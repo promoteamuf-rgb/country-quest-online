@@ -15,7 +15,7 @@ title:'Think rarer.',titleEm:'Go deeper.',intro:'Seven geography prompts. One an
 fact1:'7 ROUNDS',fact2:'25 SECONDS',fact3:'RARE ANSWERS WIN',seaTitle:'THE DEEP BLUE',totalDepth:'TOTAL DEPTH',
 footer:'Country Quest · Original rare-answer geography game · Unlimited practice',back:'Back to Country Quest',
 introMeta:'READY TO EXPLORE?',introCount:'7 OPEN QUESTIONS',introTitle:'The obvious answer is just the beginning.',
-introDesc:'Seven quick geography missions. Hunt down uncommon correct answers, collect treasures and unlock badges as your submarine descends. Stuck? You have two sonar scans.',
+introDesc:'Seven geography questions. Find the rarest correct answer, and watch your anchor dive past reefs, sharks and mysterious deep-sea creatures. Two sonar hints are available.',
 rarityGuide:'SIX DEPTH TIERS',step1:'THINK FAST',step1Desc:'25 seconds per question',step2:'THINK DIFFERENT',step2Desc:'An uncommon correct answer wins',step3:'GO DEEP',step3Desc:'Up to 7,000 metres',
 begin:'Begin your voyage ↓',
 editorNote:'Answers and rarity scores are curated for Country Quest, not measured from other players. The accepted lists are extensive but not exhaustive.',
@@ -29,7 +29,7 @@ complete:'VOYAGE COMPLETE',doneTitle:'How deep did you go?',doneLead:'Seven stop
 depth:'DEPTH',score:'POINTS',best:'BEST DEPTH',roundList:'YOUR SEVEN ANSWERS',chart:'DEPTH EARNED IN EACH ROUND',
 noAnswer:'No accepted answer',playAgain:'Dive again ↻',copy:'Copy my result',copied:'Result copied!',
 clipboard:'Copy this result:',meters:'m',points:'pts',
-collect:'DISCOVERIES',collection:'COLLECTED TREASURES',streak:'RARE STREAK',sonarName:'SONAR',sonarBtn:'Send sonar ping',sonarGuide:'Need an idea? Two sonar scans reveal a common accepted example. The timer keeps running.',sonarExample:'SONAR FOUND',sonarMore:'That answer is valid, but a rarer one earns more.',soundInfo:'Optional sounds',relicFound:'TREASURE DISCOVERED!',relicMissing:'KEEP EXPLORING',relicEmpty:'No treasure this round. Try another dive!',relicCaption:'Rare answers uncover more valuable ocean treasures.',collectionEmpty:'No treasures found yet.',achievementTitle:'EXPEDITION BADGES',comboTitle:'RARE STREAK',comboCaption:'Consecutive unusual answers!',gameTip:'Find uncommon answers to earn treasures and build a rare streak.',unlocked:'UNLOCKED',achievement0:'First Explorer',achievement0Desc:'Completed a full expedition',achievement1:'Treasure Hunter',achievement1Desc:'Found 3 rare answers',achievement2:'Gold Rush',achievement2Desc:'Discovered a legendary treasure',achievement3:'Abyss Diver',achievement3Desc:'Reached 4,000 m',achievement4:'Rare Combo',achievement4Desc:'Three rare answers in a row',achievement5:'Fast Thinker',achievement5Desc:'Answered three questions within 8 seconds',fullscreenOn:'Full screen',fullscreenOff:'Exit full screen',rank10:'Common',rank25:'Familiar',rank40:'Less obvious',rank60:'Uncommon',rank80:'Rare find',rank100:'Deep discovery'
+sonarBtn:'Send sonar ping',sonarGuide:'Need an idea? Two sonar scans reveal a common accepted example. The timer keeps running.',sonarExample:'SONAR FOUND',sonarMore:'That answer is valid, but a rarer one earns more.',fullscreenOn:'Full screen',fullscreenOff:'Exit full screen',rank10:'Common',rank25:'Familiar',rank40:'Less obvious',rank60:'Uncommon',rank80:'Rare find',rank100:'Deep discovery'
 },
 sv:{
 all:'Alla spel',solo:'Spela själv',eyebrow:'COUNTRY QUEST · ETT NYTT ÄVENTYR',
@@ -37,7 +37,7 @@ title:'Tänk ovanligare.',titleEm:'Dyk djupare.',intro:'Sju geografifrågor. Ett
 fact1:'7 RUNDOR',fact2:'25 SEKUNDER',fact3:'OVANLIGA SVAR VINNER',seaTitle:'DET DJUPBLÅ HAVET',totalDepth:'TOTALT DJUP',
 footer:'Country Quest · Eget geografispel med ovanliga svar · Obegränsat spelande',back:'Tillbaka till Country Quest',
 introMeta:'REDO ATT UTFORSKA?',introCount:'7 ÖPPNA FRÅGOR',introTitle:'Det uppenbara svaret är bara början.',
-introDesc:'Sju snabba geografiuppdrag. Hitta ovanliga rätta svar, samla skatter och lås upp märken medan din ubåt dyker djupare. Fastnat? Du har två sonarpulser.',
+introDesc:'Sju geografifrågor. Hitta så ovanliga rätta svar som möjligt och se ankaret dyka förbi rev, hajar och mystiska djuphavsdjur. Du har två sonarledtrådar.',
 rarityGuide:'SEX DJUPNIVÅER',step1:'TÄNK SNABBT',step1Desc:'25 sekunder per fråga',step2:'TÄNK ANNORLUNDA',step2Desc:'Ovanliga rätta svar ger mer',step3:'DYK DJUPT',step3Desc:'Nå upp till 7 000 meter',
 begin:'Starta dyket ↓',
 editorNote:'Svar och sällsynthetspoäng är utvalda av Country Quest, inte beräknade från andra spelares svar. Svarslistorna är omfattande men inte fullständiga.',
@@ -51,13 +51,13 @@ complete:'DYKET ÄR KLART',doneTitle:'Hur djupt kom du?',doneLead:'Sju stationer
 depth:'DJUP',score:'POÄNG',best:'DJUPREKORD',roundList:'DINA SJU SVAR',chart:'DJUP PER RUNDA',
 noAnswer:'Inget godkänt svar',playAgain:'Dyk igen ↻',copy:'Kopiera resultat',copied:'Resultatet kopierat!',
 clipboard:'Kopiera detta resultat:',meters:'m',points:'p',
-collect:'FYND',collection:'INSAMLADE SKATTER',streak:'OVANLIG SVIT',sonarName:'SONAR',sonarBtn:'Skicka sonarpuls',sonarGuide:'Behöver du hjälp? Två sonarpulser visar ett vanligt godkänt exempel. Klockan fortsätter.',sonarExample:'SONAREN HITTADE',sonarMore:'Det svaret är rätt, men ett ovanligare svar ger mer.',soundInfo:'Valfritt ljud',relicFound:'SKATT HITTAD!',relicMissing:'FORTSÄTT UTFORSKA',relicEmpty:'Ingen skatt den här rundan. Försök igen!',relicCaption:'Ovanliga svar avslöjar värdefullare havsskatter.',collectionEmpty:'Inga skatter hittade ännu.',achievementTitle:'EXPEDITIONSMÄRKEN',comboTitle:'OVANLIG SVIT',comboCaption:'Ovanliga svar flera gånger i rad!',gameTip:'Hitta ovanliga svar, samla skatter och bygg en sällsynt svit.',unlocked:'UPPLÅST',achievement0:'Första resan',achievement0Desc:'Avklarade en hel expedition',achievement1:'Skattjägare',achievement1Desc:'Hittade tre ovanliga svar',achievement2:'Guldrush',achievement2Desc:'Upptäckte en legendarisk skatt',achievement3:'Djuphavsdykare',achievement3Desc:'Nådde 4 000 meter',achievement4:'Sällsynt svit',achievement4Desc:'Tre ovanliga svar i rad',achievement5:'Snabbtänkt',achievement5Desc:'Tre svar inom 8 sekunder',fullscreenOn:'Helskärm',fullscreenOff:'Avsluta helskärm',rank10:'Vanligt',rank25:'Välkänt',rank40:'Lite ovanligt',rank60:'Ovanligt',rank80:'Sällsynt',rank100:'Djupfynd'
+sonarBtn:'Skicka sonarpuls',sonarGuide:'Behöver du hjälp? Två sonarpulser visar ett vanligt godkänt exempel. Klockan fortsätter.',sonarExample:'SONAREN HITTADE',sonarMore:'Det svaret är rätt, men ett ovanligare svar ger mer.',fullscreenOn:'Helskärm',fullscreenOff:'Avsluta helskärm',rank10:'Vanligt',rank25:'Välkänt',rank40:'Lite ovanligt',rank60:'Ovanligt',rank80:'Sällsynt',rank100:'Djupfynd'
 }
 };
 let lang='en';
 try{const saved=localStorage.getItem(LANG_KEY);if(saved==='en'||saved==='sv')lang=saved}catch{}
 let phase='intro',questions=[],index=0,points=0,results=[],deadline=0,timer=null,currentResult=null,notice='',draft='';
-let relics=[],rareStreak=0,bestStreak=0,sonarLeft=2,sonarExample=null;
+let sonarLeft=2,sonarExample=null;
 const stage=$('stage');
 const aliases=new Map();
 for(const q of BANK){
@@ -135,7 +135,7 @@ function updateDepth(){
 function start(){
   if(BANK.length<QUESTION_COUNT){stage.textContent='Question bank unavailable.';return}
   questions=selectQuestions();index=0;points=0;results=[];currentResult=null;draft='';notice='';phase='playing';
-  relics=[];rareStreak=0;bestStreak=0;sonarLeft=2;sonarExample=null;
+  sonarLeft=2;sonarExample=null;
   window.CQDiveFX?.reset();window.CQFun?.reset();window.CQFun?.play('start');updateDepth();openRound();
 }
 function openRound(){
@@ -175,15 +175,10 @@ function finishAnswer(answer,timedOut){
  if(phase!=='playing')return;
  clearInterval(timer);timer=null;phase='reveal';
  const gained=answer?.points||0;points+=gained;
- const secondsUsed=Math.min(SECONDS,Math.max(0,SECONDS-(deadline-Date.now())/1000));
- rareStreak=answer&&gained>=60?rareStreak+1:0;
- bestStreak=Math.max(bestStreak,rareStreak);
- const relic=answer?relicFor(gained):null;
- if(relic)relics.push(relic);
- currentResult={prompt:qNow().id,answer,earned:gained,expired:timedOut,secondsUsed,relic,streak:rareStreak};
- window.CQFun?.reveal(gained,rareStreak);
+ currentResult={prompt:qNow().id,answer,earned:gained,expired:timedOut};
+ window.CQFun?.reveal(gained);
  results.push(currentResult);
- draft='';updateDepth();render();
+ draft='';updateDepth();if(gained>0)window.CQDiveFX?.plunge(gained);render();
 }
 function next(){
  if(phase!=='reveal')return;
@@ -200,25 +195,7 @@ function rarity(points){
  return COPY[lang]['rank'+points]||'Rare';
 }
 
-/* Extra things to discover while on the same seven-question expedition. */
-function relicFor(value){
- if(value>=100)return{tier:'gold',emoji:'👑',en:'Sunken crown',sv:'Sjunket kronfynd'};
- if(value>=80)return{tier:'crystal',emoji:'💎',en:'Deep-sea crystal',sv:'Djuphavskristall'};
- if(value>=60)return{tier:'pearl',emoji:'🦪',en:'Ocean pearl',sv:'Havspärla'};
- if(value>=40)return{tier:'coral',emoji:'🪸',en:'Glowing coral',sv:'Lysande korall'};
- if(value>=25)return{tier:'shell',emoji:'🐚',en:'Rare shell',sv:'Ovanligt snäckskal'};
- return{tier:'bubble',emoji:'🫧',en:'Sea bubbles',sv:'Havsbubblor'};
-}
-function relicName(item){return item?(lang==='sv'?item.sv:item.en):''}
-function statRibbon(){
- const t=dictionary();
- return '<div class="expedition-ribbon"><span class="expedition-tag">✧ '+escapeHTML(t.gameTip)+'</span>'
-  +'<div class="expedition-mini">'
-  +'<span class="expedition-pill">🎒 '+escapeHTML(t.collect)+' <strong>'+relics.length+'</strong></span>'
-  +'<span class="expedition-pill '+(rareStreak>=2?'has-streak':'')+'">🔥 '+escapeHTML(t.streak)+' <strong>×'+rareStreak+'</strong></span>'
-  +'<span class="expedition-pill">📡 '+escapeHTML(t.sonarName)+' <strong>'+sonarLeft+'/2</strong></span>'
-  +'</div></div>';
-}
+/* Two optional sonar hints, without collectible rewards. */
 function sonarMessage(){
  if(!sonarExample)return'';
  const t=dictionary();
@@ -239,20 +216,6 @@ function sonar(){
  if(stock)stock.textContent=sonarLeft+'/2';
  window.CQFun?.sonar();
 }
-function achievementBadges(){
- const t=dictionary();
- const rareCount=results.filter(r=>r.earned>=60).length;
- const fastCount=results.filter(r=>r.answer&&r.secondsUsed<=8).length;
- const earned=[
-  {id:0,emoji:'🧭',when:true},
-  {id:1,emoji:'💎',when:rareCount>=3},
-  {id:2,emoji:'👑',when:results.some(r=>r.earned===100)},
-  {id:3,emoji:'🦑',when:points>=400},
-  {id:4,emoji:'🔥',when:bestStreak>=3},
-  {id:5,emoji:'⚡',when:fastCount>=3}
- ].filter(b=>b.when);
- return earned.map(b=>'<div class="achievement"><span aria-hidden="true">'+b.emoji+'</span><div><b>'+escapeHTML(t['achievement'+b.id])+'</b><small>'+escapeHTML(t['achievement'+b.id+'Desc'])+'</small></div></div>').join('');
-}
 function chips(){
  const t=dictionary();
  return '<div class="meta"><span class="micro">'+escapeHTML(t.round)+' '+(index+1)+' '+escapeHTML(t.of)+' '+QUESTION_COUNT+'</span><span class="counter">'+(index+1)+' / '+QUESTION_COUNT+'</span></div>'
@@ -268,7 +231,6 @@ function render(){
     +'<div class="how"><div><b>01</b><strong>'+escapeHTML(t.step1)+'</strong><div class="note">'+escapeHTML(t.step1Desc)+'</div></div>'
     +'<div><b>02</b><strong>'+escapeHTML(t.step2)+'</strong><div class="note">'+escapeHTML(t.step2Desc)+'</div></div>'
     +'<div><b>03</b><strong>'+escapeHTML(t.step3)+'</strong><div class="note">'+escapeHTML(t.step3Desc)+'</div></div></div>'
-    +'<div class="reward-preview" aria-label="'+escapeHTML(t.relicCaption)+'"><span>🐚</span><span>🪸</span><span>🦪</span><span>💎</span><span>👑</span><strong>'+escapeHTML(t.relicCaption)+'</strong></div>'
     +'<div class="tier-guide"><span class="micro">'+escapeHTML(t.rarityGuide)+'</span><div class="tier-steps">'+[10,25,40,60,80,100].map(value=>'<div class="tier-pill tier-'+value+'"><strong>'+value+' <small>'+escapeHTML(t.points)+'</small></strong><span>'+escapeHTML(rarity(value))+'</span></div>').join('')+'</div></div>'
     +'<button class="primary" id="startGame" type="button">'+escapeHTML(t.begin)+'</button>'
     +'<p class="disclaimer">'+escapeHTML(t.editorNote)+'</p>';
@@ -277,7 +239,7 @@ function render(){
  }
  if(phase==='playing'){
   const q=qNow();
-  stage.innerHTML=chips()+statRibbon()
+  stage.innerHTML=chips()
     +'<div class="meta"><span class="prompt-category">'+escapeHTML(t.questionMeta)+'</span><div class="timer-widget" id="timerGauge"><svg class="timer-svg" viewBox="0 0 40 40" aria-hidden="true"><circle class="track" cx="20" cy="20" r="15"></circle><circle class="remaining" id="timerArc" cx="20" cy="20" r="15"></circle></svg><span class="clock" id="clock" aria-label="'+escapeHTML(t.time)+'">25 s</span></div></div>'
     +'<h2 class="question">'+escapeHTML(lang==='sv'?q.sv:q.en)+'</h2>'
     +'<form id="answerForm" autocomplete="off" novalidate><div class="answerbox">'
@@ -292,14 +254,11 @@ function render(){
  if(phase==='reveal'){
   const r=currentResult,answer=r.answer,q=qNow(),rank=answer?rarity(answer.points):'—';
   const rareSuggestions=q.answers.filter(x=>x.points>=80&&(!answer||x.name!==answer.name)).slice(0,3).map(x=>escapeHTML(label(x))).join(' · ');
-  stage.innerHTML=chips()+statRibbon()
+  stage.innerHTML=chips()
    +'<span class="rarity-badge">'+(answer?'✦ '+escapeHTML(rank.toUpperCase())+' · '+r.earned+' '+escapeHTML(t.points):'◌ 0 '+escapeHTML(t.points))+'</span>'
    +'<h2 class="headline">'+escapeHTML(answer?t.accepted:t.invalid)+'</h2>'
    +'<div class="feedback"><strong>'+escapeHTML(answer?label(answer):t.noAnswer)+'</strong><p>'
    +escapeHTML(answer?'+'+(r.earned*10)+' m · '+r.earned+' '+t.points:t.timeoutInfo)+'</p></div>'
-   +'<div class="discovery-ceremony" data-tier="'+(r.relic?r.relic.tier:'none')+'"><span class="discovery-icon" aria-hidden="true">'+(r.relic?r.relic.emoji:'🌫️')+'</span><div class="discovery-info"><span class="discovery-kicker">'+escapeHTML(r.relic?t.relicFound:t.relicMissing)+'</span><strong class="discovery-title">'+escapeHTML(r.relic?relicName(r.relic):t.noAnswer)+'</strong><span class="discovery-caption">'+escapeHTML(r.relic?t.relicCaption:t.relicEmpty)+'</span></div></div>'
-   +(r.streak>=2?'<div class="streak-callout">🔥 '+escapeHTML(t.comboTitle)+' <strong>×'+r.streak+'</strong> · '+escapeHTML(t.comboCaption)+'</div>':'')
-   +(relics.length?'<div class="reward-rail"><span class="micro">'+escapeHTML(t.collection)+'</span>'+relics.map(relic=>'<span class="relic-token" title="'+escapeHTML(relicName(relic))+'">'+relic.emoji+'</span>').join('')+'</div>':'')
    +(rareSuggestions?'<p class="note">'+escapeHTML(t.also)+' '+rareSuggestions+'</p>':'')
    +'<p class="disclaimer">'+escapeHTML(t.resultNote)+'</p>'
    +'<button class="primary" type="button" id="nextRound">'+escapeHTML(index===QUESTION_COUNT-1?t.finish:t.next)+'</button>';
@@ -313,9 +272,6 @@ function render(){
    +'<div class="hud"><div class="stat"><small>'+escapeHTML(t.depth)+'</small><strong>'+fmt(points*10)+' m</strong></div>'
    +'<div class="stat"><small>'+escapeHTML(t.score)+'</small><strong>'+points+' / 700</strong></div>'
    +'<div class="stat"><small>'+escapeHTML(t.best)+'</small><strong>'+fmt(best)+' m</strong></div></div>'
-   +'<div class="fun-collection"><div class="fun-collect-card"><span aria-hidden="true">🎒</span><div><strong>'+escapeHTML(t.collection)+'</strong><small>'+relics.length+' / 7</small></div></div><div class="fun-collect-card"><span aria-hidden="true">🔥</span><div><strong>'+escapeHTML(t.streak)+'</strong><small>×'+bestStreak+'</small></div></div></div>'
-   +(relics.length?'<div class="reward-rail"><span class="micro">'+escapeHTML(t.collection)+'</span>'+relics.map(item=>'<span class="relic-token" title="'+escapeHTML(relicName(item))+'">'+item.emoji+'</span>').join('')+'</div>':'<p class="note">'+escapeHTML(t.collectionEmpty)+'</p>')
-   +'<div class="achievement-section"><span class="micro">✦ '+escapeHTML(t.achievementTitle)+'</span><div class="achievement-grid">'+achievementBadges()+'</div></div>'
    +'<h3 class="micro" style="margin-top:26px">'+escapeHTML(t.chart)+'</h3>'
    +'<div class="voyage-chart" role="img" aria-label="'+escapeHTML(t.chart)+'">'+results.map((r,i)=>'<div class="voyage-column"><div class="voyage-bar-area"><span class="voyage-bar '+(r.earned?'':'empty')+'" style="--height:'+Math.max(3,r.earned)+'%;--delay:'+(i*.06)+'s"></span></div><strong>'+r.earned+'</strong><small>'+(i+1)+' / 7</small></div>').join('')+'</div>'
    +'<h3 class="micro" style="margin-top:26px">'+escapeHTML(t.roundList)+'</h3>'
