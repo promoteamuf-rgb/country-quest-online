@@ -1,0 +1,26 @@
+/* New Rare Depths photo game card; applied after editorial styles. */
+.photo-mode-grid > .mode-rare{grid-column:span 12!important}
+.photo-mode-grid .mode-rare{
+ min-height:265px!important;
+ background-image:linear-gradient(100deg,#041b2ae8 0%,#0b3756c8 39%,#071e2b29 100%),url('https://images.unsplash.com/photo-1707343848655-a196bfe88861?auto=format&fit=crop&w=1400&q=78')!important;
+ background-position:center,center 42%!important;
+ background-size:cover!important;
+ border:1px solid #a9e3e08b!important;
+ box-shadow:0 20px 48px #0008!important;
+}
+.photo-mode-grid .mode-rare .photo-card-top{align-self:stretch}
+.photo-mode-grid .mode-rare .photo-card-bottom{max-width:660px}
+.photo-mode-grid .mode-rare .mode-icon,.photo-mode-grid .mode-rare .emoji{color:#b8fbe4!important;border-color:#c6f1dfb0!important}
+.photo-mode-grid .mode-rare .mode-name,.photo-mode-grid .mode-rare strong{font-size:36px!important}
+.photo-mode-grid .mode-rare .mode-desc{max-width:460px!important;font-size:15px!important}
+.photo-mode-grid .mode-rare .mode-action{font-weight:900!important}
+.photo-mode-grid .mode-rare .live-indicator{border-color:#b8f5ce!important;background:#103d43d4!important}
+@media(max-width:690px){
+ .photo-mode-grid > .mode-rare{grid-column:span 2!important}
+ .photo-mode-grid .mode-rare{min-height:270px!important}
+ .photo-mode-grid .mode-rare .mode-name,.photo-mode-grid .mode-rare strong{font-size:30px!important}
+}
+@media(max-width:420px){
+ .photo-mode-grid > .mode-rare{grid-column:span 1!important}
+ .photo-mode-grid .mode-rare{min-height:305px!important}
+}
