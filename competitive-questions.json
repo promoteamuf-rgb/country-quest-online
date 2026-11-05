@@ -1,0 +1,456 @@
+{
+  "clues": [
+    {
+      "name": "Iceland",
+      "clues": [
+        "This country sits on two tectonic plates.",
+        "It produces much of its electricity from renewable sources.",
+        "You can find black-sand beaches and powerful geysers here.",
+        "Its capital is Reykjavík.",
+        "It is a Nordic island famous for volcanoes and glaciers."
+      ]
+    },
+    {
+      "name": "Japan",
+      "clues": [
+        "This country has thousands of islands.",
+        "Its traditional art includes origami and ukiyo-e.",
+        "Its high-speed rail network is called the Shinkansen.",
+        "Mount Fuji is one of its best-known landmarks.",
+        "Its capital is Tokyo."
+      ]
+    },
+    {
+      "name": "Brazil",
+      "clues": [
+        "This country shares borders with most countries on its continent.",
+        "A large part of the Amazon rainforest lies within its borders.",
+        "Its official language differs from most neighboring countries.",
+        "It is famous for samba and Carnival in Rio.",
+        "It is the largest country in South America."
+      ]
+    },
+    {
+      "name": "Morocco",
+      "clues": [
+        "This country has coastlines on two major bodies of water.",
+        "Its landscapes include part of the Atlas Mountains.",
+        "Marrakech and Fez are famous cities here.",
+        "It is in northwestern Africa, near Spain.",
+        "Its capital is Rabat."
+      ]
+    },
+    {
+      "name": "New Zealand",
+      "clues": [
+        "This country has no native land snakes.",
+        "It was one of the first countries to grant women the right to vote nationally.",
+        "The Māori are its Indigenous Polynesian people.",
+        "It is known for kiwis, both birds and people.",
+        "Its capital is Wellington, and it lies southeast of Australia."
+      ]
+    },
+    {
+      "name": "Egypt",
+      "clues": [
+        "This country is home to one of the world’s oldest civilizations.",
+        "Most of its population lives close to one major river.",
+        "Its ancient writing system used hieroglyphs.",
+        "The Great Sphinx and Giza pyramids are here.",
+        "Its capital is Cairo."
+      ]
+    },
+    {
+      "name": "Switzerland",
+      "clues": [
+        "This country has four national languages.",
+        "It is landlocked and has a long tradition of neutrality.",
+        "It is famous for precision watches and chocolate.",
+        "The Alps cover much of its territory.",
+        "Its capital is Bern."
+      ]
+    },
+    {
+      "name": "Thailand",
+      "clues": [
+        "This country was historically known as Siam.",
+        "It is the only Southeast Asian country that avoided formal European colonization.",
+        "Its cuisine often blends sweet, sour, salty and spicy flavors.",
+        "Its famous islands include Phuket and Ko Samui.",
+        "Its capital is Bangkok."
+      ]
+    },
+    {
+      "name": "Canada",
+      "clues": [
+        "This country has more lakes than any other country.",
+        "It has two official languages at the federal level.",
+        "Its national flag features a maple leaf.",
+        "Toronto, Vancouver and Montréal are major cities here.",
+        "It lies immediately north of the contiguous United States."
+      ]
+    },
+    {
+      "name": "Kenya",
+      "clues": [
+        "The equator runs through this country.",
+        "It is home to the Maasai Mara wildlife reserve.",
+        "Swahili and English are official languages here.",
+        "It is known for long-distance runners and safaris.",
+        "Its capital is Nairobi."
+      ]
+    },
+    {
+      "name": "Greece",
+      "clues": [
+        "This country has thousands of islands.",
+        "It is widely associated with the origins of democracy.",
+        "Its ancient myths feature Zeus and Athena.",
+        "The Acropolis overlooks its capital city.",
+        "Its capital is Athens."
+      ]
+    },
+    {
+      "name": "Peru",
+      "clues": [
+        "This country has coastal desert, mountain and rainforest regions.",
+        "The ancient Nazca Lines can be found here.",
+        "It was at the heart of the Inca Empire.",
+        "Machu Picchu is one of its most famous sites.",
+        "Its capital is Lima."
+      ]
+    },
+    {
+      "name": "Vietnam",
+      "clues": [
+        "This country has a long, narrow shape.",
+        "Its currency is the đồng.",
+        "Ha Long Bay is known for limestone islands.",
+        "Phở is a popular noodle soup from here.",
+        "Its capital is Hanoi."
+      ]
+    },
+    {
+      "name": "Norway",
+      "clues": [
+        "This country has a long coastline with many deep inlets.",
+        "It has a large sovereign wealth fund funded by petroleum revenues.",
+        "The northern lights can be seen in its far north.",
+        "It is particularly famous for fjords.",
+        "Its capital is Oslo."
+      ]
+    },
+    {
+      "name": "Argentina",
+      "clues": [
+        "This country stretches from subtropical regions to the far south.",
+        "It is home to a large portion of Patagonia.",
+        "Tango developed around its capital region.",
+        "Its flag has light-blue and white stripes with a sun.",
+        "Its capital is Buenos Aires."
+      ]
+    },
+    {
+      "name": "India",
+      "clues": [
+        "This country has one of the world’s largest film industries.",
+        "Its geography includes parts of the Himalayas.",
+        "Hundreds of languages are spoken within its borders.",
+        "The Taj Mahal is located here.",
+        "Its capital is New Delhi."
+      ]
+    },
+    {
+      "name": "Portugal",
+      "clues": [
+        "This country was a major maritime power during the Age of Exploration.",
+        "It includes the Atlantic island groups of Madeira and the Azores.",
+        "Fado is a traditional musical style here.",
+        "It shares its only land border with Spain.",
+        "Its capital is Lisbon."
+      ]
+    },
+    {
+      "name": "South Africa",
+      "clues": [
+        "This country has three capital cities for different branches of government.",
+        "It has 12 official languages, including South African Sign Language.",
+        "Table Mountain is a well-known landmark.",
+        "It occupies the southern tip of the African continent.",
+        "Its largest city is Johannesburg."
+      ]
+    },
+    {
+      "name": "South Korea",
+      "clues": [
+        "This country has an extensive high-speed internet infrastructure.",
+        "It is known for popular culture exports like K-pop.",
+        "Its alphabet is called Hangul.",
+        "It shares a heavily fortified border with North Korea.",
+        "Its capital is Seoul."
+      ]
+    },
+    {
+      "name": "Mexico",
+      "clues": [
+        "This country is home to many ancient Maya archaeological sites.",
+        "Its cuisine is on UNESCO’s intangible cultural heritage list.",
+        "Chichén Itzá and Teotihuacán are famous sites here.",
+        "It borders the United States to the north.",
+        "Its capital is Mexico City."
+      ]
+    },
+    {
+      "name": "Indonesia",
+      "clues": [
+        "This country spans three time zones.",
+        "It is among the world’s largest archipelagic nations.",
+        "Komodo dragons live on some of its islands.",
+        "Bali is one of its best-known tourist destinations.",
+        "Its national language is Indonesian."
+      ]
+    },
+    {
+      "name": "Turkey",
+      "clues": [
+        "This country spans parts of Europe and Asia.",
+        "The ancient city of Troy was located in what is now this country.",
+        "Cappadocia is famous for unusual rock formations and hot-air balloons.",
+        "Istanbul lies on the Bosphorus strait.",
+        "Its capital is Ankara."
+      ]
+    },
+    {
+      "name": "Australia",
+      "clues": [
+        "This country is both a sovereign state and occupies most of a continent.",
+        "It has the world’s largest coral reef system.",
+        "Kangaroos and koalas are native animals here.",
+        "Its major cities include Sydney and Melbourne.",
+        "Its capital is Canberra."
+      ]
+    },
+    {
+      "name": "Chile",
+      "clues": [
+        "This country includes territory on Easter Island, also called Rapa Nui.",
+        "It is one of the longest north-to-south countries in the world.",
+        "The Atacama Desert occupies part of its north.",
+        "The Andes run along its eastern border.",
+        "Its capital is Santiago."
+      ]
+    },
+    {
+      "name": "Nepal",
+      "clues": [
+        "This country uses a non-rectangular national flag.",
+        "It is landlocked between two very populous nations.",
+        "Many people trek in its Annapurna region.",
+        "Mount Everest sits on its border with China.",
+        "Its capital is Kathmandu."
+      ]
+    },
+    {
+      "name": "Spain",
+      "clues": [
+        "This country includes island groups in the Mediterranean and Atlantic.",
+        "Many people here speak Catalan, Galician or Basque alongside Spanish.",
+        "Gaudí designed many buildings in Barcelona.",
+        "Flamenco is strongly associated with its Andalusia region.",
+        "Its capital is Madrid."
+      ]
+    },
+    {
+      "name": "Finland",
+      "clues": [
+        "This country has two national languages: Finnish and Swedish.",
+        "It is nicknamed the land of a thousand lakes.",
+        "Saunas are an important cultural tradition.",
+        "It borders Sweden, Norway and Russia.",
+        "Its capital is Helsinki."
+      ]
+    },
+    {
+      "name": "Colombia",
+      "clues": [
+        "This country touches both the Caribbean Sea and Pacific Ocean.",
+        "It is a major producer of coffee and emeralds.",
+        "The colorful city of Cartagena is a popular destination.",
+        "It lies in the northwestern part of South America.",
+        "Its capital is Bogotá."
+      ]
+    },
+    {
+      "name": "Ireland",
+      "clues": [
+        "This country has an ancient tradition of Celtic storytelling.",
+        "It has two official languages, Irish and English.",
+        "Its landscapes earned it the nickname the Emerald Isle.",
+        "Its national symbol is often the shamrock.",
+        "Its capital is Dublin."
+      ]
+    },
+    {
+      "name": "Singapore",
+      "clues": [
+        "This country is one of the few modern city-states.",
+        "It has four official languages.",
+        "Its main airport is famous for an indoor waterfall.",
+        "The Merlion is a well-known symbol here.",
+        "It lies at the southern end of the Malay Peninsula."
+      ]
+    }
+  ],
+  "years": [
+    {
+      "prompt": "The United States declared independence.",
+      "answer": 1776,
+      "difficulty": "easy"
+    },
+    {
+      "prompt": "The Berlin Wall fell.",
+      "answer": 1989,
+      "difficulty": "easy"
+    },
+    {
+      "prompt": "World War II ended.",
+      "answer": 1945,
+      "difficulty": "easy"
+    },
+    {
+      "prompt": "The first human landed on the Moon.",
+      "answer": 1969,
+      "difficulty": "easy"
+    },
+    {
+      "prompt": "The Titanic sank.",
+      "answer": 1912,
+      "difficulty": "easy"
+    },
+    {
+      "prompt": "The first modern Olympic Games were held in Athens.",
+      "answer": 1896,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "India became independent from Britain.",
+      "answer": 1947,
+      "difficulty": "easy"
+    },
+    {
+      "prompt": "The United Nations was founded.",
+      "answer": 1945,
+      "difficulty": "easy"
+    },
+    {
+      "prompt": "South Africa held its first fully democratic national election.",
+      "answer": 1994,
+      "difficulty": "easy"
+    },
+    {
+      "prompt": "The Euro was introduced as a currency for electronic payments.",
+      "answer": 1999,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "The first FIFA World Cup took place in Uruguay.",
+      "answer": 1930,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "The World Wide Web was made publicly available.",
+      "answer": 1991,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "The Chernobyl nuclear disaster occurred.",
+      "answer": 1986,
+      "difficulty": "easy"
+    },
+    {
+      "prompt": "The Soviet Union dissolved.",
+      "answer": 1991,
+      "difficulty": "easy"
+    },
+    {
+      "prompt": "The first iPhone was released.",
+      "answer": 2007,
+      "difficulty": "easy"
+    },
+    {
+      "prompt": "The first successful powered airplane flight took place.",
+      "answer": 1903,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "The Suez Canal opened.",
+      "answer": 1869,
+      "difficulty": "hard"
+    },
+    {
+      "prompt": "The Panama Canal opened.",
+      "answer": 1914,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "The Great Fire of London happened.",
+      "answer": 1666,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "The French Revolution began.",
+      "answer": 1789,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "The fall of Constantinople happened.",
+      "answer": 1453,
+      "difficulty": "hard"
+    },
+    {
+      "prompt": "The printing of the Gutenberg Bible was completed (approximately).",
+      "answer": 1455,
+      "difficulty": "hard"
+    },
+    {
+      "prompt": "The first artificial satellite, Sputnik 1, was launched.",
+      "answer": 1957,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "The first woman went to space.",
+      "answer": 1963,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "The first country adopted women’s suffrage at the national level (New Zealand).",
+      "answer": 1893,
+      "difficulty": "hard"
+    },
+    {
+      "prompt": "The Treaty of Versailles was signed.",
+      "answer": 1919,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "The European Union was formally established by the Maastricht Treaty.",
+      "answer": 1993,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "The first successful ascent of Mount Everest occurred.",
+      "answer": 1953,
+      "difficulty": "medium"
+    },
+    {
+      "prompt": "The first transatlantic telephone cable entered service.",
+      "answer": 1956,
+      "difficulty": "hard"
+    },
+    {
+      "prompt": "The first recorded circumnavigation expedition returned to Spain.",
+      "answer": 1522,
+      "difficulty": "hard"
+    }
+  ]
+}
