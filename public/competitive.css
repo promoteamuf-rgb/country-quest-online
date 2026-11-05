@@ -1,0 +1,75 @@
+/* Competitive difficulty selector: three clear, accessible choices. */
+.competitive-level-picker{
+ min-width:0; margin:18px 0 8px; padding:0; border:0;
+ color:#eff8f1;
+}
+.competitive-level-picker legend{
+ display:block; width:100%; padding:0; margin:0 0 11px;
+ font:850 13px/1.4 system-ui,sans-serif; color:#d8e9dc;
+}
+.competitive-level-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.competitive-level-options label{display:block!important;position:relative!important;margin:0!important;cursor:pointer!important;min-width:0}
+.competitive-level-options input[type="radio"]{
+ position:absolute!important;width:1px!important;height:1px!important;
+ opacity:0!important;pointer-events:none!important;
+}
+.competitive-level-options label>span{
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:5px;min-height:96px;padding:12px 6px;
+ border:1px solid #537977;border-radius:12px;
+ background:linear-gradient(150deg,#17343e,#0d2934);
+ text-align:center;transition:background .14s,border-color .14s,box-shadow .14s,transform .14s
+}
+.competitive-level-options label>span strong{
+ font:900 16px/1.1 system-ui,sans-serif;letter-spacing:-.3px;color:#eef9ee
+}
+.competitive-level-options label>span small{
+ display:block;color:#aac9c2;font:550 10px/1.3 system-ui,sans-serif;
+ max-width:150px
+}
+.competitive-level-options input:checked+span{
+ background:linear-gradient(140deg,#30645c,#183d41);
+ border-color:#a7f5c8;box-shadow:inset 0 0 0 1px #a3f2ce,0 0 0 2px #b4f4d41b;
+ transform:translateY(-1px)
+}
+.competitive-level-options input:checked+span strong{color:#bffff0}
+.competitive-level-options input:checked+span small{color:#ddf5e8}
+.competitive-level-options input:focus-visible+span{outline:3px solid #e1f6ae;outline-offset:3px}
+.competitive-level-hint{color:#a4c3bb!important;font:550 11px/1.5 system-ui,sans-serif;margin:10px 0 0}
+.difficulty-readout{
+ display:inline-flex;align-items:center;gap:8px;
+ padding:9px 13px;margin:11px 0 7px;
+ color:#b5d8c8;font:750 12px/1.2 system-ui,sans-serif;
+ border-radius:99px;border:1px solid #669c8970;
+ background:#153a3dc9
+}
+.difficulty-readout strong{font-weight:900;color:#d7fce6}
+.competitive-setup{margin:32px auto!important;padding:32px!important;max-width:740px!important}
+.competitive-setup h2{font-size:30px!important}
+.competitive-setup .competitive-level-picker{margin:28px 0}
+.competitive-setup .competitive-level-options{gap:13px}
+.competitive-setup .competitive-level-options label>span{min-height:128px;padding:20px 14px}
+.competitive-setup .competitive-level-options label>span strong{font-size:23px}
+.competitive-setup .competitive-level-options label>span small{font-size:12px}
+.competitive-setup .actions{justify-content:flex-end}
+@media(max-width:620px){
+ .competitive-setup{margin:20px auto!important;padding:20px!important}
+ .competitive-setup h2{font-size:24px!important}
+ .competitive-level-options{gap:7px}
+ .competitive-level-options label>span{min-height:92px;padding:11px 5px}
+ .competitive-level-options label>span strong{font-size:15px}
+ .competitive-level-options label>span small{font-size:9px}
+ .competitive-setup .competitive-level-options{gap:8px}
+ .competitive-setup .competitive-level-options label>span{min-height:110px;padding:15px 6px}
+ .competitive-setup .competitive-level-options label>span strong{font-size:18px}
+ .competitive-setup .competitive-level-options label>span small{font-size:10px}
+}
+@media(max-width:390px){
+ .competitive-level-options label>span{min-height:82px;padding:9px 4px}
+ .competitive-level-options label>span strong{font-size:14px}
+ .competitive-level-options label>span small{font-size:9px}
+ .competitive-setup .competitive-level-options label>span{min-height:100px}
+}
+@media(prefers-reduced-motion:reduce){
+ .competitive-level-options label>span{transition:none!important}
+}
