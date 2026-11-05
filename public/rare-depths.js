@@ -268,6 +268,7 @@ function render(){
     +'<div class="how"><div><b>01</b><strong>'+escapeHTML(t.step1)+'</strong><div class="note">'+escapeHTML(t.step1Desc)+'</div></div>'
     +'<div><b>02</b><strong>'+escapeHTML(t.step2)+'</strong><div class="note">'+escapeHTML(t.step2Desc)+'</div></div>'
     +'<div><b>03</b><strong>'+escapeHTML(t.step3)+'</strong><div class="note">'+escapeHTML(t.step3Desc)+'</div></div></div>'
+    +'<div class="reward-preview" aria-label="'+escapeHTML(t.relicCaption)+'"><span>🐚</span><span>🪸</span><span>🦪</span><span>💎</span><span>👑</span><strong>'+escapeHTML(t.relicCaption)+'</strong></div>'
     +'<div class="tier-guide"><span class="micro">'+escapeHTML(t.rarityGuide)+'</span><div class="tier-steps">'+[10,25,40,60,80,100].map(value=>'<div class="tier-pill tier-'+value+'"><strong>'+value+' <small>'+escapeHTML(t.points)+'</small></strong><span>'+escapeHTML(rarity(value))+'</span></div>').join('')+'</div></div>'
     +'<button class="primary" id="startGame" type="button">'+escapeHTML(t.begin)+'</button>'
     +'<p class="disclaimer">'+escapeHTML(t.editorNote)+'</p>';
@@ -276,24 +277,29 @@ function render(){
  }
  if(phase==='playing'){
   const q=qNow();
-  stage.innerHTML=chips()
+  stage.innerHTML=chips()+statRibbon()
     +'<div class="meta"><span class="prompt-category">'+escapeHTML(t.questionMeta)+'</span><div class="timer-widget" id="timerGauge"><svg class="timer-svg" viewBox="0 0 40 40" aria-hidden="true"><circle class="track" cx="20" cy="20" r="15"></circle><circle class="remaining" id="timerArc" cx="20" cy="20" r="15"></circle></svg><span class="clock" id="clock" aria-label="'+escapeHTML(t.time)+'">25 s</span></div></div>'
     +'<h2 class="question">'+escapeHTML(lang==='sv'?q.sv:q.en)+'</h2>'
     +'<form id="answerForm" autocomplete="off" novalidate><div class="answerbox">'
     +'<input id="answerInput" type="text" inputmode="text" maxlength="85" autocapitalize="words" spellcheck="false" autocomplete="off" placeholder="'+escapeHTML(t.placeholder)+'" aria-label="'+escapeHTML(t.placeholder)+'" required>'
     +'<button class="primary" type="submit">'+escapeHTML(t.submit)+'</button></div></form>'
     +'<div class="notice" id="notice" role="status">'+escapeHTML(notice)+'</div>'
+    +'<div class="answer-tools"><button class="sonar-button" type="button" id="sonarButton" '+((sonarLeft<=0||sonarExample)?'disabled':'')+'>📡 '+escapeHTML(t.sonarBtn)+' ('+sonarLeft+'/2)</button><p class="fun-context">'+escapeHTML(t.sonarGuide)+'</p></div>'
+    +'<div class="sonar-hint" id="sonarReveal" '+(sonarExample?'':'hidden')+'>'+sonarMessage()+'</div>'
     +'<p class="note">'+escapeHTML(t.hint)+'</p>';
   $('answerInput').value=draft;tick();window.CQDiveFX?.onScreen('playing',index,0);return;
  }
  if(phase==='reveal'){
   const r=currentResult,answer=r.answer,q=qNow(),rank=answer?rarity(answer.points):'—';
   const rareSuggestions=q.answers.filter(x=>x.points>=80&&(!answer||x.name!==answer.name)).slice(0,3).map(x=>escapeHTML(label(x))).join(' · ');
-  stage.innerHTML=chips()
+  stage.innerHTML=chips()+statRibbon()
    +'<span class="rarity-badge">'+(answer?'✦ '+escapeHTML(rank.toUpperCase())+' · '+r.earned+' '+escapeHTML(t.points):'◌ 0 '+escapeHTML(t.points))+'</span>'
    +'<h2 class="headline">'+escapeHTML(answer?t.accepted:t.invalid)+'</h2>'
    +'<div class="feedback"><strong>'+escapeHTML(answer?label(answer):t.noAnswer)+'</strong><p>'
    +escapeHTML(answer?'+'+(r.earned*10)+' m · '+r.earned+' '+t.points:t.timeoutInfo)+'</p></div>'
+   +'<div class="discovery-ceremony" data-tier="'+(r.relic?r.relic.tier:'none')+'"><span class="discovery-icon" aria-hidden="true">'+(r.relic?r.relic.emoji:'🌫️')+'</span><div class="discovery-info"><span class="discovery-kicker">'+escapeHTML(r.relic?t.relicFound:t.relicMissing)+'</span><strong class="discovery-title">'+escapeHTML(r.relic?relicName(r.relic):t.noAnswer)+'</strong><span class="discovery-caption">'+escapeHTML(r.relic?t.relicCaption:t.relicEmpty)+'</span></div></div>'
+   +(r.streak>=2?'<div class="streak-callout">🔥 '+escapeHTML(t.comboTitle)+' <strong>×'+r.streak+'</strong> · '+escapeHTML(t.comboCaption)+'</div>':'')
+   +(relics.length?'<div class="reward-rail"><span class="micro">'+escapeHTML(t.collection)+'</span>'+relics.map(relic=>'<span class="relic-token" title="'+escapeHTML(relicName(relic))+'">'+relic.emoji+'</span>').join('')+'</div>':'')
    +(rareSuggestions?'<p class="note">'+escapeHTML(t.also)+' '+rareSuggestions+'</p>':'')
    +'<p class="disclaimer">'+escapeHTML(t.resultNote)+'</p>'
    +'<button class="primary" type="button" id="nextRound">'+escapeHTML(index===QUESTION_COUNT-1?t.finish:t.next)+'</button>';
@@ -307,6 +313,9 @@ function render(){
    +'<div class="hud"><div class="stat"><small>'+escapeHTML(t.depth)+'</small><strong>'+fmt(points*10)+' m</strong></div>'
    +'<div class="stat"><small>'+escapeHTML(t.score)+'</small><strong>'+points+' / 700</strong></div>'
    +'<div class="stat"><small>'+escapeHTML(t.best)+'</small><strong>'+fmt(best)+' m</strong></div></div>'
+   +'<div class="fun-collection"><div class="fun-collect-card"><span aria-hidden="true">🎒</span><div><strong>'+escapeHTML(t.collection)+'</strong><small>'+relics.length+' / 7</small></div></div><div class="fun-collect-card"><span aria-hidden="true">🔥</span><div><strong>'+escapeHTML(t.streak)+'</strong><small>×'+bestStreak+'</small></div></div></div>'
+   +(relics.length?'<div class="reward-rail"><span class="micro">'+escapeHTML(t.collection)+'</span>'+relics.map(item=>'<span class="relic-token" title="'+escapeHTML(relicName(item))+'">'+item.emoji+'</span>').join('')+'</div>':'<p class="note">'+escapeHTML(t.collectionEmpty)+'</p>')
+   +'<div class="achievement-section"><span class="micro">✦ '+escapeHTML(t.achievementTitle)+'</span><div class="achievement-grid">'+achievementBadges()+'</div></div>'
    +'<h3 class="micro" style="margin-top:26px">'+escapeHTML(t.chart)+'</h3>'
    +'<div class="voyage-chart" role="img" aria-label="'+escapeHTML(t.chart)+'">'+results.map((r,i)=>'<div class="voyage-column"><div class="voyage-bar-area"><span class="voyage-bar '+(r.earned?'':'empty')+'" style="--height:'+Math.max(3,r.earned)+'%;--delay:'+(i*.06)+'s"></span></div><strong>'+r.earned+'</strong><small>'+(i+1)+' / 7</small></div>').join('')+'</div>'
    +'<h3 class="micro" style="margin-top:26px">'+escapeHTML(t.roundList)+'</h3>'
@@ -327,6 +336,7 @@ async function copyResult(){
 stage.addEventListener('click',e=>{
  const target=e.target.closest('button');if(!target)return;
  if(target.id==='startGame')start();
+ if(target.id==='sonarButton')sonar();
  if(target.id==='nextRound')next();
  if(target.id==='copyResult')copyResult();
 });
