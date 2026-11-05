@@ -1,12 +1,75 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Country Quest · Online</title><style>
 :root{color-scheme:dark;--bg:#0b1120;--box:#192339;--line:#33435a;--main:#7be6c9;--text:#f4f7ff;--sub:#a2afc2}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,Arial,sans-serif}main{max-width:790px;margin:auto;padding:28px 18px 90px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:0 0 17px}header b{font-size:23px}header span,.muted{color:var(--sub)}h1{font-size:clamp(30px,6vw,46px);line-height:1.1;margin:30px 0 12px;letter-spacing:-1px}h2{margin:0 0 13px;font-size:22px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.panel{background:var(--box);border:1px solid var(--line);border-radius:18px;padding:24px;margin:20px 0}.field{width:100%;background:#0e192a;color:white;border:1px solid #50607a;padding:13px;border-radius:10px;font:inherit}.field:focus{outline:2px solid var(--main)}label{display:block;font-size:13px;margin:12px 0 6px;color:var(--sub)}button{cursor:pointer;border:0;border-radius:10px;padding:13px 17px;background:var(--main);color:#08292b;font:inherit;font-weight:800}button.alt{background:#32435b;color:white}button:disabled{opacity:.45;cursor:not-allowed}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.code{font-size:45px;letter-spacing:6px;font-weight:900;color:var(--main)}.players{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:18px}.player{background:#23334a;border-radius:12px;padding:15px;border:1px solid var(--line)}.player.me{border-color:var(--main)}.player strong{display:block;font-size:27px}.clue{background:#263850;border-radius:12px;padding:17px 20px;margin:12px 0;font-size:20px;font-weight:650}.choices{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0}.choices button{background:#2a4059;color:white;border:1px solid #496079}.shape{background:#0e192a;border-radius:12px;display:grid;place-items:center;margin:18px 0}.shape svg{height:225px;width:100%;max-width:460px}.shape path{fill:var(--main)}.tag{font-size:12px;color:var(--main);letter-spacing:1.2px;font-weight:800}.notice{color:#ffa7ac;min-height:28px;margin-top:12px}footer{color:var(--sub);font-size:12px;margin-top:30px}@media(max-width:560px){.grid{grid-template-columns:1fr}.panel{padding:19px}.players{gap:8px}.choices{gap:8px}.choices button{padding:12px 7px}}</style></head><body><main><header><b>🌍 Country Quest</b><span>ONLINE MULTIPLAYER</span><a href='/solo.html' style='color:#7be6c9;text-decoration:none;font-weight:800'>Solo games →</a></header><div id="app"></div><footer>Play from different PCs using the same link. Private matches have 6 rounds. Room data is temporary if the server restarts.</footer></main><script>
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,Arial,sans-serif}main{max-width:790px;margin:auto;padding:28px 18px 90px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:0 0 17px}header b{font-size:23px}header span,.muted{color:var(--sub)}h1{font-size:clamp(30px,6vw,46px);line-height:1.1;margin:30px 0 12px;letter-spacing:-1px}h2{margin:0 0 13px;font-size:22px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.panel{background:var(--box);border:1px solid var(--line);border-radius:18px;padding:24px;margin:20px 0}.field{width:100%;background:#0e192a;color:white;border:1px solid #50607a;padding:13px;border-radius:10px;font:inherit}.field:focus{outline:2px solid var(--main)}label{display:block;font-size:13px;margin:12px 0 6px;color:var(--sub)}button{cursor:pointer;border:0;border-radius:10px;padding:13px 17px;background:var(--main);color:#08292b;font:inherit;font-weight:800}button.alt{background:#32435b;color:white}button:disabled{opacity:.45;cursor:not-allowed}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.code{font-size:45px;letter-spacing:6px;font-weight:900;color:var(--main)}.players{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:18px}.player{background:#23334a;border-radius:12px;padding:15px;border:1px solid var(--line)}.player.me{border-color:var(--main)}.player strong{display:block;font-size:27px}.clue{background:#263850;border-radius:12px;padding:17px 20px;margin:12px 0;font-size:20px;font-weight:650}.choices{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0}.choices button{background:#2a4059;color:white;border:1px solid #496079}.shape{background:#0e192a;border-radius:12px;display:grid;place-items:center;margin:18px 0}.shape svg{height:225px;width:100%;max-width:460px}.shape path{fill:var(--main)}.tag{font-size:12px;color:var(--main);letter-spacing:1.2px;font-weight:800}.notice{color:#ffa7ac;min-height:28px;margin-top:12px}footer{color:var(--sub);font-size:12px;margin-top:30px}@media(max-width:560px){.grid{grid-template-columns:1fr}.panel{padding:19px}.players{gap:8px}.choices{gap:8px}.choices button{padding:12px 7px}}
+.mode-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}
+.mode-card{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;min-height:230px;width:100%;padding:24px;background:#1b2c43;color:var(--text);border:1px solid #38506c;border-radius:17px;text-align:left;text-decoration:none;font:inherit;font-weight:400;cursor:pointer}
+.mode-card:hover,.mode-card:focus-visible{border-color:var(--main);background:#22364e;outline:none}
+.mode-icon{font-size:37px}.mode-name{font-size:24px;font-weight:850;line-height:1.25;margin:9px 0}
+.mode-desc{font-size:14px;color:var(--sub);line-height:1.5;margin:0}
+.mode-action{font-weight:800;color:var(--main);margin-top:18px}
+.online-section{scroll-margin-top:20px}
+@media(max-width:560px){.mode-grid{grid-template-columns:1fr}.mode-card{min-height:175px}}
+</style></head><body><main><header><b>🌍 Country Quest</b><span>SOLO & ONLINE</span></header><div id="app"></div><footer>Play from different PCs using the same link. Private matches have 6 rounds. Room data is temporary if the server restarts.</footer></main><script>
 let session=null,state=null,busy=false,tick=null;const app=document.querySelector('#app');
 const escapeHTML=x=>String(x??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 async function api(action,extra={}){let response=await fetch('/api/'+action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...session,...extra})});let result=await response.json();if(!response.ok)throw Error(result.error||'Network error');return result}
 function save(){try{localStorage.setItem('country-quest-session',JSON.stringify(session))}catch{}}
 function leave(){session=null;state=null;try{localStorage.removeItem('country-quest-session')}catch{}landing()}
-function landing(){app.innerHTML='<h1>Challenge your friends.</h1><p class="muted">Create a private room or join using a code. Play Country Clues, Outlines and Guess the Year.</p><div class="grid"><div class="panel"><h2>Create room</h2><form id="create"><label>Your name</label><input class="field" name="name" maxlength="24" required placeholder="Your name"><div class="actions"><button>Create room</button></div></form></div><div class="panel"><h2>Join room</h2><form id="join"><label>Your name</label><input class="field" name="name" maxlength="24" required placeholder="Your name"><label>Room code</label><input class="field" name="code" maxlength="6" required placeholder="ABC123" style="text-transform:uppercase"><div class="actions"><button>Join match</button></div></form></div></div><p class="notice" id="message"></p>';['create','join'].forEach(action=>document.getElementById(action).onsubmit=async e=>{e.preventDefault();const button=e.currentTarget.querySelector('button');button.disabled=true;const form=Object.fromEntries(new FormData(e.currentTarget));try{const response=await api(action,form);session={code:response.code,token:response.token};save();state=response;render()}catch(err){document.querySelector('#message').textContent=err.message;button.disabled=false}});const code=new URLSearchParams(location.search).get('room');if(code)document.querySelector('#join [name=code]').value=code.toUpperCase()}
+function landing(){
+  const invited=new URLSearchParams(location.search).get('room');
+  app.innerHTML=\`
+    <h1>Choose your game.</h1>
+    <p class="muted">Play alone or compete with a friend.</p>
+    <div class="mode-grid">
+      <a class="mode-card" href="/solo.html">
+        <div><div class="mode-icon">🧭</div><div class="mode-name">Single Player</div>
+        <p class="mode-desc">Country Clues · Guess the Year · Country Outlines</p></div>
+        <span class="mode-action">Play solo →</span>
+      </a>
+      <button class="mode-card" type="button" id="onlineMode">
+        <div><div class="mode-icon">⚔️</div><div class="mode-name">Online Multiplayer</div>
+        <p class="mode-desc">Play 6 rounds against a friend on another PC.</p></div>
+        <span class="mode-action">Play online →</span>
+      </button>
+    </div>
+    <section class="online-section" id="onlineForms" \${invited||location.hash==='#online'?'':'hidden'}>
+      <h2>Online multiplayer</h2>
+      <div class="grid">
+        <div class="panel"><h2>Create room</h2>
+          <form id="create"><label>Your name</label><input class="field" name="name" maxlength="24" required placeholder="Your name">
+          <div class="actions"><button>Create room</button></div></form>
+        </div>
+        <div class="panel"><h2>Join room</h2>
+          <form id="join"><label>Your name</label><input class="field" name="name" maxlength="24" required placeholder="Your name">
+          <label>Room code</label><input class="field" name="code" maxlength="6" required placeholder="ABC123" style="text-transform:uppercase">
+          <div class="actions"><button>Join match</button></div></form>
+        </div>
+      </div>
+      <p class="notice" id="message"></p>
+    </section>
+  \`;
+  document.getElementById('onlineMode').onclick=()=>{
+    const section=document.getElementById('onlineForms');section.hidden=false;
+    if(!location.hash)history.replaceState(null,'','#online');
+    section.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  ['create','join'].forEach(action=>{
+    document.getElementById(action).onsubmit=async e=>{
+      e.preventDefault();
+      const button=e.currentTarget.querySelector('button');
+      button.disabled=true;
+      const form=Object.fromEntries(new FormData(e.currentTarget));
+      try{
+        const response=await api(action,form);
+        session={code:response.code,token:response.token};
+        save();state=response;render();
+      }catch(err){document.querySelector('#message').textContent=err.message;button.disabled=false;}
+    };
+  });
+  if(invited){
+    document.querySelector('#join [name=code]').value=invited.toUpperCase();
+  }
+}
 const scores=()=>'<div class="players">'+state.players.map((p,i)=>'<div class="player '+(i===state.you?'me':'')+'"><div class="muted">'+escapeHTML(p.name)+(i===state.you?' (you)':'')+'</div><strong>'+p.score+' pts</strong><small>'+(p.done?'✓ Answered':'Thinking…')+'</small></div>').join('')+'</div>';
 function render(){if(!session){landing();return}if(!state)return;let h='';if(!state.started){h='<h1>Invite a friend.</h1><div class="panel"><p class="muted">Share this room code:</p><div class="code">'+state.code+'</div><div class="actions"><button id="copy">Copy invitation link</button><button class="alt" id="leave">Leave</button></div><p class="muted">Waiting for player 2...</p></div>'}
 else if(state.finished){let [a,b]=state.players;h='<h1>🏆 '+(a.score===b.score?"It's a tie!":escapeHTML(a.score>b.score?a.name:b.name)+' wins!')+'</h1><div class="panel"><h2>Final scores</h2>'+scores()+'<div class="actions"><button id="leave">Play again</button></div></div>'}
