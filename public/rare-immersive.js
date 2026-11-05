@@ -7,7 +7,7 @@ const MAX=7000,$=id=>document.getElementById(id);
 const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let lastDepth=0,anim=null,ready=false,lastScreen='',lastBurst='',sceneZone='sunlit';
 const fishSvg='<svg viewBox="0 0 148 54" aria-hidden="true" focusable="false"><path d="M12 15q18-15 34 0q-16 17-34 0l-10-8 0 16z"/><path d="M76 37q14-13 27 0q-13 14-27 0l-9-6v12z"/><path d="M110 14q14-12 26 0q-13 14-26 0l-9-6v12z"/></svg>';
-const subSvg='<svg viewBox="0 0 72 72" role="img" aria-label="Exploration submarine"><defs><linearGradient id="cqSubBody" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#e5ffe4"/><stop offset=".55" stop-color="#91ecd2"/><stop offset="1" stop-color="#3289a2"/></linearGradient></defs><path d="M16 36q0-18 20-18t20 18v12H16z" fill="url(#cqSubBody)" stroke="#f3fff5" stroke-width="1.6"/><path d="M26 20v-6h11" fill="none" stroke="#c5f9e7" stroke-width="3" stroke-linecap="round"/><rect x="10" y="35" width="52" height="21" rx="10" fill="#4aabb2" stroke="#e2ffe9" stroke-width="1.6"/><circle cx="23" cy="45" r="5" fill="#1b4d68" stroke="#dcfff0" stroke-width="2"/><circle cx="37" cy="45" r="5" fill="#1b4d68" stroke="#dcfff0" stroke-width="2"/><path d="M62 40l8-5v19l-8-6M12 42l-7-3v13l7-3" fill="#b7fbe2" stroke="#d7fff2" stroke-width="1"/><path d="M30 58l-4 7m18-7 4 7" stroke="#8fd6cb" stroke-width="3" stroke-linecap="round"/></svg>';
+const anchorSvg='<svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diving anchor"><defs><linearGradient id="cqAnchorMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff6d9"/><stop offset=".48" stop-color="#a0f1e1"/><stop offset="1" stop-color="#4c9db9"/></linearGradient></defs><g fill="none" stroke="url(#cqAnchorMetal)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="16" r="10"/><path d="M50 30V92M28 48H72M18 73C19 98 42 105 50 88C58 105 81 98 82 73"/></g><g fill="#d4fff0" stroke="#d4fff0" stroke-linejoin="round"><path d="M15 67L31 77L14 87Z"/><path d="M85 67L69 77L86 87Z"/></g><path d="M50 36v47" stroke="#eafff4" stroke-width="2.5" opacity=".75"/></svg>';
 const bubbles=Array.from({length:18},(_,i)=>{
  const x=(13+i*37)%93,seconds=7+(i*13)%11,sz=3+(i*7)%13,sway=((i*31)%130)-65;
  return '<i class="particle" style="--x:'+x+'%;--s:'+sz+'px;--duration:'+seconds+'s;--delay:-'+(i*1.8).toFixed(1)+'s;--sway:'+sway+'px"></i>';
@@ -29,7 +29,7 @@ const scene=[
  '<div class="burst-layer" id="burstLayer" aria-hidden="true"></div>'
 ].join('');
 sea.insertAdjacentHTML('afterbegin',scene);
-const submarine=$('submersible');if(submarine)submarine.innerHTML=subSvg;
+const submarine=$('submersible');if(submarine)submarine.innerHTML=anchorSvg;
 const zones=[
  {min:0,key:'sunlit',en:'SUNLIT REEF',sv:'SOLBELYST REV'},
  {min:1200,key:'twilight',en:'BLUE TWILIGHT',sv:'BLÅ SKYMNING'},
@@ -97,6 +97,31 @@ function burst(points,showScore=true){
  layer.innerHTML=bits+toast+'<span class="sea-impact" style="--by:'+y+'"></span>';
  target.appendChild(layer);setTimeout(()=>layer.remove(),1800);
 }
+/* Correct answers trigger a cinematic anchor drop, with the ocean
+   rushing upwards to create a sense of real downward travel. */
+let plungeTicket=0,plungeTimer=null;
+function plunge(points){
+ if(points<=0||reduce)return;
+ if(plungeTimer)clearTimeout(plungeTimer);
+ const ticket=++plungeTicket;
+ sea.classList.remove('ocean-plunging');
+ const prior=$('anchorDiveOverlay');if(prior)prior.remove();
+ void sea.offsetWidth;
+ sea.classList.add('ocean-plunging');
+ const layer=document.createElement('div');
+ layer.className='anchor-dive-overlay';
+ layer.id='anchorDiveOverlay';
+ layer.setAttribute('aria-hidden','true');
+ layer.innerHTML='<div class="anchor-plunge-ghost">'+anchorSvg+'</div>'
+   +Array.from({length:14},(_,i)=>'<i class="anchor-speed-bubble" style="--i:'+i+';--shift:'+((i*17)%145-72)+'px"></i>').join('')
+   +'<span class="anchor-plunge-label">+'+(points*10)+' m</span>';
+ sea.appendChild(layer);
+ plungeTimer=setTimeout(()=>{
+   if(ticket!==plungeTicket)return;
+   layer.remove();sea.classList.remove('ocean-plunging');
+   plungeTimer=null;
+ },1950);
+}
 function setTimer(ms,total){
  const remaining=Math.max(0,Number(ms)||0),duration=Math.max(1,Number(total)||25000);
  const arc=$('timerArc');if(arc)arc.style.strokeDashoffset=(94.248*(1-remaining/duration)).toFixed(3);
@@ -108,6 +133,9 @@ function reject(){
  field.classList.remove('invalid-entry');void field.offsetWidth;field.classList.add('invalid-entry');
 }
 function reset(){
+ plungeTicket++;if(plungeTimer){clearTimeout(plungeTimer);plungeTimer=null}
+ sea.classList.remove('ocean-plunging');
+ const fly=$('anchorDiveOverlay');if(fly)fly.remove();
  lastScreen='';lastBurst='';lastDepth=0;ready=false;document.body.dataset.zone='sunlit';
  const layer=$('burstLayer');if(layer)layer.innerHTML='';
  if(anim){cancelAnimationFrame(anim);anim=null}
@@ -129,6 +157,6 @@ function onScreen(screen,round,points){
  }else if(screen==='done'&&lastBurst!=='done'){lastBurst='done';burst(100,false)}
 }
 function onLanguage(){translateZone();displayDepth(lastDepth)}
-window.CQDiveFX={setDepth,setTimer,onScreen,reject,reset,onLanguage};
+window.CQDiveFX={setDepth,plunge,setTimer,onScreen,reject,reset,onLanguage};
 document.body.dataset.zone='sunlit';translateZone();
 })();
