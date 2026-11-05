@@ -106,8 +106,40 @@ function home(){document.body.removeAttribute('data-game');mode=null;game=null;v
   <button class="mode" data-start="outline"><div class="photo-card-top"><span class="card-index">02 / SOLO</span><span class="card-corner">↗</span></div><div class="photo-card-bottom"><span class="emoji">◇</span><strong>Country Outlines</strong><span>Recognize the real shapes of our world.</span><span class="mode-action">Start challenge ↗</span></div></button>
   <button class="mode" data-start="year"><div class="photo-card-top"><span class="card-index">03 / SOLO</span><span class="card-corner">↗</span></div><div class="photo-card-bottom"><span class="emoji">◷</span><strong>Guess the Year</strong><span>Every year has a story. Know the moment?</span><span class="mode-action">Start challenge ↗</span></div></button>
   <button class="mode" data-start="versus"><div class="photo-card-top"><span class="card-index">04 / LOCAL</span><span class="card-corner">↗</span></div><div class="photo-card-bottom"><span class="emoji">◎</span><strong>Pass & Play</strong><span>Two players. One device. Six rounds.</span><span class="mode-action">Start challenge ↗</span></div></button>
-  </section></section><section class="summary"><span>🎮 <b>${saved.played}</b> games played</span><span class="separator">•</span><span>✅ <b>${saved.wins}</b> correct guesses</span></section>`;$('#difficulty').value=level;$('#difficulty').addEventListener('change',e=>level=e.target.value);document.querySelectorAll('[data-start]').forEach(x=>x.addEventListener('click',()=>start(x.dataset.start)))}
-function filterPool(items){if(level==='all')return items;let n=level==='easy'?0:level==='medium'?1:2;return items.filter((x,i)=>{if(x.difficulty)return x.difficulty===level;return i%3===n})}
+  </section></section><section class="summary"><span>🎮 <b>${saved.played}</b> games played</span><span class="separator">•</span><span>✅ <b>${saved.wins}</b> correct guesses</span></section>`;$('#difficulty').value=level;$('#difficulty').addEventListener('change',e=>level=e.target.value);document.querySelectorAll('[data-start]').forEach(x=>x.addEventListener('click',()=>x.dataset.start==='versus'?chooseCompetitiveDifficulty():start(x.dataset.start)))}
+const localCompetitiveTiers={"easy":{"clues":["Japan","Brazil","Canada","India","Mexico","Australia","Spain","Finland"],"outlines":["Italy","Japan","Brazil","France","Germany","Australia","Spain","United Kingdom","Mexico","Canada"]},"medium":{"clues":["Morocco","Iceland","Greece","Peru","Thailand","Turkey","Argentina","Portugal","South Africa","Norway","Colombia","Indonesia"],"outlines":["Norway","Greece","Finland","Portugal","Argentina","Poland","Morocco","Thailand","South Africa","Peru","Switzerland"]},"hard":{"clues":["Nepal","Vietnam","South Korea","Singapore","Ireland","Kenya","Chile","Colombia","Indonesia","New Zealand","Finland"],"outlines":["Nepal","Vietnam","Chile","Croatia","Romania","Mongolia","Madagascar","Indonesia","Ireland","Saudi Arabia","Pakistan","Ukraine","Morocco"]}};
+function chooseCompetitiveDifficulty(){
+  document.body.removeAttribute('data-game');
+  const options='<fieldset class="competitive-level-picker"><legend>Choose match difficulty</legend>'
+    +'<div class="competitive-level-options">'
+    +'<label><input type="radio" name="matchDifficulty" value="easy"><span><strong>Easy</strong><small>Famous countries &amp; events</small></span></label>'
+    +'<label><input type="radio" name="matchDifficulty" value="medium" checked><span><strong>Medium</strong><small>Balanced world questions</small></span></label>'
+    +'<label><input type="radio" name="matchDifficulty" value="hard"><span><strong>Hard</strong><small>Trickier borders &amp; history</small></span></label>'
+    +'</div></fieldset>';
+  $('#app').innerHTML='<div class="gamehead"><button class="back" id="setupBack">← Modes</button><span class="tag">⚔️ COMPETITIVE</span></div>'
+    +'<div class="panel competitive-setup"><h2>Choose match difficulty</h2>'
+    +'<p class="quiet">Both players will play this level.</p>'
+    +'<form id="localCompetitionForm">'+options
+    +'<div class="actions"><button class="btn" type="submit">Start match →</button></div></form></div>';
+  $('#setupBack').onclick=home;
+  $('#localCompetitionForm').onsubmit=e=>{
+    e.preventDefault();
+    const chosen=document.querySelector('input[name="matchDifficulty"]:checked');
+    level=chosen&&['easy','medium','hard'].includes(chosen.value)?chosen.value:'medium';
+    start('versus');
+  };
+}
+function filterPool(items){
+ if(level==='all')return items;
+ if(items===yearQuestions)return items.filter(x=>x[2]===level);
+ if(mode==='versus'&&localCompetitiveTiers[level]){
+   const tier=localCompetitiveTiers[level];
+   if(items===countries)return items.filter(x=>tier.clues.includes(x.name));
+   if(items===shapeNames)return items.filter(x=>tier.outlines.includes(x));
+ }
+ const n=level==='easy'?0:level==='medium'?1:2;
+ return items.filter((x,i)=>x.difficulty?x.difficulty===level:i%3===n);
+}
 function createQuestion(type){if(type==='clues'){let pool=filterPool(countries);if(!pool.length)pool=countries;let picked=take('clues',pool);return {type,data:picked,answer:picked.name}}
 if(type==='outline'){let pool=filterPool(shapeNames);if(!pool.length)pool=shapeNames;let answer=take('outline',pool);let others=shuffle(shapeNames.filter(n=>n!==answer)).slice(0,3);return {type,answer,options:shuffle([answer,...others]),data:(realOutlines[answer]||{path:shapes[answer],viewBox:'0 0 300 185'})}}
 let pool=filterPool(yearQuestions);if(!pool.length)pool=yearQuestions;let chosen=take('year',pool);let correct=chosen[1];let offsets=shuffle([-50,-25,-20,-15,-10,-8,-5,5,8,10,15,20,25,50]);let options=new Set([correct]);for(let delta of offsets){if(options.size===4)break;let n=correct+delta;if(n>1000 && n<2030)options.add(n)}return {type,answer:correct,options:shuffle([...options]),data:chosen[0]}}
@@ -116,7 +148,7 @@ function start(m){mode=m;deck={};round=0;points=0;clueIndex=0;locked=false;feedb
 function nextRound(){locked=false;feedback='';picked='';clueIndex=0;if(mode==='versus'){if(vs.turn>=6){finish();return}let types=['clues','outline','year','clues','outline','year'];game=createQuestion(types[vs.turn]);vs.index=vs.turn%2;showPass();return}if(round>=5){finish();return}game=createQuestion(mode);renderGame()}
 function gameHead(){return `<div class="gamehead"><button class="back" id="leave">← Modes</button><span class="tag">${mode==='versus'?'⚔️ COMPETITIVE':mode==='clues'?'🧩 COUNTRY CLUES':mode==='outline'?'🗺️ COUNTRY OUTLINES':'📅 GUESS THE YEAR'}</span><strong>${mode==='versus'?'Turn '+(vs.turn+1)+' / 6':'Round '+(round+1)+' / 5'}</strong></div>`}
 function showPass(){let p=vs.index+1;$('#app').innerHTML=gameHead()+`<div class="panel center"><div class="finish">🎮</div><h2>Player ${p}'s turn</h2><p class="quiet">Pass the device to Player ${p}.</p>${scoreboard()}<button class="btn" id="ready">I'm ready →</button></div>`;wireLeave();$('#ready').onclick=renderGame}
-function scoreboard(){return `<div class="competitive">${[0,1].map(i=>`<div class="player ${vs.index===i?'active':''}"><small>Player ${i+1}</small><b>${vs.scores[i]} pts</b></div>`).join('')}</div>`}
+function scoreboard(){return `<div class="difficulty-readout">Difficulty: <strong>${level==="easy"?"Easy":level==="hard"?"Hard":"Medium"}</strong></div><div class="competitive">${[0,1].map(i=>`<div class="player ${vs.index===i?'active':''}"><small>Player ${i+1}</small><b>${vs.scores[i]} pts</b></div>`).join('')}</div>`}
 function renderGame(){document.body.dataset.game=game.type;let isVs=mode==='versus';let extra=isVs?scoreboard():`<div class="scoreline"><span class="chip">Score: <b>${points}</b></span><span class="chip">Progress: <b>${round}</b> rounds finished</span></div>`;let inner='';
 if(game.type==='clues'){let value=[100,80,60,40,20][clueIndex];inner=`<div class="dots">${[0,1,2,3,4].map(i=>`<span class="dot ${i<=clueIndex?'on':''}"></span>`).join('')}</div><div class="clue"><div class="step">CLUE ${clueIndex+1} OF 5 · ${value} POINTS</div><div class="words">${esc(game.data.clues[clueIndex])}</div></div><form id="guessForm"><div class="formline"><input id="guessInput" class="field" list="countryList" placeholder="Type a country..." autocomplete="off" aria-label="Country guess" required><datalist id="countryList">${countries.map(x=>`<option value="${esc(x.name)}"></option>`).join('')}${shapeNames.filter(x=>!countries.some(y=>y.name===x)).map(x=>`<option value="${esc(x)}"></option>`).join('')}${Object.values(window.CQI18N?.countryNames||{}).map(n=>`<option value="${esc(n)}"></option>`).join('')}</datalist><button class="btn" type="submit">Guess</button></div></form><div class="actions"><button class="btn alt" id="nextClue" ${clueIndex>=4?'disabled':''}>Next clue →</button></div><div class="notice ${feedback?'bad':''}" role="status">${esc(feedback)}</div>`}
 if(game.type==='outline')inner=`<p class="prompt">Which country is this?</p><div class="shapeholder"><svg viewBox="${game.data.viewBox}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Accurate silhouette of a country"><defs><linearGradient id="outlineFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9ef8d9"/><stop offset="100%" stop-color="#37b9d0"/></linearGradient></defs><path d="${game.data.path}" fill="url(#outlineFill)" fill-rule="evenodd"></path></svg></div><div class="options">${game.options.map(o=>`<button class="choice" data-answer="${esc(o)}">${esc(o==='United States of America'?'United States':o)}</button>`).join('')}</div><div class="notice ${feedback?'bad':''}" role="status">${esc(feedback)}</div>`;
