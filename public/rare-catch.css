@@ -128,3 +128,14 @@ body.no-fish .fishing-line{animation:line-tension .3s ease-in-out 3 alternate}
 }
 @media(max-width:380px){.answer-row{flex-direction:column}.answer-row button{width:100%}.quiz-panel{padding:19px 16px}.catch-hud{gap:2px}.hud-stat{min-width:66px}.hud-stat strong{font-size:19px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Generated Rare Catch poster at the start of a fishing trip. */
+body.poster-ready[data-phase="intro"] .hero-title{display:none}
+body[data-phase="intro"] .quiz-panel{flex-basis:640px;width:min(640px,100%)}
+.poster-wrap{
+ width:100%;aspect-ratio:16/9;border:2px solid #b9ffffaa;border-radius:16px;
+ overflow:hidden;margin:0 0 21px;background:#095c8a;
+ box-shadow:0 10px 28px #001727a6,0 0 34px #80f7e72a;
+}
+.poster-wrap img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+@media(max-width:680px){body[data-phase="intro"] .quiz-panel{width:100%;flex:auto}.poster-wrap{margin-bottom:17px;border-radius:12px}}
