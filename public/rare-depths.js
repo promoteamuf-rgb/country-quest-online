@@ -29,7 +29,7 @@ complete:'VOYAGE COMPLETE',doneTitle:'How deep did you go?',doneLead:'Seven stop
 depth:'DEPTH',score:'POINTS',best:'BEST DEPTH',roundList:'YOUR SEVEN ANSWERS',chart:'DEPTH EARNED IN EACH ROUND',
 noAnswer:'No accepted answer',playAgain:'Dive again ↻',copy:'Copy my result',copied:'Result copied!',
 clipboard:'Copy this result:',meters:'m',points:'pts',
-rank10:'Common',rank25:'Familiar',rank40:'Less obvious',rank60:'Uncommon',rank80:'Rare find',rank100:'Deep discovery'
+fullscreenOn:'Full screen',fullscreenOff:'Exit full screen',rank10:'Common',rank25:'Familiar',rank40:'Less obvious',rank60:'Uncommon',rank80:'Rare find',rank100:'Deep discovery'
 },
 sv:{
 all:'Alla spel',solo:'Spela själv',eyebrow:'COUNTRY QUEST · ETT NYTT ÄVENTYR',
@@ -51,7 +51,7 @@ complete:'DYKET ÄR KLART',doneTitle:'Hur djupt kom du?',doneLead:'Sju stationer
 depth:'DJUP',score:'POÄNG',best:'DJUPREKORD',roundList:'DINA SJU SVAR',chart:'DJUP PER RUNDA',
 noAnswer:'Inget godkänt svar',playAgain:'Dyk igen ↻',copy:'Kopiera resultat',copied:'Resultatet kopierat!',
 clipboard:'Kopiera detta resultat:',meters:'m',points:'p',
-rank10:'Vanligt',rank25:'Välkänt',rank40:'Lite ovanligt',rank60:'Ovanligt',rank80:'Sällsynt',rank100:'Djupfynd'
+fullscreenOn:'Helskärm',fullscreenOff:'Avsluta helskärm',rank10:'Vanligt',rank25:'Välkänt',rank40:'Lite ovanligt',rank60:'Ovanligt',rank80:'Sällsynt',rank100:'Djupfynd'
 }
 };
 let lang='en';
@@ -97,6 +97,17 @@ function setLanguage(value){
   lang=value;try{localStorage.setItem(LANG_KEY,value)}catch{}
   updateStatic();render();
 }
+function updateFullscreenButton(){
+  const button=$('fullscreenBtn');
+  if(!button)return;
+  const enabled=!!document.fullscreenElement;
+  const text=enabled?dictionary().fullscreenOff:dictionary().fullscreenOn;
+  button.setAttribute('aria-pressed',String(enabled));
+  button.setAttribute('aria-label',text);
+  button.title=text;
+  const span=button.querySelector('.expand-label');
+  if(span)span.textContent=text;
+}
 function updateStatic(){
   const t=dictionary();document.documentElement.lang=lang;
   for(const btn of document.querySelectorAll('[data-lang]'))btn.setAttribute('aria-pressed',String(btn.dataset.lang===lang));
@@ -107,6 +118,7 @@ function updateStatic(){
   $('heroFact1').textContent=t.fact1;$('heroFact2').textContent=t.fact2;$('heroFact3').textContent=t.fact3;
   $('seaTitle').textContent=t.seaTitle;$('depthTitle').textContent=t.totalDepth;
   $('footerText').textContent=t.footer;$('backFooter').textContent=t.back;
+  updateFullscreenButton();
   updateDepth();
   window.CQDiveFX?.onLanguage();
 }
@@ -183,6 +195,7 @@ function chips(){
    +'<div class="progress" aria-label="Question progress"><span style="width:'+((index)/QUESTION_COUNT*100)+'%"></span></div>';
 }
 function render(){
+ document.body.dataset.rarePhase=phase;
  const t=dictionary();
  if(phase==='intro'){
   stage.innerHTML='<div class="meta"><span class="micro">'+escapeHTML(t.introMeta)+'</span><span class="counter">'+escapeHTML(t.introCount)+'</span></div>'
@@ -261,5 +274,17 @@ stage.addEventListener('input',e=>{
  if(e.target.id==='answerInput')draft=e.target.value;
 });
 for(const b of document.querySelectorAll('[data-lang]'))b.addEventListener('click',()=>setLanguage(b.dataset.lang));
+const fullscreenBtn=$('fullscreenBtn');
+if(fullscreenBtn){
+ if(!document.documentElement.requestFullscreen)fullscreenBtn.hidden=true;
+ else fullscreenBtn.addEventListener('click',async()=>{
+  try{
+   if(document.fullscreenElement)await document.exitFullscreen();
+   else await document.documentElement.requestFullscreen();
+  }catch(err){fullscreenBtn.title=lang==='sv'?'Helskärm stöds inte här.':'Full screen is unavailable in this browser.'}
+  updateFullscreenButton();
+ });
+}
+document.addEventListener('fullscreenchange',updateFullscreenButton);
 updateStatic();render();
 })();
