@@ -1171,6 +1171,534 @@
       "prompt": "The first recorded circumnavigation expedition returned to Spain.",
       "answer": 1522,
       "difficulty": "hard"
+    },
+    {
+      "prompt": "Mount Vesuvius buried Pompeii and Herculaneum.",
+      "answer": 79,
+      "difficulty": "hard",
+      "promptSv": "Vulkanen Vesuvius begravde Pompeji och Herculaneum."
+    },
+    {
+      "prompt": "The Edict of Milan established tolerance for Christianity in the Roman Empire.",
+      "answer": 313,
+      "difficulty": "hard",
+      "promptSv": "Ediktet i Milano gav kristna religionsfrihet i Romarriket."
+    },
+    {
+      "prompt": "Constantinople was dedicated as an imperial capital.",
+      "answer": 330,
+      "difficulty": "hard",
+      "promptSv": "Konstantinopel invigdes som kejserlig huvudstad."
+    },
+    {
+      "prompt": "Romulus Augustulus was deposed as Western Roman emperor.",
+      "answer": 476,
+      "difficulty": "hard",
+      "promptSv": "Romulus Augustulus avsattes som västromersk kejsare."
+    },
+    {
+      "prompt": "The Hijra migration from Mecca to Medina took place.",
+      "answer": 622,
+      "difficulty": "hard",
+      "promptSv": "Utvandringen hijra från Mecka till Medina ägde rum."
+    },
+    {
+      "prompt": "The Battle of Tours was fought in the Frankish kingdom.",
+      "answer": 732,
+      "difficulty": "hard",
+      "promptSv": "Slaget vid Poitiers utkämpades i Frankerriket."
+    },
+    {
+      "prompt": "Vikings raided the monastery of Lindisfarne.",
+      "answer": 793,
+      "difficulty": "hard",
+      "promptSv": "Vikingar plundrade klostret Lindisfarne."
+    },
+    {
+      "prompt": "Charlemagne was crowned emperor in Rome.",
+      "answer": 800,
+      "difficulty": "hard",
+      "promptSv": "Karl den store kröntes till kejsare i Rom."
+    },
+    {
+      "prompt": "The Treaty of Verdun divided the Carolingian Empire.",
+      "answer": 843,
+      "difficulty": "hard",
+      "promptSv": "Fördraget i Verdun delade det karolingiska riket."
+    },
+    {
+      "prompt": "Otto I was crowned emperor in Rome.",
+      "answer": 962,
+      "difficulty": "hard",
+      "promptSv": "Otto I kröntes till kejsare i Rom."
+    },
+    {
+      "prompt": "The Normans won the Battle of Hastings.",
+      "answer": 1066,
+      "difficulty": "hard",
+      "promptSv": "Normanderna vann slaget vid Hastings."
+    },
+    {
+      "prompt": "The First Crusade captured Jerusalem.",
+      "answer": 1099,
+      "difficulty": "hard",
+      "promptSv": "Det första korståget intog Jerusalem."
+    },
+    {
+      "prompt": "Genghis Khan was proclaimed supreme ruler of the Mongols.",
+      "answer": 1206,
+      "difficulty": "hard",
+      "promptSv": "Djingis khan utropades till mongolernas högste härskare."
+    },
+    {
+      "prompt": "King John sealed Magna Carta in England.",
+      "answer": 1215,
+      "difficulty": "hard",
+      "promptSv": "Kung Johan utan land beseglade Magna Carta i England."
+    },
+    {
+      "prompt": "Mongol forces captured Baghdad.",
+      "answer": 1258,
+      "difficulty": "hard",
+      "promptSv": "Mongoliska styrkor intog Bagdad."
+    },
+    {
+      "prompt": "Marco Polo began his famous journey east from Venice.",
+      "answer": 1271,
+      "difficulty": "hard",
+      "promptSv": "Marco Polo påbörjade sin berömda resa österut från Venedig."
+    },
+    {
+      "prompt": "The Black Death reached Mediterranean Europe.",
+      "answer": 1347,
+      "difficulty": "hard",
+      "promptSv": "Digerdöden nådde Medelhavsområdet i Europa."
+    },
+    {
+      "prompt": "The Ming dynasty began ruling China.",
+      "answer": 1368,
+      "difficulty": "hard",
+      "promptSv": "Mingdynastin började styra Kina."
+    },
+    {
+      "prompt": "English forces won the Battle of Agincourt.",
+      "answer": 1415,
+      "difficulty": "hard",
+      "promptSv": "Engelska styrkor vann slaget vid Azincourt."
+    },
+    {
+      "prompt": "Spain and Portugal signed the Treaty of Tordesillas.",
+      "answer": 1494,
+      "difficulty": "hard",
+      "promptSv": "Spanien och Portugal undertecknade Tordesillasfördraget."
+    },
+    {
+      "prompt": "Martin Luther published his Ninety-five Theses.",
+      "answer": 1517,
+      "difficulty": "hard",
+      "promptSv": "Martin Luther offentliggjorde sina 95 teser."
+    },
+    {
+      "prompt": "The Aztec capital Tenochtitlan fell to Spanish-led forces.",
+      "answer": 1521,
+      "difficulty": "hard",
+      "promptSv": "Aztekernas huvudstad Tenochtitlán föll för spanskledda styrkor."
+    },
+    {
+      "prompt": "The English Act of Supremacy recognized Henry VIII as head of the Church of England.",
+      "answer": 1534,
+      "difficulty": "hard",
+      "promptSv": "Den engelska suprematiakten erkände Henrik VIII som överhuvud för kyrkan i England."
+    },
+    {
+      "prompt": "Copernicus's book on the heliocentric system was published.",
+      "answer": 1543,
+      "difficulty": "hard",
+      "promptSv": "Copernicus bok om det heliocentriska systemet publicerades."
+    },
+    {
+      "prompt": "The naval Battle of Lepanto was fought.",
+      "answer": 1571,
+      "difficulty": "hard",
+      "promptSv": "Sjöslaget vid Lepanto utkämpades."
+    },
+    {
+      "prompt": "The Spanish Armada's invasion attempt against England failed.",
+      "answer": 1588,
+      "difficulty": "hard",
+      "promptSv": "Den spanska armadans invasionsförsök mot England misslyckades."
+    },
+    {
+      "prompt": "The Dutch East India Company was founded.",
+      "answer": 1602,
+      "difficulty": "hard",
+      "promptSv": "Nederländska Ostindiska kompaniet bildades."
+    },
+    {
+      "prompt": "Tokugawa Ieyasu became shogun of Japan.",
+      "answer": 1603,
+      "difficulty": "hard",
+      "promptSv": "Tokugawa Ieyasu blev shogun i Japan."
+    },
+    {
+      "prompt": "The English settlement at Jamestown was founded.",
+      "answer": 1607,
+      "difficulty": "hard",
+      "promptSv": "Den engelska bosättningen Jamestown grundades."
+    },
+    {
+      "prompt": "The Thirty Years' War began in Europe.",
+      "answer": 1618,
+      "difficulty": "hard",
+      "promptSv": "Trettioåriga kriget började i Europa."
+    },
+    {
+      "prompt": "The Peace of Westphalia ended the Thirty Years' War.",
+      "answer": 1648,
+      "difficulty": "hard",
+      "promptSv": "Westfaliska freden avslutade trettioåriga kriget."
+    },
+    {
+      "prompt": "The second Ottoman siege of Vienna was lifted.",
+      "answer": 1683,
+      "difficulty": "hard",
+      "promptSv": "Den andra osmanska belägringen av Wien hävdes."
+    },
+    {
+      "prompt": "Peter the Great founded Saint Petersburg.",
+      "answer": 1703,
+      "difficulty": "hard",
+      "promptSv": "Peter den store grundade Sankt Petersburg."
+    },
+    {
+      "prompt": "The Acts of Union created the Kingdom of Great Britain.",
+      "answer": 1707,
+      "difficulty": "hard",
+      "promptSv": "Unionsakterna skapade kungariket Storbritannien."
+    },
+    {
+      "prompt": "The Treaty of Utrecht was signed during the War of Spanish Succession.",
+      "answer": 1713,
+      "difficulty": "hard",
+      "promptSv": "Freden i Utrecht undertecknades under spanska tronföljdskriget."
+    },
+    {
+      "prompt": "A devastating earthquake struck Lisbon.",
+      "answer": 1755,
+      "difficulty": "hard",
+      "promptSv": "En förödande jordbävning drabbade Lissabon."
+    },
+    {
+      "prompt": "The Seven Years' War began.",
+      "answer": 1756,
+      "difficulty": "hard",
+      "promptSv": "Sjuårskriget började."
+    },
+    {
+      "prompt": "James Cook departed on his first Pacific voyage.",
+      "answer": 1768,
+      "difficulty": "hard",
+      "promptSv": "James Cook gav sig av på sin första resa i Stilla havet."
+    },
+    {
+      "prompt": "The First Fleet of British ships arrived at Sydney Cove.",
+      "answer": 1788,
+      "difficulty": "hard",
+      "promptSv": "Den brittiska första flottan anlände till Sydney Cove."
+    },
+    {
+      "prompt": "The Haitian Revolution began in Saint-Domingue.",
+      "answer": 1791,
+      "difficulty": "hard",
+      "promptSv": "Haitiska revolutionen började i Saint-Domingue."
+    },
+    {
+      "prompt": "Haiti declared independence from France.",
+      "answer": 1804,
+      "difficulty": "hard",
+      "promptSv": "Haiti förklarade sig självständigt från Frankrike."
+    },
+    {
+      "prompt": "The naval Battle of Trafalgar was fought.",
+      "answer": 1805,
+      "difficulty": "hard",
+      "promptSv": "Sjöslaget vid Trafalgar utkämpades."
+    },
+    {
+      "prompt": "The Congress of Vienna concluded after the Napoleonic Wars.",
+      "answer": 1815,
+      "difficulty": "hard",
+      "promptSv": "Wienkongressen avslutades efter Napoleonkrigen."
+    },
+    {
+      "prompt": "The Greek War of Independence began.",
+      "answer": 1821,
+      "difficulty": "hard",
+      "promptSv": "Grekiska frihetskriget började."
+    },
+    {
+      "prompt": "Brazil declared independence from Portugal.",
+      "answer": 1822,
+      "difficulty": "hard",
+      "promptSv": "Brasilien utropade sin självständighet från Portugal."
+    },
+    {
+      "prompt": "The First Opium War began between Britain and China.",
+      "answer": 1839,
+      "difficulty": "hard",
+      "promptSv": "Det första opiumkriget började mellan Storbritannien och Kina."
+    },
+    {
+      "prompt": "Revolutionary uprisings spread across much of Europe.",
+      "answer": 1848,
+      "difficulty": "hard",
+      "promptSv": "Revolutionära uppror spreds över stora delar av Europa."
+    },
+    {
+      "prompt": "Commodore Matthew Perry arrived in Japan with American warships.",
+      "answer": 1853,
+      "difficulty": "hard",
+      "promptSv": "Kommendör Matthew Perry anlände till Japan med amerikanska krigsfartyg."
+    },
+    {
+      "prompt": "The Indian Rebellion against East India Company rule began.",
+      "answer": 1857,
+      "difficulty": "hard",
+      "promptSv": "Det indiska upproret mot Ostindiska kompaniets styre började."
+    },
+    {
+      "prompt": "The Kingdom of Italy was proclaimed.",
+      "answer": 1861,
+      "difficulty": "hard",
+      "promptSv": "Kungariket Italien utropades."
+    },
+    {
+      "prompt": "The Meiji Restoration began in Japan.",
+      "answer": 1868,
+      "difficulty": "hard",
+      "promptSv": "Meijirestaurationen började i Japan."
+    },
+    {
+      "prompt": "The German Empire was proclaimed at Versailles.",
+      "answer": 1871,
+      "difficulty": "hard",
+      "promptSv": "Tyska kejsarriket utropades i Versailles."
+    },
+    {
+      "prompt": "Alexander Graham Bell received his telephone patent.",
+      "answer": 1876,
+      "difficulty": "hard",
+      "promptSv": "Alexander Graham Bell fick patent på telefonen."
+    },
+    {
+      "prompt": "The Berlin Conference on European colonial claims in Africa began.",
+      "answer": 1884,
+      "difficulty": "hard",
+      "promptSv": "Berlinkonferensen om europeiska kolonialanspråk i Afrika började."
+    },
+    {
+      "prompt": "The Eiffel Tower opened to the public in Paris.",
+      "answer": 1889,
+      "difficulty": "hard",
+      "promptSv": "Eiffeltornet öppnades för allmänheten i Paris."
+    },
+    {
+      "prompt": "The Boxer Rebellion began in China.",
+      "answer": 1899,
+      "difficulty": "hard",
+      "promptSv": "Boxarupproret började i Kina."
+    },
+    {
+      "prompt": "Japan defeated Russia in the naval Battle of Tsushima.",
+      "answer": 1905,
+      "difficulty": "hard",
+      "promptSv": "Japan besegrade Ryssland i sjöslaget vid Tsushima."
+    },
+    {
+      "prompt": "The Mexican Revolution began.",
+      "answer": 1910,
+      "difficulty": "hard",
+      "promptSv": "Mexikanska revolutionen började."
+    },
+    {
+      "prompt": "China's Qing dynasty came to an end.",
+      "answer": 1912,
+      "difficulty": "hard",
+      "promptSv": "Kinas Qingdynasti gick under."
+    },
+    {
+      "prompt": "The Bolsheviks took power during the October Revolution.",
+      "answer": 1917,
+      "difficulty": "hard",
+      "promptSv": "Bolsjevikerna tog makten under oktoberrevolutionen."
+    },
+    {
+      "prompt": "The Treaty of Trianon was signed with Hungary.",
+      "answer": 1920,
+      "difficulty": "hard",
+      "promptSv": "Trianonfördraget undertecknades med Ungern."
+    },
+    {
+      "prompt": "The Republic of Turkey was proclaimed.",
+      "answer": 1923,
+      "difficulty": "hard",
+      "promptSv": "Republiken Turkiet utropades."
+    },
+    {
+      "prompt": "Alexander Fleming discovered penicillin's antibacterial effects.",
+      "answer": 1928,
+      "difficulty": "hard",
+      "promptSv": "Alexander Fleming upptäckte penicillinets antibakteriella verkan."
+    },
+    {
+      "prompt": "Japan invaded Manchuria.",
+      "answer": 1931,
+      "difficulty": "hard",
+      "promptSv": "Japan invaderade Manchuriet."
+    },
+    {
+      "prompt": "The Spanish Civil War began.",
+      "answer": 1936,
+      "difficulty": "hard",
+      "promptSv": "Spanska inbördeskriget började."
+    },
+    {
+      "prompt": "The Bretton Woods Conference established a new international monetary framework.",
+      "answer": 1944,
+      "difficulty": "hard",
+      "promptSv": "Bretton Woods-konferensen lade grunden för ett nytt internationellt valutasystem."
+    },
+    {
+      "prompt": "The Soviet blockade of West Berlin began.",
+      "answer": 1948,
+      "difficulty": "hard",
+      "promptSv": "Sovjetunionens blockad av Västberlin började."
+    },
+    {
+      "prompt": "The People's Republic of China was proclaimed.",
+      "answer": 1949,
+      "difficulty": "hard",
+      "promptSv": "Folkrepubliken Kina utropades."
+    },
+    {
+      "prompt": "The Korean War began.",
+      "answer": 1950,
+      "difficulty": "hard",
+      "promptSv": "Koreakriget började."
+    },
+    {
+      "prompt": "The Battle of Dien Bien Phu ended with a French defeat.",
+      "answer": 1954,
+      "difficulty": "hard",
+      "promptSv": "Slaget vid Dien Bien Phu slutade med ett franskt nederlag."
+    },
+    {
+      "prompt": "The Suez Crisis began after Egypt nationalized the canal.",
+      "answer": 1956,
+      "difficulty": "hard",
+      "promptSv": "Suezkrisen började efter att Egypten nationaliserat kanalen."
+    },
+    {
+      "prompt": "The Republic of the Congo gained independence from Belgium.",
+      "answer": 1960,
+      "difficulty": "hard",
+      "promptSv": "Republiken Kongo blev självständig från Belgien."
+    },
+    {
+      "prompt": "Construction of the Berlin Wall began.",
+      "answer": 1961,
+      "difficulty": "hard",
+      "promptSv": "Bygget av Berlinmuren påbörjades."
+    },
+    {
+      "prompt": "The Cuban Missile Crisis brought the Cold War close to nuclear conflict.",
+      "answer": 1962,
+      "difficulty": "hard",
+      "promptSv": "Kubakrisen förde kalla kriget nära en kärnvapenkonflikt."
+    },
+    {
+      "prompt": "Singapore became independent after separating from Malaysia.",
+      "answer": 1965,
+      "difficulty": "hard",
+      "promptSv": "Singapore blev självständigt efter att ha separerats från Malaysia."
+    },
+    {
+      "prompt": "The Six-Day War began in the Middle East.",
+      "answer": 1967,
+      "difficulty": "hard",
+      "promptSv": "Sexdagarskriget började i Mellanöstern."
+    },
+    {
+      "prompt": "Saigon fell, marking the end of the Vietnam War.",
+      "answer": 1975,
+      "difficulty": "hard",
+      "promptSv": "Saigon föll och Vietnamkriget tog slut."
+    },
+    {
+      "prompt": "Iran's monarchy fell during the Iranian Revolution.",
+      "answer": 1979,
+      "difficulty": "hard",
+      "promptSv": "Irans monarki föll under den iranska revolutionen."
+    },
+    {
+      "prompt": "The Falklands War began.",
+      "answer": 1982,
+      "difficulty": "hard",
+      "promptSv": "Falklandskriget började."
+    },
+    {
+      "prompt": "The Bhopal gas disaster occurred in India.",
+      "answer": 1984,
+      "difficulty": "hard",
+      "promptSv": "Gaskatastrofen i Bhopal inträffade i Indien."
+    },
+    {
+      "prompt": "The Dayton Peace Accords were signed.",
+      "answer": 1995,
+      "difficulty": "hard",
+      "promptSv": "Daytonavtalet undertecknades."
+    },
+    {
+      "prompt": "Hong Kong was handed over from Britain to China.",
+      "answer": 1997,
+      "difficulty": "hard",
+      "promptSv": "Hongkong överlämnades från Storbritannien till Kina."
+    },
+    {
+      "prompt": "East Timor became an independent state.",
+      "answer": 2002,
+      "difficulty": "hard",
+      "promptSv": "Östtimor blev en självständig stat."
+    },
+    {
+      "prompt": "A massive Indian Ocean earthquake triggered a devastating tsunami.",
+      "answer": 2004,
+      "difficulty": "hard",
+      "promptSv": "En kraftig jordbävning i Indiska oceanen orsakade en förödande tsunami."
+    },
+    {
+      "prompt": "South Sudan became independent.",
+      "answer": 2011,
+      "difficulty": "hard",
+      "promptSv": "Sydsudan blev självständigt."
+    },
+    {
+      "prompt": "The United Kingdom held its Brexit referendum.",
+      "answer": 2016,
+      "difficulty": "hard",
+      "promptSv": "Storbritannien höll folkomröstningen om brexit."
+    },
+    {
+      "prompt": "The WHO characterized COVID-19 as a pandemic.",
+      "answer": 2020,
+      "difficulty": "hard",
+      "promptSv": "WHO klassade covid-19 som en pandemi."
+    },
+    {
+      "prompt": "The container ship Ever Given blocked the Suez Canal.",
+      "answer": 2021,
+      "difficulty": "hard",
+      "promptSv": "Containerfartyget Ever Given blockerade Suezkanalen."
     }
   ]
 }
