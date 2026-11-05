@@ -171,6 +171,7 @@ Object.assign(dict,{"Choose match difficulty":"Välj svårighetsgrad","Famous co
 Object.assign(dict,{"Rare Depths":"Sällsynta djup","05 / NEW GAME":"05 / NYTT SPEL","RARE ANSWERS":"OVANLIGA SVAR","Seven questions. One correct answer each. The rarer your answer, the deeper you go.":"Sju frågor. Ett korrekt svar per fråga. Ju ovanligare svar, desto djupare kommer du.","Seven open questions. Your most unusual correct answers take you deeper.":"Sju öppna frågor. Dina ovanligaste rätta svar tar dig djupare.","Dive in":"Dyk ner","Dive in ↗":"Dyk ner ↗"});
 Object.assign(dict,{'Underwater explorer — Rare Depths':'Undervattensutforskare — Sällsynta djup'});
 Object.assign(dict,{'Five ways to travel the world.':'Fem sätt att upptäcka världen.'});
+Object.assign(dict,{"Rare Catch":"Sällsynt fångst","Fish from a yacht. Give a rarer correct answer to reel in a bigger fish!":"Fiska från en yacht. Ju ovanligare rätt svar, desto större fisk drar du upp!","Fish from a yacht! Rarer correct answers hook bigger fish.":"Fiska från en yacht! Ovanligare rätt svar ger större fiskar.","Cast your line":"Kasta ut linan","Cast your line ↗":"Kasta ut linan ↗","Six ways to travel the world.":"Sex sätt att upptäcka världen.","06 / NEW GAME":"06 / NYTT SPEL","06 / FISHING GAME":"06 / FISKESPEL","FISHING QUEST":"FISKEÄVENTYR"});
 let language='en';
 try{
   const stored=localStorage.getItem(KEY);
