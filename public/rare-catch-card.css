@@ -46,3 +46,12 @@
  .photo-mode-grid .mode-catch:after{right:-5%;top:8%;font-size:48px!important}
 }
 @media(prefers-reduced-motion:reduce){.photo-mode-grid .mode-catch:before,.photo-mode-grid .mode-catch:after{animation:none!important}}
+
+/* Apply original yacht fishing poster when its image data is ready. */
+.photo-mode-grid .mode-catch{
+ background-image:
+  linear-gradient(92deg,#031c35ca 0%,#052d47b0 34%,#0a32534d 100%),
+  var(--rare-poster,linear-gradient(170deg,#0c89c5,#016983 52%,#062e55))!important;
+ background-position:center,center!important;
+ background-size:cover,cover!important;
+}
