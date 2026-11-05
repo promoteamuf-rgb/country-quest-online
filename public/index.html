@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Country Quest — Photo Edition</title><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Country Quest — Explore the World</title><style>
 :root{color-scheme:dark;--bg:#0b1120;--box:#192339;--line:#33435a;--main:#7be6c9;--text:#f4f7ff;--sub:#a2afc2}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,Arial,sans-serif}main{max-width:790px;margin:auto;padding:28px 18px 90px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:0 0 17px}header b{font-size:23px}header span,.muted{color:var(--sub)}h1{font-size:clamp(30px,6vw,46px);line-height:1.1;margin:30px 0 12px;letter-spacing:-1px}h2{margin:0 0 13px;font-size:22px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.panel{background:var(--box);border:1px solid var(--line);border-radius:18px;padding:24px;margin:20px 0}.field{width:100%;background:#0e192a;color:white;border:1px solid #50607a;padding:13px;border-radius:10px;font:inherit}.field:focus{outline:2px solid var(--main)}label{display:block;font-size:13px;margin:12px 0 6px;color:var(--sub)}button{cursor:pointer;border:0;border-radius:10px;padding:13px 17px;background:var(--main);color:#08292b;font:inherit;font-weight:800}button.alt{background:#32435b;color:white}button:disabled{opacity:.45;cursor:not-allowed}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.code{font-size:45px;letter-spacing:6px;font-weight:900;color:var(--main)}.players{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:18px}.player{background:#23334a;border-radius:12px;padding:15px;border:1px solid var(--line)}.player.me{border-color:var(--main)}.player strong{display:block;font-size:27px}.clue{background:#263850;border-radius:12px;padding:17px 20px;margin:12px 0;font-size:20px;font-weight:650}.choices{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:20px 0}.choices button{background:#2a4059;color:white;border:1px solid #496079}.shape{background:#0e192a;border-radius:12px;display:grid;place-items:center;margin:18px 0}.shape svg{height:225px;width:100%;max-width:460px}.shape path{fill:var(--main)}.tag{font-size:12px;color:var(--main);letter-spacing:1.2px;font-weight:800}.notice{color:#ffa7ac;min-height:28px;margin-top:12px}footer{color:var(--sub);font-size:12px;margin-top:30px}@media(max-width:560px){.grid{grid-template-columns:1fr}.panel{padding:19px}.players{gap:8px}.choices{gap:8px}.choices button{padding:12px 7px}}
 .mode-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}
@@ -66,7 +66,7 @@ button.alt{background:#314860;color:#eff8ff}
 footer{margin-top:60px;border-top:1px solid #31445798;padding-top:25px}
 @media(max-width:610px){main{padding:18px 15px 40px}header{padding-bottom:16px}header b{font-size:19px}header .nav-tag{font-size:9px}h1{letter-spacing:-2.4px;font-size:50px}.eyebrow{margin-top:29px}.mode-grid{grid-template-columns:1fr;gap:14px}.mode-card{min-height:208px;padding:23px}.mode-icon{width:52px;height:52px;font-size:26px}.mode-name{margin-top:15px;font-size:26px}.mode-card .mode-action{margin-top:12px}.shape{min-height:255px}.shape svg{height:225px}.panel{padding:21px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.mode-card{transition:none}}
-</style><link rel="stylesheet" href="/world-theme.css?v=2"><link rel="preconnect" href="https://images.unsplash.com" crossorigin><link rel="dns-prefetch" href="//images.unsplash.com"><link rel="stylesheet" href="/photo-theme.css?v=3"></head><body><div class="map-ambient" aria-hidden="true"></div><main><header><b>🌍 Country Quest</b><span class="nav-tag">SOLO <i></i> ONLINE</span></header><div id="app"></div><footer><div class="world-footer-stamp">COUNTRY QUEST · WORLD EDITION</div><div>Play from different PCs using the same link. Private matches have 6 rounds. Room data is temporary. Geographic boundaries from Natural Earth.</div><div style="margin-top:9px;font-size:12px"><a class="photo-credit" href="/photo-credits.html">Real photo credits</a> · Photos via Unsplash</div></footer></main><script>
+</style><link rel="stylesheet" href="/world-theme.css?v=2"><link rel="preconnect" href="https://images.unsplash.com" crossorigin><link rel="dns-prefetch" href="//images.unsplash.com"><link rel="stylesheet" href="/photo-theme.css?v=3"><link rel="stylesheet" href="/editorial.css?v=4"></head><body><div class="map-ambient" aria-hidden="true"></div><main><header class="editorial-header"><a href="/" class="brand-lockup" aria-label="Country Quest home"><span class="brand-mark" aria-hidden="true">✳</span><span class="brand-name">COUNTRY<span>QUEST</span><small>THE WORLD IS YOURS</small></span></a><nav aria-label="Main navigation"><a href="#modes">Explore</a><a href="/solo.html">Solo games</a><a href="/#online" id="navOnline" class="nav-play">Play online <span aria-hidden="true">↗</span></a></nav></header><div id="app"></div><footer><div class="world-footer-stamp">COUNTRY QUEST · WORLD EDITION</div><div>Play from different PCs using the same link. Private matches have 6 rounds. Room data is temporary. Geographic boundaries from Natural Earth.</div><div style="margin-top:9px;font-size:12px"><a class="photo-credit" href="/photo-credits.html">Real photo credits</a> · Photos via Unsplash</div></footer></main><script>
 let session=null,state=null,busy=false,tick=null;const app=document.querySelector('#app');
 const escapeHTML=x=>String(x??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 async function api(action,extra={}){let response=await fetch('/api/'+action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...session,...extra})});let result=await response.json();if(!response.ok)throw Error(result.error||'Network error');return result}
@@ -75,23 +75,62 @@ function leave(){session=null;state=null;try{localStorage.removeItem('country-qu
 function landing(){
   const invited=new URLSearchParams(location.search).get('room');
   app.innerHTML=`
-    <section class="world-hero hero"><div class="world-eyebrow">EXPLORE THE WORLD</div>
-    <h1>Know the world.<br><em>Prove it.</em></h1>
-    <p class="hero-copy">Clues, borders and history — how far can you go?</p>
-    <div class="world-tags"><span>🧩 CLUES</span><span>🗺️ MAPS</span><span>📅 HISTORY</span></div>
-    <div class="earth-visual" aria-hidden="true"><div class="earth-glow"></div><div class="earth-orbit"></div><div class="earth-orbit orbit-two"></div><div class="earth-sphere"><div class="earth-map"></div></div><svg class="map-flight" viewBox="0 0 340 340"><path d="M 18 224 Q 123 56 300 146"></path><circle cx="18" cy="224" r="4"></circle><circle cx="300" cy="146" r="4"></circle></svg><div class="compass-rose"></div></div></section>
-    <div class="mode-grid">
-      <a class="mode-card" href="/solo.html">
-        <div><div class="mode-icon">🧭</div><div class="mode-name">Single Player</div>
-        <p class="mode-desc">Clues · Outlines · Years</p></div>
-        <span class="mode-action">Play solo →</span>
-      </a>
-      <button class="mode-card" type="button" id="onlineMode">
-        <div><div class="mode-icon">⚔️</div><div class="mode-name">Online Multiplayer</div>
-        <p class="mode-desc">Go head-to-head with friends. Live scores.</p></div>
-        <span class="mode-action">Play online →</span>
-      </button>
+    <section class="world-hero hero editorial-hero" aria-label="Explore Country Quest">
+      <div class="hero-content">
+        <div class="world-eyebrow">THE ULTIMATE GEOGRAPHY CHALLENGE</div>
+        <div class="hero-accent-line"></div>
+        <h1>There's a whole<br><em>world to discover.</em></h1>
+        <p class="hero-copy">From faraway landmarks to familiar borders. Test what you know, discover what you don't.</p>
+        <div class="hero-ctas">
+          <a href="#modes" class="hero-primary">Start exploring <span aria-hidden="true">↗</span></a>
+          <button type="button" class="hero-secondary" id="heroOnline">Play with a friend <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+      <div class="hero-photo-credit">THE WORLD AWAITS &nbsp; ✳ &nbsp; COUNTRY QUEST</div>
+    </section>
+
+    <div class="journey-strip" aria-label="How to play">
+      <span><b>01</b> Pick a challenge</span><i aria-hidden="true"></i>
+      <span><b>02</b> Explore the clues</span><i aria-hidden="true"></i>
+      <span><b>03</b> Earn your score</span>
     </div>
+
+    <section class="explore-section" id="modes">
+      <div class="section-head">
+        <div>
+          <span class="section-eyebrow">YOUR NEXT ADVENTURE</span>
+          <h2>Where to next<span class="period">?</span></h2>
+        </div>
+        <p>Four ways to travel the world.<br>Every round is a new discovery.</p>
+      </div>
+      <div class="mode-grid photo-mode-grid">
+        <a class="mode-card mode-clues" href="/solo.html?mode=clues">
+          <div class="photo-card-top"><span class="card-index">01 / SOLO</span><span class="card-corner" aria-hidden="true">↗</span></div>
+          <div class="photo-card-bottom"><span class="mode-icon" aria-hidden="true">✦</span><div class="mode-name">Country Clues</div>
+          <p class="mode-desc">Five hints. One destination. Guess early to score big.</p><span class="mode-action">Explore clues <span aria-hidden="true">↗</span></span></div>
+        </a>
+        <a class="mode-card mode-outline" href="/solo.html?mode=outline">
+          <div class="photo-card-top"><span class="card-index">02 / SOLO</span><span class="card-corner" aria-hidden="true">↗</span></div>
+          <div class="photo-card-bottom"><span class="mode-icon" aria-hidden="true">◇</span><div class="mode-name">Country Outlines</div>
+          <p class="mode-desc">No names. Just real borders. Do you know the shape?</p><span class="mode-action">Explore maps <span aria-hidden="true">↗</span></span></div>
+        </a>
+        <a class="mode-card mode-year" href="/solo.html?mode=year">
+          <div class="photo-card-top"><span class="card-index">03 / SOLO</span><span class="card-corner" aria-hidden="true">↗</span></div>
+          <div class="photo-card-bottom"><span class="mode-icon" aria-hidden="true">◷</span><div class="mode-name">Guess the Year</div>
+          <p class="mode-desc">How well do you remember moments that shaped history?</p><span class="mode-action">Travel through time <span aria-hidden="true">↗</span></span></div>
+        </a>
+        <button class="mode-card mode-online" type="button" id="onlineMode">
+          <div class="photo-card-top"><span class="card-index">04 / MULTIPLAYER</span><span class="live-indicator"><span></span> LIVE MATCH</span></div>
+          <div class="photo-card-bottom"><span class="mode-icon" aria-hidden="true">◎</span><div class="mode-name">Online Multiplayer</div>
+          <p class="mode-desc">Challenge a friend anywhere in the world. One winner.</p><span class="mode-action">Create a room <span aria-hidden="true">↗</span></span></div>
+        </button>
+      </div>
+    </section>
+
+    <section class="editorial-note" aria-label="About the game"><span class="editorial-note-star" aria-hidden="true">✳</span>
+      <div><strong>Your passport to everywhere.</strong><p>Pick up and play. Real country outlines, clever clues and a little healthy competition.</p></div>
+      <a href="/solo.html">All solo games <span aria-hidden="true">→</span></a>
+    </section>
     <section class="online-section" id="onlineForms" ${invited||location.hash==='#online'?'':'hidden'}>
       <h2>Online multiplayer</h2>
       <div class="grid">
@@ -108,11 +147,17 @@ function landing(){
       <p class="notice" id="message"></p>
     </section>
   `;
-  document.getElementById('onlineMode').onclick=()=>{
-    const section=document.getElementById('onlineForms');section.hidden=false;
-    if(!location.hash)history.replaceState(null,'','#online');
+  const revealOnline=()=>{
+    const section=document.getElementById('onlineForms');
+    if(!section)return;
+    section.hidden=false;
+    if(location.hash!=='#online')history.replaceState(null,'','#online');
     section.scrollIntoView({behavior:'smooth',block:'start'});
   };
+  document.getElementById('onlineMode').onclick=revealOnline;
+  document.getElementById('heroOnline').onclick=revealOnline;
+  const headerOnline=document.getElementById('navOnline');
+  if(headerOnline)headerOnline.onclick=(e)=>{e.preventDefault();revealOnline()};
   ['create','join'].forEach(action=>{
     document.getElementById(action).onsubmit=async e=>{
       e.preventDefault();
