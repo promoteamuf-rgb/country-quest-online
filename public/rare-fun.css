@@ -287,3 +287,14 @@ body[data-rare-phase="intro"] .panel .expedition-ribbon{display:none}
  .discovery-caption{font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){.reward-preview span{animation:none!important}}
+
+/* Creature encounters are revealed as the diver reaches new depths. */
+.fun-whale{color:#57aec3;opacity:.25}
+.fun-manta svg{fill:#80d0d9}
+body[data-zone="sunlit"] .fun-whale{opacity:.07}
+body[data-zone="sunlit"] .fun-manta{opacity:.2}
+body[data-zone="twilight"] .fun-whale{opacity:.32}
+body[data-zone="midnight"] .fun-whale{opacity:.48;filter:drop-shadow(0 0 21px #67e6e850)}
+body[data-zone="abyss"] .fun-manta{opacity:.53;filter:drop-shadow(0 0 28px #b6b3ff56)}
+body[data-zone="trench"] .fun-relic{filter:drop-shadow(0 0 36px #ffeab9e1);animation-duration:2.3s}
+body[data-zone="trench"] .fun-spark{background:#e7c5ff;box-shadow:0 0 14px #e5b6ffb8}
