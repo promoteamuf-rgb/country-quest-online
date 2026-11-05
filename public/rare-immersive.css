@@ -300,3 +300,61 @@ body[data-zone="trench"] .submersible{box-shadow:0 0 0 8px #dfe9ff1a,0 0 43px #c
  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
  .light-shaft,.particle,.fish-school,.jelly,.surface-waves{animation:none!important}
 }
+
+/* Six original rarity levels introduce the strategy at a glance. */
+.tier-guide{margin:16px 0 26px;padding:16px;border-radius:14px;border:1px solid #9bd8bc49;background:#071e2b99}
+.tier-guide>.micro{display:block;margin-bottom:13px;color:#c4e3d9}
+.tier-steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.tier-pill{
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:10px 4px;min-width:0;gap:5px;min-height:81px;border-radius:9px;
+  border:1px solid #b9f0db2c;background:#163846b7;
+  transition:transform .2s,box-shadow .2s,border-color .2s
+}
+.tier-pill strong{font:900 20px/1 system-ui;color:#d8f7e6;white-space:nowrap}
+.tier-pill strong small{font:800 9px/1 system-ui;color:#9ecac4}
+.tier-pill>span{font:750 10px/1.2 system-ui;color:#b6d4cc;text-align:center;max-width:100%}
+.tier-pill:nth-child(4){background:#1c4d57}
+.tier-pill:nth-child(5){background:#205851}
+.tier-pill:nth-child(6){
+ background:linear-gradient(135deg,#745f41,#b79d67 60%,#6b5c44);
+ border-color:#ffe5aa;color:#fff0c9;
+ box-shadow:0 0 24px #ecca8041;
+ animation:golden-tier 3.2s ease-in-out infinite
+}
+.tier-pill:nth-child(6) strong,.tier-pill:nth-child(6)>span{color:#fff3d5}
+.tier-pill:nth-child(6) strong small{color:#ffedbe}
+.tier-pill:hover{transform:translateY(-4px);border-color:#b5fff0;box-shadow:0 8px 17px #0005}
+@keyframes golden-tier{50%{box-shadow:0 0 35px #ecca8080}}
+/* Milestone announcement when entering a new depth region. */
+.zone-unlocked{
+ position:absolute;z-index:23;left:12px;right:12px;top:25%;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+ padding:20px 12px;text-align:center;
+ color:#e5fff5;letter-spacing:1.5px;
+ background:linear-gradient(95deg,#072431c9,#1b5060e8,#072431c9);
+ backdrop-filter:blur(6px);
+ border:1px solid #c9f8e4a4;border-radius:14px;
+ box-shadow:0 12px 30px #0008,0 0 28px #94f7da59;
+ animation:milestone-arrive 2.2s cubic-bezier(.19,1,.25,1) both;
+ pointer-events:none;
+}
+.zone-unlocked span{font:800 10px/1.2 system-ui;color:#acd3cc}
+.zone-unlocked strong{font:400 26px/1.1 Georgia,serif;color:#f2f9df;letter-spacing:-.2px}
+@keyframes milestone-arrive{
+ 0%{opacity:0;transform:scale(.8) translateY(15px);filter:blur(5px)}
+ 18%{opacity:1;transform:scale(1.04);filter:none}
+ 31%{transform:scale(1)}
+ 70%{opacity:1;transform:none}
+ 100%{opacity:0;transform:translateY(-27px)}
+}
+@media(max-width:660px){
+ .tier-steps{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .tier-pill{min-height:69px}
+ .zone-unlocked{top:29%;padding:13px}
+ .zone-unlocked strong{font-size:19px}
+}
+@media(prefers-reduced-motion:reduce){
+ .tier-pill:nth-child(6){animation:none}
+ .zone-unlocked{animation:none;opacity:1}
+}
