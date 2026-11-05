@@ -298,3 +298,158 @@ body[data-zone="midnight"] .fun-whale{opacity:.48;filter:drop-shadow(0 0 21px #6
 body[data-zone="abyss"] .fun-manta{opacity:.53;filter:drop-shadow(0 0 28px #b6b3ff56)}
 body[data-zone="trench"] .fun-relic{filter:drop-shadow(0 0 36px #ffeab9e1);animation-duration:2.3s}
 body[data-zone="trench"] .fun-spark{background:#e7c5ff;box-shadow:0 0 14px #e5b6ffb8}
+
+/* Anchor dive and living ocean update — collectibles are no longer rendered. */
+.fun-world .fun-creature{
+ position:absolute;z-index:6;pointer-events:none;opacity:0;
+ transition:opacity .8s ease,filter .6s ease;
+ filter:drop-shadow(0 8px 16px #00182782);
+ will-change:transform;
+}
+.fun-creature svg{display:block;width:100%;height:auto;overflow:visible}
+.fun-reef-fish{top:22%;left:48%;width:clamp(110px,15vw,210px);animation:reef-swim 12s ease-in-out infinite alternate}
+.fun-turtle{top:55%;left:69%;width:clamp(130px,20vw,260px);animation:turtle-glide 19s ease-in-out infinite alternate}
+.fun-shark{top:34%;left:43%;width:clamp(210px,31vw,390px);animation:shark-cruise 15s linear infinite alternate}
+.fun-angler{top:46%;right:7%;width:clamp(145px,20vw,240px);animation:angler-hover 8s ease-in-out infinite alternate}
+.fun-angler:after{
+ content:"";position:absolute;left:76%;top:11%;width:25%;height:28%;
+ border-radius:50%;background:#c9fff7bb;filter:blur(20px);opacity:.65;
+ animation:angler-glow 3s ease-in-out infinite alternate;
+}
+.fun-squid{top:25%;left:70%;width:clamp(90px,12vw,170px);animation:squid-float 10s ease-in-out infinite alternate}
+body[data-zone="sunlit"] .fun-reef-fish,
+body[data-zone="sunlit"] .fun-turtle,
+body[data-zone="twilight"] .fun-reef-fish,
+body[data-zone="twilight"] .fun-turtle{opacity:.88}
+body[data-zone="twilight"] .fun-shark,
+body[data-zone="midnight"] .fun-shark{opacity:.72}
+body[data-zone="midnight"] .fun-squid,
+body[data-zone="abyss"] .fun-squid,
+body[data-zone="trench"] .fun-squid{opacity:.86;filter:drop-shadow(0 0 24px #aaa9ff83)}
+body[data-zone="abyss"] .fun-angler,
+body[data-zone="trench"] .fun-angler{opacity:.97;filter:drop-shadow(0 0 32px #b0fcf39d)}
+body[data-zone="abyss"] .fun-shark{opacity:.22}
+body[data-zone="trench"] .fun-shark{opacity:0}
+@keyframes reef-swim{
+ 0%{transform:translate3d(-38px,8px,0) rotate(-4deg)}
+ 50%{transform:translate3d(44px,-18px,0) rotate(3deg)}
+ 100%{transform:translate3d(115px,11px,0) rotate(-3deg)}
+}
+@keyframes turtle-glide{
+ 0%{transform:translate3d(100px,30px,0) rotate(9deg)}
+ 50%{transform:translate3d(-25px,-25px,0) rotate(-7deg)}
+ 100%{transform:translate3d(-140px,25px,0) rotate(8deg)}
+}
+@keyframes shark-cruise{
+ 0%{transform:translate3d(190px,5px,0) scaleX(-1)}
+ 50%{transform:translate3d(-70px,-22px,0) scaleX(-1)}
+ 100%{transform:translate3d(-370px,12px,0) scaleX(-1)}
+}
+@keyframes angler-hover{to{transform:translate3d(-25px,-34px,0) rotate(6deg)}}
+@keyframes angler-glow{to{opacity:1;filter:blur(28px);transform:scale(1.45)}}
+@keyframes squid-float{to{transform:translate3d(-60px,-55px,0) rotate(-11deg)}}
+/* A real anchor replaces the miniature submarine on the depth meter. */
+body[data-rare-phase] .sea .depth-track .submersible{
+ border-radius:50%;
+ background:radial-gradient(circle at 26% 22%,#377c94,#0a2f51 65%,#061e33);
+ border:2px solid #e6d9aa;
+ box-shadow:0 0 0 8px #90e9ef12,0 0 33px #b2ffed8a,0 12px 27px #0009;
+ overflow:visible;
+}
+body[data-rare-phase] .sea .depth-track .submersible svg{
+ width:75%;height:84%;max-width:none;overflow:visible;
+ filter:drop-shadow(0 2px 5px #022132af);
+ animation:anchor-bob 3s ease-in-out infinite alternate;
+}
+@keyframes anchor-bob{to{transform:rotate(9deg) translateY(2px)}}
+.sea.ocean-plunging .sea-atmosphere{
+ animation:ocean-rush-up 1.65s cubic-bezier(.11,.8,.23,1) both;
+}
+.sea.ocean-plunging .fun-world{
+ animation:ocean-rush-near 1.65s cubic-bezier(.11,.8,.23,1) both;
+}
+.sea.ocean-plunging .depth-track .submersible{opacity:0!important;transition:top 1.5s cubic-bezier(.12,.76,.25,1),opacity .12s}
+.sea:not(.ocean-plunging) .depth-track .submersible{opacity:1;transition:top 1.35s cubic-bezier(.12,.76,.25,1),opacity .2s}
+@keyframes ocean-rush-up{
+ 0%{transform:translateY(0) scale(1)}
+ 30%{transform:translateY(-42px) scale(1.03)}
+ 72%{transform:translateY(-132px) scale(1.08)}
+ 100%{transform:translateY(0) scale(1)}
+}
+@keyframes ocean-rush-near{
+ 0%{transform:translateY(0)}
+ 65%{transform:translateY(-105px)}
+ 100%{transform:translateY(0)}
+}
+/* The large anchor drops across the open water every time a correct answer lands. */
+.anchor-dive-overlay{
+ position:absolute;inset:0;z-index:19;overflow:hidden;
+ pointer-events:none;--anchor-x:calc(100% - clamp(95px,17vw,285px));
+}
+.anchor-plunge-ghost{
+ position:absolute;left:var(--anchor-x);top:10%;width:clamp(83px,9vw,132px);
+ transform:translate(-50%,-50%);
+ border-radius:50%;border:2px solid #fff0be;
+ background:radial-gradient(circle at 28% 24%,#417d96ed,#0a2845ed);
+ box-shadow:0 0 0 12px #b1f6ec15,0 0 76px #b2fff6bd,0 11px 35px #000b;
+ aspect-ratio:1;display:grid;place-items:center;
+ animation:anchor-dive-swoop 1.7s cubic-bezier(.34,.05,.27,1) both;
+}
+.anchor-plunge-ghost svg{width:78%;height:85%;filter:drop-shadow(0 6px 9px #00182a)}
+@keyframes anchor-dive-swoop{
+ 0%{top:7%;opacity:0;filter:blur(7px);transform:translate(-50%,-50%) rotate(-24deg) scale(.55)}
+ 15%{top:15%;opacity:1;filter:blur(0);transform:translate(-50%,-50%) rotate(9deg) scale(1)}
+ 55%{top:45%;opacity:1;transform:translate(-50%,-50%) rotate(-12deg) scale(1.25)}
+ 88%{top:88%;opacity:.92;transform:translate(-50%,-50%) rotate(4deg) scale(1.13)}
+ 100%{top:109%;opacity:0;filter:blur(4px);transform:translate(-50%,-50%) rotate(-5deg) scale(.85)}
+}
+.anchor-speed-bubble{
+ position:absolute;left:calc(var(--anchor-x) + var(--shift));bottom:-24px;
+ width:calc(3px + var(--i)*.5px);height:calc(3px + var(--i)*.5px);
+ border-radius:50%;border:1px solid #f5ffebde;background:#ccfff054;
+ box-shadow:0 0 13px #c4faffbd;
+ animation:anchor-bubble-stream .85s linear infinite;
+ animation-delay:calc(var(--i)*-.064s);
+}
+@keyframes anchor-bubble-stream{
+ from{bottom:-12%;opacity:0;transform:translateX(0) scale(.6)}
+ 20%{opacity:.85}
+ to{bottom:115%;opacity:0;transform:translateX(-28px) scale(1.25)}
+}
+.anchor-plunge-label{
+ position:absolute;right:15%;top:24%;
+ padding:10px 16px;border-radius:30px;
+ background:linear-gradient(115deg,#eafde3,#acefd4);color:#07343c;
+ border:2px solid #f9fff3;
+ box-shadow:0 0 38px #a8ffdf6e;
+ font:950 clamp(17px,2.2vw,28px)/1 system-ui;
+ animation:plunge-score 1.55s ease-in-out both;
+}
+@keyframes plunge-score{
+ 0%{opacity:0;transform:translateY(14px) scale(.7)}
+ 20%{opacity:1;transform:translateY(-8px) scale(1.08)}
+ 65%{opacity:1;transform:translateY(-34px)}
+ 100%{opacity:0;transform:translateY(-70px)}
+}
+@media(max-width:720px){
+ .fun-reef-fish{top:15%;left:42%;width:125px}
+ .fun-turtle{top:27%;left:50%;width:155px}
+ .fun-shark{top:13%;left:42%;width:220px}
+ .fun-angler{top:18%;right:-2%;width:155px}
+ .fun-squid{top:12%;left:59%;width:106px}
+ .anchor-dive-overlay{--anchor-x:75%}
+ .anchor-plunge-ghost{width:70px;animation-name:anchor-dive-mobile}
+ .anchor-plunge-label{right:7%;top:32%;font-size:18px;padding:8px 11px}
+ @keyframes anchor-dive-mobile{
+ 0%{top:7%;opacity:0;transform:translate(-50%,-50%) rotate(-20deg) scale(.5)}
+ 20%{top:14%;opacity:1;transform:translate(-50%,-50%) rotate(6deg)}
+ 75%{top:33%;opacity:1;transform:translate(-50%,-50%) rotate(-8deg) scale(1.17)}
+ 100%{top:51%;opacity:0;transform:translate(-50%,-50%) rotate(4deg) scale(.9)}
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .fun-creature,.sea.ocean-plunging .fun-world,.sea.ocean-plunging .sea-atmosphere,
+ .anchor-dive-overlay,.depth-track .submersible svg{animation:none!important}
+ .anchor-dive-overlay{display:none}
+ .fun-creature{transition:none}
+}
