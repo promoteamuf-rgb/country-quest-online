@@ -299,6 +299,726 @@
         "The Merlion is a well-known symbol here.",
         "It lies at the southern end of the Malay Peninsula."
       ]
+    },
+    {
+      "name": "Bhutan",
+      "clues": [
+        "The philosophy of Gross National Happiness originated here.",
+        "Its constitution mandates protecting extensive forest cover.",
+        "The national sport is archery.",
+        "It lies in the eastern Himalayas between India and China.",
+        "Its capital is Thimphu."
+      ],
+      "cluesSv": [
+        "Filosofin bruttonationallycka kommer härifrån.",
+        "Grundlagen kräver skydd av stora skogsområden.",
+        "Landets nationalsport är bågskytte.",
+        "Det ligger i östra Himalaya mellan Indien och Kina.",
+        "Huvudstaden heter Thimphu."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Laos",
+      "clues": [
+        "The Plain of Jars is an archaeological landscape here.",
+        "The Mekong River forms much of its western border.",
+        "It is the only landlocked country in Southeast Asia.",
+        "Luang Prabang was once a royal capital.",
+        "Its capital is Vientiane."
+      ],
+      "cluesSv": [
+        "Krukslätten är en arkeologisk plats här.",
+        "Mekongfloden utgör en stor del av västgränsen.",
+        "Det är Sydostasiens enda land utan kust.",
+        "Luang Prabang var en gång kunglig huvudstad.",
+        "Huvudstaden heter Vientiane."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Cambodia",
+      "clues": [
+        "The Tonlé Sap lake expands greatly in the rainy season.",
+        "The Khmer Empire once dominated this region.",
+        "A temple appears on its national flag.",
+        "The Angkor Wat temple complex is here.",
+        "Its capital is Phnom Penh."
+      ],
+      "cluesSv": [
+        "Sjön Tonlé Sap växer kraftigt under regnperioden.",
+        "Khmerriket dominerade tidigare regionen.",
+        "Ett tempel finns på landets flagga.",
+        "Tempelområdet Angkor Wat ligger här.",
+        "Huvudstaden heter Phnom Penh."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Bangladesh",
+      "clues": [
+        "The Sundarbans mangrove forest extends into this country.",
+        "Much of the country is formed by the Ganges-Brahmaputra delta.",
+        "It declared independence in 1971.",
+        "Bengali is the official language.",
+        "Its capital is Dhaka."
+      ],
+      "cluesSv": [
+        "Mangroveskogen Sundarbans sträcker sig in i landet.",
+        "Mycket av landet ligger i Ganges-Brahmaputras delta.",
+        "Det utropade självständighet 1971.",
+        "Bengali är officiellt språk.",
+        "Huvudstaden heter Dhaka."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Sri Lanka",
+      "clues": [
+        "The ancient rock fortress Sigiriya is found here.",
+        "It exports tea long known as Ceylon tea.",
+        "It lies across the Palk Strait from India.",
+        "This island country was formerly known as Ceylon.",
+        "Its administrative capital is Sri Jayawardenepura Kotte."
+      ],
+      "cluesSv": [
+        "Klippfästningen Sigiriya finns här.",
+        "Det exporterar te som länge kallats Ceylonte.",
+        "Det ligger på andra sidan Palksundet från Indien.",
+        "Önationen hette tidigare Ceylon.",
+        "Den administrativa huvudstaden är Sri Jayawardenepura Kotte."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Myanmar",
+      "clues": [
+        "The ancient city of Bagan has thousands of Buddhist monuments.",
+        "The Irrawaddy is a major river.",
+        "It was widely called Burma in English.",
+        "It borders Thailand, China, India, Laos and Bangladesh.",
+        "Its capital is Naypyidaw."
+      ],
+      "cluesSv": [
+        "Den antika staden Bagan har tusentals buddhistiska monument.",
+        "Irrawaddy är en stor flod.",
+        "Det kallades ofta Burma på engelska.",
+        "Det gränsar till Thailand, Kina, Indien, Laos och Bangladesh.",
+        "Huvudstaden heter Naypyidaw."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Kazakhstan",
+      "clues": [
+        "The Baikonur Cosmodrome is located here.",
+        "It borders part of the shrinking Aral Sea.",
+        "It is the world's largest landlocked country.",
+        "Its territory extends from the Caspian Sea toward China.",
+        "Its capital is Astana."
+      ],
+      "cluesSv": [
+        "Kosmodromen Bajkonur ligger här.",
+        "Det gränsar till delar av den krympande Aralsjön.",
+        "Det är världens största land utan kust.",
+        "Landet sträcker sig från Kaspiska havet mot Kina.",
+        "Huvudstaden heter Astana."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Kyrgyzstan",
+      "clues": [
+        "Issyk-Kul is a large high-altitude lake here.",
+        "The traditional sport kok-boru is played here.",
+        "The Tian Shan mountains dominate its geography.",
+        "It borders China in Central Asia.",
+        "Its capital is Bishkek."
+      ],
+      "cluesSv": [
+        "Issyk-Kul är en stor högt belägen sjö.",
+        "Den traditionella sporten kok-boru spelas här.",
+        "Tian Shan-bergen dominerar geografin.",
+        "Landet gränsar till Kina i Centralasien.",
+        "Huvudstaden heter Bisjkek."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Tajikistan",
+      "clues": [
+        "The Pamir Highway crosses its high mountains.",
+        "Most of the country is mountainous.",
+        "The river Panj forms much of its southern border.",
+        "Its official language is closely related to Persian.",
+        "Its capital is Dushanbe."
+      ],
+      "cluesSv": [
+        "Pamirvägen korsar landets höga berg.",
+        "Större delen av landet är bergig.",
+        "Floden Pandzj utgör en stor del av sydgränsen.",
+        "Det officiella språket är nära släkt med persiska.",
+        "Huvudstaden heter Dusjanbe."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Uzbekistan",
+      "clues": [
+        "It is one of the world's two doubly landlocked countries.",
+        "Samarkand and Bukhara lie here.",
+        "The Aral Sea basin extends into its territory.",
+        "Its cities were major stops on the Silk Road.",
+        "Its capital is Tashkent."
+      ],
+      "cluesSv": [
+        "Det är ett av världens två dubbelt landlåsta länder.",
+        "Samarkand och Buchara ligger här.",
+        "Aralsjöns område sträcker sig in i landet.",
+        "Städerna var viktiga stopp på Sidenvägen.",
+        "Huvudstaden heter Tasjkent."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Turkmenistan",
+      "clues": [
+        "The Karakum Desert covers much of the territory.",
+        "A burning gas crater is nicknamed the Door to Hell.",
+        "Its coastline faces the Caspian Sea.",
+        "It lies south of Uzbekistan in Central Asia.",
+        "Its capital is Ashgabat."
+      ],
+      "cluesSv": [
+        "Karakumöknen täcker stora delar av landet.",
+        "En brinnande gaskrater kallas Helvetesporten.",
+        "Kusten vetter mot Kaspiska havet.",
+        "Det ligger söder om Uzbekistan i Centralasien.",
+        "Huvudstaden heter Asjchabad."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Georgia",
+      "clues": [
+        "The cave city Vardzia was carved into a mountainside.",
+        "Its unique alphabet includes the Mkhedruli script.",
+        "The Caucasus Mountains rise along its north.",
+        "It lies beside the eastern Black Sea.",
+        "Its capital is Tbilisi."
+      ],
+      "cluesSv": [
+        "Grottstaden Vardzia höggs in i ett berg.",
+        "Dess unika alfabet omfattar mchedruli.",
+        "Kaukasusbergen reser sig i norr.",
+        "Det ligger vid östra Svarta havet.",
+        "Huvudstaden heter Tbilisi."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Armenia",
+      "clues": [
+        "The Geghard monastery is partly carved into rock.",
+        "It was among the first states to adopt Christianity.",
+        "Its distinctive alphabet dates to the fifth century.",
+        "This landlocked Caucasus country borders Turkey and Iran.",
+        "Its capital is Yerevan."
+      ],
+      "cluesSv": [
+        "Klostret Geghard är delvis uthugget i berg.",
+        "Det var en av de första staterna som antog kristendomen.",
+        "Det speciella alfabetet är från 400-talet.",
+        "Detta kustlösa land i Kaukasus gränsar till Turkiet och Iran.",
+        "Huvudstaden heter Jerevan."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Azerbaijan",
+      "clues": [
+        "The Flame Towers are landmarks of its largest city.",
+        "It includes the Nakhchivan exclave.",
+        "Oil and gas play important economic roles.",
+        "It lies beside the western Caspian Sea.",
+        "Its capital is Baku."
+      ],
+      "cluesSv": [
+        "Flame Towers är landmärken i landets största stad.",
+        "Det omfattar exklaven Nachitjevan.",
+        "Olja och gas är viktiga för ekonomin.",
+        "Det ligger vid västra Kaspiska havet.",
+        "Huvudstaden heter Baku."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Ethiopia",
+      "clues": [
+        "The rock-hewn churches of Lalibela stand here.",
+        "The Blue Nile flows from Lake Tana.",
+        "Its calendar differs from the Gregorian calendar.",
+        "It is a landlocked country in East Africa.",
+        "Its capital is Addis Ababa."
+      ],
+      "cluesSv": [
+        "De klipphuggna kyrkorna i Lalibela finns här.",
+        "Blå Nilen rinner från Tanasjön.",
+        "Kalendern skiljer sig från den gregorianska.",
+        "Det är ett kustlöst land i Östafrika.",
+        "Huvudstaden heter Addis Abeba."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Eritrea",
+      "clues": [
+        "The port of Massawa lies on its coast.",
+        "Its capital has notable Italian-era modernist architecture.",
+        "It gained independence from Ethiopia in 1993.",
+        "It has a long shoreline on the Red Sea.",
+        "Its capital is Asmara."
+      ],
+      "cluesSv": [
+        "Hamnen Massawa ligger vid kusten.",
+        "Huvudstaden har modernistisk arkitektur från italiensk tid.",
+        "Det blev självständigt från Etiopien 1993.",
+        "Det har lång kust vid Röda havet.",
+        "Huvudstaden heter Asmara."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Djibouti",
+      "clues": [
+        "Lake Assal is one of Africa's lowest places.",
+        "It is near the Bab-el-Mandeb Strait.",
+        "Several countries maintain military bases here.",
+        "It sits at the Red Sea entrance in the Horn of Africa.",
+        "Its capital has the same name as the country."
+      ],
+      "cluesSv": [
+        "Assalsjön är en av Afrikas lägsta platser.",
+        "Det ligger nära sundet Bab el-Mandeb.",
+        "Flera länder har militärbaser här.",
+        "Det ligger vid Röda havets inlopp på Afrikas horn.",
+        "Huvudstaden har samma namn som landet."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Rwanda",
+      "clues": [
+        "Its national parks protect endangered mountain gorillas.",
+        "It is called the land of a thousand hills.",
+        "A genocide took place here in 1994.",
+        "It is a small landlocked African Great Lakes country.",
+        "Its capital is Kigali."
+      ],
+      "cluesSv": [
+        "Nationalparkerna skyddar hotade bergsgorillor.",
+        "Det kallas de tusen kullarnas land.",
+        "Ett folkmord ägde rum här 1994.",
+        "Det är ett litet land utan kust vid Afrikas stora sjöar.",
+        "Huvudstaden heter Kigali."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Uganda",
+      "clues": [
+        "The Rwenzori Mountains rise along its western frontier.",
+        "Part of Lake Victoria lies within its borders.",
+        "Endangered mountain gorillas live here.",
+        "It lies in East Africa north of Lake Victoria.",
+        "Its capital is Kampala."
+      ],
+      "cluesSv": [
+        "Rwenzoribergen reser sig vid västgränsen.",
+        "En del av Victoriasjön ligger inom landet.",
+        "Hotade bergsgorillor lever här.",
+        "Det ligger i Östafrika norr om Victoriasjön.",
+        "Huvudstaden heter Kampala."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Botswana",
+      "clues": [
+        "The Okavango Delta is a vast inland wetland.",
+        "The Kalahari Desert covers much of the territory.",
+        "It shares a very short border with Zambia.",
+        "This southern African country is landlocked.",
+        "Its capital is Gaborone."
+      ],
+      "cluesSv": [
+        "Okavangodeltat är ett stort våtmarksområde inne i landet.",
+        "Kalahariöknen täcker mycket av området.",
+        "Det delar en mycket kort gräns med Zambia.",
+        "Detta land i södra Afrika saknar kust.",
+        "Huvudstaden heter Gaborone."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Namibia",
+      "clues": [
+        "The Skeleton Coast is notorious for shipwrecks.",
+        "The Namib Desert has towering sand dunes.",
+        "Etosha Pan is an enormous salt pan.",
+        "It borders the Atlantic Ocean north of South Africa.",
+        "Its capital is Windhoek."
+      ],
+      "cluesSv": [
+        "Skelettkusten är känd för skeppsvrak.",
+        "Namiböknen har enorma sanddyner.",
+        "Etoshaslätten är ett stort saltområde.",
+        "Det ligger vid Atlanten norr om Sydafrika.",
+        "Huvudstaden heter Windhoek."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Zambia",
+      "clues": [
+        "The enormous Lake Kariba partly borders this country.",
+        "The Zambezi River forms much of its southern frontier.",
+        "Victoria Falls lies along its border with Zimbabwe.",
+        "This southern African nation has no coastline.",
+        "Its capital is Lusaka."
+      ],
+      "cluesSv": [
+        "Den enorma Karibasjön ligger delvis vid gränsen.",
+        "Zambezifloden utgör mycket av sydgränsen.",
+        "Victoriafallen ligger vid gränsen mot Zimbabwe.",
+        "Detta land i södra Afrika saknar kust.",
+        "Huvudstaden heter Lusaka."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Ghana",
+      "clues": [
+        "Lake Volta is one of the largest artificial lakes by area.",
+        "The historic Gold Coast was located here.",
+        "The country became independent in 1957.",
+        "It lies on the Gulf of Guinea in West Africa.",
+        "Its capital is Accra."
+      ],
+      "cluesSv": [
+        "Voltasjön är en av de största konstgjorda sjöarna till ytan.",
+        "Den historiska Guldkusten låg här.",
+        "Landet blev självständigt 1957.",
+        "Det ligger vid Guineabukten i Västafrika.",
+        "Huvudstaden heter Accra."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Senegal",
+      "clues": [
+        "The island of Gorée is a historic site near its capital.",
+        "The Gambia is almost surrounded by its territory.",
+        "Its mainland includes Africa's westernmost point.",
+        "This country lies on the Atlantic in West Africa.",
+        "Its capital is Dakar."
+      ],
+      "cluesSv": [
+        "Ön Gorée är en historisk plats nära huvudstaden.",
+        "Gambia är nästan helt omgivet av landet.",
+        "På dess fastland finns Afrikas västligaste punkt.",
+        "Det ligger vid Atlanten i Västafrika.",
+        "Huvudstaden heter Dakar."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Tanzania",
+      "clues": [
+        "The Ngorongoro Crater is a wildlife-rich caldera.",
+        "Lake Tanganyika forms part of its western border.",
+        "Africa's highest mountain rises here.",
+        "The Zanzibar islands belong to this country.",
+        "Its official capital is Dodoma."
+      ],
+      "cluesSv": [
+        "Ngorongorokratern är en kaldera med rikt djurliv.",
+        "Tanganyikasjön utgör en del av västgränsen.",
+        "Afrikas högsta berg finns här.",
+        "Zanzibaröarna hör till landet.",
+        "Den officiella huvudstaden heter Dodoma."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Mozambique",
+      "clues": [
+        "The Quirimbas islands lie off its northern coast.",
+        "Its flag shows an assault rifle.",
+        "The country has a long Indian Ocean coastline.",
+        "Portuguese is its official language.",
+        "Its capital is Maputo."
+      ],
+      "cluesSv": [
+        "Quirimbasöarna ligger utanför nordkusten.",
+        "Flaggan visar ett automatgevär.",
+        "Landet har en lång kust mot Indiska oceanen.",
+        "Portugisiska är officiellt språk.",
+        "Huvudstaden heter Maputo."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Bolivia",
+      "clues": [
+        "The Salar de Uyuni salt flat is found here.",
+        "Lake Titicaca lies partly along its border.",
+        "It has a constitutional capital and a seat of government.",
+        "It is a landlocked Andean country in South America.",
+        "Sucre is its constitutional capital and La Paz hosts the government."
+      ],
+      "cluesSv": [
+        "Saltöknen Salar de Uyuni finns här.",
+        "Titicacasjön ligger delvis vid gränsen.",
+        "Det har en konstitutionell huvudstad och en regeringsstad.",
+        "Det är ett kustlöst land i Anderna i Sydamerika.",
+        "Sucre är konstitutionell huvudstad och regeringen finns i La Paz."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Paraguay",
+      "clues": [
+        "Guaraní is an official language alongside Spanish.",
+        "The Chaco plain occupies much of its western territory.",
+        "The Paraguay River divides the country into regions.",
+        "It is landlocked between Brazil, Argentina and Bolivia.",
+        "Its capital is Asunción."
+      ],
+      "cluesSv": [
+        "Guaraní är officiellt språk tillsammans med spanska.",
+        "Chacoslätten täcker stora delar av väster.",
+        "Paraguayfloden delar landet i regioner.",
+        "Det ligger utan kust mellan Brasilien, Argentina och Bolivia.",
+        "Huvudstaden heter Asunción."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Uruguay",
+      "clues": [
+        "The old town of Colonia del Sacramento is UNESCO-listed.",
+        "Its football team won the first men's FIFA World Cup.",
+        "It lies beside the Río de la Plata opposite Buenos Aires.",
+        "It is a small country between Argentina and Brazil.",
+        "Its capital is Montevideo."
+      ],
+      "cluesSv": [
+        "Gamla delen av Colonia del Sacramento finns på Unescos lista.",
+        "Landslaget vann det första herr-VM i fotboll.",
+        "Det ligger vid Río de la Plata mittemot Buenos Aires.",
+        "Det är ett litet land mellan Argentina och Brasilien.",
+        "Huvudstaden heter Montevideo."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Ecuador",
+      "clues": [
+        "The Galápagos Islands belong to this country.",
+        "The equator crosses its mainland.",
+        "The Andes cross its interior and the Pacific lies west.",
+        "It borders Colombia and Peru.",
+        "Its capital is Quito."
+      ],
+      "cluesSv": [
+        "Galápagosöarna hör till landet.",
+        "Ekvatorn går genom fastlandet.",
+        "Anderna korsar landet och Stilla havet ligger i väster.",
+        "Det gränsar till Colombia och Peru.",
+        "Huvudstaden heter Quito."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Guyana",
+      "clues": [
+        "Kaieteur Falls drops over a sandstone escarpment.",
+        "English is the official language.",
+        "Its interior contains vast tropical rainforests.",
+        "It borders Venezuela, Brazil and Suriname.",
+        "Its capital is Georgetown."
+      ],
+      "cluesSv": [
+        "Kaieteurfallet störtar nedför en sandstensbrant.",
+        "Engelska är officiellt språk.",
+        "Inlandet består till stor del av tropisk regnskog.",
+        "Det gränsar till Venezuela, Brasilien och Surinam.",
+        "Huvudstaden heter Georgetown."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Suriname",
+      "clues": [
+        "Paramaribo's historic center is UNESCO-listed.",
+        "Dutch is its official language.",
+        "The Maroni River lies along the eastern frontier.",
+        "It is South America's smallest mainland sovereign state.",
+        "Its capital is Paramaribo."
+      ],
+      "cluesSv": [
+        "Paramaribos historiska centrum finns på Unescos lista.",
+        "Nederländska är officiellt språk.",
+        "Maronifloden ligger längs östgränsen.",
+        "Det är Sydamerikas minsta självständiga fastlandsstat.",
+        "Huvudstaden heter Paramaribo."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Papua New Guinea",
+      "clues": [
+        "Hundreds of Indigenous languages are spoken here.",
+        "The Kokoda Track is a famous mountain route.",
+        "It occupies eastern New Guinea.",
+        "It lies in the Pacific north of Australia.",
+        "Its capital is Port Moresby."
+      ],
+      "cluesSv": [
+        "Hundratals ursprungsspråk talas här.",
+        "Kokodaleden är en känd väg genom bergen.",
+        "Det upptar östra delen av Nya Guinea.",
+        "Det ligger i Stilla havet norr om Australien.",
+        "Huvudstaden heter Port Moresby."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Fiji",
+      "clues": [
+        "Viti Levu and Vanua Levu are its largest islands.",
+        "The drink yaqona is also called kava.",
+        "It is an island country in Melanesia.",
+        "Its flag contains a Union Jack.",
+        "Its capital is Suva."
+      ],
+      "cluesSv": [
+        "Viti Levu och Vanua Levu är de största öarna.",
+        "Drycken yaqona kallas också kava.",
+        "Det är ett öland i Melanesien.",
+        "Flaggan innehåller Union Jack.",
+        "Huvudstaden heter Suva."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Vanuatu",
+      "clues": [
+        "Mount Yasur is an active volcano here.",
+        "Traditional land diving is practiced on Pentecost Island.",
+        "Britain and France once administered it jointly.",
+        "The country is an archipelago east of Australia.",
+        "Its capital is Port Vila."
+      ],
+      "cluesSv": [
+        "Yasur är en aktiv vulkan här.",
+        "Traditionell landdykning utförs på ön Pentecost.",
+        "Storbritannien och Frankrike styrde det tidigare gemensamt.",
+        "Det är en ögrupp öster om Australien.",
+        "Huvudstaden heter Port Vila."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Slovenia",
+      "clues": [
+        "Lake Bled is famous for its island church.",
+        "The Julian Alps extend into the country.",
+        "It has a short Adriatic coastline.",
+        "It borders Italy, Austria, Hungary and Croatia.",
+        "Its capital is Ljubljana."
+      ],
+      "cluesSv": [
+        "Bledsjön är känd för kyrkan på en liten ö.",
+        "Juliska alperna går in i landet.",
+        "Det har en kort kust mot Adriatiska havet.",
+        "Det gränsar till Italien, Österrike, Ungern och Kroatien.",
+        "Huvudstaden heter Ljubljana."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Slovakia",
+      "clues": [
+        "Spiš Castle is a large historic complex here.",
+        "The Tatra Mountains rise along its northern border.",
+        "It became independent after Czechoslovakia split in 1993.",
+        "It is a landlocked Central European country.",
+        "Its capital is Bratislava."
+      ],
+      "cluesSv": [
+        "Borgen Spiš är ett stort historiskt komplex.",
+        "Tatrabergen reser sig vid norra gränsen.",
+        "Det blev självständigt när Tjeckoslovakien delades 1993.",
+        "Det är ett kustlöst land i Centraleuropa.",
+        "Huvudstaden heter Bratislava."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Estonia",
+      "clues": [
+        "Its digital public services are unusually extensive.",
+        "Saaremaa and Hiiumaa are among its islands.",
+        "It regained independence from the Soviet Union in 1991.",
+        "It lies on the Baltic Sea south of the Gulf of Finland.",
+        "Its capital is Tallinn."
+      ],
+      "cluesSv": [
+        "De digitala offentliga tjänsterna är mycket utbyggda.",
+        "Saaremaa och Hiiumaa är två av landets öar.",
+        "Det blev åter självständigt från Sovjetunionen 1991.",
+        "Det ligger vid Östersjön söder om Finska viken.",
+        "Huvudstaden heter Tallinn."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Latvia",
+      "clues": [
+        "The Daugava River passes through its capital.",
+        "It has a long sandy Baltic coastline.",
+        "Its language is one of the surviving Baltic languages.",
+        "It is between Estonia and Lithuania.",
+        "Its capital is Riga."
+      ],
+      "cluesSv": [
+        "Floden Daugava går genom huvudstaden.",
+        "Det har en lång sandig Östersjökust.",
+        "Språket är ett av de levande baltiska språken.",
+        "Det ligger mellan Estland och Litauen.",
+        "Huvudstaden heter Riga."
+      ],
+      "difficulty": "hard"
+    },
+    {
+      "name": "Lithuania",
+      "clues": [
+        "The Curonian Spit is a long sand peninsula partly here.",
+        "The Hill of Crosses is a pilgrimage site.",
+        "It declared restoration of independence from the USSR in 1990.",
+        "It is the southernmost Baltic state.",
+        "Its capital is Vilnius."
+      ],
+      "cluesSv": [
+        "Kuriska näset är en lång sandig halvö som delvis ligger här.",
+        "Korskullen är en pilgrimsplats.",
+        "Det utropade återupprättad självständighet från Sovjet 1990.",
+        "Det är det sydligaste baltiska landet.",
+        "Huvudstaden heter Vilnius."
+      ],
+      "difficulty": "hard"
     }
   ],
   "years": [
