@@ -66,7 +66,7 @@ button.alt{background:#314860;color:#eff8ff}
 footer{margin-top:60px;border-top:1px solid #31445798;padding-top:25px}
 @media(max-width:610px){main{padding:18px 15px 40px}header{padding-bottom:16px}header b{font-size:19px}header .nav-tag{font-size:9px}h1{letter-spacing:-2.4px;font-size:50px}.eyebrow{margin-top:29px}.mode-grid{grid-template-columns:1fr;gap:14px}.mode-card{min-height:208px;padding:23px}.mode-icon{width:52px;height:52px;font-size:26px}.mode-name{margin-top:15px;font-size:26px}.mode-card .mode-action{margin-top:12px}.shape{min-height:255px}.shape svg{height:225px}.panel{padding:21px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.mode-card{transition:none}}
-</style></head><body><main><header><b>🌍 Country Quest</b><span class="nav-tag">SOLO <i></i> ONLINE</span></header><div id="app"></div><footer>Play from different PCs using the same link. Private matches have 6 rounds. Room data is temporary. Geographic boundaries from Natural Earth.</footer></main><script>
+</style><link rel="stylesheet" href="/world-theme.css?v=2"></head><body><div class="map-ambient" aria-hidden="true"></div><main><header><b>🌍 Country Quest</b><span class="nav-tag">SOLO <i></i> ONLINE</span></header><div id="app"></div><footer><div class="world-footer-stamp">COUNTRY QUEST · WORLD EDITION</div><div>Play from different PCs using the same link. Private matches have 6 rounds. Room data is temporary. Geographic boundaries from Natural Earth.</div></footer></main><script>
 let session=null,state=null,busy=false,tick=null;const app=document.querySelector('#app');
 const escapeHTML=x=>String(x??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 async function api(action,extra={}){let response=await fetch('/api/'+action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...session,...extra})});let result=await response.json();if(!response.ok)throw Error(result.error||'Network error');return result}
@@ -75,9 +75,11 @@ function leave(){session=null;state=null;try{localStorage.removeItem('country-qu
 function landing(){
   const invited=new URLSearchParams(location.search).get('room');
   app.innerHTML=`
-    <div class="eyebrow"><span class="pulse"></span> COUNTRY QUEST</div>
+    <section class="world-hero hero"><div class="world-eyebrow">EXPLORE THE WORLD</div>
     <h1>Know the world.<br><em>Prove it.</em></h1>
-    <p class="hero-copy">Pick a challenge and play.</p>
+    <p class="hero-copy">Clues, borders and history — how far can you go?</p>
+    <div class="world-tags"><span>🧩 CLUES</span><span>🗺️ MAPS</span><span>📅 HISTORY</span></div>
+    <div class="earth-visual" aria-hidden="true"><div class="earth-glow"></div><div class="earth-orbit"></div><div class="earth-orbit orbit-two"></div><div class="earth-sphere"><div class="earth-map"></div></div><svg class="map-flight" viewBox="0 0 340 340"><path d="M 18 224 Q 123 56 300 146"></path><circle cx="18" cy="224" r="4"></circle><circle cx="300" cy="146" r="4"></circle></svg><div class="compass-rose"></div></div></section>
     <div class="mode-grid">
       <a class="mode-card" href="/solo.html">
         <div><div class="mode-icon">🧭</div><div class="mode-name">Single Player</div>
