@@ -219,6 +219,7 @@ function render(){
    +'<div class="catch-flow" aria-label="Fishing adventure"><span>🎣 '+(lang==='sv'?'Kasta':'Cast')+'</span><span>❓ '+(lang==='sv'?'Fråga':'Question')+'</span><span>⚡ '+(lang==='sv'?'Napp':'Bite')+'</span><span>💪 '+(lang==='sv'?'Kamp':'Fight')+'</span><span>🐟 '+(lang==='sv'?'Fångst':'Catch')+'</span></div>'
    +'<div class="catch-facts">'+t.facts.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'
    +'<p class="helper">'+esc(t.how)+'</p>'
+   +'<div class="fish-scale-guide"><img id="fishTiersArt" alt="'+esc(t.note)+'" loading="lazy"><p>'+esc(t.note)+'</p></div>'
    +'<div style="margin-top:20px"><button class="btn" id="start" type="button">🎣 '+esc(t.begin)+'</button></div>'
    +'<p class="disclaimer">'+esc(t.rareInfo)+'</p>';
  }
@@ -261,7 +262,8 @@ function render(){
  }
  else if(phase==='done'){
   const record=Math.max(totalWeight,Number(read('cq-rare-catch-best',0))||0);
-  h='<span class="kicker">'+esc(t.summary)+'</span><h2 class="headline">🏆 '+esc(t.summary)+'</h2>'
+  h='<div class="results-art"><img id="catchResultsArt" alt="'+esc(t.summary)+'" loading="lazy"></div>'
+   +'<span class="kicker">'+esc(t.summary)+'</span><h2 class="headline">🏆 '+esc(t.summary)+'</h2>'
    +'<p class="lead">'+esc(t.summaryText)+'</p>'
    +'<div class="catch-facts"><span>🎣 '+answers.filter(a=>a.fish).length+' / 7</span><span>⚖️ '+kg(totalWeight)+'</span><span>🏅 '+esc(t.best)+': '+kg(biggest)+'</span></div>'
    +'<div class="score-mini">'+esc(t.record)+': <strong>'+kg(record)+'</strong></div>'
@@ -272,6 +274,8 @@ function render(){
    +'<p class="disclaimer">'+esc(t.rareInfo)+'</p>';
  }
  stage.innerHTML=h;void stage.offsetWidth;stage.classList.add('enter');
+ if(phase==='intro')window.CQRareMedia?.applyImage('fish_tiers_art','fishTiersArt');
+ if(phase==='done')window.CQRareMedia?.applyImage('results_art','catchResultsArt');
  if(phase==='playing'){$('answer').value=typed;tick()}
 }
 async function share(){
@@ -291,16 +295,22 @@ $('stage').addEventListener('submit',e=>{if(e.target.id!=='answerForm')return;e.
 $('stage').addEventListener('input',e=>{if(e.target.id==='answer')typed=e.target.value});
 for(const b of document.querySelectorAll('[data-lang]'))b.addEventListener('click',()=>setLang(b.dataset.lang));
 refreshStatic();render();
-/* Compact version of the original generated poster is stored as a local asset.
-   Decode once and reuse when players change languages on the intro screen. */
-if(typeof fetch==='function'){
- fetch('/rare-catch-poster.avif.base64')
- .then(r=>{if(!r.ok)throw Error('poster not available');return r.text()})
- .then(encoded=>{
-  if(!/^[A-Za-z0-9+/]+={0,2}$/.test(encoded.trim()))return;
-  posterSrc='data:image/avif;base64,'+encoded.trim();
-  if(phase==='intro'){document.body.classList.add('poster-ready');render()}
- })
- .catch(()=>{});
+/* Use the approved Rare Catch 2.0 hero art, with the old yacht
+   image as a fallback if an asset fails to load. */
+function presentPoster(src){
+ posterSrc=src;
+ if(phase==='intro'){document.body.classList.add('poster-ready');render()}
 }
+function fallbackPoster(){
+ if(typeof fetch!=='function')return;
+ fetch('/rare-catch-poster.avif.base64').then(r=>{
+  if(!r.ok)throw Error('Poster unavailable');return r.text()
+ }).then(encoded=>{
+  const b64=encoded.trim();
+  if(/^[A-Za-z0-9+/]+={0,2}$/.test(b64))presentPoster('data:image/avif;base64,'+b64);
+ }).catch(()=>{});
+}
+if(window.CQRareMedia?.get){
+ window.CQRareMedia.get('hero').then(presentPoster).catch(fallbackPoster);
+}else fallbackPoster();
 })();
