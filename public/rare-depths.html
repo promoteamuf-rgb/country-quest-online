@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071521">
+<meta name="description" content="Rare Depths: a Country Quest geography challenge where the rarer valid answer takes you deeper into the sea.">
+<title>Rare Depths · Country Quest</title>
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<style>
+:root{color-scheme:dark;--bg:#071521;--ink:#f6fbf4;--sub:#b2cbd0;--mint:#a5f2d1;--gold:#f7d9a3;--line:#8be0dc38;--panel:#102a38;--hero-photo:url('https://images.unsplash.com/photo-1627110466069-5bd673d78f6f?auto=format&fit=crop&w=1600&q=78')}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 80% 0%,#174657 0,transparent 43%),linear-gradient(160deg,#071521,#09232e 80%,#071521);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(#88bca30a 1px,transparent 1px),linear-gradient(90deg,#88bca30a 1px,transparent 1px);background-size:38px 38px;z-index:0}
+button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #e3f7ad;outline-offset:3px}
+a{color:inherit}
+.wrap{max-width:1160px;padding:0 25px 65px;margin:auto;position:relative;z-index:1}
+.topbar{min-height:83px;display:flex;gap:14px;align-items:center;border-bottom:1px solid var(--line);padding:14px 0}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
+.brand-mark{display:grid;place-items:center;background:#ecf8ef;color:#12323b;border-radius:12px;width:44px;height:44px;font-size:26px}
+.brand-name{font-weight:900;font-size:17px;letter-spacing:1.6px;line-height:1.1}
+.brand-name span{color:#a9efd7}.brand-name small{display:block;color:#b0c9c7;font-size:8px;letter-spacing:2.2px;margin-top:6px}
+.navlinks{margin-left:auto;display:flex;gap:15px;align-items:center;font-weight:800;font-size:12px}
+.navlinks a{color:#d6e9e4;text-decoration:none}.navlinks a:hover{color:white}
+.lang{display:flex;gap:3px;border:1px solid #c6eee45c;background:#0b2935;padding:3px;border-radius:10px;flex-shrink:0}
+.lang button{border:0;background:none;color:#b6d1cb;border-radius:7px;padding:8px 10px;font-weight:900;font-size:11px}
+.lang button[aria-pressed=true]{background:#eaf6eb;color:#102b33}
+.intro{margin:22px 0 25px;min-height:290px;border-radius:24px;overflow:hidden;position:relative;display:flex;align-items:center;padding:35px clamp(22px,5vw,60px);border:1px solid #d0ffe13b;background-image:linear-gradient(95deg,#07202df2 0%,#0a2935cb 47%,#0b28354c 100%),var(--hero-photo);background-size:cover;background-position:center,center 50%;box-shadow:0 18px 55px #0008}
+.intro>div{position:relative;z-index:1;max-width:680px}
+.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:900;color:#adf2dd}
+.eyebrow:before{content:"";display:inline-block;vertical-align:middle;height:1px;width:20px;background:#efd2a7;margin-right:12px}
+.intro h1{font:400 clamp(46px,6.5vw,76px)/1.05 Georgia,"Times New Roman",serif;letter-spacing:-2px;margin:15px 0 13px;color:#fff}
+.intro h1 em{font-weight:400;color:#d8f8dd}
+.intro p{font-size:16px;color:#eef8f2;max-width:520px;margin:0;line-height:1.6}
+.intro-stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.intro-stats span{font-size:10px;font-weight:900;letter-spacing:1px;padding:8px 10px;background:#092735c9;border:1px solid #bde4d663;border-radius:6px}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 295px;gap:19px;align-items:stretch}
+.panel{border:1px solid #b0ebe12a;background:linear-gradient(140deg,#143343ef,#102835f5);border-radius:22px;padding:30px;box-shadow:0 19px 45px #0004;min-width:0}
+.meta{display:flex;align-items:center;gap:14px;justify-content:space-between;margin-bottom:22px}
+.micro{font-size:10px;letter-spacing:2px;font-weight:900;color:#bdecd7;text-transform:uppercase}
+.counter{font-weight:900;color:#e4f5e9;font-size:12px;white-space:nowrap}
+.headline{font:400 clamp(30px,4.4vw,48px)/1.12 Georgia,"Times New Roman",serif;letter-spacing:-.8px;margin:8px 0 17px}
+.lead{color:#c3d6d4;font-size:15px;line-height:1.65;margin:0 0 24px;max-width:620px}
+.primary,.secondary{display:inline-flex;align-items:center;justify-content:center;gap:12px;border-radius:10px;min-height:48px;padding:13px 20px;font-weight:900;text-decoration:none;transition:transform .2s,background .2s}
+.primary{background:#eaf4e9;color:#173337;border:1px solid #f8fff1}
+.primary:hover{background:white;transform:translateY(-2px)}
+.secondary{background:#244650;color:#ebf7ee;border:1px solid #7fa79b}
+.secondary:hover{background:#305864}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:28px 0}
+.how>div{padding:15px;border:1px solid #b4edd331;background:#0c2b36bb;border-radius:12px}
+.how b{display:block;color:var(--gold);font-size:10px;letter-spacing:1.3px;margin-bottom:5px}
+.how strong{font-size:13px}
+.disclaimer{font-size:12px;line-height:1.55;color:#9eb9bb}
+.hud{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.stat{border:1px solid #9ee4d634;padding:10px 13px;border-radius:10px;background:#09252fc2}
+.stat small{display:block;color:#afc7c6;font-size:10px;font-weight:750;letter-spacing:1.1px;text-transform:uppercase}
+.stat strong{display:block;color:#f1f9e9;font-size:23px;line-height:1.25;font-variant-numeric:tabular-nums}
+.progress{height:6px;border-radius:99px;background:#315364;overflow:hidden;margin:0 0 24px}
+.progress span{display:block;width:0%;height:100%;background:linear-gradient(90deg,#b1f5db,#edce9f);transition:width .4s}
+.clock{display:flex;align-items:center;gap:8px;font:900 19px/1 system-ui;font-variant-numeric:tabular-nums}
+.clock.warn{color:#ffc4ae}
+.prompt-category{color:#afc9c6;font-weight:850;font-size:11px;letter-spacing:1.4px;text-transform:uppercase}
+.question{font:400 clamp(29px,4.1vw,43px)/1.18 Georgia,serif;letter-spacing:-.8px;margin:13px 0 22px;color:#f7fff0}
+.answerbox{display:flex;gap:8px;align-items:stretch}
+.answerbox input{background:#08202c;color:white;border:1px solid #81b6ad;border-radius:10px;padding:15px;min-width:0;flex:1;font-size:17px}
+.answerbox input::placeholder{color:#91acb2}
+.answerbox button{flex-shrink:0}
+.notice{min-height:25px;margin:14px 0 0;color:#f3d9ae;font-weight:700;font-size:13px}
+.note{font-size:12px;color:#acc2c1;margin-top:12px}
+.feedback{margin:20px 0;padding:21px;border-radius:15px;background:linear-gradient(130deg,#17454a,#102c3d);border:1px solid #98ecbc73}
+.feedback strong{display:block;font:400 31px/1.1 Georgia,serif}
+.feedback p{margin:10px 0 0;color:#d0e6de}
+.rarity-badge{display:inline-flex;align-items:center;gap:7px;background:#1c4a49;color:#c9f7d6;border:1px solid #a6f0c27b;border-radius:99px;padding:7px 12px;font-size:12px;font-weight:900}
+.recap{display:grid;gap:7px;margin:18px 0 23px}
+.recap>div{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#0b2935b8;padding:10px 13px;border-radius:9px;border:1px solid #94cbbe25}
+.recap span{color:#d2e5dd;font-size:12px}
+.recap strong{color:#ecf6d8;font-size:12px;text-align:right}
+.sea{border:1px solid #97cfdc48;border-radius:22px;background:linear-gradient(180deg,#164d60 0%,#0b3549 24%,#09283c 48%,#082034 73%,#061524 100%);box-shadow:0 16px 45px #0006;min-height:550px;position:relative;overflow:hidden}
+.sea:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#c7eaff0c 1px,transparent 1px),linear-gradient(90deg,#c7eaff0c 1px,transparent 1px);background-size:26px 26px}
+.sea:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 25% 6%,#cefff02c,transparent 38%),linear-gradient(90deg,#0003,transparent 65%)}
+.sea-top{position:absolute;top:16px;left:20px;right:20px;z-index:3;display:flex;justify-content:space-between;color:#d3f3e5;font-weight:900;font-size:11px;letter-spacing:1.3px}
+.depth-track{position:absolute;z-index:2;top:64px;bottom:53px;left:50%;width:2px;background:#bff7df50}
+.depth-fill{position:absolute;top:0;left:0;width:100%;background:#e0fdd6;height:0%;box-shadow:0 0 13px #b4ffd5;transition:height 1.1s cubic-bezier(.2,.6,.2,1)}
+.submersible{position:absolute;z-index:4;top:0;left:50%;transform:translate(-50%,-50%);width:61px;height:61px;border:1px solid #dfffe6ad;display:grid;place-items:center;border-radius:50%;font-size:30px;background:radial-gradient(circle at 30% 25%,#48a6a5,#0a394e);box-shadow:0 6px 23px #0008,0 0 0 7px #afe8d513;transition:top 1.1s cubic-bezier(.2,.6,.2,1)}
+.depth-label{position:absolute;right:0;z-index:2;color:#d9f7e5aa;font-size:11px;font-variant-numeric:tabular-nums;transform:translateY(-50%)}
+.depth-label::before{content:"";display:inline-block;vertical-align:middle;width:15px;height:1px;background:#b0f3d287;margin-right:7px}
+.depth-readout{position:absolute;z-index:4;bottom:14px;left:0;right:0;text-align:center;font-size:12px;color:#b8dfd6;letter-spacing:1.4px;font-weight:900}
+.depth-readout strong{display:block;font-size:31px;line-height:1.35;color:#eafced;font-variant-numeric:tabular-nums;letter-spacing:0}
+.bubble{position:absolute;border:1px solid #d9fff244;border-radius:50%;opacity:.5;animation:rise 10s linear infinite;pointer-events:none}
+.b1{left:20%;bottom:-40px;width:12px;height:12px}.b2{left:76%;bottom:0;width:20px;height:20px;animation-delay:-6s}.b3{left:64%;bottom:-25px;width:8px;height:8px;animation-delay:-3s}.b4{left:31%;bottom:10px;width:16px;height:16px;animation-delay:-8s}
+@keyframes rise{to{transform:translateY(-640px);opacity:0}}
+.bottom{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;align-items:center;border-top:1px solid #91bfa52b;margin-top:28px;padding-top:24px;color:#a8c5c6;font-size:12px}
+.bottom a{color:#caf5d3;text-decoration:underline;text-underline-offset:3px}
+[hidden]{display:none!important}
+@media(max-width:850px){.workspace{grid-template-columns:minmax(0,1fr) 220px}.sea{min-height:520px}.panel{padding:24px}}
+@media(max-width:660px){
+ .wrap{padding:0 15px 42px}.topbar{min-height:71px}
+ .brand-mark{width:37px;height:37px;font-size:22px}.brand-name{font-size:14px;letter-spacing:1px}.brand-name small{font-size:7px}
+ .navlinks{gap:9px}.navlinks a{font-size:11px}
+ .lang button{padding:7px}
+ .intro{min-height:266px;padding:28px 20px;border-radius:17px;margin:15px 0}
+ .intro h1{font-size:48px}.intro p{font-size:14px}
+ .workspace{grid-template-columns:1fr;gap:13px}
+ .sea{min-height:240px;order:-1}
+ .sea-top{top:10px;font-size:10px}
+ .depth-track{top:49px;bottom:44px}
+ .submersible{width:44px;height:44px;font-size:23px}
+ .depth-readout{bottom:6px}.depth-readout strong{font-size:24px}
+ .depth-label{font-size:9px}
+ .panel{padding:23px;border-radius:16px}
+ .how{grid-template-columns:1fr 1fr}
+}
+@media(max-width:390px){.navlinks a:first-child{display:none}.intro h1{font-size:42px}.answerbox{flex-direction:column}.how{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar">
+  <a class="brand" href="/" aria-label="Country Quest home"><span class="brand-mark" aria-hidden="true">✳</span><span class="brand-name">COUNTRY<span>QUEST</span><small>RARE DEPTHS</small></span></a>
+  <nav class="navlinks" aria-label="Game navigation"><a href="/" id="navAll">All games</a><a href="/solo.html" id="navSolo">Solo games</a></nav>
+  <div class="lang" role="group" aria-label="Language / Språk"><button type="button" data-lang="sv" aria-pressed="false">🇸🇪 SV</button><button type="button" data-lang="en" aria-pressed="true">🇬🇧 EN</button></div>
+</header>
+<section class="intro" aria-label="Rare Depths">
+  <div><div class="eyebrow">COUNTRY QUEST · A NEW EXPEDITION</div><h1>Think rarer.<br><em>Go deeper.</em></h1><p id="introText">Seven geography prompts. One answer each. The less obvious your correct answer, the deeper your voyage.</p>
+   <div class="intro-stats"><span id="heroFact1">7 ROUNDS</span><span id="heroFact2">25 SECONDS</span><span id="heroFact3">RARE ANSWERS WIN</span></div>
+  </div>
+</section>
+<main class="workspace" id="workspace">
+  <section class="panel" id="stage" aria-live="polite"></section>
+  <aside class="sea" aria-label="Ocean depth journey">
+    <div class="sea-top"><span id="seaTitle">THE DEEP BLUE</span><span id="seaRank">0 / 7,000 m</span></div>
+    <div class="depth-track"><div class="depth-fill" id="depthFill"></div><div class="submersible" id="submersible" aria-hidden="true">⚓</div></div>
+    <span class="depth-label" style="top:18%">1,000 m</span>
+    <span class="depth-label" style="top:36%">2,500 m</span>
+    <span class="depth-label" style="top:57%">4,000 m</span>
+    <span class="depth-label" style="top:79%">5,500 m</span>
+    <div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div><div class="bubble b4"></div>
+    <div class="depth-readout"><span id="depthTitle">TOTAL DEPTH</span><strong id="depthValue" aria-live="polite">0 m</strong></div>
+  </aside>
+</main>
+<footer class="bottom"><div id="footerText">Country Quest · Original geography rare-answer game · Practice anytime</div><div><a href="/" id="backFooter">Back to Country Quest</a></div></footer>
+</div>
+<script src="/rare-bank.js?v=1"></script>
+<script src="/rare-depths.js?v=1"></script>
+</body>
+</html>
