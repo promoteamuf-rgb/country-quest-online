@@ -237,7 +237,7 @@ function init(){
 const content=window.CQ_SV_CONTENT||{};
 Object.assign(serverClues,content.onlineClues||{});
 Object.assign(serverYears,content.onlineYears||{});
-window.CQI18N={setLanguage,language:()=>language,translate:apply,loadSolo:loadContent,canonicalCountry:normalizeCountry,countryLabel,translateText:localize,register:obj=>{Object.assign(dict,obj);apply()}};
+window.CQI18N={setLanguage,language:()=>language,translate:apply,loadSolo:loadContent,canonicalCountry:normalizeCountry,countryLabel,countryNames:countrySv,translateText:localize,register:obj=>{Object.assign(dict,obj);apply()}};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
 else init();
 })();
