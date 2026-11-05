@@ -51,6 +51,7 @@ for(const q of BANK){
  lookup.set(q.id,a);
 }
 let phase='intro',questions=[],round=0,deadline=0,interval=null,transition=null,answers=[],points=0,totalWeight=0,biggest=0,sonar=2,sonarAnswer=null,typed='',message='',latest=null;
+let posterSrc='';
 function read(key,fallback){try{const v=JSON.parse(localStorage.getItem(key)||'null');return v??fallback}catch{return fallback}}
 function save(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch{}}
 function newQuestions(){
@@ -203,7 +204,8 @@ function render(){
  document.body.dataset.phase=phase;
  let h='';
  if(phase==='intro'){
-  h='<span class="kicker">'+esc(t.kicker)+'</span><h1 class="hero-title">RARE <span>CATCH</span></h1>'
+  h=(posterSrc?'<div class="poster-wrap"><img id="posterArt" src="'+posterSrc+'" alt="Rare Catch: yacht above a reef, fishing line and bigger fish at rarer levels" decoding="async"></div>':'')
+   +'<span class="kicker">'+esc(t.kicker)+'</span><h1 class="hero-title">RARE <span>CATCH</span></h1>'
    +'<p class="lead">'+esc(t.intro)+'</p><p class="lead">'+esc(t.description)+'</p>'
    +'<div class="catch-facts">'+t.facts.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'
    +'<p class="helper">'+esc(t.how)+'</p>'
@@ -279,4 +281,16 @@ $('stage').addEventListener('submit',e=>{if(e.target.id!=='answerForm')return;e.
 $('stage').addEventListener('input',e=>{if(e.target.id==='answer')typed=e.target.value});
 for(const b of document.querySelectorAll('[data-lang]'))b.addEventListener('click',()=>setLang(b.dataset.lang));
 refreshStatic();render();
+/* Compact version of the original generated poster is stored as a local asset.
+   Decode once and reuse when players change languages on the intro screen. */
+if(typeof fetch==='function'){
+ fetch('/rare-catch-poster.avif.base64')
+ .then(r=>{if(!r.ok)throw Error('poster not available');return r.text()})
+ .then(encoded=>{
+  if(!/^[A-Za-z0-9+/]+={0,2}$/.test(encoded.trim()))return;
+  posterSrc='data:image/avif;base64,'+encoded.trim();
+  if(phase==='intro'){document.body.classList.add('poster-ready');render()}
+ })
+ .catch(()=>{});
+}
 })();
