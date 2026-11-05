@@ -21,7 +21,12 @@ const sparks=Array.from({length:24},(_,i)=>{
 sea.insertAdjacentHTML('afterbegin',
   '<div class="fun-world" aria-hidden="true">'
  +'<div class="fun-whale">'+whale+'</div><div class="fun-manta">'+manta+'</div>'
- +'<div class="fun-coral">'+coral+'</div><div class="fun-relic">🪸</div>'
+ +'<div class="fun-coral">'+coral+'</div>'
+ +'<div class="fun-creature fun-reef-fish">'+reefSvg+'</div>'
+ +'<div class="fun-creature fun-turtle">'+turtleSvg+'</div>'
+ +'<div class="fun-creature fun-shark">'+sharkSvg+'</div>'
+ +'<div class="fun-creature fun-angler">'+anglerSvg+'</div>'
+ +'<div class="fun-creature fun-squid">'+squidSvg+'</div>'
  +sparks+'<div class="fun-sonar-layer" id="funSonarLayer"></div></div>');
 let soundEnabled=false,context=null;
 try{soundEnabled=localStorage.getItem('cq-rare-sound')==='on'}catch{}
@@ -96,13 +101,13 @@ function confetti(){
  document.body.appendChild(layer);
  setTimeout(()=>layer.remove(),3500);
 }
-function reveal(points,streak){
- if(points>=100||streak>=3){play('epic');confetti()}
+function reveal(points){
+ if(points>=100)play('epic');
  else if(points>=60)play('rare');
  else if(points>0)play('common');
  else play('wrong');
 }
-function finish(){play('finish');confetti()}
+function finish(){play('finish')}
 function reset(){
  const sonarLayer=$('funSonarLayer');if(sonarLayer)sonarLayer.innerHTML='';
 }
