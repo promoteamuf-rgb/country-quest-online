@@ -405,7 +405,7 @@ body[data-rare-phase] .sea .depth-track .submersible svg{
 }
 .anchor-speed-bubble{
  position:absolute;left:calc(var(--anchor-x) + var(--shift));bottom:-24px;
- width:calc(3px + var(--i)*.5px);height:calc(3px + var(--i)*.5px);
+ width:7px;height:7px;
  border-radius:50%;border:1px solid #f5ffebde;background:#ccfff054;
  box-shadow:0 0 13px #c4faffbd;
  animation:anchor-bubble-stream .85s linear infinite;
