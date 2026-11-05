@@ -199,6 +199,60 @@ function finishGame(){
 function rarity(points){
  return COPY[lang]['rank'+points]||'Rare';
 }
+
+/* Extra things to discover while on the same seven-question expedition. */
+function relicFor(value){
+ if(value>=100)return{tier:'gold',emoji:'👑',en:'Sunken crown',sv:'Sjunket kronfynd'};
+ if(value>=80)return{tier:'crystal',emoji:'💎',en:'Deep-sea crystal',sv:'Djuphavskristall'};
+ if(value>=60)return{tier:'pearl',emoji:'🦪',en:'Ocean pearl',sv:'Havspärla'};
+ if(value>=40)return{tier:'coral',emoji:'🪸',en:'Glowing coral',sv:'Lysande korall'};
+ if(value>=25)return{tier:'shell',emoji:'🐚',en:'Rare shell',sv:'Ovanligt snäckskal'};
+ return{tier:'bubble',emoji:'🫧',en:'Sea bubbles',sv:'Havsbubblor'};
+}
+function relicName(item){return item?(lang==='sv'?item.sv:item.en):''}
+function statRibbon(){
+ const t=dictionary();
+ return '<div class="expedition-ribbon"><span class="expedition-tag">✧ '+escapeHTML(t.gameTip)+'</span>'
+  +'<div class="expedition-mini">'
+  +'<span class="expedition-pill">🎒 '+escapeHTML(t.collect)+' <strong>'+relics.length+'</strong></span>'
+  +'<span class="expedition-pill '+(rareStreak>=2?'has-streak':'')+'">🔥 '+escapeHTML(t.streak)+' <strong>×'+rareStreak+'</strong></span>'
+  +'<span class="expedition-pill">📡 '+escapeHTML(t.sonarName)+' <strong>'+sonarLeft+'/2</strong></span>'
+  +'</div></div>';
+}
+function sonarMessage(){
+ if(!sonarExample)return'';
+ const t=dictionary();
+ return '<span aria-hidden="true">📡</span><div><strong>'+escapeHTML(t.sonarExample)+': '+escapeHTML(label(sonarExample))+'</strong><div>'+escapeHTML(t.sonarMore)+'</div></div>';
+}
+function sonar(){
+ if(phase!=='playing'||sonarLeft<=0||sonarExample)return;
+ const available=[...qNow().answers].sort((a,b)=>a.points-b.points);
+ if(!available.length)return;
+ const minimum=available[0].points;
+ sonarExample=shuffle(available.filter(a=>a.points===minimum))[0];
+ sonarLeft--;
+ const hint=$('sonarReveal');
+ if(hint){hint.innerHTML=sonarMessage();hint.hidden=false}
+ const button=$('sonarButton');
+ if(button){button.disabled=true;button.textContent='📡 '+dictionary().sonarBtn+' ('+sonarLeft+'/2)'}
+ const stock=$('sonarStock');
+ if(stock)stock.textContent=sonarLeft+'/2';
+ window.CQFun?.sonar();
+}
+function achievementBadges(){
+ const t=dictionary();
+ const rareCount=results.filter(r=>r.earned>=60).length;
+ const fastCount=results.filter(r=>r.answer&&r.secondsUsed<=8).length;
+ const earned=[
+  {id:0,emoji:'🧭',when:true},
+  {id:1,emoji:'💎',when:rareCount>=3},
+  {id:2,emoji:'👑',when:results.some(r=>r.earned===100)},
+  {id:3,emoji:'🦑',when:points>=400},
+  {id:4,emoji:'🔥',when:bestStreak>=3},
+  {id:5,emoji:'⚡',when:fastCount>=3}
+ ].filter(b=>b.when);
+ return earned.map(b=>'<div class="achievement"><span aria-hidden="true">'+b.emoji+'</span><div><b>'+escapeHTML(t['achievement'+b.id])+'</b><small>'+escapeHTML(t['achievement'+b.id+'Desc'])+'</small></div></div>').join('');
+}
 function chips(){
  const t=dictionary();
  return '<div class="meta"><span class="micro">'+escapeHTML(t.round)+' '+(index+1)+' '+escapeHTML(t.of)+' '+QUESTION_COUNT+'</span><span class="counter">'+(index+1)+' / '+QUESTION_COUNT+'</span></div>'
