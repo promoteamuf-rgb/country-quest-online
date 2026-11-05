@@ -1,0 +1,77 @@
+/* Country Quest / World Explorer visual system */
+:root { --world-sea:#0b1d34; --world-teal:#8df6d8; --world-amber:#f3cd80; --world-ink:#0b1729; }
+html { scroll-behavior:smooth }
+body { background: radial-gradient(ellipse at 88% 5%, #173b50 0, transparent 42%), radial-gradient(ellipse at 2% 72%, #112b45 0, transparent 53%), #081221; }
+body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:0; background-image:linear-gradient(#92e6cc0b 1px,transparent 1px),linear-gradient(90deg,#92e6cc0b 1px,transparent 1px); background-size:38px 38px; mask-image:linear-gradient(#0009,transparent 90%); }
+.map-ambient { position:fixed; inset:0; pointer-events:none; z-index:0; background:url('/world-map.svg') no-repeat center 33%; background-size:min(1250px,130vw) auto; opacity:.07; filter:drop-shadow(0 0 30px #62d4c3); }
+body>main,body>.shell { position:relative; z-index:1; }
+header,.topbar { background:rgba(9,23,38,.67); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom-color:#51718a55; position:relative; z-index:3; }
+header b,.logo{letter-spacing:-.85px}
+.world-hero { position:relative; isolation:isolate; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; min-height:390px; padding:35px 340px 33px 0; margin:0 0 17px; }
+.world-hero:before,.hero.world-hero:before{display:none!important}
+.world-hero h1 { position:relative; z-index:1; font-size:clamp(47px,6.4vw,74px); line-height:1.08; letter-spacing:-3.4px; max-width:720px; margin:16px 0 18px; }
+.world-hero h1 em { font-style:normal; color:transparent; background:linear-gradient(95deg,#a4ffdb 0,#8dc7ff 90%); background-clip:text; -webkit-background-clip:text; }
+.world-hero .eyebrow { margin:0; color:#b0ffe4; text-transform:uppercase; font-weight:900; letter-spacing:2.7px; font-size:11px; }
+.world-hero>p,.world-hero .hero-copy { color:#bdd0dc; font-size:16px; margin:0 0 15px; max-width:425px; line-height:1.55; }
+.world-eyebrow { display:inline-flex; align-items:center; gap:10px; padding:8px 12px; border:1px solid #6fe7c345; border-radius:99px; color:#9df5d7; font-size:11px; font-weight:900; letter-spacing:2.4px; background:#132e3e9c; }
+.world-eyebrow::before { content:""; width:7px; height:7px; border-radius:50%; background:#93fbd9; box-shadow:0 0 0 4px #93fbd91e; }
+.world-hero .eyebrow { display:none; }
+.world-hero .world-eyebrow { position:relative; z-index:1; }
+.world-tags { position:relative; z-index:1; display:flex; flex-wrap:wrap; gap:8px; margin-top:13px; }
+.world-tags span { padding:7px 10px; color:#b5dacd; border:1px solid #577b785c; background:#123143a6; border-radius:7px; font:800 10px/1.3 system-ui,sans-serif; letter-spacing:1.1px; }
+.world-hero .earth-visual { width:323px; height:323px; position:absolute; right:0; top:50%; transform:translateY(-50%); z-index:0; pointer-events:none; }
+.earth-visual::before { content:""; position:absolute; inset:-17px; border:1px dashed #96dfd92b; border-radius:50%; }
+.earth-visual::after { content:""; position:absolute; inset:9px; border:1px solid #95dfd91d; border-radius:50%; transform:scale(1.08); }
+.earth-glow { position:absolute; inset:16px; border-radius:50%; background:#6becd82b; filter:blur(39px); }
+.earth-sphere { position:absolute; inset:32px; border-radius:50%; overflow:hidden; border:1.5px solid #c4ffe967; background:linear-gradient(145deg,#174764,#0a2840); box-shadow:inset -26px -14px 48px #010e2199, inset 13px 8px 28px #abffe229, 0 0 0 7px #5bdaca12, 0 24px 56px #0009; transform:rotate(-14deg); }
+.earth-map { position:absolute; inset:0; background-image:url('/world-map.svg'); background-repeat:repeat-x; background-size:660px 330px; background-position:0 50%; opacity:.86; animation:earth-scroll 38s linear infinite; filter:drop-shadow(0 0 4px #7afad2aa); }
+.earth-sphere::before { content:""; position:absolute; inset:0; z-index:1; pointer-events:none; border-radius:50%; background:repeating-linear-gradient(0deg,transparent 0 38px,#ccfff01a 39px,#ccfff01a 40px), repeating-linear-gradient(90deg,transparent 0 35px,#ccfff013 36px,#ccfff013 37px); mix-blend-mode:screen; }
+.earth-sphere::after { content:""; position:absolute; inset:0; z-index:2; pointer-events:none; border-radius:50%; background:radial-gradient(ellipse at 27% 23%,#ecfff44c,transparent 34%),linear-gradient(100deg,#0000 38%,#000b 98%), radial-gradient(circle at 50% 50%,transparent 46%,#011b31bd 98%); }
+@keyframes earth-scroll { from{background-position:0 50%} to{background-position:-660px 50%} }
+.earth-orbit { position:absolute; z-index:2; border:1px solid #b4efdc58; border-radius:50%; inset:45px 4px; transform:rotate(-29deg); box-shadow:0 0 30px #83ffdf0a; }
+.earth-orbit.orbit-two { inset:15px 55px; transform:rotate(29deg); border-style:dashed; border-color:#bde8e039; }
+.earth-orbit::after { content:""; position:absolute; width:9px; height:9px; background:var(--world-amber); border:2px solid #fff5c3; border-radius:50%; right:16px; top:42px; box-shadow:0 0 19px #ffe4a5; }
+.map-flight { position:absolute; inset:-8px; z-index:4; width:calc(100% + 16px); height:calc(100% + 16px); transform:rotate(-10deg); overflow:visible; }
+.map-flight path { stroke:#ffe2a0; stroke-width:1.6; stroke-dasharray:6 8; stroke-linecap:round; fill:none; opacity:.72; animation:dash-flight 18s linear infinite; }
+.map-flight circle { fill:#e8ffdf; stroke:#ffedb9; stroke-width:3; filter:drop-shadow(0 0 5px #ffedb9); }
+@keyframes dash-flight { to{stroke-dashoffset:-280} }
+.compass-rose { position:absolute; right:0; bottom:-8px; z-index:5; width:83px; height:83px; border-radius:50%; background:radial-gradient(circle,#17344a 0 24%,transparent 25%), conic-gradient(from 45deg,#d8f7e5 0 11%,#31546a 11% 25%,#d8f7e5 25% 36%,#31546a 36% 50%,#d8f7e5 50% 61%,#31546a 61% 75%,#d8f7e5 75% 86%,#31546a 86% 100%); border:5px solid #16344a; outline:1px solid #8bc5b64d; box-shadow:0 8px 20px #0008; }
+.compass-rose::before { content:""; position:absolute; inset:15px 35px; background:linear-gradient(#edca86 50%,#9bcbca 50%); clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%); transform:rotate(-18deg); }
+.compass-rose::after { content:"N"; position:absolute; top:-18px; left:calc(50% - 4px); color:#c3f5e3; font:800 11px/1 system-ui; letter-spacing:0; }
+.world-hero .route-note { position:absolute; bottom:19px; right:220px; z-index:6; color:#aad6c9; font-size:10px; font-weight:900; letter-spacing:1.5px; transform:rotate(-6deg); opacity:.7; }
+.mode-grid,.modes{position:relative;z-index:1}
+.mode-card,.mode{box-shadow:0 12px 38px #0005;border-color:#54717d73; transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease; }
+.mode-card:hover,.mode:hover {transform:translateY(-5px);border-color:#94f8dc;box-shadow:0 22px 54px #0009}
+.mode-card::before { content:"01 / SOLO"; position:absolute; top:22px; right:22px; color:#9bc8bb9b; font:900 10px/1 system-ui; letter-spacing:2.1px; z-index:1; }
+.mode-card:nth-child(2)::before{content:"02 / ARENA";color:#c9b5f99c}
+.mode::after {content:"01 / EXPLORE"; position:absolute;right:20px;bottom:14px;opacity:.45;color:#bceee0;font:900 9px/1.3 system-ui;letter-spacing:1.8px;pointer-events:none}
+.mode:nth-child(2)::after {content:"02 / MAP";}
+.mode:nth-child(3)::after {content:"03 / HISTORY";}
+.mode:nth-child(4)::after {content:"04 / VERSUS";}
+.panel,.shape,.shapeholder{backdrop-filter:blur(5px)}
+.shape,.shapeholder{background-image:radial-gradient(ellipse at center,#204b61,#0d2033 75%)!important;}
+.shape::before,.shapeholder::before{background-image:linear-gradient(#9dffe60f 1px,transparent 1px),linear-gradient(90deg,#9dffe60f 1px,transparent 1px)!important;background-size:28px 28px!important}
+.shape::after,.shapeholder::after{border:1px solid #b5ffe025!important;}
+.choice.correct,.choices button:focus-visible {border-color:#8bf2d1!important}
+.world-footer-stamp {display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border:1px solid #426975; border-radius:6px;font:800 10px/1 system-ui;letter-spacing:1.2px;color:#91c5bd;margin-bottom:10px; transform:rotate(-1deg)}
+.world-footer-stamp::before { content:"✦";color:#f1ce88 }
+@media(max-width:750px){
+  .world-hero{min-height:340px;padding-right:278px}
+  .world-hero .earth-visual{width:256px;height:256px;right:0}
+  .world-hero h1{font-size:clamp(40px,6vw,59px)}
+}
+@media(max-width:610px){
+  .world-hero{min-height:unset;padding:24px 0 0;display:block;margin-bottom:18px}
+  .world-hero h1{font-size:clamp(43px,10vw,58px);letter-spacing:-2.3px;line-height:1.06}
+  .world-hero .earth-visual{position:relative;top:auto;right:auto;transform:none;width:min(280px,70vw);height:min(280px,70vw);margin:3px auto -10px}
+  .world-hero .route-note{right:40px;bottom:11px}
+  .world-tags{margin-top:9px}
+  .map-ambient{background-size:880px auto;opacity:.05}
+  .world-hero .hero-copy,.world-hero>p{font-size:15px}
+  .compass-rose{width:70px;height:70px}
+  .mode-grid,.modes{gap:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  .earth-map,.map-flight path{animation:none!important}
+  .mode-card,.mode{transition:none!important}
+}
