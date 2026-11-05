@@ -16,7 +16,7 @@ fact1:'7 ROUNDS',fact2:'25 SECONDS',fact3:'RARE ANSWERS WIN',seaTitle:'THE DEEP 
 footer:'Country Quest · Original rare-answer geography game · Unlimited practice',back:'Back to Country Quest',
 introMeta:'READY TO EXPLORE?',introCount:'7 OPEN QUESTIONS',introTitle:'The obvious answer is just the beginning.',
 introDesc:'You will see seven geography categories. Type one correct answer before the clock runs out. More unusual answers earn more points — and take you deeper into the ocean.',
-step1:'THINK FAST',step1Desc:'25 seconds per question',step2:'THINK DIFFERENT',step2Desc:'An uncommon correct answer wins',step3:'GO DEEP',step3Desc:'Up to 7,000 metres',
+rarityGuide:'SIX DEPTH TIERS',step1:'THINK FAST',step1Desc:'25 seconds per question',step2:'THINK DIFFERENT',step2Desc:'An uncommon correct answer wins',step3:'GO DEEP',step3Desc:'Up to 7,000 metres',
 begin:'Begin your voyage ↓',
 editorNote:'Answers and rarity scores are curated for Country Quest, not measured from other players. The accepted lists are extensive but not exhaustive.',
 round:'ROUND',of:'OF',time:'TIME',questionMeta:'NAME ONE VALID ANSWER',placeholder:'Type a place name…',
@@ -38,7 +38,7 @@ fact1:'7 RUNDOR',fact2:'25 SEKUNDER',fact3:'OVANLIGA SVAR VINNER',seaTitle:'DET 
 footer:'Country Quest · Eget geografispel med ovanliga svar · Obegränsat spelande',back:'Tillbaka till Country Quest',
 introMeta:'REDO ATT UTFORSKA?',introCount:'7 ÖPPNA FRÅGOR',introTitle:'Det uppenbara svaret är bara början.',
 introDesc:'Du får sju kategorier inom geografi. Skriv ett korrekt svar innan tiden tar slut. Ovanligare svar ger fler poäng och tar dig djupare ner i havet.',
-step1:'TÄNK SNABBT',step1Desc:'25 sekunder per fråga',step2:'TÄNK ANNORLUNDA',step2Desc:'Ovanliga rätta svar ger mer',step3:'DYK DJUPT',step3Desc:'Nå upp till 7 000 meter',
+rarityGuide:'SEX DJUPNIVÅER',step1:'TÄNK SNABBT',step1Desc:'25 sekunder per fråga',step2:'TÄNK ANNORLUNDA',step2Desc:'Ovanliga rätta svar ger mer',step3:'DYK DJUPT',step3Desc:'Nå upp till 7 000 meter',
 begin:'Starta dyket ↓',
 editorNote:'Svar och sällsynthetspoäng är utvalda av Country Quest, inte beräknade från andra spelares svar. Svarslistorna är omfattande men inte fullständiga.',
 round:'RUNDA',of:'AV',time:'TID',questionMeta:'ANGE ETT KORREKT SVAR',placeholder:'Skriv ett land eller en huvudstad …',
@@ -191,6 +191,7 @@ function render(){
     +'<div class="how"><div><b>01</b><strong>'+escapeHTML(t.step1)+'</strong><div class="note">'+escapeHTML(t.step1Desc)+'</div></div>'
     +'<div><b>02</b><strong>'+escapeHTML(t.step2)+'</strong><div class="note">'+escapeHTML(t.step2Desc)+'</div></div>'
     +'<div><b>03</b><strong>'+escapeHTML(t.step3)+'</strong><div class="note">'+escapeHTML(t.step3Desc)+'</div></div></div>'
+    +'<div class="tier-guide"><span class="micro">'+escapeHTML(t.rarityGuide)+'</span><div class="tier-steps">'+[10,25,40,60,80,100].map(value=>'<div class="tier-pill tier-'+value+'"><strong>'+value+' <small>'+escapeHTML(t.points)+'</small></strong><span>'+escapeHTML(rarity(value))+'</span></div>').join('')+'</div></div>'
     +'<button class="primary" id="startGame" type="button">'+escapeHTML(t.begin)+'</button>'
     +'<p class="disclaimer">'+escapeHTML(t.editorNote)+'</p>';
   window.CQDiveFX?.onScreen('intro',0,0);
