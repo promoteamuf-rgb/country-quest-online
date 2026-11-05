@@ -237,3 +237,53 @@ body[data-rare-phase="done"] .panel{width:min(740px,100%);flex-basis:740px}
  .relic-token,.sonar-hint,.achievement{animation:none!important}
  .fun-celebrate{display:none}
 }
+
+/* Expedition intro and navigation refinements. */
+.reward-preview{
+ display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:23px 0 8px;
+ padding:14px 16px;border:1px solid #e9d69a74;border-radius:13px;
+ background:linear-gradient(112deg,#294958b3,#543d35a1);
+ box-shadow:inset 0 1px 0 #fff2ca23;
+}
+.reward-preview span{display:inline-flex;align-items:center;justify-content:center;width:37px;height:38px;
+ font-size:25px;filter:drop-shadow(0 4px 6px #0007);
+ animation:reward-preview-bob 3.5s ease-in-out infinite alternate}
+.reward-preview span:nth-child(2){animation-delay:-.7s}
+.reward-preview span:nth-child(3){animation-delay:-1.5s}
+.reward-preview span:nth-child(4){animation-delay:-2.1s}
+.reward-preview span:nth-child(5){animation-delay:-2.7s}
+@keyframes reward-preview-bob{to{transform:translateY(-6px) rotate(5deg)}}
+.reward-preview strong{flex:1 1 160px;font:750 12px/1.45 system-ui;color:#f7e7b9}
+.fun-world .fun-sonar-layer{position:absolute;inset:0;z-index:12;pointer-events:none}
+.fun-sonar-layer .fun-scan{position:absolute;inset:0}
+body[data-rare-phase] .panel .expedition-ribbon{background:#092d3dec}
+body[data-rare-phase] .panel .reward-rail{background:#071f2edb}
+body[data-rare-phase] .panel .discovery-ceremony{z-index:4}
+body[data-rare-phase] .panel .sonar-hint{z-index:5}
+body[data-rare-phase] .panel .expedition-ribbon{border-color:#baf7d963}
+body[data-rare-phase] .panel .expedition-tag{line-height:1.5;letter-spacing:.35px}
+body[data-rare-phase="playing"] .panel .question{margin-bottom:26px}
+body[data-rare-phase="playing"] .sea .fun-manta{opacity:.5}
+body[data-rare-phase="reveal"] .sea .fun-relic{filter:drop-shadow(0 0 23px #ffe79db8)}
+body[data-rare-phase="done"] .panel .achievement-section{max-width:100%}
+body[data-rare-phase="intro"] .panel .expedition-ribbon{display:none}
+@media(max-width:700px){
+ body[data-rare-phase] .topbar .navlinks{display:none!important}
+ body[data-rare-phase] .topbar .expand-btn{margin-left:auto}
+ body[data-rare-phase] .topbar{gap:8px}
+ body[data-rare-phase] .topbar .fun-sound{flex-shrink:0}
+ .reward-preview{gap:6px;padding:10px 11px}
+ .reward-preview span{width:30px;font-size:22px}
+ .reward-preview strong{font-size:11px}
+ .expedition-ribbon{margin-bottom:16px}
+ .expedition-tag{font-size:10px!important}
+}
+@media(max-width:390px){
+ body[data-rare-phase] .brand-name{font-size:12px}
+ body[data-rare-phase] .lang button{font-size:9px!important}
+ body[data-rare-phase] .fun-sound,
+ body[data-rare-phase] .expand-btn{min-width:32px;width:32px;height:34px;padding:6px}
+ .expedition-ribbon .expedition-pill{letter-spacing:-.3px}
+ .discovery-caption{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){.reward-preview span{animation:none!important}}
