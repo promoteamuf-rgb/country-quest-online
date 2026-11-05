@@ -358,3 +358,348 @@ body[data-zone="trench"] .submersible{box-shadow:0 0 0 8px #dfe9ff1a,0 0 43px #c
  .tier-pill:nth-child(6){animation:none}
  .zone-unlocked{animation:none;opacity:1}
 }
+
+
+/* V3 — FULL-SCREEN DEEP-SEA MODE
+   The ocean is now the entire viewport. Quiz controls float on a readable
+   glass panel; the submarine and depth track remain visible to the right. */
+body[data-rare-phase]{
+  min-height:100svh;
+  background:#061b29;
+}
+body[data-rare-phase] .wrap{
+  max-width:none;
+  width:100%;
+  min-height:100svh;
+  padding:0;
+  position:relative;
+  isolation:isolate;
+}
+body[data-rare-phase] .intro,
+body[data-rare-phase] .bottom{
+  display:none!important;
+}
+body[data-rare-phase] .topbar{
+  position:relative;
+  z-index:40;
+  height:78px;
+  padding:10px clamp(18px,4vw,66px);
+  border-bottom:1px solid #a8f3e43b;
+  background:linear-gradient(90deg,#071d2de9,#0b3041d1);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+body[data-rare-phase] .workspace{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:0;
+  width:100%;
+  min-height:calc(100svh - 78px);
+  padding:clamp(18px,4vh,44px) clamp(18px,5.5vw,92px);
+  margin:0;
+  overflow:visible;
+  isolation:isolate;
+}
+/* Keep ocean visible behind the quiz and at the edge of the screen. */
+body[data-rare-phase] .sea{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100svh;
+  min-height:100svh;
+  border:0;
+  border-radius:0;
+  z-index:-1;
+  margin:0;
+  box-shadow:inset 0 0 100px #020d1999;
+  overflow:hidden;
+}
+body[data-rare-phase] .sea::before{
+  background-size:42px 42px;
+  opacity:.24;
+}
+body[data-rare-phase] .sea::after{
+  background:linear-gradient(90deg,#031523ce 0%,#04182795 25%,#081a293a 48%,transparent 75%),
+    radial-gradient(ellipse at 70% 1%,#9effe92b,transparent 48%);
+}
+/* All animated depth elements now use the full vertical viewport. */
+body[data-rare-phase] .sea .depth-track{
+  left:auto;
+  right:clamp(95px,17vw,285px);
+  top:130px;
+  bottom:148px;
+  height:auto;
+  width:3px;
+  z-index:8;
+}
+body[data-rare-phase] .sea .submersible{
+  left:50%;
+  width:clamp(65px,6vw,91px);
+  height:clamp(65px,6vw,91px);
+  box-shadow:0 0 0 9px #85ffe018,0 0 46px #a3f8d488,
+    inset -6px -8px 18px #081d37ac,0 10px 24px #001320bb;
+}
+body[data-rare-phase] .sea .sea-top{
+  top:100px;
+  left:auto;
+  right:clamp(23px,5vw,90px);
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+  gap:6px;
+  font-size:12px;
+  color:#dffbf0;
+}
+body[data-rare-phase] .sea .sea-top span:last-child{
+  color:#b8dfd5;
+  font-variant-numeric:tabular-nums;
+  font-size:11px;
+}
+body[data-rare-phase] .sea .depth-readout{
+  left:auto;
+  right:clamp(18px,5vw,90px);
+  bottom:30px;
+  width:230px;
+  padding:14px 19px;
+  border-radius:16px;
+  background:#031c2acc;
+  border:1px solid #a4f6e45a;
+  box-shadow:0 10px 30px #02111c9b,0 0 22px #8ee9d821;
+  backdrop-filter:blur(10px);
+}
+body[data-rare-phase] .sea .depth-readout strong{
+  font-size:34px;
+  letter-spacing:-1px;
+}
+body[data-rare-phase] .sea .depth-label{
+  right:clamp(12px,4vw,80px);
+  z-index:6;
+  font-size:12px;
+  letter-spacing:1px;
+}
+body[data-rare-phase] .sea .depth-label::before{width:22px}
+body[data-rare-phase] .sea .scene-zone{
+  top:auto;
+  bottom:135px;
+  right:clamp(15px,5vw,90px);
+  left:auto;
+  justify-content:flex-end;
+  text-align:right;
+  font-size:12px;
+  letter-spacing:2.5px;
+}
+body[data-rare-phase] .sea .zone-marker{
+  left:auto;
+  right:clamp(180px,28vw,440px);
+  max-width:140px;
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-align:right;
+}
+body[data-rare-phase] .sea .zone-marker::after{margin-left:auto}
+body[data-rare-phase] .sea .fish-school.one{width:190px;left:48%}
+body[data-rare-phase] .sea .fish-school.two{width:180px;left:65%}
+body[data-rare-phase] .sea .jelly.a{left:52%}
+body[data-rare-phase] .sea .jelly.b{right:24%}
+body[data-rare-phase] .sea .light-shaft{width:45%}
+body[data-rare-phase] .sea .light-shaft.shaft-a{left:23%}
+body[data-rare-phase] .sea .light-shaft.shaft-b{left:63%}
+/* Compact, interactive floating quiz panel in front of full-screen water. */
+body[data-rare-phase] .panel{
+  position:relative;
+  z-index:10;
+  flex:0 1 630px;
+  width:min(630px,100%);
+  min-width:0;
+  min-height:0;
+  max-width:none;
+  padding:clamp(23px,3vw,40px);
+  margin:0;
+  overflow:visible;
+  border-radius:24px;
+  border:1px solid #c2f7ec72;
+  background:linear-gradient(135deg,#071d2dee,#092938e8 65%,#0a2939db);
+  box-shadow:0 25px 90px #0009,0 0 35px #8af7d20b,inset 0 1px 0 #effff427;
+  backdrop-filter:blur(19px) saturate(1.25);
+  -webkit-backdrop-filter:blur(19px) saturate(1.25);
+}
+body[data-rare-phase] .panel:before{
+  border-radius:24px;
+}
+body[data-rare-phase] .panel .headline{
+  font-size:clamp(34px,3.6vw,52px);
+}
+body[data-rare-phase] .panel .question{
+  font-size:clamp(32px,3.3vw,49px);
+}
+body[data-rare-phase] .panel .meta{gap:12px}
+body[data-rare-phase] .panel .meta,
+body[data-rare-phase] .panel .feedback{
+  position:relative;z-index:1;
+}
+body[data-rare-phase] .panel .answerbox input{min-height:55px}
+body[data-rare-phase] .panel .answerbox .primary{white-space:nowrap}
+body[data-rare-phase] .panel .tier-guide{background:#061e2ab8}
+body[data-rare-phase="done"] .workspace{
+  align-items:flex-start;
+  min-height:100svh;
+}
+body[data-rare-phase="done"] .panel{
+  margin:10px 0 48px;
+  width:min(690px,100%);
+  flex-basis:690px;
+}
+body[data-rare-phase="done"] .panel .recap{
+  max-height:none;
+}
+/* Optional genuine browser fullscreen control. */
+.expand-btn{
+  appearance:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  flex-shrink:0;
+  min-height:37px;
+  padding:7px 12px;
+  border-radius:9px;
+  border:1px solid #b6f8de7a;
+  background:#0d3541c9;
+  color:#e6fbef;
+  font:850 12px/1 system-ui,sans-serif;
+  letter-spacing:.15px;
+  transition:background .2s,transform .2s;
+}
+.expand-btn svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none}
+.expand-btn:hover{background:#22576a;transform:translateY(-1px)}
+.expand-btn[aria-pressed="true"]{background:#d0f6e3;color:#0c3036}
+body[data-rare-phase] .lang{margin-left:0}
+@media(min-width:1000px) and (max-height:750px){
+ body[data-rare-phase] .workspace{align-items:flex-start;padding-top:28px}
+ body[data-rare-phase] .panel{padding:26px}
+ body[data-rare-phase] .sea .depth-track{top:100px;bottom:100px}
+ body[data-rare-phase] .sea .sea-top{top:80px}
+ body[data-rare-phase] .sea .depth-readout{bottom:13px}
+ body[data-rare-phase] .sea .scene-zone{bottom:112px}
+}
+/* Mobile: depth scene occupies the ENTIRE screen behind a bottom quiz card.
+   Keep the moving submarine visible in the upper open-water area. */
+@media(max-width:720px){
+ body[data-rare-phase] .topbar{
+   height:68px;
+   padding:9px 13px;
+   gap:8px;
+ }
+ body[data-rare-phase] .topbar .navlinks{gap:6px}
+ body[data-rare-phase] .topbar .navlinks a{font-size:10px}
+ body[data-rare-phase] .topbar .navlinks a:first-child{display:none}
+ body[data-rare-phase] .brand-mark{width:35px;height:35px;font-size:21px}
+ body[data-rare-phase] .brand-name{font-size:12px;letter-spacing:1px}
+ body[data-rare-phase] .brand-name small{font-size:6px}
+ body[data-rare-phase] .expand-btn{
+   min-width:36px;
+   width:36px;
+   height:36px;
+   padding:8px;
+ }
+ body[data-rare-phase] .expand-btn .expand-label{display:none}
+ body[data-rare-phase] .lang{padding:2px}
+ body[data-rare-phase] .lang button{padding:7px 5px;font-size:10px}
+ body[data-rare-phase] .workspace{
+   display:block;
+   min-height:calc(100svh - 68px);
+   padding:clamp(230px,39svh,385px) 12px 28px;
+ }
+ body[data-rare-phase] .sea{
+   width:100vw;
+   height:100svh;
+   min-height:100svh;
+   border-radius:0;
+ }
+ body[data-rare-phase] .sea .sea-top{
+   top:88px;
+   left:16px;
+   right:auto;
+   align-items:flex-start;
+   font-size:10px;
+ }
+ body[data-rare-phase] .sea .depth-track{
+   top:105px;
+   bottom:auto;
+   height:clamp(145px,24svh,285px);
+   right:26%;
+   left:auto;
+   width:2px;
+ }
+ body[data-rare-phase] .sea .submersible{
+   width:clamp(53px,15vw,70px);
+   height:clamp(53px,15vw,70px);
+ }
+ body[data-rare-phase] .sea .depth-readout{
+   top:154px;
+   left:16px;
+   right:auto;
+   bottom:auto;
+   width:auto;
+   min-width:116px;
+   padding:9px 12px;
+   text-align:left;
+   border-radius:11px;
+ }
+ body[data-rare-phase] .sea .depth-readout:before{display:none}
+ body[data-rare-phase] .sea .depth-readout strong{
+   font-size:26px;
+ }
+ body[data-rare-phase] .sea .scene-zone{
+   top:clamp(260px,33svh,340px);
+   left:15px;
+   right:auto;
+   bottom:auto;
+   font-size:9px;
+   letter-spacing:1px;
+ }
+ body[data-rare-phase] .sea .zone-marker,
+ body[data-rare-phase] .sea .depth-label{display:none}
+ body[data-rare-phase] .sea .jelly.a{left:54%;top:13%;transform:scale(.66)}
+ body[data-rare-phase] .sea .jelly.b{display:none}
+ body[data-rare-phase] .sea .fish-school.one{top:19%;left:38%;width:140px}
+ body[data-rare-phase] .sea .fish-school.two{top:33%;left:55%;width:110px}
+ body[data-rare-phase] .panel,
+ body[data-rare-phase="done"] .panel{
+   width:100%;
+   max-width:none;
+   min-height:0;
+   margin:0;
+   padding:22px;
+   border-radius:21px;
+   background:linear-gradient(135deg,#071e2ff0,#092938ec);
+   backdrop-filter:blur(16px);
+ }
+ body[data-rare-phase] .panel .headline{font-size:clamp(31px,8vw,42px)}
+ body[data-rare-phase] .panel .question{font-size:clamp(29px,7vw,38px)}
+ body[data-rare-phase="done"] .workspace{min-height:100svh}
+ body[data-rare-phase] .panel .answerbox{flex-wrap:wrap}
+ body[data-rare-phase] .panel .answerbox input{min-width:0}
+}
+@media(max-width:420px){
+ body[data-rare-phase] .workspace{
+  padding-top:clamp(220px,39svh,360px);
+  padding-left:9px;
+  padding-right:9px;
+ }
+ body[data-rare-phase] .panel{padding:20px 17px}
+ body[data-rare-phase] .topbar .brand-mark{display:none}
+ body[data-rare-phase] .topbar .navlinks a{font-size:10px}
+ body[data-rare-phase] .sea .depth-readout{top:140px;left:11px}
+ body[data-rare-phase] .sea .sea-top{left:11px;top:82px}
+ body[data-rare-phase] .sea .depth-track{top:103px;right:23%;height:clamp(138px,23svh,245px)}
+ body[data-rare-phase] .sea .scene-zone{left:11px}
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-rare-phase] .panel,
+ body[data-rare-phase] .sea{
+  scroll-behavior:auto!important;
+ }
+}
