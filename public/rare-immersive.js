@@ -80,7 +80,7 @@ function subTop(){
  const y=track.offsetTop+track.clientHeight*(lastDepth/MAX);
  return Math.max(34,Math.min(sea.clientHeight-24,y))+'px';
 }
-function burst(points){
+function burst(points,showScore=true){
  if(reduce)return;
  const target=$('burstLayer');if(!target)return;
  const y=subTop(),count=points>=80?22:points>=40?15:points>0?10:4;
@@ -93,7 +93,7 @@ function burst(points){
   const dx=(Math.cos(angle)*dist).toFixed(1),dy=(Math.sin(angle)*dist).toFixed(1),size=4+(i*11)%11;
   return '<span class="splash-bit" style="--by:'+y+';--dx:'+dx+'px;--dy:'+dy+'px;--sz:'+size+'px;--particle-color:'+color+'"></span>';
  }).join('');
- const toast=points>0?'<span class="score-toast" style="--by:'+y+'">+'+(points*10)+' m</span>':'';
+ const toast=points>0&&showScore?'<span class="score-toast" style="--by:'+y+'">+'+(points*10)+' m</span>':'';
  layer.innerHTML=bits+toast+'<span class="sea-impact" style="--by:'+y+'"></span>';
  target.appendChild(layer);setTimeout(()=>layer.remove(),1800);
 }
@@ -126,7 +126,7 @@ function onScreen(screen,round,points){
  }
  if(screen==='reveal'){
   const id=round+':'+lastDepth;if(lastBurst!==id){lastBurst=id;burst(points)}
- }else if(screen==='done'&&lastBurst!=='done'){lastBurst='done';burst(100)}
+ }else if(screen==='done'&&lastBurst!=='done'){lastBurst='done';burst(100,false)}
 }
 function onLanguage(){translateZone();displayDepth(lastDepth)}
 window.CQDiveFX={setDepth,setTimer,onScreen,reject,reset,onLanguage};
