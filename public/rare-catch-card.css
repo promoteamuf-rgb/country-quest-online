@@ -1,0 +1,48 @@
+/* Rare Catch card — yacht fishing adventure, separate from Rare Depths. */
+.photo-mode-grid > .mode-catch{grid-column:span 12!important}
+.photo-mode-grid .mode-catch{
+ position:relative!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important;
+ min-height:275px!important;overflow:hidden!important;
+ border:1px solid #a5faffb8!important;border-radius:17px!important;
+ background:
+ radial-gradient(ellipse at 72% 15%,#ffefa1a1,transparent 19%),
+ linear-gradient(180deg,#1388cf 0 25%,#04aaca 26%,#086c97 53%,#06274a 100%)!important;
+ box-shadow:0 18px 48px #021e39b7!important;transition:transform .23s ease,box-shadow .23s ease!important;
+ color:#fff!important;text-decoration:none!important;
+}
+.photo-mode-grid .mode-catch:hover{transform:translateY(-6px)!important;box-shadow:0 23px 60px #02182fcf,0 0 34px #43ecfc45!important}
+.photo-mode-grid .mode-catch:before{
+ content:"";position:absolute;z-index:0;inset:0;
+ background:repeating-linear-gradient(100deg,transparent 0 60px,#c0ffef0c 72px,transparent 106px);
+ transform-origin:top right;animation:catch-rays 12s ease-in-out infinite alternate;pointer-events:none
+}
+.photo-mode-grid .mode-catch:after{
+ content:"🎣 🐟 🐠 🦈";position:absolute;right:7%;top:22%;z-index:1;
+ font-size:clamp(45px,5vw,84px)!important;letter-spacing:14px;
+ white-space:nowrap;text-shadow:0 12px 21px #001c3cc9;
+ filter:drop-shadow(0 7px 12px #001525);
+ animation:catch-sea-float 7s ease-in-out infinite alternate;pointer-events:none;
+}
+.photo-mode-grid .mode-catch .photo-card-top,
+.photo-mode-grid .mode-catch .photo-card-bottom{position:relative;z-index:3}
+.photo-mode-grid .mode-catch .photo-card-bottom{max-width:690px}
+.photo-mode-grid .mode-catch .mode-name,
+.photo-mode-grid .mode-catch strong{font:900 clamp(34px,4.8vw,53px)/1 "Barlow Condensed",Impact,sans-serif!important;letter-spacing:.4px}
+.photo-mode-grid .mode-catch .mode-desc{font-size:16px!important;max-width:510px!important;line-height:1.45!important}
+.photo-mode-grid .mode-catch .mode-icon{display:inline-grid;place-items:center;background:#0b5776bc;border:1px solid #a6fcfa!important;color:#e6fff5!important}
+.photo-mode-grid .mode-catch .mode-action{font-size:13px!important;color:#ffe3a5!important;font-weight:900!important}
+.photo-mode-grid .mode-catch .card-index{background:#082b42c4;border:1px solid #a9f7f08a;color:#d6fff4;border-radius:5px;padding:6px 10px}
+@keyframes catch-rays{to{transform:rotate(7deg) scale(1.06)}}
+@keyframes catch-sea-float{to{transform:translateY(-15px) rotate(-3deg)}}
+@media(max-width:690px){
+ .photo-mode-grid>.mode-catch{grid-column:span 2!important}
+ .photo-mode-grid .mode-catch{min-height:258px!important}
+ .photo-mode-grid .mode-catch:after{right:-2%;top:12%;font-size:47px!important;letter-spacing:4px}
+ .photo-mode-grid .mode-catch .mode-name,.photo-mode-grid .mode-catch strong{font-size:36px!important}
+}
+@media(max-width:420px){
+ .photo-mode-grid>.mode-catch{grid-column:span 1!important}
+ .photo-mode-grid .mode-catch{min-height:299px!important}
+ .photo-mode-grid .mode-catch:after{right:-5%;top:8%;font-size:48px!important}
+}
+@media(prefers-reduced-motion:reduce){.photo-mode-grid .mode-catch:before,.photo-mode-grid .mode-catch:after{animation:none!important}}
