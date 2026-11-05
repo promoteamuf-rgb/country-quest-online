@@ -21,9 +21,46 @@ const years=[["The Berlin Wall fell",1989],["The first Moon landing",1969],["The
 const geographicOutlines=require('./public/outlines.js');
 const rooms=new Map(),rand=n=>crypto.randomInt(n),shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){let j=rand(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
 const norm=s=>String(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
-function makeQ(type){if(type==='year'){let [prompt,answer]=years[rand(years.length)];let opts=new Set([answer]);for(let d of shuffle([-40,-30,-20,-15,-10,-5,5,10,15,20,30,40])){if(opts.size>=4)break;opts.add(answer+d)}return{type,prompt,answer,options:shuffle([...opts])}}let d=data[rand(data.length)];if(type==='outline')return{type,answer:d.name,shape:geographicOutlines[d.name]?.path||d.shape,viewBox:geographicOutlines[d.name]?.viewBox||'0 0 260 190',options:shuffle([d.name,...shuffle(data.filter(x=>x.name!==d.name)).slice(0,3).map(x=>x.name)])};return{type,answer:d.name,clues:d.clues}}
-function state(r,p){let finished=r.started&&r.round===r.qs.length,q=r.started&&!finished?r.qs[r.round]:null,reveal=q&&r.players.every(x=>x.done);return{code:r.id,started:r.started,finished,round:r.round,total:6,you:r.players.indexOf(p),players:r.players.map(x=>({name:x.name,score:x.score,done:x.done,ready:x.ready})),question:!q?null:q.type==='clues'?{type:q.type,clue:p.clue,clues:q.clues.slice(0,p.clue+1)}:q.type==='outline'?{type:q.type,shape:q.shape,viewBox:q.viewBox,options:q.options}:{type:q.type,prompt:q.prompt,options:q.options},yourDone:p.done,yourAnswer:p.answer,correctAnswer:reveal?q.answer:null}}
-function api(route,b){if(route==='/api/create'){let id;do{id=crypto.randomBytes(4).toString('hex').slice(0,6).toUpperCase()}while(rooms.has(id));let token=crypto.randomBytes(24).toString('hex'),p={name:String(b.name||'Player').trim().slice(0,24),token,score:0,done:false,ready:false,clue:0,answer:null};let r={id,players:[p],started:false,round:0,qs:[],last:Date.now()};rooms.set(id,r);return{token,...state(r,p)}}if(route==='/api/join'){let r=rooms.get(String(b.code||'').toUpperCase());if(!r)throw Error('Room not found');if(r.players.length>=2)throw Error('Room is full');let token=crypto.randomBytes(24).toString('hex'),p={name:String(b.name||'Player').trim().slice(0,24),token,score:0,done:false,ready:false,clue:0,answer:null};r.players.push(p);r.started=true;r.qs=['clues','outline','year','clues','outline','year'].map(makeQ);return{token,...state(r,p)}}
+const competitiveQuestions=require('./competitive-questions.json');
+const allClueQuestions=[...data,...competitiveQuestions.clues.filter(c=>!data.some(d=>d.name===c.name))];
+const competitiveTiers={"easy":{"clues":["Sweden","Italy","Japan","Brazil","Australia","France","Germany","Spain","Mexico","Egypt","Canada","India","United States"],"outlines":["Italy","Japan","Brazil","Australia","France","Germany","Spain","Sweden","United Kingdom","United States of America","India","Egypt","Mexico"]},"medium":{"clues":["Norway","Greece","United Kingdom","Mexico","Canada","India","Argentina","Iceland","Morocco","Portugal","Finland","Turkey","South Africa","Thailand","Kenya"],"outlines":["Norway","Greece","United Kingdom","Canada","Portugal","Argentina","Turkey","Finland","South Africa","Morocco","Thailand","Peru","China","Poland","Ukraine","Iceland"]},"hard":{"clues":["Nepal","Vietnam","Peru","Indonesia","Colombia","South Korea","Singapore","Chile","Ireland","New Zealand","Kenya","Morocco","Finland","Portugal","South Africa"],"outlines":["Nepal","Vietnam","Chile","Peru","Indonesia","Colombia","Croatia","Romania","Mongolia","Madagascar","Kenya","Iceland","Ireland","Saudi Arabia","Pakistan","Ukraine","Morocco"]}};
+const availableDifficulties=['easy','medium','hard'];
+const matchDifficulty=d=>availableDifficulties.includes(d)?d:'medium';
+function uniqueQuestion(items,seen,key){
+  const fresh=items.filter(x=>!seen.has(String(key(x))));
+  const pool=fresh.length?fresh:items;
+  if(!pool.length)throw Error('Not enough questions for this difficulty');
+  const selected=pool[rand(pool.length)];
+  seen.add(String(key(selected)));
+  return selected;
+}
+function makeQ(type,difficulty,seen){
+ const d=matchDifficulty(difficulty),tier=competitiveTiers[d];
+ if(type==='year'){
+   const pool=competitiveQuestions.years.filter(q=>q.difficulty===d);
+   const picked=uniqueQuestion(pool,seen,x=>x.prompt);
+   const answer=picked.answer, options=new Set([answer]);
+   const offsets=d==='easy'?[-20,-15,-10,-5,5,10,15,20]:d==='medium'?[-35,-25,-15,-8,8,15,25,35]:[-75,-50,-30,-15,15,30,50,75];
+   for(const delta of shuffle(offsets)){if(options.size===4)break;options.add(answer+delta)}
+   return{type,prompt:picked.prompt,answer,options:shuffle([...options])};
+ }
+ if(type==='outline'){
+   const country=uniqueQuestion(tier.outlines,seen,x=>x);
+   const shape=geographicOutlines[country];
+   if(!shape)throw Error('Missing geographic border data');
+   const others=shuffle(tier.outlines.filter(x=>x!==country)).slice(0,3);
+   return{type,answer:country,shape:shape.path,viewBox:shape.viewBox,options:shuffle([country,...others])};
+ }
+ const pool=allClueQuestions.filter(c=>tier.clues.includes(c.name));
+ const item=uniqueQuestion(pool,seen,x=>x.name);
+ return{type,answer:item.name,clues:item.clues};
+}
+function makeMatchQuestions(difficulty){
+ const seen={clues:new Set(),outline:new Set(),year:new Set()};
+ return['clues','outline','year','clues','outline','year'].map(type=>makeQ(type,difficulty,seen[type]));
+}
+function state(r,p){let finished=r.started&&r.round===r.qs.length,q=r.started&&!finished?r.qs[r.round]:null,reveal=q&&r.players.every(x=>x.done);return{code:r.id,difficulty:r.difficulty||'medium',started:r.started,finished,round:r.round,total:6,you:r.players.indexOf(p),players:r.players.map(x=>({name:x.name,score:x.score,done:x.done,ready:x.ready})),question:!q?null:q.type==='clues'?{type:q.type,clue:p.clue,clues:q.clues.slice(0,p.clue+1)}:q.type==='outline'?{type:q.type,shape:q.shape,viewBox:q.viewBox,options:q.options}:{type:q.type,prompt:q.prompt,options:q.options},yourDone:p.done,yourAnswer:p.answer,correctAnswer:reveal?q.answer:null}}
+function api(route,b){if(route==='/api/create'){let id;do{id=crypto.randomBytes(4).toString('hex').slice(0,6).toUpperCase()}while(rooms.has(id));let token=crypto.randomBytes(24).toString('hex'),p={name:String(b.name||'Player').trim().slice(0,24),token,score:0,done:false,ready:false,clue:0,answer:null};let r={id,players:[p],difficulty:matchDifficulty(b.difficulty),started:false,round:0,qs:[],last:Date.now()};rooms.set(id,r);return{token,...state(r,p)}}if(route==='/api/join'){let r=rooms.get(String(b.code||'').toUpperCase());if(!r)throw Error('Room not found');if(r.players.length>=2)throw Error('Room is full');let token=crypto.randomBytes(24).toString('hex'),p={name:String(b.name||'Player').trim().slice(0,24),token,score:0,done:false,ready:false,clue:0,answer:null};r.players.push(p);r.started=true;r.qs=makeMatchQuestions(r.difficulty);return{token,...state(r,p)}}
 let r=rooms.get(String(b.code||'').toUpperCase());if(!r)throw Error('Room not found');let p=r.players.find(x=>x.token===b.token);if(!p)throw Error('Invalid player session');r.last=Date.now();if(route==='/api/state')return state(r,p);if(!r.started||r.round>=6)throw Error('No active round');let q=r.qs[r.round];if(route==='/api/clue'){if(q.type!=='clues'||p.done)throw Error('Clues unavailable');p.clue=Math.min(4,p.clue+1)}else if(route==='/api/answer'){if(p.done)throw Error('Already answered');let answer=String(b.answer||'').slice(0,100);if(q.type!=='clues'&&!q.options.some(x=>String(x)===answer))throw Error('Choose an option');if(!answer.trim())throw Error('Enter an answer');p.answer=answer;p.done=true;if(norm(answer)===norm(q.answer))p.score+=q.type==='clues'?[100,80,60,40,20][p.clue]:100}else if(route==='/api/ready'){if(!r.players.every(x=>x.done))throw Error('Wait for both answers');p.ready=true;if(r.players.every(x=>x.ready)){r.round++;r.players.forEach(x=>Object.assign(x,{done:false,ready:false,clue:0,answer:null}))}}else throw Error('Unknown action');return state(r,p)}
 function respond(res,status,data){res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(data))}
 const root=path.join(__dirname,'public');
