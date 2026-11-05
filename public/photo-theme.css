@@ -1,0 +1,87 @@
+/* COUNTRY QUEST — photographic travel design. Images: Unsplash. */
+:root{
+--hero-photo:url('https://images.unsplash.com/photo-1627110466069-5bd673d78f6f?auto=format&fit=crop&w=1800&q=82');
+--clues-photo:url('https://images.unsplash.com/photo-1751483876820-7e944717b30f?auto=format&fit=crop&w=1100&q=82');
+--outlines-photo:url('https://images.unsplash.com/photo-1673540229523-ae909da944e0?auto=format&fit=crop&w=1100&q=82');
+--years-photo:url('https://images.unsplash.com/photo-1636804907108-fa8d2e0f7a90?auto=format&fit=crop&w=1100&q=82');
+--online-photo:url('https://images.unsplash.com/photo-1653243417575-45c78fe7c846?auto=format&fit=crop&w=1100&q=82');
+}
+body{background:radial-gradient(ellipse 700px 480px at 85% 0%,#193746 0,transparent 75%),#071320!important;color:#f7faf9}
+.map-ambient{background:url('https://images.unsplash.com/photo-1628686066166-d2ee65d07bfd?auto=format&fit=crop&w=1300&q=75') center 60%/cover no-repeat!important;opacity:.035!important;filter:blur(13px)}
+/* Large cinematic real-photo hero */
+.world-hero,.hero.world-hero{
+position:relative!important;isolation:isolate!important;overflow:hidden!important;min-height:440px!important;
+display:flex!important;align-items:flex-start!important;flex-direction:column!important;justify-content:center!important;
+margin:26px 0 28px!important;padding:48px clamp(25px,5vw,60px)!important;
+border:1px solid #e8fff535!important;border-radius:28px!important;
+background-image:linear-gradient(94deg,#071722f2 0%,#0a2236b8 42%,#0b273747 100%),var(--hero-photo)!important;
+background-repeat:no-repeat!important;background-size:cover!important;background-position:center,center 52%!important;
+box-shadow:0 22px 60px #0008!important;
+}
+.world-hero:before,.hero.world-hero:before{display:none!important}
+.world-hero:after,.hero.world-hero:after{
+content:'THE WORLD IS YOUR PLAYGROUND'!important;
+position:absolute!important;top:auto!important;left:auto!important;bottom:19px!important;right:24px!important;
+width:auto!important;height:auto!important;border:0!important;box-shadow:none!important;border-radius:0!important;
+background:none!important;filter:none!important;transform:none!important;display:block!important;
+font:800 10px/1 system-ui,sans-serif!important;letter-spacing:2px!important;color:#e2f6edbb!important;
+}
+.world-hero .earth-visual,.world-hero .route-note{display:none!important}
+.world-hero h1{z-index:1!important;max-width:740px!important;font-size:clamp(47px,7vw,77px)!important;line-height:1.06!important;letter-spacing:-3.5px!important;margin:15px 0 18px!important;color:#fff!important;text-shadow:0 4px 24px #0009}
+.world-hero h1 em{background:linear-gradient(90deg,#e6fff0,#a9f0d2)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important}
+.world-hero .world-eyebrow{z-index:1!important;border:1px solid #e2fff06b!important;background:#071b2bc4!important;color:#dffff0!important;backdrop-filter:blur(8px)}
+.world-hero p,.world-hero .hero-copy{z-index:1!important;position:relative;color:#eef6f5!important;font-size:17px!important;line-height:1.6!important;max-width:400px!important;text-shadow:0 2px 10px #000a}
+.world-tags{z-index:1!important;position:relative!important;margin-top:16px!important}
+.world-tags span{background:#0c2538ca!important;color:#ebfff5!important;border-color:#d0fff16b!important;backdrop-filter:blur(8px)}
+/* Photo cards: each mode is a different real destination or travel scene */
+.mode-grid,.modes{gap:18px!important}
+.mode-card,.mode{
+position:relative!important;isolation:isolate!important;min-height:272px!important;
+padding:27px!important;overflow:hidden!important;border-radius:23px!important;
+background-size:cover!important;background-repeat:no-repeat!important;background-position:center!important;
+border:1px solid #e9fff34a!important;color:#fff!important;
+box-shadow:0 13px 38px #0007!important;transition:transform .2s ease,box-shadow .2s ease!important;
+display:flex!important;align-items:flex-start!important;flex-direction:column!important;justify-content:space-between!important;
+}
+.mode-card:hover,.mode:hover{transform:translateY(-5px)!important;box-shadow:0 24px 50px #000a!important}
+.mode-card:after,.mode:before{display:none!important}
+.mode-card:nth-child(1){background-image:linear-gradient(180deg,#0818221a 5%,#04141fe6 100%),var(--clues-photo)!important}
+.mode-card:nth-child(2){background-image:linear-gradient(180deg,#061e2e16 5%,#06162be9 100%),var(--online-photo)!important}
+.modes .mode:nth-child(1){background-image:linear-gradient(180deg,#07192320 5%,#05131de8 100%),var(--clues-photo)!important}
+.modes .mode:nth-child(2){background-image:linear-gradient(180deg,#071b2b20 5%,#081725ee 100%),var(--outlines-photo)!important}
+.modes .mode:nth-child(3){background-image:linear-gradient(180deg,#16132619 5%,#130f1deb 100%),var(--years-photo)!important}
+.modes .mode:nth-child(4){background-image:linear-gradient(180deg,#07182b20 5%,#071829ec 100%),var(--online-photo)!important}
+.mode-card .mode-icon,.mode .emoji{
+display:grid!important;place-items:center!important;width:54px!important;height:54px!important;
+border-radius:16px!important;font-size:28px!important;margin:0 0 23px!important;
+background:#0b2535ab!important;border:1px solid #f0fff265!important;
+backdrop-filter:blur(7px);box-shadow:0 7px 18px #0007!important;
+}
+.mode-card .mode-name,.mode strong{font-size:27px!important;color:#fff!important;font-weight:900!important;line-height:1.12!important;letter-spacing:-.7px!important;text-shadow:0 2px 12px #000c!important}
+.mode-card .mode-desc,.mode span:not(.go){font-weight:650!important;color:#e9f1f1!important;line-height:1.5!important;text-shadow:0 2px 10px #000b!important}
+.mode-card .mode-action{background:#e5fff5!important;border-radius:999px!important;padding:10px 15px!important;color:#12323b!important;font-size:13px!important;font-weight:900!important;margin-top:20px!important;text-shadow:none!important}
+.mode-card:nth-child(2) .mode-action{background:#e0ebff!important;color:#12233e!important}
+.mode .go{color:#e9fff6!important;text-shadow:0 2px 10px #000}
+.panel{background:linear-gradient(140deg,#152a3cfb,#0d1a2cfc)!important;border:1px solid #7edac03d!important;box-shadow:0 20px 52px #0005!important;border-radius:22px!important}
+.clue{background:linear-gradient(135deg,#1a3747,#16283b)!important}
+.shape,.shapeholder{background:radial-gradient(ellipse at 50% 45%,#21485a,#0b1d30 80%)!important}
+.shape:before,.shapeholder:before{opacity:.35}
+.photo-credit{color:#b8d6cf!important;text-decoration:underline;text-underline-offset:3px}
+.photo-credit:hover{color:white!important}
+@media(max-width:750px){
+.world-hero,.hero.world-hero{min-height:405px!important;padding:38px 32px!important}
+.mode-card,.mode{min-height:235px!important}
+}
+@media(max-width:610px){
+.world-hero,.hero.world-hero{min-height:370px!important;padding:30px 22px 44px!important;margin:16px 0 23px!important;border-radius:21px!important;background-position:center,62% center!important}
+.world-hero h1{font-size:clamp(43px,10vw,59px)!important;letter-spacing:-2.5px!important}
+.world-hero:after,.hero.world-hero:after{right:17px!important;bottom:14px!important;font-size:8px!important}
+.world-hero p,.world-hero .hero-copy{font-size:15px!important}
+.world-tags span{font-size:9px!important}
+.mode-grid,.modes{gap:12px!important}
+.mode-card,.mode{min-height:222px!important;padding:23px!important}
+.mode-card .mode-name,.mode strong{font-size:25px!important}
+.mode-card .mode-desc,.mode span:not(.go){font-size:13px!important}
+.mode-card .mode-icon,.mode .emoji{margin-bottom:15px!important}
+}
+@media(prefers-reduced-motion:reduce){.mode-card,.mode{transition:none!important}}
