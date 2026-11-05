@@ -26,7 +26,7 @@ accepted:'Correct answer!',invalid:'Time is up!',timeoutInfo:'No recognized answ
 rarity:'CURATED RARITY',added:'MORE METRES',resultNote:'Unusual correct answers earn more points. These tiers are editorial estimates, not live popularity statistics.',
 also:'Some other rare accepted answers:',next:'Next question →',finish:'See your voyage →',
 complete:'VOYAGE COMPLETE',doneTitle:'How deep did you go?',doneLead:'Seven stops on your geography expedition. Here is where your answers took you.',
-depth:'DEPTH',score:'POINTS',best:'BEST DEPTH',roundList:'YOUR SEVEN ANSWERS',
+depth:'DEPTH',score:'POINTS',best:'BEST DEPTH',roundList:'YOUR SEVEN ANSWERS',chart:'DEPTH EARNED IN EACH ROUND',
 noAnswer:'No accepted answer',playAgain:'Dive again ↻',copy:'Copy my result',copied:'Result copied!',
 clipboard:'Copy this result:',meters:'m',points:'pts',
 rank10:'Common',rank25:'Familiar',rank40:'Less obvious',rank60:'Uncommon',rank80:'Rare find',rank100:'Deep discovery'
@@ -48,7 +48,7 @@ accepted:'Rätt svar!',invalid:'Tiden är slut!',timeoutInfo:'Inget godkänt sva
 rarity:'UPPSKATTAD SÄLLSYNTHET',added:'FLER METER',resultNote:'Ovanligare korrekta svar ger mer poäng. Nivåerna är uppskattningar, inte statistik över andra spelare.',
 also:'Andra ovanliga rätta svar:',next:'Nästa fråga →',finish:'Se ditt resultat →',
 complete:'DYKET ÄR KLART',doneTitle:'Hur djupt kom du?',doneLead:'Sju stationer på din geografiresa. Här ser du hur långt dina svar tog dig.',
-depth:'DJUP',score:'POÄNG',best:'DJUPREKORD',roundList:'DINA SJU SVAR',
+depth:'DJUP',score:'POÄNG',best:'DJUPREKORD',roundList:'DINA SJU SVAR',chart:'DJUP PER RUNDA',
 noAnswer:'Inget godkänt svar',playAgain:'Dyk igen ↻',copy:'Kopiera resultat',copied:'Resultatet kopierat!',
 clipboard:'Kopiera detta resultat:',meters:'m',points:'p',
 rank10:'Vanligt',rank25:'Välkänt',rank40:'Lite ovanligt',rank60:'Ovanligt',rank80:'Sällsynt',rank100:'Djupfynd'
@@ -108,9 +108,11 @@ function updateStatic(){
   $('seaTitle').textContent=t.seaTitle;$('depthTitle').textContent=t.totalDepth;
   $('footerText').textContent=t.footer;$('backFooter').textContent=t.back;
   updateDepth();
+  window.CQDiveFX?.onLanguage();
 }
 function updateDepth(){
   const depth=Math.min(MAX_DEPTH,points*10),percent=depth/MAX_DEPTH*100;
+  if(window.CQDiveFX){window.CQDiveFX.setDepth(depth);return}
   $('depthFill').style.height=percent+'%';
   $('submersible').style.top=percent+'%';
   $('depthValue').textContent=fmt(depth)+' m';
@@ -118,7 +120,7 @@ function updateDepth(){
 }
 function start(){
   if(BANK.length<QUESTION_COUNT){stage.textContent='Question bank unavailable.';return}
-  questions=selectQuestions();index=0;points=0;results=[];currentResult=null;draft='';notice='';phase='playing';updateDepth();openRound();
+  questions=selectQuestions();index=0;points=0;results=[];currentResult=null;draft='';notice='';phase='playing';window.CQDiveFX?.reset();updateDepth();openRound();
 }
 function openRound(){
   clearInterval(timer);timer=null;phase='playing';draft='';notice='';
@@ -132,6 +134,7 @@ function tick(){
  const seconds=Math.max(0,Math.ceil((deadline-Date.now())/1000));
  const el=$('clock');
  if(el){el.textContent=String(seconds).padStart(2,'0')+' s';el.classList.toggle('warn',seconds<=7)}
+ window.CQDiveFX?.setTimer(Math.max(0,deadline-Date.now()),SECONDS*1000);
  if(seconds<=0){finishAnswer(null,true)}
 }
 function findAnswer(question,input){
@@ -145,7 +148,7 @@ function submitAnswer(value){
  const raw=String(value||'').trim();
  if(!raw){notice=t.empty;displayNotice();return}
  const answer=findAnswer(qNow(),raw);
- if(!answer){notice=t.unknown;displayNotice();return}
+ if(!answer){notice=t.unknown;displayNotice();window.CQDiveFX?.reject();return}
  finishAnswer(answer,false);
 }
 function displayNotice(){
@@ -190,19 +193,20 @@ function render(){
     +'<div><b>03</b><strong>'+escapeHTML(t.step3)+'</strong><div class="note">'+escapeHTML(t.step3Desc)+'</div></div></div>'
     +'<button class="primary" id="startGame" type="button">'+escapeHTML(t.begin)+'</button>'
     +'<p class="disclaimer">'+escapeHTML(t.editorNote)+'</p>';
+  window.CQDiveFX?.onScreen('intro',0,0);
   return;
  }
  if(phase==='playing'){
   const q=qNow();
   stage.innerHTML=chips()
-    +'<div class="meta"><span class="prompt-category">'+escapeHTML(t.questionMeta)+'</span><span class="clock" id="clock" aria-label="'+escapeHTML(t.time)+'">25 s</span></div>'
+    +'<div class="meta"><span class="prompt-category">'+escapeHTML(t.questionMeta)+'</span><div class="timer-widget" id="timerGauge"><svg class="timer-svg" viewBox="0 0 40 40" aria-hidden="true"><circle class="track" cx="20" cy="20" r="15"></circle><circle class="remaining" id="timerArc" cx="20" cy="20" r="15"></circle></svg><span class="clock" id="clock" aria-label="'+escapeHTML(t.time)+'">25 s</span></div></div>'
     +'<h2 class="question">'+escapeHTML(lang==='sv'?q.sv:q.en)+'</h2>'
     +'<form id="answerForm" autocomplete="off" novalidate><div class="answerbox">'
     +'<input id="answerInput" type="text" inputmode="text" maxlength="85" autocapitalize="words" spellcheck="false" autocomplete="off" placeholder="'+escapeHTML(t.placeholder)+'" aria-label="'+escapeHTML(t.placeholder)+'" required>'
     +'<button class="primary" type="submit">'+escapeHTML(t.submit)+'</button></div></form>'
     +'<div class="notice" id="notice" role="status">'+escapeHTML(notice)+'</div>'
     +'<p class="note">'+escapeHTML(t.hint)+'</p>';
-  $('answerInput').value=draft;tick();return;
+  $('answerInput').value=draft;tick();window.CQDiveFX?.onScreen('playing',index,0);return;
  }
  if(phase==='reveal'){
   const r=currentResult,answer=r.answer,q=qNow(),rank=answer?rarity(answer.points):'—';
@@ -215,6 +219,7 @@ function render(){
    +(rareSuggestions?'<p class="note">'+escapeHTML(t.also)+' '+rareSuggestions+'</p>':'')
    +'<p class="disclaimer">'+escapeHTML(t.resultNote)+'</p>'
    +'<button class="primary" type="button" id="nextRound">'+escapeHTML(index===QUESTION_COUNT-1?t.finish:t.next)+'</button>';
+  window.CQDiveFX?.onScreen('reveal',index,r.earned);
   return;
  }
  if(phase==='done'){
@@ -224,10 +229,13 @@ function render(){
    +'<div class="hud"><div class="stat"><small>'+escapeHTML(t.depth)+'</small><strong>'+fmt(points*10)+' m</strong></div>'
    +'<div class="stat"><small>'+escapeHTML(t.score)+'</small><strong>'+points+' / 700</strong></div>'
    +'<div class="stat"><small>'+escapeHTML(t.best)+'</small><strong>'+fmt(best)+' m</strong></div></div>'
+   +'<h3 class="micro" style="margin-top:26px">'+escapeHTML(t.chart)+'</h3>'
+   +'<div class="voyage-chart" role="img" aria-label="'+escapeHTML(t.chart)+'">'+results.map((r,i)=>'<div class="voyage-column"><div class="voyage-bar-area"><span class="voyage-bar '+(r.earned?'':'empty')+'" style="--height:'+Math.max(3,r.earned)+'%;--delay:'+(i*.06)+'s"></span></div><strong>'+r.earned+'</strong><small>'+(i+1)+' / 7</small></div>').join('')+'</div>'
    +'<h3 class="micro" style="margin-top:26px">'+escapeHTML(t.roundList)+'</h3>'
    +'<div class="recap">'+results.map((r,i)=>'<div><span>'+(i+1)+'. '+escapeHTML(lang==='sv'?questions[i].sv:questions[i].en)+'</span><strong>'+escapeHTML(r.answer?label(r.answer):t.noAnswer)+' · '+r.earned+' '+escapeHTML(t.points)+'</strong></div>').join('')+'</div>'
    +'<div style="display:flex;gap:9px;flex-wrap:wrap"><button class="primary" type="button" id="startGame">'+escapeHTML(t.playAgain)+'</button><button class="secondary" type="button" id="copyResult">'+escapeHTML(t.copy)+'</button></div>'
    +'<p class="disclaimer">'+escapeHTML(t.editorNote)+'</p>';
+   window.CQDiveFX?.onScreen('done',index,points);
  }
 }
 function shareText(){
