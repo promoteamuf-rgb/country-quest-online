@@ -115,13 +115,17 @@ a{color:inherit}
 @media(max-width:390px){.navlinks a:first-child{display:none}.intro h1{font-size:42px}.answerbox{flex-direction:column}.how{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
-<link rel="stylesheet" href="/rare-immersive.css?v=2">
+<link rel="stylesheet" href="/rare-immersive.css?v=3">
 </head>
 <body>
 <div class="wrap">
 <header class="topbar">
   <a class="brand" href="/" aria-label="Country Quest home"><span class="brand-mark" aria-hidden="true">✳</span><span class="brand-name">COUNTRY<span>QUEST</span><small>RARE DEPTHS</small></span></a>
   <nav class="navlinks" aria-label="Game navigation"><a href="/" id="navAll">All games</a><a href="/solo.html" id="navSolo">Solo games</a></nav>
+  <button class="expand-btn" type="button" id="fullscreenBtn" aria-pressed="false" aria-label="Full screen" title="Full screen">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 3H4a1 1 0 0 0-1 1v4M16 3h4a1 1 0 0 1 1 1v4M3 16v4a1 1 0 0 0 1 1h4M21 16v4a1 1 0 0 1-1 1h-4"/></svg>
+    <span class="expand-label">Full screen</span>
+  </button>
   <div class="lang" role="group" aria-label="Language / Språk"><button type="button" data-lang="sv" aria-pressed="false">🇸🇪 SV</button><button type="button" data-lang="en" aria-pressed="true">🇬🇧 EN</button></div>
 </header>
 <section class="intro" aria-label="Rare Depths">
