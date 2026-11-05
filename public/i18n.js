@@ -127,6 +127,7 @@ const dict={
   'You':'Du','(you)':'(du)','(You)':'(du)',
   'Waiting for your friend to finish...':'Väntar på att din vän ska bli klar …'
 };
+Object.assign(dict,{"Choose match difficulty":"Välj svårighetsgrad","Famous countries & events":"Kända länder och händelser","Balanced world questions":"Lagom svåra frågor om världen","Trickier borders & history":"Svårare landsgränser och historia","Both players will play this level.":"Båda spelarna spelar på den här nivån.","Difficulty:":"Svårighetsgrad:","Start match →":"Starta matchen →","⚔️ COMPETITIVE":"⚔️ TÄVLING"});
 let language='en';
 try{
   const stored=localStorage.getItem(KEY);
