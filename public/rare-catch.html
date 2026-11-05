@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#073350"><meta name="description" content="Rare Catch — a yacht fishing geography quiz. Answer rarer, catch bigger fish!">
+<title>Rare Catch · Country Quest</title>
+<link rel="stylesheet" href="/rare-catch.css?v=1">
+</head>
+<body class="catch-page" data-phase="intro">
+<div class="catch-world" aria-hidden="true">
+ <div class="sky"><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div><div class="sun"></div><div class="island island-one"></div><div class="island island-two"></div></div>
+ <div class="yacht-stage">
+  <svg class="yacht-svg" viewBox="0 0 600 245" role="img" aria-label="White yacht and fishing rod" xmlns="http://www.w3.org/2000/svg">
+   <defs><linearGradient id="hull" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".52" stop-color="#dbeef5"/><stop offset="1" stop-color="#789cad"/></linearGradient></defs>
+   <path d="M54 164H535L496 223H127Q91 222 54 164Z" fill="url(#hull)" stroke="#bcefff" stroke-width="3"/>
+   <path d="M92 178H527L495 214H130Z" fill="#e9fbff"/><path d="M161 152V74H415L457 151Z" fill="#eefaff" stroke="#b7e9fa" stroke-width="5"/>
+   <path d="M186 82H401L427 144H186Z" fill="#164c6f"/><path d="M196 91H242V136H196ZM255 91H302V136H255ZM318 91H392L412 136H318Z" fill="#58bada" opacity=".65"/>
+   <path d="M138 66H407M161 66V150M400 66V152" stroke="#ecffff" stroke-width="9" stroke-linecap="round"/>
+   <path d="M218 67L260 27H354L392 67" fill="#f5ffff" stroke="#b4e8f1" stroke-width="5"/>
+   <path d="M258 28V8M347 27V8" stroke="#f8ffff" stroke-width="6"/><ellipse cx="259" cy="7" rx="12" ry="6" fill="#d5eff5"/>
+   <circle cx="142" cy="180" r="23" fill="#ff9f55" stroke="#fff8e6" stroke-width="6"/><circle cx="142" cy="180" r="10" fill="#e8fbff"/>
+   <path d="M522 154L560 135" stroke="#eefaff" stroke-width="8" stroke-linecap="round"/>
+   <circle cx="483" cy="127" r="17" fill="#f4be81"/><path d="M471 143L500 142L523 165L494 170L475 159Z" fill="#f7e8c5"/>
+   <path d="M487 105Q505 89 519 112L490 117Z" fill="#155078"/>
+   <path d="M506 144L525 118M518 148L535 129" stroke="#f3be83" stroke-width="8" stroke-linecap="round"/>
+   <path d="M526 124Q556 29 584 74" stroke="#fff8cb" stroke-width="5" fill="none" stroke-linecap="round"/>
+  </svg>
+  <div class="wake"></div>
+ </div>
+ <div class="water">
+   <div class="water-glow"></div><div class="surface"></div><div class="sun-rays"></div><div class="coral coral-left"></div><div class="coral coral-right"></div>
+   <span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span><span class="bubble b4"></span><span class="bubble b5"></span>
+   <span class="deep-fish ambient-fish one">🐠</span><span class="deep-fish ambient-fish two">🐟</span><span class="deep-fish ambient-fish three">🐡</span><span class="deep-fish ambient-fish four">🦈</span>
+ </div>
+ <div class="fishing-line" id="fishingLine"><span class="line-wire"></span><span class="hook" id="hook">🪝</span></div>
+ <div class="caught-fish" id="caughtFish"><div class="fish-body" id="fishBody">🐟</div><span class="fish-aura"></span></div>
+ <div class="splash-ring" id="splashRing"></div>
+</div>
+<div class="site-ui">
+ <header class="catch-header">
+   <a class="brand" href="/" aria-label="Country Quest home"><span class="brand-icon">✳</span><span>COUNTRY<b>QUEST</b></span></a>
+   <nav><a href="/" id="allGames">All games</a><a href="/solo.html" id="soloLink">Solo games</a></nav>
+   <div class="languages" role="group" aria-label="Language / Språk">
+     <button type="button" data-lang="sv" aria-pressed="false">🇸🇪 SV</button>
+     <button type="button" data-lang="en" aria-pressed="true">🇬🇧 EN</button>
+   </div>
+ </header>
+ <main class="catch-layout">
+  <section class="quiz-panel" id="stage" aria-live="polite"></section>
+  <aside class="catch-hud" aria-label="Fishing score">
+    <div class="hud-title" id="hudTitle">FISHING LOG</div>
+    <div class="hud-stat"><span id="hudCatchLabel">FISH CAUGHT</span><strong id="fishCount">0 / 7</strong></div>
+    <div class="hud-stat"><span id="hudWeightLabel">TOTAL WEIGHT</span><strong id="totalWeight">0 kg</strong></div>
+    <div class="hud-stat"><span id="hudBestLabel">BIGGEST FISH</span><strong id="bestFish">—</strong></div>
+    <div class="rarity-track" id="rarityTrack"><span>COMMON</span><span>UNCOMMON</span><span>RARE</span><span>EPIC</span><span>LEGENDARY</span></div>
+  </aside>
+ </main>
+ <footer class="catch-footer"><span id="footnote">Original game · Curated rarity ratings, not live player statistics</span><a href="/" id="homeFooter">Country Quest ↗</a></footer>
+</div>
+<script src="/rare-bank.js?v=1"></script>
+<script src="/rare-catch.js?v=1"></script>
+</body></html>
