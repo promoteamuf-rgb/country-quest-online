@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap');
+:root{--white:#f7fffd;--mint:#bcffe4;--gold:#ffe09b;--navy:#061c34;--ink:#0d2a43;--sky:#4cc4ec}
+*{box-sizing:border-box}
+html{min-height:100%;scroll-behavior:smooth}
+body{min-height:100svh;margin:0;background:#05374d;color:var(--white);font:700 15px/1.4 Nunito,system-ui,-apple-system,Segoe UI,sans-serif;overflow-x:hidden}
+button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}
+a{color:inherit}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #fce4a2;outline-offset:3px}
+.catch-world{position:fixed;inset:0;z-index:0;isolation:isolate;overflow:hidden;background:#0a5e82;pointer-events:none}
+.sky{position:absolute;inset:0 0 auto;height:31%;background:linear-gradient(160deg,#167fce 0%,#62cfff 40%,#c7f5ff 100%);overflow:hidden}
+.sun{position:absolute;right:15%;top:6%;width:110px;height:110px;border-radius:50%;background:#fffad7;box-shadow:0 0 0 26px #fff7b322,0 0 100px 50px #fff6b25c;animation:sun-glow 5s ease-in-out infinite alternate}
+.cloud{position:absolute;height:48px;width:160px;background:#f3ffffbd;border-radius:65px;filter:blur(5px);opacity:.85;animation:cloud-float 19s ease-in-out infinite alternate}
+.cloud:before,.cloud:after{content:"";position:absolute;background:#fff;border-radius:50%}.cloud:before{width:77px;height:70px;left:23px;bottom:4px}.cloud:after{width:96px;height:90px;right:11px;bottom:2px}
+.cloud-one{left:19%;top:16%}.cloud-two{right:9%;top:33%;transform:scale(.7);animation-delay:-10s}
+.island{position:absolute;bottom:0;width:32%;height:60%;background:linear-gradient(#367b81,#246977);clip-path:polygon(0 100%,5% 70%,23% 61%,35% 20%,43% 40%,54% 14%,71% 61%,82% 52%,100% 100%);opacity:.54}
+.island-one{left:-3%}.island-two{right:-6%;transform:scaleX(-1)}
+.yacht-stage{position:absolute;z-index:7;top:5%;left:47%;width:min(46vw,570px);min-width:260px;transform:translateX(-50%);animation:yacht-bob 3.3s ease-in-out infinite alternate;filter:drop-shadow(0 8px 9px #002f4f82)}
+.yacht-svg{display:block;width:100%;height:auto;filter:drop-shadow(0 9px 13px #0547708c)}
+.wake{position:absolute;left:2%;right:3%;bottom:6%;height:13px;border-radius:50%;background:#eefff8;filter:blur(8px);box-shadow:0 0 24px 16px #d3fdff70}
+.water{position:absolute;inset:27% 0 0;background:linear-gradient(180deg,#00a3cb 0%,#096b97 17%,#0c497a 44%,#082955 75%,#050d31 100%);overflow:hidden}
+.water:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(106deg,transparent 0 63px,#a9fafa10 70px,transparent 102px);animation:rays-sway 11s ease-in-out infinite alternate}
+.water:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 82% 0,#8affea40,transparent 50%),linear-gradient(90deg,#08243786,transparent 80%)}
+.surface{position:absolute;z-index:4;top:-10px;left:-3%;width:106%;height:29px;border-radius:50%;background:repeating-radial-gradient(ellipse at 50% -2px,#c4fdfe 0px 5px,#1ba8cf 7px 18px,#b8f8ff 19px 23px);opacity:.85;filter:blur(3px);animation:waterline 4.2s ease-in-out infinite alternate}
+.sun-rays{position:absolute;top:0;right:3%;width:55%;height:95%;background:repeating-conic-gradient(from 190deg at 70% 0%,transparent 0deg 6deg,#b7f9ed20 7deg 11deg,transparent 12deg 19deg);filter:blur(12px);animation:rays-sway 11s alternate infinite}
+.water-glow{position:absolute;top:0;right:6%;width:70%;height:65%;background:radial-gradient(ellipse at 50% 0,#d4ffeb18,transparent 76%)}
+.coral{position:absolute;bottom:-45px;width:25%;height:230px;opacity:.7;background:radial-gradient(ellipse at 13% 80%,#ad3c86 0 16%,transparent 17%),radial-gradient(ellipse at 50% 84%,#f5796c 0 17%,transparent 18%),radial-gradient(ellipse at 79% 88%,#e0a94f 0 20%,transparent 21%);filter:blur(2px)}
+.coral-left{left:0}.coral-right{right:0;transform:scaleX(-1)}
+.bubble{position:absolute;z-index:5;border:2px solid #cdf6ff8c;border-radius:50%;background:#bffff510;filter:drop-shadow(0 0 4px #e9fff6);bottom:-35px;animation:bubble-rise 11s linear infinite}
+.b1{left:33%;width:9px;height:9px}.b2{left:63%;width:22px;height:22px;animation-delay:-6s}.b3{left:83%;width:12px;height:12px;animation-delay:-3s}.b4{left:48%;width:17px;height:17px;animation-delay:-8s}.b5{left:91%;width:7px;height:7px;animation-delay:-1s}
+.deep-fish{position:absolute;z-index:3;font-size:28px;filter:drop-shadow(0 3px 8px #0007);opacity:.5;animation:fish-cruise 13s linear infinite alternate}.one{left:58%;top:20%}.two{left:78%;top:43%;animation-delay:-3s}.three{left:30%;top:65%;animation-delay:-7s}.four{left:75%;top:68%;font-size:55px;opacity:.19;animation-duration:20s}
+.fishing-line{position:absolute;z-index:9;left:73%;top:20%;width:2px;height:50%;transform:rotate(-5deg);transform-origin:top;background:transparent;transition:height 1s}
+.line-wire{display:block;width:2px;height:100%;background:linear-gradient(#fff5d2,#92f5f3);box-shadow:0 0 11px #f5fff7}
+.hook{position:absolute;bottom:-14px;left:-13px;display:grid;place-items:center;font-size:25px;width:30px;height:35px;filter:drop-shadow(0 0 7px #f6f5bb);animation:hook-swing 2.7s ease-in-out infinite alternate}
+.caught-fish{position:absolute;z-index:12;left:72%;top:57%;width:100px;height:100px;display:grid;place-items:center;opacity:0;transform:translate(-50%,-50%) scale(.1);filter:drop-shadow(0 12px 18px #031b42a6)}
+.fish-body{font-size:clamp(80px,10vw,160px);line-height:1;white-space:nowrap;transform:scaleX(-1)}
+.fish-body svg{display:block;width:100%;height:auto;overflow:visible}
+.fish-aura{position:absolute;z-index:-1;inset:9%;border-radius:50%;background:#a1ffe759;filter:blur(24px)}
+.splash-ring{position:absolute;z-index:9;left:72%;top:27%;width:75px;height:25px;border:4px solid #e5feff;opacity:0;border-radius:50%;transform:translate(-50%,-50%) scale(.2)}
+body.casting .fishing-line{animation:cast-line 1.1s ease-in-out both}
+body.casting .splash-ring{animation:splash 1s ease-out both}
+body.hooked .fishing-line{animation:line-tension .26s ease-in-out 6 alternate}
+body.hooked .caught-fish{animation:catch-swim 1.45s cubic-bezier(.12,.3,.25,1) both}
+body.reeling .caught-fish{animation:reel-up 1.15s cubic-bezier(.18,.86,.22,1) both}
+body.reeling .fishing-line{animation:reel-line 1.15s ease-in-out both}
+body.showing-fish .caught-fish{opacity:1;transform:translate(-50%,-50%) scale(var(--scale,1));left:73%;top:39%;animation:fish-hover 3s ease-in-out infinite alternate}
+body.no-fish .fishing-line{animation:line-tension .3s ease-in-out 3 alternate}
+.site-ui{position:relative;z-index:10;min-height:100svh;display:flex;flex-direction:column}
+.catch-header{display:flex;align-items:center;gap:16px;padding:12px clamp(18px,3vw,45px);min-height:73px;background:#05283acb;border-bottom:1px solid #b0f6e661;backdrop-filter:blur(12px);position:relative;z-index:20}
+.brand{display:flex;gap:10px;align-items:center;text-decoration:none;font:900 21px/1 "Barlow Condensed",Impact,sans-serif;letter-spacing:1.5px;white-space:nowrap}
+.brand b{color:#c2f9d8}.brand-icon{display:grid;place-items:center;width:37px;height:37px;background:#eafff1;color:#106579;border-radius:11px;font:900 30px/1 Georgia}
+.catch-header nav{margin-left:auto;display:flex;gap:23px;font-size:12px;font-weight:900}.catch-header nav a{text-decoration:none}.catch-header nav a:hover{color:#b5ffeb}
+.languages{display:flex;gap:3px;padding:3px;background:#082d43;border-radius:10px;border:1px solid #95ead382}
+.languages button{border:0;background:transparent;color:#c4e6e4;padding:9px;border-radius:7px;font-weight:900;font-size:11px}
+.languages button[aria-pressed=true]{background:#e9fbec;color:#0d3140}
+.catch-layout{width:100%;max-width:1440px;margin:0 auto;flex:1;display:flex;align-items:center;gap:20px;justify-content:space-between;padding:clamp(25px,6vh,85px) clamp(20px,5vw,78px) 55px}
+.quiz-panel{position:relative;z-index:11;width:min(560px,100%);flex:0 1 560px;padding:clamp(24px,3vw,42px);border:1px solid #b3faffba;border-radius:25px;background:linear-gradient(140deg,#062d46f2,#0a3854e7 85%);box-shadow:0 24px 68px #03192bba,0 0 26px #8effec19,inset 0 1px #fff3;backdrop-filter:blur(18px);min-height:340px}
+.quiz-panel.enter>*{animation:panel-slide .46s ease both}.quiz-panel.enter>*:nth-child(2){animation-delay:.05s}.quiz-panel.enter>*:nth-child(3){animation-delay:.09s}
+.kicker{font:900 11px/1 "Barlow Condensed",sans-serif;letter-spacing:2.3px;color:#acffdf;text-transform:uppercase}
+.hero-title{font:900 clamp(66px,9vw,124px)/.83 "Barlow Condensed",Impact,"Arial Narrow",sans-serif;letter-spacing:-2px;margin:14px 0 23px;color:#f9feff;text-shadow:0 5px 0 #09688c,0 10px 25px #001e36}
+.hero-title span{display:block;color:#ffce68;text-shadow:0 5px 0 #cb6f27,0 12px 24px #001e36}
+.headline{font:900 clamp(29px,3.6vw,46px)/1.04 "Barlow Condensed",Impact,sans-serif;margin:12px 0 18px;letter-spacing:.4px}
+.lead{color:#d1eef0;line-height:1.57;font-size:15px;margin:0 0 24px;max-width:440px}
+.catch-facts{display:flex;flex-wrap:wrap;gap:9px;margin:20px 0 24px}
+.catch-facts span,.chip{background:#074663ab;border:1px solid #acecdb77;border-radius:8px;padding:8px 10px;color:#cff9e7;font-size:11px;font-weight:900;letter-spacing:.4px}
+.btn{border:1px solid #fff9d1;border-radius:12px;background:linear-gradient(#ffdf88,#ffb94c);color:#52300b;box-shadow:0 6px 0 #a45b23,0 13px 23px #001e3188;display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:14px 24px;min-height:51px;font:900 19px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.6px;transition:transform .15s,box-shadow .15s}
+.btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 0 #a45b23,0 17px 26px #001e3188}.btn:active:not(:disabled){transform:translateY(4px);box-shadow:0 2px 0 #a45b23}
+.btn.secondary{background:#153d5e;color:#d8fff4;border:1px solid #a5edec;box-shadow:none;font-size:15px}
+.quiz-head{display:flex;justify-content:space-between;gap:13px;align-items:center;margin-bottom:21px}
+.round-no{background:#154e65;border:1px solid #9febdd6e;padding:7px 11px;border-radius:8px;font-size:12px;font-weight:900;white-space:nowrap}
+.timer-pill{display:flex;align-items:center;gap:7px;background:#06283d;padding:8px 13px;border-radius:99px;border:1px solid #9ce6d8;color:#ebffef;font-size:16px;font-weight:900;font-variant-numeric:tabular-nums}
+.timer-pill.low{color:#ffd0bd;background:#5a2633;border-color:#ffae96;animation:warn .8s ease-in-out infinite}
+.question{font:900 clamp(28px,3vw,41px)/1.1 "Barlow Condensed",sans-serif;margin:9px 0 26px}
+.answer-row{display:flex;gap:9px}
+.answer-row input{flex:1;min-width:0;background:#071f35;border:2px solid #94d9d7;border-radius:11px;padding:13px 16px;color:white;font-size:17px;font-weight:800}
+.answer-row input::placeholder{color:#8aafbb}.answer-row input:focus{border-color:#e4f2a2;box-shadow:0 0 0 4px #b7f5c81c}
+.answer-row button{white-space:nowrap;min-width:94px}
+.hint-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px}
+.hint-btn{border:1px solid #9ce6d6;background:#1a5667;color:#e5fff4;border-radius:9px;padding:10px 13px;font-size:12px;font-weight:900}
+.hint-btn:hover:not(:disabled){background:#267b85}
+.helper{color:#9ed1d6;font-size:11px;font-weight:750}
+.notice{min-height:22px;color:#ffe1a1;margin-top:12px;font-size:13px;font-weight:800}
+.sonar-result{background:#14657caa;border:1px solid #a0f5e8;border-radius:10px;padding:12px;margin-top:12px;color:#ddfff6;font-size:12px}
+.reveal-pill{font-size:12px;color:#f8ecd0;background:#704f2c;border:1px solid #f1c980;border-radius:30px;padding:8px 14px;font-weight:900;display:inline-block;letter-spacing:1px}
+.fish-showcase{display:flex;align-items:center;gap:19px;margin:19px 0;padding:19px;background:linear-gradient(115deg,#0c5d7bac,#164465b9);border:1px solid #abeaff9a;border-radius:18px}
+.catch-emoji{font-size:clamp(65px,8vw,114px);line-height:1;filter:drop-shadow(0 10px 14px #0008);animation:fish-reward .6s cubic-bezier(.16,1.25,.35,1) both}
+.catch-emoji svg{width:100px;max-width:100%;height:auto}
+.fish-stats{min-width:0}.fish-stats small{display:block;font-size:10px;font-weight:900;letter-spacing:1.3px;color:#b8f7ed}.fish-stats strong{display:block;font:900 clamp(31px,3vw,44px)/1 "Barlow Condensed",sans-serif;color:#ffe09d;margin:4px 0}.fish-stats p{margin:0;color:#d2eeed;font-size:12px}
+.catch-name{font-weight:950;color:#fff;margin-bottom:3px;font-size:17px}
+.score-mini{background:#123f55;border:1px solid #9cdcca6d;border-radius:11px;padding:10px 14px;display:inline-block;font-size:12px;margin-bottom:19px}
+.score-mini strong{color:#ffdf9e}
+.result-list{display:grid;gap:7px;margin:18px 0}
+.result-line{display:flex;justify-content:space-between;gap:12px;padding:9px 11px;background:#0b394caa;border:1px solid #a2ddd74f;border-radius:9px;font-size:12px}
+.result-line strong{white-space:nowrap;color:#ffdb9a}
+.disclaimer{font-size:11px;color:#b7dcde;line-height:1.5;margin:18px 0 0}
+.catch-hud{width:216px;flex:0 0 216px;align-self:flex-end;border:1px solid #c7f8eaaa;border-radius:17px;background:#053450d1;backdrop-filter:blur(15px);padding:16px;box-shadow:0 14px 35px #0006}
+.hud-title{font:900 18px/1 "Barlow Condensed",sans-serif;letter-spacing:2px;color:#ffe0a8;margin-bottom:14px}
+.hud-stat{padding:9px 0;border-top:1px solid #b1f2ee45}
+.hud-stat span{display:block;color:#add7d6;font-size:10px;letter-spacing:1px;font-weight:900}
+.hud-stat strong{font:900 25px/1.2 "Barlow Condensed",sans-serif;color:#fff}
+.rarity-track{display:grid;gap:6px;margin-top:10px}.rarity-track span{background:#0e5673;border:1px solid #83c4d66e;border-radius:6px;text-align:center;font-size:9px;font-weight:900;letter-spacing:.8px;padding:5px}
+.rarity-track span:nth-child(2){color:#c8fce4}.rarity-track span:nth-child(3){color:#e9cbff}.rarity-track span:nth-child(4){color:#ffe4a1}.rarity-track span:nth-child(5){background:#a86c26;color:white;border-color:#ffd17b}
+.catch-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:13px 4%;background:#052336c4;color:#a8d5dd;font-size:11px;font-weight:800}.catch-footer a{color:#c4fff2}
+@keyframes yacht-bob{to{transform:translateX(-50%) translateY(7px) rotate(1deg)}}@keyframes waterline{to{transform:translateY(5px) scaleX(1.02)}}@keyframes sun-glow{to{box-shadow:0 0 0 34px #fff7b329,0 0 120px 62px #fff6b275}}@keyframes cloud-float{to{translate:45px 0}}
+@keyframes rays-sway{to{transform:rotate(7deg) translateX(4%)}}@keyframes bubble-rise{0%{transform:translateY(0);opacity:0}15%{opacity:.8}100%{transform:translateY(-100vh);opacity:0}}
+@keyframes fish-cruise{to{transform:translate3d(-95px,-21px,0) scaleX(-1)}}@keyframes hook-swing{to{transform:translateX(11px) rotate(15deg)}}
+@keyframes cast-line{0%{height:1%;transform:rotate(14deg)}30%{height:7%}80%{height:50%;transform:rotate(-5deg)}100%{height:50%}}
+@keyframes splash{0%{opacity:0;transform:translate(-50%,-50%) scale(.1)}27%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(3.4)}}
+@keyframes catch-swim{0%{opacity:0;left:120%;top:60%;transform:translate(-50%,-50%) scale(.45) rotate(-16deg)}55%{opacity:1;left:78%;top:57%;transform:translate(-50%,-50%) scale(var(--scale,1)) rotate(8deg)}100%{opacity:1;left:72%;top:58%;transform:translate(-50%,-50%) scale(var(--scale,1)) rotate(-12deg)}}
+@keyframes reel-up{0%{opacity:1;left:72%;top:58%;transform:translate(-50%,-50%) scale(var(--scale,1)) rotate(-12deg)}65%{opacity:1;left:72%;top:31%;transform:translate(-50%,-50%) scale(var(--scale,1)) rotate(-32deg)}100%{opacity:1;left:73%;top:39%;transform:translate(-50%,-50%) scale(var(--scale,1)) rotate(3deg)}}
+@keyframes reel-line{to{height:13%;transform:rotate(6deg)}}@keyframes line-tension{to{transform:rotate(9deg)}}
+@keyframes fish-hover{to{transform:translate(-50%,-55%) scale(var(--scale,1)) rotate(5deg)}}
+@keyframes panel-slide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes fish-reward{from{opacity:0;transform:scale(.4) rotate(-25deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes warn{50%{box-shadow:0 0 16px #ffb49a8c}}
+@media(max-width:900px){.catch-layout{align-items:flex-end;padding-top:160px}.yacht-stage{left:57%;width:480px;top:6%}.catch-hud{width:155px;flex-basis:155px;padding:12px}.hud-stat strong{font-size:19px}.rarity-track{display:none}.quiz-panel{padding:24px}}
+@media(max-width:680px){
+ .catch-header{padding:10px 13px;gap:7px;min-height:60px}.brand{font-size:17px;gap:6px}.brand-icon{width:30px;height:30px;font-size:24px}.catch-header nav{display:none}
+ .languages{margin-left:auto}.languages button{padding:7px 6px}
+ .sky{height:27%}.water{top:25%}.yacht-stage{width:min(75vw,380px);left:53%;top:7%}
+ .catch-layout{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:clamp(185px,32svh,310px) 10px 28px;gap:11px}
+ .quiz-panel{width:100%;flex:auto;min-height:0;padding:22px 20px;border-radius:18px;background:#052b44f3}
+ .catch-hud{width:100%;flex:auto;align-self:auto;display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:9px 12px}
+ .hud-title{width:100%;margin:0;font-size:13px}
+ .hud-stat{border:0;padding:0 12px 0 0;flex:1;min-width:80px}.hud-stat strong{font-size:22px}
+ .fishing-line{left:76%;top:19%;height:26%}.caught-fish{left:74%;top:27%}
+ .fish-body{font-size:82px}.catch-footer{padding:12px 15px}
+ .hero-title{font-size:clamp(70px,17vw,100px)}
+}
+@media(max-width:380px){.answer-row{flex-direction:column}.answer-row button{width:100%}.quiz-panel{padding:19px 16px}.catch-hud{gap:2px}.hud-stat{min-width:66px}.hud-stat strong{font-size:19px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
