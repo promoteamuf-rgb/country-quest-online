@@ -29,7 +29,7 @@ complete:'VOYAGE COMPLETE',doneTitle:'How deep did you go?',doneLead:'Seven stop
 depth:'DEPTH',score:'POINTS',best:'BEST DEPTH',roundList:'YOUR SEVEN ANSWERS',chart:'DEPTH EARNED IN EACH ROUND',
 noAnswer:'No accepted answer',playAgain:'Dive again ↻',copy:'Copy my result',copied:'Result copied!',
 clipboard:'Copy this result:',meters:'m',points:'pts',
-fullscreenOn:'Full screen',fullscreenOff:'Exit full screen',rank10:'Common',rank25:'Familiar',rank40:'Less obvious',rank60:'Uncommon',rank80:'Rare find',rank100:'Deep discovery'
+collect:'DISCOVERIES',collection:'COLLECTED TREASURES',streak:'RARE STREAK',sonarName:'SONAR',sonarBtn:'Send sonar ping',sonarGuide:'Need an idea? Two sonar scans reveal a common accepted example. The timer keeps running.',sonarExample:'SONAR FOUND',sonarMore:'That answer is valid, but a rarer one earns more.',soundInfo:'Optional sounds',relicFound:'TREASURE DISCOVERED!',relicMissing:'KEEP EXPLORING',relicEmpty:'No treasure this round. Try another dive!',relicCaption:'Rare answers uncover more valuable ocean treasures.',collectionEmpty:'No treasures found yet.',achievementTitle:'EXPEDITION BADGES',comboTitle:'RARE STREAK',comboCaption:'Consecutive unusual answers!',gameTip:'Find uncommon answers to earn treasures and build a rare streak.',unlocked:'UNLOCKED',achievement0:'First Explorer',achievement0Desc:'Completed a full expedition',achievement1:'Treasure Hunter',achievement1Desc:'Found 3 rare answers',achievement2:'Gold Rush',achievement2Desc:'Discovered a legendary treasure',achievement3:'Abyss Diver',achievement3Desc:'Reached 4,000 m',achievement4:'Rare Combo',achievement4Desc:'Three rare answers in a row',achievement5:'Fast Thinker',achievement5Desc:'Answered three questions within 8 seconds',fullscreenOn:'Full screen',fullscreenOff:'Exit full screen',rank10:'Common',rank25:'Familiar',rank40:'Less obvious',rank60:'Uncommon',rank80:'Rare find',rank100:'Deep discovery'
 },
 sv:{
 all:'Alla spel',solo:'Spela själv',eyebrow:'COUNTRY QUEST · ETT NYTT ÄVENTYR',
@@ -51,12 +51,13 @@ complete:'DYKET ÄR KLART',doneTitle:'Hur djupt kom du?',doneLead:'Sju stationer
 depth:'DJUP',score:'POÄNG',best:'DJUPREKORD',roundList:'DINA SJU SVAR',chart:'DJUP PER RUNDA',
 noAnswer:'Inget godkänt svar',playAgain:'Dyk igen ↻',copy:'Kopiera resultat',copied:'Resultatet kopierat!',
 clipboard:'Kopiera detta resultat:',meters:'m',points:'p',
-fullscreenOn:'Helskärm',fullscreenOff:'Avsluta helskärm',rank10:'Vanligt',rank25:'Välkänt',rank40:'Lite ovanligt',rank60:'Ovanligt',rank80:'Sällsynt',rank100:'Djupfynd'
+collect:'FYND',collection:'INSAMLADE SKATTER',streak:'OVANLIG SVIT',sonarName:'SONAR',sonarBtn:'Skicka sonarpuls',sonarGuide:'Behöver du hjälp? Två sonarpulser visar ett vanligt godkänt exempel. Klockan fortsätter.',sonarExample:'SONAREN HITTADE',sonarMore:'Det svaret är rätt, men ett ovanligare svar ger mer.',soundInfo:'Valfritt ljud',relicFound:'SKATT HITTAD!',relicMissing:'FORTSÄTT UTFORSKA',relicEmpty:'Ingen skatt den här rundan. Försök igen!',relicCaption:'Ovanliga svar avslöjar värdefullare havsskatter.',collectionEmpty:'Inga skatter hittade ännu.',achievementTitle:'EXPEDITIONSMÄRKEN',comboTitle:'OVANLIG SVIT',comboCaption:'Ovanliga svar flera gånger i rad!',gameTip:'Hitta ovanliga svar, samla skatter och bygg en sällsynt svit.',unlocked:'UPPLÅST',achievement0:'Första resan',achievement0Desc:'Avklarade en hel expedition',achievement1:'Skattjägare',achievement1Desc:'Hittade tre ovanliga svar',achievement2:'Guldrush',achievement2Desc:'Upptäckte en legendarisk skatt',achievement3:'Djuphavsdykare',achievement3Desc:'Nådde 4 000 meter',achievement4:'Sällsynt svit',achievement4Desc:'Tre ovanliga svar i rad',achievement5:'Snabbtänkt',achievement5Desc:'Tre svar inom 8 sekunder',fullscreenOn:'Helskärm',fullscreenOff:'Avsluta helskärm',rank10:'Vanligt',rank25:'Välkänt',rank40:'Lite ovanligt',rank60:'Ovanligt',rank80:'Sällsynt',rank100:'Djupfynd'
 }
 };
 let lang='en';
 try{const saved=localStorage.getItem(LANG_KEY);if(saved==='en'||saved==='sv')lang=saved}catch{}
 let phase='intro',questions=[],index=0,points=0,results=[],deadline=0,timer=null,currentResult=null,notice='',draft='';
+let relics=[],rareStreak=0,bestStreak=0,sonarLeft=2,sonarExample=null;
 const stage=$('stage');
 const aliases=new Map();
 for(const q of BANK){
@@ -119,6 +120,7 @@ function updateStatic(){
   $('seaTitle').textContent=t.seaTitle;$('depthTitle').textContent=t.totalDepth;
   $('footerText').textContent=t.footer;$('backFooter').textContent=t.back;
   updateFullscreenButton();
+  window.CQFun?.setLabels(lang);
   updateDepth();
   window.CQDiveFX?.onLanguage();
 }
@@ -132,10 +134,12 @@ function updateDepth(){
 }
 function start(){
   if(BANK.length<QUESTION_COUNT){stage.textContent='Question bank unavailable.';return}
-  questions=selectQuestions();index=0;points=0;results=[];currentResult=null;draft='';notice='';phase='playing';window.CQDiveFX?.reset();updateDepth();openRound();
+  questions=selectQuestions();index=0;points=0;results=[];currentResult=null;draft='';notice='';phase='playing';
+  relics=[];rareStreak=0;bestStreak=0;sonarLeft=2;sonarExample=null;
+  window.CQDiveFX?.reset();window.CQFun?.reset();window.CQFun?.play('start');updateDepth();openRound();
 }
 function openRound(){
-  clearInterval(timer);timer=null;phase='playing';draft='';notice='';
+  clearInterval(timer);timer=null;phase='playing';draft='';notice='';sonarExample=null;
   deadline=Date.now()+SECONDS*1000;
   render();
   timer=setInterval(tick,100);
@@ -160,7 +164,7 @@ function submitAnswer(value){
  const raw=String(value||'').trim();
  if(!raw){notice=t.empty;displayNotice();return}
  const answer=findAnswer(qNow(),raw);
- if(!answer){notice=t.unknown;displayNotice();window.CQDiveFX?.reject();return}
+ if(!answer){notice=t.unknown;displayNotice();window.CQDiveFX?.reject();window.CQFun?.play('wrong');return}
  finishAnswer(answer,false);
 }
 function displayNotice(){
@@ -171,20 +175,26 @@ function finishAnswer(answer,timedOut){
  if(phase!=='playing')return;
  clearInterval(timer);timer=null;phase='reveal';
  const gained=answer?.points||0;points+=gained;
- currentResult={prompt:qNow().id,answer,earned:gained,expired:timedOut};
+ const secondsUsed=Math.min(SECONDS,Math.max(0,SECONDS-(deadline-Date.now())/1000));
+ rareStreak=answer&&gained>=60?rareStreak+1:0;
+ bestStreak=Math.max(bestStreak,rareStreak);
+ const relic=answer?relicFor(gained):null;
+ if(relic)relics.push(relic);
+ currentResult={prompt:qNow().id,answer,earned:gained,expired:timedOut,secondsUsed,relic,streak:rareStreak};
+ window.CQFun?.reveal(gained,rareStreak);
  results.push(currentResult);
  draft='';updateDepth();render();
 }
 function next(){
  if(phase!=='reveal')return;
  if(index===QUESTION_COUNT-1){finishGame();return}
- index++;openRound();
+ index++;window.CQFun?.play('next');openRound();
 }
 function finishGame(){
  clearInterval(timer);timer=null;phase='done';
  const depth=points*10,best=Number(read('cq-rare-best',0))||0;
  if(depth>best)write('cq-rare-best',depth);
- render();
+ render();window.CQFun?.finish();
 }
 function rarity(points){
  return COPY[lang]['rank'+points]||'Rare';
