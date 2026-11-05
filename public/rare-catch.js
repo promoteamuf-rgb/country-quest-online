@@ -93,7 +93,7 @@ function setLang(v){
  if(v!=='en'&&v!=='sv')return;
  if(phase==='playing')typed=$('answer')?.value??typed;
  lang=v;try{localStorage.setItem(LANG_KEY,v)}catch{}
- refreshStatic();render();
+ refreshStatic();window.CQRareFX?.languageUpdate();render();
 }
 function refreshStatic(){
  document.documentElement.lang=lang;
@@ -113,21 +113,22 @@ function updateHUD(){
 }
 function begin(){
  if(BANK.length<TOTAL){$('stage').textContent='Question bank unavailable.';return}
- clearTimers();clearScene();
+ clearTimers();clearScene();window.CQRareFX?.reset();
  questions=newQuestions();round=0;answers=[];points=0;totalWeight=0;biggest=0;sonar=2;sonarAnswer=null;latest=null;message='';typed='';
  refreshStatic();cast();
 }
 function cast(){
  clearTimers();clearScene();phase='casting';document.body.dataset.phase=phase;sonarAnswer=null;message='';typed='';
+ window.CQRareFX?.reset();window.CQRareFX?.cast();
  render();
  void document.body.offsetWidth;document.body.classList.add('casting');
  transition=setTimeout(()=>{
   if(phase==='casting')openQuestion();
- },1050);
+ },1780);
 }
 function openQuestion(){
  clearTimers();phase='playing';document.body.dataset.phase=phase;message='';deadline=Date.now()+LIMIT*1000;
- render();interval=setInterval(tick,100);tick();
+ render();window.CQRareFX?.question();interval=setInterval(tick,100);tick();
 }
 function tick(){
  if(phase!=='playing')return;
@@ -166,23 +167,31 @@ function finish(answer){
  answers.push(latest);points+=latest.points;
  if(fish){totalWeight=Math.round((totalWeight+fish.weight)*10)/10;biggest=Math.max(biggest,fish.weight)}
  updateHUD();
- if(!fish){document.body.classList.add('no-fish');render();return}
+ if(!fish){document.body.classList.add('no-fish');window.CQRareFX?.miss();render();return}
  const fishNode=$('caughtFish'),fishBody=$('fishBody');
  fishBody.innerHTML=fishSvg(fish);
  const scale=fish.points===100?2.05:fish.points===80?1.7:fish.points===60?1.35:fish.points===40?1.13:fish.points===25?.86:.66;
  fishNode.style.setProperty('--scale',scale);
  clearScene();fishNode.style.setProperty('--scale',scale);
  document.body.classList.add('hooked');
+ window.CQRareFX?.bite(fish);
  render();
  transition=setTimeout(()=>{
   if(phase!=='reeling')return;
-  document.body.classList.remove('hooked');document.body.classList.add('reeling');
+  window.CQRareFX?.fight(fish);
   transition=setTimeout(()=>{
    if(phase!=='reeling')return;
-   document.body.classList.remove('reeling');document.body.classList.add('showing-fish');
-   phase='reveal';document.body.dataset.phase=phase;render();
-  },1100);
- },850);
+   document.body.classList.remove('hooked');document.body.classList.add('reeling');
+   window.CQRareFX?.reel(fish);
+   transition=setTimeout(()=>{
+    if(phase!=='reeling')return;
+    document.body.classList.remove('reeling');document.body.classList.add('showing-fish');
+    phase='reveal';document.body.dataset.phase=phase;
+    window.CQRareFX?.reveal(fish);
+    render();
+   },1600);
+  },900);
+ },750);
 }
 function next(){
  if(phase!=='reveal')return;
@@ -190,7 +199,7 @@ function next(){
  round++;cast();
 }
 function complete(){
- clearTimers();clearScene();phase='done';document.body.dataset.phase=phase;
+ clearTimers();clearScene();phase='done';document.body.dataset.phase=phase;window.CQRareFX?.done();
  const best=Number(read('cq-rare-catch-best',0))||0;
  if(totalWeight>best)save('cq-rare-catch-best',totalWeight);
  render();
@@ -207,6 +216,7 @@ function render(){
   h=(posterSrc?'<div class="poster-wrap"><img id="posterArt" src="'+posterSrc+'" alt="Rare Catch: yacht above a reef, fishing line and bigger fish at rarer levels" decoding="async"></div>':'')
    +'<span class="kicker">'+esc(t.kicker)+'</span><h1 class="hero-title">RARE <span>CATCH</span></h1>'
    +'<p class="lead">'+esc(t.intro)+'</p><p class="lead">'+esc(t.description)+'</p>'
+   +'<div class="catch-flow" aria-label="Fishing adventure"><span>🎣 '+(lang==='sv'?'Kasta':'Cast')+'</span><span>❓ '+(lang==='sv'?'Fråga':'Question')+'</span><span>⚡ '+(lang==='sv'?'Napp':'Bite')+'</span><span>💪 '+(lang==='sv'?'Kamp':'Fight')+'</span><span>🐟 '+(lang==='sv'?'Fångst':'Catch')+'</span></div>'
    +'<div class="catch-facts">'+t.facts.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'
    +'<p class="helper">'+esc(t.how)+'</p>'
    +'<div style="margin-top:20px"><button class="btn" id="start" type="button">🎣 '+esc(t.begin)+'</button></div>'
