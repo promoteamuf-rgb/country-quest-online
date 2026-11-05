@@ -93,7 +93,7 @@ function setLang(v){
  if(v!=='en'&&v!=='sv')return;
  if(phase==='playing')typed=$('answer')?.value??typed;
  lang=v;try{localStorage.setItem(LANG_KEY,v)}catch{}
- refreshStatic();window.CQRareFX?.languageUpdate();render();
+ refreshStatic();render();
 }
 function refreshStatic(){
  document.documentElement.lang=lang;
@@ -113,22 +113,21 @@ function updateHUD(){
 }
 function begin(){
  if(BANK.length<TOTAL){$('stage').textContent='Question bank unavailable.';return}
- clearTimers();clearScene();window.CQRareFX?.reset();
+ clearTimers();clearScene();
  questions=newQuestions();round=0;answers=[];points=0;totalWeight=0;biggest=0;sonar=2;sonarAnswer=null;latest=null;message='';typed='';
  refreshStatic();cast();
 }
 function cast(){
  clearTimers();clearScene();phase='casting';document.body.dataset.phase=phase;sonarAnswer=null;message='';typed='';
- window.CQRareFX?.reset();window.CQRareFX?.cast();
  render();
  void document.body.offsetWidth;document.body.classList.add('casting');
  transition=setTimeout(()=>{
   if(phase==='casting')openQuestion();
- },1780);
+ },920);
 }
 function openQuestion(){
  clearTimers();phase='playing';document.body.dataset.phase=phase;message='';deadline=Date.now()+LIMIT*1000;
- render();window.CQRareFX?.question();interval=setInterval(tick,100);tick();
+ render();interval=setInterval(tick,100);tick();
 }
 function tick(){
  if(phase!=='playing')return;
@@ -161,37 +160,33 @@ function sonarHint(){
 }
 function finish(answer){
  if(phase!=='playing')return;
- clearTimers();phase=answer?'reeling':'reveal';document.body.dataset.phase=phase;
+ clearTimers();
+ phase=answer?'reeling':'reveal';document.body.dataset.phase=phase;
  const fish=answer?fishFor(answer):null;
  latest={question:questions[round],answer,fish,points:answer?answer.points:0};
  answers.push(latest);points+=latest.points;
  if(fish){totalWeight=Math.round((totalWeight+fish.weight)*10)/10;biggest=Math.max(biggest,fish.weight)}
  updateHUD();
- if(!fish){document.body.classList.add('no-fish');window.CQRareFX?.miss();render();return}
+ if(!fish){document.body.classList.add('no-fish');render();return}
  const fishNode=$('caughtFish'),fishBody=$('fishBody');
  fishBody.innerHTML=fishSvg(fish);
- const scale=fish.points===100?2.05:fish.points===80?1.7:fish.points===60?1.35:fish.points===40?1.13:fish.points===25?.86:.66;
+ const scale=fish.points===100?1.8:fish.points===80?1.55:fish.points===60?1.3:fish.points===40?1.05:fish.points===25?.85:.65;
+ clearScene();
  fishNode.style.setProperty('--scale',scale);
- clearScene();fishNode.style.setProperty('--scale',scale);
  document.body.classList.add('hooked');
- window.CQRareFX?.bite(fish);
  render();
  transition=setTimeout(()=>{
   if(phase!=='reeling')return;
-  window.CQRareFX?.fight(fish);
+  document.body.classList.remove('hooked');
+  document.body.classList.add('reeling');
   transition=setTimeout(()=>{
    if(phase!=='reeling')return;
-   document.body.classList.remove('hooked');document.body.classList.add('reeling');
-   window.CQRareFX?.reel(fish);
-   transition=setTimeout(()=>{
-    if(phase!=='reeling')return;
-    document.body.classList.remove('reeling');document.body.classList.add('showing-fish');
-    phase='reveal';document.body.dataset.phase=phase;
-    window.CQRareFX?.reveal(fish);
-    render();
-   },1600);
-  },900);
- },750);
+   document.body.classList.remove('reeling');
+   document.body.classList.add('showing-fish');
+   phase='reveal';document.body.dataset.phase=phase;
+   render();
+  },1000);
+ },520);
 }
 function next(){
  if(phase!=='reveal')return;
@@ -199,7 +194,7 @@ function next(){
  round++;cast();
 }
 function complete(){
- clearTimers();clearScene();phase='done';document.body.dataset.phase=phase;window.CQRareFX?.done();
+ clearTimers();clearScene();phase='done';document.body.dataset.phase=phase;
  const best=Number(read('cq-rare-catch-best',0))||0;
  if(totalWeight>best)save('cq-rare-catch-best',totalWeight);
  render();
@@ -216,10 +211,9 @@ function render(){
   h=(posterSrc?'<div class="poster-wrap"><img id="posterArt" src="'+posterSrc+'" alt="Rare Catch: yacht above a reef, fishing line and bigger fish at rarer levels" decoding="async"></div>':'')
    +'<span class="kicker">'+esc(t.kicker)+'</span><h1 class="hero-title">RARE <span>CATCH</span></h1>'
    +'<p class="lead">'+esc(t.intro)+'</p><p class="lead">'+esc(t.description)+'</p>'
-   +'<div class="catch-flow" aria-label="Fishing adventure"><span>🎣 '+(lang==='sv'?'Kasta':'Cast')+'</span><span>❓ '+(lang==='sv'?'Fråga':'Question')+'</span><span>⚡ '+(lang==='sv'?'Napp':'Bite')+'</span><span>💪 '+(lang==='sv'?'Kamp':'Fight')+'</span><span>🐟 '+(lang==='sv'?'Fångst':'Catch')+'</span></div>'
    +'<div class="catch-facts">'+t.facts.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div>'
    +'<p class="helper">'+esc(t.how)+'</p>'
-   +'<div class="fish-scale-guide"><img id="fishTiersArt" alt="'+esc(t.note)+'" loading="lazy"><p>'+esc(t.note)+'</p></div>'
+   +'<div class="catch-size-guide"><span>🐟</span><span>🐠</span><span>🐡</span><span>🐟</span><span>🐬</span><strong>'+esc(t.note)+'</strong></div>'
    +'<div style="margin-top:20px"><button class="btn" id="start" type="button">🎣 '+esc(t.begin)+'</button></div>'
    +'<p class="disclaimer">'+esc(t.rareInfo)+'</p>';
  }
@@ -262,8 +256,7 @@ function render(){
  }
  else if(phase==='done'){
   const record=Math.max(totalWeight,Number(read('cq-rare-catch-best',0))||0);
-  h='<div class="results-art"><img id="catchResultsArt" alt="'+esc(t.summary)+'" loading="lazy"></div>'
-   +'<span class="kicker">'+esc(t.summary)+'</span><h2 class="headline">🏆 '+esc(t.summary)+'</h2>'
+  h='<span class="kicker">'+esc(t.summary)+'</span><h2 class="headline">🏆 '+esc(t.summary)+'</h2>'
    +'<p class="lead">'+esc(t.summaryText)+'</p>'
    +'<div class="catch-facts"><span>🎣 '+answers.filter(a=>a.fish).length+' / 7</span><span>⚖️ '+kg(totalWeight)+'</span><span>🏅 '+esc(t.best)+': '+kg(biggest)+'</span></div>'
    +'<div class="score-mini">'+esc(t.record)+': <strong>'+kg(record)+'</strong></div>'
@@ -274,8 +267,6 @@ function render(){
    +'<p class="disclaimer">'+esc(t.rareInfo)+'</p>';
  }
  stage.innerHTML=h;void stage.offsetWidth;stage.classList.add('enter');
- if(phase==='intro')window.CQRareMedia?.applyImage('fish_tiers_art','fishTiersArt');
- if(phase==='done')window.CQRareMedia?.applyImage('results_art','catchResultsArt');
  if(phase==='playing'){$('answer').value=typed;tick()}
 }
 async function share(){
@@ -295,22 +286,15 @@ $('stage').addEventListener('submit',e=>{if(e.target.id!=='answerForm')return;e.
 $('stage').addEventListener('input',e=>{if(e.target.id==='answer')typed=e.target.value});
 for(const b of document.querySelectorAll('[data-lang]'))b.addEventListener('click',()=>setLang(b.dataset.lang));
 refreshStatic();render();
-/* Use the approved Rare Catch 2.0 hero art, with the old yacht
-   image as a fallback if an asset fails to load. */
-function presentPoster(src){
- posterSrc=src;
- if(phase==='intro'){document.body.classList.add('poster-ready');render()}
-}
-function fallbackPoster(){
- if(typeof fetch!=='function')return;
- fetch('/rare-catch-poster.avif.base64').then(r=>{
-  if(!r.ok)throw Error('Poster unavailable');return r.text()
- }).then(encoded=>{
-  const b64=encoded.trim();
-  if(/^[A-Za-z0-9+/]+={0,2}$/.test(b64))presentPoster('data:image/avif;base64,'+b64);
+/* Use only the original compact static yacht poster, no animated asset preloads. */
+if(typeof fetch==='function'){
+ fetch('/rare-catch-poster.avif.base64',{cache:'force-cache'})
+ .then(r=>{if(!r.ok)throw Error('Poster unavailable');return r.text()})
+ .then(b64=>{
+  const encoded=b64.trim();
+  if(!/^[A-Za-z0-9+/]+={0,2}$/.test(encoded))return;
+  posterSrc='data:image/avif;base64,'+encoded;
+  if(phase==='intro'){document.body.classList.add('poster-ready');render()}
  }).catch(()=>{});
 }
-if(window.CQRareMedia?.get){
- window.CQRareMedia.get('hero').then(presentPoster).catch(fallbackPoster);
-}else fallbackPoster();
 })();
