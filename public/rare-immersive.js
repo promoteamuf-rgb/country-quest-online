@@ -55,7 +55,17 @@ function setDepth(metres){
  if($('depthFill'))$('depthFill').style.height=pct+'%';
  if($('submersible'))$('submersible').style.top=pct+'%';
  const selected=zones.slice().reverse().find(z=>target>=z.min)||zones[0];
+ const previousZone=sceneZone;
  sceneZone=selected.key;document.body.dataset.zone=sceneZone;translateZone();
+ if(ready&&previousZone!==sceneZone&&!reduce){
+  const announcement=document.createElement('div');
+  announcement.className='zone-unlocked';
+  const isSwedish=document.documentElement.lang==='sv';
+  announcement.innerHTML='<span>'+(isSwedish?'NY DJUPZON':'NEW DEPTH ZONE')+'</span><strong>'+selected[isSwedish?'sv':'en']+'</strong>';
+  announcement.setAttribute('aria-hidden','true');
+  sea.appendChild(announcement);
+  setTimeout(()=>announcement.remove(),2300);
+ }
  if(!ready||reduce||from===target){displayDepth(target);ready=true;return}
  const begin=performance.now(),duration=Math.min(1700,950+Math.abs(target-from)*.35);
  const frame=now=>{
