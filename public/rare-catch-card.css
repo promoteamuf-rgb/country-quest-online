@@ -56,16 +56,16 @@
  background-size:cover,cover!important;
 }
 
-/* Rare Catch 2.0: the approved yacht artwork replaces emoji decoration. */
-.photo-mode-grid .mode-catch:after{display:none!important;content:none!important}
+/* Original Rare Catch card: compact image, no animated overlays. */
+.photo-mode-grid .mode-catch:before,.photo-mode-grid .mode-catch:after{
+ content:none!important;display:none!important;animation:none!important;
+}
 .photo-mode-grid .mode-catch{
- background-position:center,center!important;
- border-color:#bef7ff!important;
- box-shadow:0 19px 53px #00132dcc,0 0 16px #34dbff22!important;
+ box-shadow:0 17px 35px #021d35b0!important;
+ border:1px solid #a1e8ebc0!important;
 }
 .photo-mode-grid .mode-catch .photo-card-top,
 .photo-mode-grid .mode-catch .photo-card-bottom{position:relative;z-index:3!important}
-.photo-mode-grid .mode-catch .mode-name,.photo-mode-grid .mode-catch strong{
- text-shadow:0 4px 12px #00182be8
-}
-.photo-mode-grid .mode-catch .mode-desc{color:#e9fcff!important;text-shadow:0 2px 10px #001c30}
+.photo-mode-grid .mode-catch .mode-name,
+.photo-mode-grid .mode-catch strong{text-shadow:0 3px 9px #00182bcf}
+.photo-mode-grid .mode-catch .mode-desc{color:#e9fcff!important;text-shadow:0 2px 8px #001c30}
