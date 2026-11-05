@@ -1,0 +1,239 @@
+/* RARE DEPTHS : EXPEDITION UPDATE
+   Original playful ocean visuals, reward UI, discovery streaks and sonar. */
+:root{--treasure-gold:#ffe0a2;--treasure-mint:#b6ffe5;--deep-ink:#06202f}
+.fun-sound{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  border:1px solid #b6f9dd70;border-radius:9px;
+  background:#14404bde;color:#e8fff1;min-height:37px;
+  padding:7px 12px;font:800 11px/1 system-ui,sans-serif;
+  letter-spacing:.1px;cursor:pointer;white-space:nowrap;
+  transition:background .2s,transform .2s,border-color .2s;
+}
+.fun-sound:hover{transform:translateY(-2px);background:#205761}
+.fun-sound[aria-pressed="true"]{background:linear-gradient(135deg,#f3e3ac,#caefce);color:#073039;border-color:#fff3c2}
+.fun-sound .fun-sound-icon{font-size:17px;line-height:1}
+.fun-sound:focus-visible,.sonar-button:focus-visible{outline:3px solid #f5e7a5;outline-offset:3px}
+.expedition-ribbon{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px;
+  margin:0 0 19px;padding:11px 12px;border:1px solid #abdcc351;
+  border-radius:12px;background:linear-gradient(95deg,#072c35e6,#1b4250d6);
+}
+.expedition-tag{font:900 10px/1.3 system-ui;color:#ffe3b5;letter-spacing:1.5px}
+.expedition-mini{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.expedition-pill{
+ display:inline-flex;align-items:center;gap:5px;
+ padding:6px 9px;border:1px solid #91d3bd50;border-radius:20px;
+ background:#092a38df;color:#d8f5e7;
+ font:850 10px/1.1 system-ui;font-variant-numeric:tabular-nums;
+ white-space:nowrap
+}
+.expedition-pill strong{font-weight:950;color:#ffebb7;font-size:12px}
+.expedition-pill.has-streak{background:#57402dc9;border-color:#ffd7979e;animation:tiny-streak-pulse 2s ease-in-out infinite}
+@keyframes tiny-streak-pulse{50%{box-shadow:0 0 17px #ffd58a37}}
+.answer-tools{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:18px}
+.sonar-button{
+ display:inline-flex;gap:8px;align-items:center;justify-content:center;
+ border:1px solid #8aeee2b0;border-radius:10px;
+ background:linear-gradient(125deg,#185069,#184256);
+ color:#dffaf4;min-height:41px;padding:10px 14px;
+ font:900 12px/1.2 system-ui;cursor:pointer;
+ box-shadow:0 7px 21px #03131f50;
+ transition:background .2s,transform .2s;
+}
+.sonar-button:hover:not(:disabled){background:#27687a;transform:translateY(-2px)}
+.sonar-button:disabled{opacity:.45;cursor:not-allowed}
+.sonar-hint{
+ display:flex;align-items:flex-start;gap:10px;padding:13px 15px;margin:14px 0 0;
+ border-radius:11px;border:1px solid #82d8d6a1;
+ background:linear-gradient(95deg,#0c4656e9,#0c374be8);
+ color:#dffef4;font:650 13px/1.5 system-ui;
+ box-shadow:0 0 27px #74ebf01a;
+ animation:sonar-result .5s cubic-bezier(.1,.8,.2,1) both
+}
+.sonar-hint>span:first-child{font-size:19px}
+.sonar-hint strong{color:#ffe6ac}
+@keyframes sonar-result{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+.fun-context{font-size:12px;color:#b1d4d1;max-width:390px;line-height:1.5;margin:0!important;align-self:center}
+.discovery-ceremony{
+ margin:15px 0 23px;padding:18px 18px 17px;overflow:hidden;position:relative;
+ display:flex;align-items:center;gap:18px;
+ border:1px solid #b4f6dc9e;border-radius:17px;
+ background:radial-gradient(ellipse at 0 0,#adf8d32a,transparent 63%),
+ linear-gradient(120deg,#153f49,#0f2a3c);
+ box-shadow:0 12px 40px #0007,0 0 40px #9ff5d116;
+ animation:discovery-rise .65s cubic-bezier(.14,1.25,.23,1) both
+}
+.discovery-ceremony:before{
+ content:"";pointer-events:none;position:absolute;inset:-50%;
+ background:conic-gradient(transparent 0deg,#f9e3a213 55deg,transparent 105deg,#9cf9d810 180deg,transparent 250deg);
+ animation:discovery-turn 12s linear infinite
+}
+@keyframes discovery-turn{to{transform:rotate(360deg)}}
+@keyframes discovery-rise{from{opacity:0;transform:translateY(19px) scale(.94)}to{opacity:1;transform:none}}
+.discovery-icon{
+ position:relative;z-index:2;
+ display:grid;place-items:center;flex-shrink:0;
+ width:84px;height:84px;border-radius:24px;
+ font-size:48px;line-height:1;
+ background:linear-gradient(140deg,#226b74,#164455);
+ box-shadow:0 0 0 4px #c5ffe51a,0 10px 25px #0007,inset 0 1px 0 #ffffff44;
+ animation:relic-pop .75s cubic-bezier(.18,1.3,.25,1) both;
+}
+@keyframes relic-pop{0%{transform:scale(.35) rotate(-28deg);opacity:0}80%{transform:scale(1.1) rotate(5deg);opacity:1}100%{transform:none}}
+.discovery-info{position:relative;z-index:2;flex:1;min-width:0}
+.discovery-kicker{display:block;color:#b8f6dd;font-size:10px;font-weight:950;letter-spacing:1.8px}
+.discovery-title{display:block;font:400 clamp(25px,3vw,35px)/1.15 Georgia,serif;color:#fff4d9;margin:4px 0}
+.discovery-caption{font:650 12px/1.5 system-ui;color:#c5e5de;display:block}
+.discovery-ceremony[data-tier="gold"]{border-color:#ffe7a0;box-shadow:0 11px 40px #0008,0 0 52px #fadd8d44}
+.discovery-ceremony[data-tier="gold"] .discovery-icon{background:linear-gradient(145deg,#8b6a35,#d5b36b,#725936);box-shadow:0 0 34px #ffe39b66}
+.discovery-ceremony[data-tier="crystal"]{border-color:#d8d0ffc4;background:linear-gradient(120deg,#483f68,#152f53)}
+.discovery-ceremony[data-tier="crystal"] .discovery-icon{background:linear-gradient(145deg,#8b7ec4,#353e76)}
+.discovery-ceremony[data-tier="none"]{border-color:#8ab0bf54;background:linear-gradient(125deg,#173b4a,#0c2433)}
+.discovery-ceremony[data-tier="none"] .discovery-icon{background:#174154}
+.streak-callout{
+ display:inline-flex;align-items:center;gap:9px;max-width:100%;
+ padding:10px 15px;margin:0 0 14px;background:linear-gradient(95deg,#674221,#8a552a);
+ border-radius:10px;border:1px solid #ffdda1ad;color:#fff6e6;
+ font:950 13px/1.2 system-ui;letter-spacing:.3px;box-shadow:0 0 25px #ffc7832e;
+ animation:streak-land .55s cubic-bezier(.2,1.4,.4,1) both
+}
+.streak-callout strong{font-size:18px}
+@keyframes streak-land{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+.reward-rail{
+ display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:16px;
+ padding:12px;border-radius:12px;
+ background:#061e2a9e;border:1px solid #bce9d441;
+}
+.reward-rail .micro{margin-right:8px;flex:1 0 100%;color:#ffdda9}
+.relic-token{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-width:40px;height:40px;border:1px solid #bae5cf88;border-radius:11px;
+ background:#2453619e;font-size:25px;
+ box-shadow:0 5px 12px #0005;animation:relic-enter .43s cubic-bezier(.16,1.4,.28,1) both
+}
+.relic-token:nth-of-type(2){animation-delay:.05s}.relic-token:nth-of-type(3){animation-delay:.1s}
+.relic-token:nth-of-type(4){animation-delay:.15s}.relic-token:nth-of-type(5){animation-delay:.2s}
+@keyframes relic-enter{from{opacity:0;transform:translateY(10px) scale(.7)}to{opacity:1;transform:none}}
+.fun-collection{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:15px 0 22px
+}
+.fun-collect-card{
+ display:flex;gap:11px;align-items:center;min-width:0;
+ padding:13px;border:1px solid #d6f2db54;border-radius:13px;
+ background:linear-gradient(140deg,#183d4b,#0e2638);
+}
+.fun-collect-card>span{font-size:32px;flex-shrink:0}
+.fun-collect-card strong{display:block;font:850 12px/1.3 system-ui;color:#ffedc9}
+.fun-collect-card small{display:block;color:#bad8d2;font:650 11px/1.4 system-ui;margin-top:4px}
+.achievement-section{margin:16px 0 24px}
+.achievement-section .micro{display:block;margin-bottom:10px}
+.achievement-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.achievement{
+ display:flex;align-items:center;gap:10px;padding:13px;border:1px solid #b7f3c857;
+ border-radius:12px;background:linear-gradient(105deg,#21463c,#143643);
+ animation:discovery-rise .45s ease both
+}
+.achievement>span{font-size:27px}.achievement b{display:block;color:#ffebc0;font-size:12px}
+.achievement small{display:block;color:#b7d8d2;font-size:10px}
+body[data-rare-phase] .panel .answer-tools{position:relative;z-index:3}
+body[data-rare-phase] .panel .discovery-ceremony{z-index:2}
+body[data-rare-phase] .panel .sonar-hint{z-index:2}
+body[data-rare-phase="done"] .panel{width:min(740px,100%);flex-basis:740px}
+/* Extra eye-catching sea creatures & treasure, all behind gameplay. */
+.fun-world{position:absolute;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+.fun-whale{
+ position:absolute;left:-33%;top:42%;width:clamp(280px,35vw,660px);height:auto;
+ color:#09263cd1;filter:drop-shadow(0 3px 35px #b5f6e617);
+ opacity:.22;animation:whale-cruise 31s ease-in-out infinite alternate;
+}
+.fun-whale svg{width:100%;height:auto;fill:currentColor}
+@keyframes whale-cruise{from{transform:translateX(-5vw) translateY(20px) scaleX(1)}
+ to{transform:translateX(115vw) translateY(-80px) scaleX(1)}}
+.fun-manta{
+ position:absolute;right:-24%;top:24%;width:clamp(170px,24vw,370px);
+ opacity:.37;filter:drop-shadow(0 0 19px #9eecdf44);animation:manta-glide 22s ease-in-out infinite alternate
+}
+.fun-manta svg{width:100%;height:auto;fill:#0a253e}
+@keyframes manta-glide{from{transform:translateX(8vw) translateY(20px) rotate(-8deg)}
+ to{transform:translateX(-98vw) translateY(40px) rotate(7deg)}}
+.fun-coral{
+ position:absolute;bottom:-12px;right:8%;width:min(24vw,295px);height:auto;
+ filter:drop-shadow(0 0 23px #7bdbe630);opacity:.8;
+ animation:coral-sway 8s ease-in-out infinite alternate;transform-origin:bottom center
+}
+.fun-coral svg{width:100%;height:auto}
+@keyframes coral-sway{to{transform:rotate(2.7deg)}}
+.fun-relic{
+ position:absolute;bottom:29px;right:34%;z-index:3;
+ display:grid;place-items:center;width:75px;height:75px;
+ font-size:43px;filter:drop-shadow(0 0 21px #ffe6a75d);
+ animation:relic-hover 4s ease-in-out infinite alternate;
+ opacity:.9;
+}
+@keyframes relic-hover{to{transform:translateY(-15px) rotate(5deg)}}
+.fun-spark{
+ position:absolute;left:var(--left);top:var(--top);
+ width:var(--size);height:var(--size);
+ border-radius:50%;background:#9fffe7;
+ box-shadow:0 0 6px #c8ffed,0 0 19px #98ebcb;
+ animation:spark-twinkle var(--period) ease-in-out infinite alternate;
+ animation-delay:var(--delay)
+}
+@keyframes spark-twinkle{0%{opacity:.1;transform:scale(.4)}100%{opacity:.9;transform:scale(1.45)}}
+.fun-sonar-wave{
+ position:absolute;left:50%;top:50%;width:80px;height:80px;
+ border:3px solid #adffdded;border-radius:50%;
+ box-shadow:0 0 31px #adfff0a1,inset 0 0 20px #8deddb44;
+ animation:fun-sonar-expand 1.4s cubic-bezier(.11,.53,.23,1) both
+}
+.fun-sonar-wave:nth-child(2){animation-delay:.2s}
+.fun-sonar-wave:nth-child(3){animation-delay:.42s}
+@keyframes fun-sonar-expand{0%{opacity:1;transform:translate(-50%,-50%) scale(.1)}
+ 100%{opacity:0;transform:translate(-50%,-50%) scale(14)}}
+.fun-celebrate{position:fixed;inset:0;z-index:55;pointer-events:none;overflow:hidden}
+.fun-celebrate>i{
+ position:absolute;top:-10%;left:var(--left);
+ width:var(--size);height:var(--size);
+ border-radius:2px;background:var(--color);
+ transform:rotate(var(--rotate));
+ animation:fun-confetti var(--time) linear both;animation-delay:var(--delay)
+}
+@keyframes fun-confetti{0%{opacity:1;transform:translateY(-5vh) rotate(0)}
+ 100%{opacity:0;transform:translateY(113vh) rotate(900deg)}}
+/* Keep new features visible on small screens without obscuring the water. */
+@media(max-width:900px){
+ .expedition-ribbon{padding:10px}
+ .expedition-mini{gap:5px}
+ .expedition-pill{font-size:9px;padding:5px 7px}
+ .fun-whale{top:24%}
+}
+@media(max-width:720px){
+ .fun-sound{width:36px;min-width:36px;height:36px;min-height:36px;padding:6px}
+ .fun-sound-label{display:none}
+ .fun-sound .fun-sound-icon{font-size:17px}
+ .discovery-icon{width:64px;height:64px;border-radius:18px;font-size:39px}
+ .discovery-ceremony{gap:13px;padding:14px}
+ .discovery-title{font-size:25px}
+ .fun-world .fun-coral{right:-2%;width:190px;bottom:calc(100% - 36svh)}
+ .fun-world .fun-relic{bottom:calc(100% - 35svh);right:4%;font-size:29px}
+ .fun-world .fun-whale{top:16%;width:260px}
+ .fun-world .fun-manta{top:25%;width:175px}
+}
+@media(max-width:420px){
+ .expedition-ribbon{gap:6px}
+ .expedition-mini{width:100%;justify-content:space-between}
+ .expedition-pill{font-size:9px;padding:6px 6px}
+ .answer-tools{flex-direction:column}
+ .sonar-button{width:100%}
+ .fun-context{font-size:11px}
+ .achievement-grid,.fun-collection{grid-template-columns:1fr}
+ .discovery-ceremony{padding:12px}
+ .discovery-icon{width:55px;height:55px;font-size:32px}
+ .discovery-title{font-size:22px}
+}
+@media(prefers-reduced-motion:reduce){
+ .fun-world .fun-whale,.fun-world .fun-manta,.fun-world .fun-coral,.fun-world .fun-relic,
+ .fun-spark,.fun-celebrate>i,.discovery-ceremony,.streak-callout,.discovery-icon,
+ .relic-token,.sonar-hint,.achievement{animation:none!important}
+ .fun-celebrate{display:none}
+}
