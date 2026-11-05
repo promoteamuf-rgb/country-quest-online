@@ -40,3 +40,19 @@
  .page-index .editorial-header .nav-play{padding:10px 8px!important}
  .page-index .editorial-header .nav-play span{padding-left:5px}
 }
+
+/* Keep the language control visible on very small phones. */
+@media(max-width:520px){
+ .page-solo .topbar .nav-multiplayer{
+  display:grid!important;place-items:center!important;
+  font-size:0!important;padding:10px!important;min-width:36px!important;
+  width:36px!important;height:36px!important;overflow:hidden!important;
+ }
+ .page-solo .topbar .nav-multiplayer:after{
+  content:"↗";font:800 16px/1 system-ui;color:#122b29
+ }
+}
+@media(max-width:390px){
+ .page-index .editorial-header .nav-play{font-size:0!important;display:grid;place-items:center;padding:10px!important;width:36px!important;height:36px!important}
+ .page-index .editorial-header .nav-play span{font-size:17px!important;padding:0!important}
+}
