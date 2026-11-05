@@ -85,31 +85,32 @@ function reset(){
  phase='idle';currentFish=null;cleanClasses();
  body.removeAttribute('data-rarity');
  const p=$('cinematicParticles');if(p)p.replaceChildren();
+ window.CQRareMedia?.hide();
 }
 function cast(){
  cleanClasses();phase='casting';body.removeAttribute('data-rarity');
- restartAnimation('cq-casting');
+ restartAnimation('cq-casting');window.CQRareMedia?.show('cast_animation');
  setTimeout(()=>{if(phase==='casting')particles('cast',26)},850);
 }
 function question(){
- phase='playing';cleanClasses();body.classList.add('cq-playing');
+ phase='playing';cleanClasses();body.classList.add('cq-playing');window.CQRareMedia?.show('deep_art');
 }
 function bite(fish){
  if(!fish)return;
  cleanClasses();phase='bite';currentFish=fish;
  body.dataset.rarity=String(fish.points);
  restartAnimation('cq-bite');
- impact();particles('water',23);
+ impact();particles('water',23);window.CQRareMedia?.show('splash_art');
 }
 function fight(fish){
  phase='fight';currentFish=fish||currentFish;
  body.classList.remove('cq-bite');restartAnimation('cq-fight');
- particles('rare',18);
+ particles('rare',18);window.CQRareMedia?.show('deep_art');
 }
 function reel(fish){
  phase='reeling';currentFish=fish||currentFish;
  body.classList.remove('cq-fight');restartAnimation('cq-reeling');
- impact();particles(fish?.points>=80?'gold':'water',35);
+ impact();particles(fish?.points>=80?'gold':'water',35);window.CQRareMedia?.show(fish?.points>=80?'legendary_animation':'cast_animation');
 }
 function reveal(fish){
  if(!fish)return;
@@ -118,17 +119,18 @@ function reveal(fish){
  updateVictory(fish);restartAnimation('cq-landing');
  body.classList.add('cq-reveal');
  if(fish.points>=80)body.classList.add('cq-epic');
+ window.CQRareMedia?.show(fish.points>=80?'legendary_art':'splash_art');
  if(fish.points===100){particles('gold',68);impact()}
  else if(fish.points>=60)particles('rare',34);
  else particles('water',16);
 }
 function miss(){
  cleanClasses();phase='miss';currentFish=null;body.removeAttribute('data-rarity');
- particles('water',12);
+ particles('water',12);window.CQRareMedia?.show('splash_art');
 }
 function done(){
  cleanClasses();phase='done';currentFish=null;body.classList.add('cq-done');
- particles('gold',28);
+ particles('gold',28);window.CQRareMedia?.show('results_art');
 }
 languageUpdate();
 window.CQRareFX={reset,cast,question,bite,fight,reel,reveal,miss,done,languageUpdate};
