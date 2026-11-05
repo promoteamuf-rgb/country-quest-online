@@ -169,6 +169,7 @@ const dict={
 };
 Object.assign(dict,{"Choose match difficulty":"Välj svårighetsgrad","Famous countries & events":"Kända länder och händelser","Balanced world questions":"Lagom svåra frågor om världen","Trickier borders & history":"Svårare landsgränser och historia","Both players will play this level.":"Båda spelarna spelar på den här nivån.","Difficulty:":"Svårighetsgrad:","Start match →":"Starta matchen →","⚔️ COMPETITIVE":"⚔️ TÄVLING"});
 Object.assign(dict,{"Rare Depths":"Sällsynta djup","05 / NEW GAME":"05 / NYTT SPEL","RARE ANSWERS":"OVANLIGA SVAR","Seven questions. One correct answer each. The rarer your answer, the deeper you go.":"Sju frågor. Ett korrekt svar per fråga. Ju ovanligare svar, desto djupare kommer du.","Seven open questions. Your most unusual correct answers take you deeper.":"Sju öppna frågor. Dina ovanligaste rätta svar tar dig djupare.","Dive in":"Dyk ner","Dive in ↗":"Dyk ner ↗"});
+Object.assign(dict,{'Underwater explorer — Rare Depths':'Undervattensutforskare — Sällsynta djup'});
 let language='en';
 try{
   const stored=localStorage.getItem(KEY);
