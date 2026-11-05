@@ -24,40 +24,50 @@ const norm=s=>String(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u03
 const competitiveQuestions=require('./competitive-questions.json');
 const allClueQuestions=[...data,...competitiveQuestions.clues.filter(c=>!data.some(d=>d.name===c.name))];
 const competitiveTiers={"easy":{"clues":["Sweden","Italy","Japan","Brazil","Australia","France","Germany","Spain","Mexico","Egypt","Canada","India","United States"],"outlines":["Italy","Japan","Brazil","Australia","France","Germany","Spain","Sweden","United Kingdom","United States of America","India","Egypt","Mexico"]},"medium":{"clues":["Norway","Greece","United Kingdom","Mexico","Canada","India","Argentina","Iceland","Morocco","Portugal","Finland","Turkey","South Africa","Thailand","Kenya"],"outlines":["Norway","Greece","United Kingdom","Canada","Portugal","Argentina","Turkey","Finland","South Africa","Morocco","Thailand","Peru","China","Poland","Ukraine","Iceland"]},"hard":{"clues":["Nepal","Vietnam","Peru","Indonesia","Colombia","South Korea","Singapore","Chile","Ireland","New Zealand","Kenya","Morocco","Finland","Portugal","South Africa"],"outlines":["Nepal","Vietnam","Chile","Peru","Indonesia","Colombia","Croatia","Romania","Mongolia","Madagascar","Kenya","Iceland","Ireland","Saudi Arabia","Pakistan","Ukraine","Morocco"]}};
+
+/* Hard matches draw from a much larger, less familiar pool. */
+competitiveTiers.hard.clues=[...new Set([...competitiveTiers.hard.clues,...competitiveQuestions.clues.filter(q=>q.difficulty==='hard').map(q=>q.name)])];
+competitiveTiers.hard.outlines=["Nepal","Vietnam","Chile","Peru","Indonesia","Colombia","Croatia","Romania","Mongolia","Madagascar","Kenya","Iceland","Ireland","Saudi Arabia","Pakistan","Ukraine","Morocco","Austria","Switzerland","Greece","Finland","Norway","Poland","Turkey","Nigeria","South Africa","Thailand","China","Portugal","Cuba","Egypt","Argentina","India","Sweden","Mexico"];
 const availableDifficulties=['easy','medium','hard'];
 const matchDifficulty=d=>availableDifficulties.includes(d)?d:'medium';
-function uniqueQuestion(items,seen,key){
-  const fresh=items.filter(x=>!seen.has(String(key(x))));
-  const pool=fresh.length?fresh:items;
-  if(!pool.length)throw Error('Not enough questions for this difficulty');
-  const selected=pool[rand(pool.length)];
-  seen.add(String(key(selected)));
-  return selected;
+/* Draw shuffled question decks without repeats between consecutive matches,
+   refreshing each difficulty/type deck only after its questions are used. */
+const questionDecks=new Map();
+function uniqueQuestion(items,seen,idOf,deckKey){
+ const available=items.filter(item=>!seen.has(String(idOf(item))));
+ if(!available.length)throw Error('Not enough questions for this difficulty');
+ const identifiers=new Set(available.map(item=>String(idOf(item))));
+ let deck=(questionDecks.get(deckKey)||[]).filter(id=>identifiers.has(id));
+ if(!deck.length)deck=shuffle([...identifiers]);
+ const id=deck.shift();
+ questionDecks.set(deckKey,deck);
+ seen.add(id);
+ return available.find(item=>String(idOf(item))===id);
 }
 function makeQ(type,difficulty,seen){
  const d=matchDifficulty(difficulty),tier=competitiveTiers[d];
  if(type==='year'){
    const pool=competitiveQuestions.years.filter(q=>q.difficulty===d);
-   const picked=uniqueQuestion(pool,seen,x=>x.prompt);
+   const picked=uniqueQuestion(pool,seen,x=>x.prompt,d+':year');
    const answer=picked.answer, options=new Set([answer]);
-   const offsets=d==='easy'?[-20,-15,-10,-5,5,10,15,20]:d==='medium'?[-35,-25,-15,-8,8,15,25,35]:[-75,-50,-30,-15,15,30,50,75];
-   for(const delta of shuffle(offsets)){if(options.size===4)break;options.add(answer+delta)}
+   const offsets=d==='easy'?[-100,-75,-50,-35,35,50,75,100]:d==='medium'?[-40,-30,-20,-12,12,20,30,40]:[-15,-12,-10,-7,-5,-3,3,5,7,10,12,15];
+   for(const delta of shuffle(offsets)){if(options.size===4)break;const candidate=answer+delta;if(candidate>=1&&candidate<=2026)options.add(candidate)}
    return{type,prompt:picked.prompt,answer,options:shuffle([...options])};
  }
  if(type==='outline'){
-   const country=uniqueQuestion(tier.outlines,seen,x=>x);
+   const country=uniqueQuestion(tier.outlines,seen,x=>x,d+':outline');
    const shape=geographicOutlines[country];
    if(!shape)throw Error('Missing geographic border data');
    const others=shuffle(tier.outlines.filter(x=>x!==country)).slice(0,3);
    return{type,answer:country,shape:shape.path,viewBox:shape.viewBox,options:shuffle([country,...others])};
  }
  const pool=allClueQuestions.filter(c=>tier.clues.includes(c.name));
- const item=uniqueQuestion(pool,seen,x=>x.name);
+ const item=uniqueQuestion(pool,seen,x=>x.name,d+':clues');
  return{type,answer:item.name,clues:item.clues};
 }
 function makeMatchQuestions(difficulty){
  const seen={clues:new Set(),outline:new Set(),year:new Set()};
- return['clues','outline','year','clues','outline','year'].map(type=>makeQ(type,difficulty,seen[type]));
+ return shuffle(['clues','clues','outline','outline','year','year']).map(type=>makeQ(type,difficulty,seen[type]));
 }
 function state(r,p){let finished=r.started&&r.round===r.qs.length,q=r.started&&!finished?r.qs[r.round]:null,reveal=q&&r.players.every(x=>x.done);return{code:r.id,difficulty:r.difficulty||'medium',started:r.started,finished,round:r.round,total:6,you:r.players.indexOf(p),players:r.players.map(x=>({name:x.name,score:x.score,done:x.done,ready:x.ready})),question:!q?null:q.type==='clues'?{type:q.type,clue:p.clue,clues:q.clues.slice(0,p.clue+1)}:q.type==='outline'?{type:q.type,shape:q.shape,viewBox:q.viewBox,options:q.options}:{type:q.type,prompt:q.prompt,options:q.options},yourDone:p.done,yourAnswer:p.answer,correctAnswer:reveal?q.answer:null}}
 function api(route,b){if(route==='/api/create'){let id;do{id=crypto.randomBytes(4).toString('hex').slice(0,6).toUpperCase()}while(rooms.has(id));let token=crypto.randomBytes(24).toString('hex'),p={name:String(b.name||'Player').trim().slice(0,24),token,score:0,done:false,ready:false,clue:0,answer:null};let r={id,players:[p],difficulty:matchDifficulty(b.difficulty),started:false,round:0,qs:[],last:Date.now()};rooms.set(id,r);return{token,...state(r,p)}}if(route==='/api/join'){let r=rooms.get(String(b.code||'').toUpperCase());if(!r)throw Error('Room not found');if(r.players.length>=2)throw Error('Room is full');let token=crypto.randomBytes(24).toString('hex'),p={name:String(b.name||'Player').trim().slice(0,24),token,score:0,done:false,ready:false,clue:0,answer:null};r.players.push(p);r.started=true;r.qs=makeMatchQuestions(r.difficulty);return{token,...state(r,p)}}
