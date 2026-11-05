@@ -17,7 +17,7 @@ function save(){try{localStorage.setItem('country-quest-session',JSON.stringify(
 function leave(){session=null;state=null;try{localStorage.removeItem('country-quest-session')}catch{}landing()}
 function landing(){
   const invited=new URLSearchParams(location.search).get('room');
-  app.innerHTML=\`
+  app.innerHTML=`
     <h1>Choose your game.</h1>
     <p class="muted">Play alone or compete with a friend.</p>
     <div class="mode-grid">
@@ -32,7 +32,7 @@ function landing(){
         <span class="mode-action">Play online →</span>
       </button>
     </div>
-    <section class="online-section" id="onlineForms" \${invited||location.hash==='#online'?'':'hidden'}>
+    <section class="online-section" id="onlineForms" ${invited||location.hash==='#online'?'':'hidden'}>
       <h2>Online multiplayer</h2>
       <div class="grid">
         <div class="panel"><h2>Create room</h2>
@@ -47,7 +47,7 @@ function landing(){
       </div>
       <p class="notice" id="message"></p>
     </section>
-  \`;
+  `;
   document.getElementById('onlineMode').onclick=()=>{
     const section=document.getElementById('onlineForms');section.hidden=false;
     if(!location.hash)history.replaceState(null,'','#online');
