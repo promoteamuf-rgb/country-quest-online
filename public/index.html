@@ -68,15 +68,27 @@ footer{margin-top:60px;border-top:1px solid #31445798;padding-top:25px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.mode-card{transition:none}}
 </style><link rel="stylesheet" href="/world-theme.css?v=2"><link rel="preconnect" href="https://images.unsplash.com" crossorigin><link rel="dns-prefetch" href="//images.unsplash.com"><link rel="stylesheet" href="/photo-theme.css?v=3"><link rel="stylesheet" href="/editorial.css?v=4"><link rel="stylesheet" href="/language.css?v=1"><link rel="stylesheet" href="/competitive.css?v=1"><link rel="stylesheet" href="/rare-card.css?v=2"><link rel="stylesheet" href="/rare-catch-card.css?v=4"><script defer src="/rare-catch-poster-card.js?v=3"></script><link rel="stylesheet" href="/competition-plus.css?v=1"></head><body class="page-index"><div class="map-ambient" aria-hidden="true"></div><main><header class="editorial-header"><a href="/" class="brand-lockup" aria-label="Country Quest home"><span class="brand-mark" aria-hidden="true">✳</span><span class="brand-name">COUNTRY<span>QUEST</span><small>THE WORLD IS YOURS</small></span></a><nav aria-label="Main navigation"><a href="#modes">Explore</a><a href="/solo.html">Solo games</a><a href="/#online" id="navOnline" class="nav-play">Play online <span aria-hidden="true">↗</span></a><div class="language-toggle" role="group" aria-label="Language / Språk"><button type="button" data-language="sv" aria-pressed="false" aria-label="Svenska">🇸🇪 SV</button><button type="button" data-language="en" aria-pressed="true" aria-label="English">🇬🇧 EN</button></div></nav></header><div id="app"></div><footer><div class="world-footer-stamp">COUNTRY QUEST · WORLD EDITION</div><div>Play from different PCs using the same link. Classic matches have 8 rounds; timeline duels have 10. Room data is temporary. Geographic boundaries from Natural Earth.</div><div style="margin-top:9px;font-size:12px"><a class="photo-credit" href="/photo-credits.html">Real photo credits</a> · Photos via Unsplash</div></footer></main><script src="/translations-sv.js?v=2"></script><script src="/i18n.js?v=7"></script>
 <script>
-let session=null,state=null,busy=false,tick=null;const app=document.querySelector('#app');
+let session=null,state=null,busy=false,tick=null,savedSession=null;const app=document.querySelector('#app');
 const SUBJECT_LABELS={"geography":{"en":"🌍 Geography","sv":"🌍 Geografi"},"sports":{"en":"⚽ Sports","sv":"⚽ Sport"},"space":{"en":"🚀 Space","sv":"🚀 Rymden"},"technology":{"en":"💻 Technology","sv":"💻 Teknik"},"science":{"en":"🔬 Science","sv":"🔬 Vetenskap"},"history":{"en":"🏛️ History","sv":"🏛️ Historia"},"nature":{"en":"🐾 Nature","sv":"🐾 Natur"},"movies":{"en":"🎬 Movies & TV","sv":"🎬 Film & TV"},"music":{"en":"🎵 Music","sv":"🎵 Musik"},"arts":{"en":"🎨 Arts & Books","sv":"🎨 Konst & Böcker"},"inventions":{"en":"💡 Inventions","sv":"💡 Uppfinningar"},"culture":{"en":"🍜 Food & Culture","sv":"🍜 Mat & Kultur"},"math":{"en":"🧮 Math & Logic","sv":"🧮 Matte & Logik"}};
 const multiplayerLanguage=()=>window.CQI18N?.language?.()==='sv'?'sv':'en';
 const multilang=(en,sv)=>multiplayerLanguage()==='sv'?sv:en;
 const localizedOption=option=>option&&typeof option==='object'?option[multiplayerLanguage()]||option.en:String(option??'');
 const escapeHTML=x=>String(x??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-async function api(action,extra={}){if(action==='answer'&&typeof extra.answer==='string')extra={...extra,answer:window.CQI18N?.canonicalCountry(extra.answer)||extra.answer};let response=await fetch('/api/'+action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...session,...extra})});let result=await response.json();if(!response.ok)throw Error(result.error||'Network error');return result}
-function save(){try{localStorage.setItem('country-quest-session',JSON.stringify(session))}catch{}}
-function leave(){session=null;state=null;try{localStorage.removeItem('country-quest-session')}catch{}landing()}
+async function api(action,extra={}){
+ if(action==='answer'&&typeof extra.answer==='string')extra={...extra,answer:window.CQI18N?.canonicalCountry(extra.answer)||extra.answer};
+ const controller=typeof AbortController!=='undefined'?new AbortController():null;
+ const timeout=controller?setTimeout(()=>controller.abort(),60000):null;
+ try{
+  const response=await fetch('/api/'+action,{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',
+   ...(controller?{signal:controller.signal}:{}),body:JSON.stringify({...session,...extra})});
+  let result;
+  try{result=await response.json()}catch{throw Error('Unable to read game server response. Please try again.')}
+  if(!response.ok)throw Error(result.error||'Game server unavailable');
+  return result;
+ }finally{if(timeout!==null)clearTimeout(timeout)}
+}
+function save(){savedSession=session?{code:session.code,token:session.token}:null;try{localStorage.setItem('country-quest-session',JSON.stringify(savedSession))}catch{}}
+function leave(){session=null;state=null;savedSession=null;try{localStorage.removeItem('country-quest-session')}catch{}landing()}
 function landing(){
   const invited=new URLSearchParams(location.search).get('room');
   app.innerHTML=`
@@ -151,8 +163,9 @@ function landing(){
       <div><strong>Your passport to everywhere.</strong><p>Pick up and play. Real country outlines, clever clues and a little healthy competition.</p></div>
       <a href="/solo.html">All solo games <span aria-hidden="true">→</span></a>
     </section>
-    <section class="online-section" id="onlineForms" ${invited||location.hash==='#online'?'':'hidden'}>
+    <section class="online-section" id="onlineForms" ${invited||location.hash==='#online'||savedSession?'':'hidden'}>
       <h2>Online multiplayer</h2>
+      ${savedSession?'<div class="saved-match-banner"><div><strong>Previous competitive room: '+escapeHTML(savedSession.code)+'</strong><small>Pick up where you left off, or create a fresh room below.</small></div><div class="saved-match-actions"><button type="button" id="resumeClassic">Resume room</button><button type="button" id="forgetClassic">Forget room</button></div></div>':''}
       <div class="grid">
         <div class="panel"><h2>Create room</h2>
           <form id="create"><label>Your name</label><input class="field" name="name" maxlength="24" required placeholder="Your name"><fieldset class="competitive-level-picker"><legend>Choose match difficulty</legend>
@@ -199,6 +212,8 @@ function landing(){
     if(location.hash!=='#online')history.replaceState(null,'','#online');
     section.scrollIntoView({behavior:'smooth',block:'start'});
   };
+  if(document.getElementById('resumeClassic'))document.getElementById('resumeClassic').onclick=resumePrevious;
+  if(document.getElementById('forgetClassic'))document.getElementById('forgetClassic').onclick=()=>{savedSession=null;try{localStorage.removeItem('country-quest-session')}catch{}landing()};
   document.getElementById('onlineMode').onclick=revealOnline;
   document.getElementById('heroOnline').onclick=revealOnline;
   const headerOnline=document.getElementById('navOnline');
@@ -217,16 +232,38 @@ function landing(){
         form.mode='quiz';
       }
       button.disabled=true;
+      const originalLabel=button.textContent;
+      button.textContent=multilang(action==='create'?'Creating room…':'Joining room…',action==='create'?'Skapar rum…':'Går med i rum…');
+      const notice=document.querySelector('#message');
+      if(notice)notice.textContent=multilang('Connecting to the game server…','Ansluter till spelservern…');
       try{
         const response=await api(action,form);
         session={code:response.code,token:response.token};
         save();state=response;render();
-      }catch(err){document.querySelector('#message').textContent=err.message;button.disabled=false;}
+      }catch(err){document.querySelector('#message').textContent=err?.message||'Could not connect to the game server.';button.disabled=false;button.textContent=originalLabel;}
     };
   });
   if(invited){
     document.querySelector('#join [name=code]').value=invited.toUpperCase();
   }
+}
+async function resumePrevious(){
+ if(busy||!savedSession)return;
+ busy=true;
+ const button=document.getElementById('resumeClassic');
+ if(button){button.disabled=true;button.textContent=multilang('Opening room…','Öppnar rum…')}
+ try{
+  session={code:savedSession.code,token:savedSession.token};
+  const next=await api('state');
+  if(!next||next.code!==session.code)throw Error('Room expired');
+  state=next;render();
+ }catch(e){
+  session=null;state=null;savedSession=null;
+  try{localStorage.removeItem('country-quest-session')}catch{}
+  landing();
+  const msg=document.getElementById('message');
+  if(msg)msg.textContent=multilang('Previous room unavailable. Create a new one or join a friend.','Tidigare rum finns inte. Skapa ett nytt eller gå med hos en vän.');
+ }finally{busy=false}
 }
 const scores=()=>'<div class="players">'+state.players.map((p,i)=>'<div class="player '+(i===state.you?'me':'')+'"><div class="muted">'+escapeHTML(p.name)+(i===state.you?' (you)':'')+'</div><strong>'+p.score+' pts</strong><small>'+(p.done?'✓ Answered':'Thinking…')+'</small></div>').join('')+'</div>';
 let lastRenderedRound=null;
@@ -337,5 +374,14 @@ async function poll(){if(!session||busy)return;try{const fresh=await api('state'
       state=fresh;
       if(!onlyOtherPlayerUpdated||!syncPlayerCards())render();
     }}catch(err){if(/Room not found|Invalid player session/.test(err.message)){leave()}else{let m=document.getElementById('message');if(m)m.textContent='Connection lost. Retrying...'}}}
-try{session=JSON.parse(localStorage.getItem('country-quest-session')||'null')}catch{}if(session)poll();else landing();setInterval(poll,1300);
+try{
+ const previous=JSON.parse(localStorage.getItem('country-quest-session')||'null');
+ if(previous&&typeof previous.code==='string'&&/^[A-Z0-9]{6}$/.test(previous.code)
+    &&typeof previous.token==='string'&&/^[a-f0-9]{48}$/.test(previous.token)){
+  savedSession={code:previous.code,token:previous.token};
+ }
+}catch{}
+/* Always show the games and room creator first. Resume is an explicit choice. */
+landing();
+setInterval(poll,1300);
 </script></body></html>
