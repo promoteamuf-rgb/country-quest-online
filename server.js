@@ -158,6 +158,12 @@ function api(route,b){
  if(!p)throw Error('Invalid player session');
  r.last=Date.now();
  if(route==='/api/state')return state(r,p);
+ if(route==='/api/leave'){
+  r.players.splice(r.players.indexOf(p),1);
+  if(r.hostToken===p.token)r.hostToken=r.players[0]?.token||null;
+  if(!r.players.length)rooms.delete(r.id);
+  return{left:true};
+ }
  if(route==='/api/start'){
   if(r.hostToken!==p.token)throw Error('Only the room host can start the match');
   if(r.started)throw Error('The match has already started');
