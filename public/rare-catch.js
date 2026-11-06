@@ -248,7 +248,7 @@ function render(){
  }
  else if(phase==='playing'){
   const q=questions[round];
-  h=cardHeader(t.question)+'<div class="quiz-head"><span class="kicker">'+esc(t.question)+'</span>'
+  h='<div class="quiz-head"><span class="kicker">'+esc(t.question)+' · '+esc(val('round'))+' '+(round+1)+' / '+TOTAL+'</span>'
     +'<span class="timer-pill" id="clock">'+LIMIT+' s</span></div>'
     +'<h2 class="question">'+esc(lang==='sv'?q.sv:q.en)+'</h2>'
     +'<form id="answerForm" autocomplete="off"><div class="answer-row">'
