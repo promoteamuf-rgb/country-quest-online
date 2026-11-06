@@ -22,6 +22,16 @@ const geographicOutlines=require('./public/outlines.js');
 const rooms=new Map(),rand=n=>crypto.randomInt(n),shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){let j=rand(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
 const norm=s=>String(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
 const competitiveQuestions=require('./competitive-questions.json');
+const subjectBank=require('./competitive-trivia.json');
+const timelineBank=require('./timeline-events.json');
+const subjectCategories=new Set(subjectBank.categories);
+function selectedSubjects(values){
+ const v=Array.isArray(values)?values:[];
+ const chosen=[...new Set(v.filter(x=>typeof x==='string'&&subjectCategories.has(x)))];
+ return chosen.length?chosen:subjectBank.categories.slice();
+}
+function matchMode(mode){return mode==='timeline'?'timeline':'quiz'}
+
 const allClueQuestions=[...data,...competitiveQuestions.clues.filter(c=>!data.some(d=>d.name===c.name))];
 const competitiveTiers={"easy":{"clues":["Sweden","Italy","Japan","Brazil","Australia","France","Germany","Spain","Mexico","Egypt","Canada","India","United States"],"outlines":["Italy","Japan","Brazil","Australia","France","Germany","Spain","Sweden","United Kingdom","United States of America","India","Egypt","Mexico"]},"medium":{"clues":["Norway","Greece","United Kingdom","Mexico","Canada","India","Argentina","Iceland","Morocco","Portugal","Finland","Turkey","South Africa","Thailand","Kenya"],"outlines":["Norway","Greece","United Kingdom","Canada","Portugal","Argentina","Turkey","Finland","South Africa","Morocco","Thailand","Peru","China","Poland","Ukraine","Iceland"]},"hard":{"clues":["Nepal","Vietnam","Peru","Indonesia","Colombia","South Korea","Singapore","Chile","Ireland","New Zealand","Kenya","Morocco","Finland","Portugal","South Africa"],"outlines":["Nepal","Vietnam","Chile","Peru","Indonesia","Colombia","Croatia","Romania","Mongolia","Madagascar","Kenya","Iceland","Ireland","Saudi Arabia","Pakistan","Ukraine","Morocco"]}};
 
@@ -44,7 +54,19 @@ function uniqueQuestion(items,seen,idOf,deckKey){
  seen.add(id);
  return available.find(item=>String(idOf(item))===id);
 }
-function makeQ(type,difficulty,seen){
+function makeQ(type,difficulty,seen,subjects){
+ const chosenSubjects=selectedSubjects(subjects);
+ if(type==='trivia'){
+  const pool=subjectBank.questions.filter(q=>chosenSubjects.includes(q.category));
+  const exact=pool.filter(q=>q.difficulty===matchDifficulty(difficulty)&&!seen.has(q.id));
+  const candidates=exact.length?exact:pool.filter(q=>!seen.has(q.id));
+  const picked=uniqueQuestion(candidates,seen,x=>x.id,'trivia:'+matchDifficulty(difficulty)+':'+chosenSubjects.slice().sort().join(','));
+  const order=shuffle([0,1,2,3]);
+  return{type:'trivia',prompt:picked.en,promptSv:picked.sv,category:picked.category,
+   options:order.map((i,pos)=>({id:String(pos),en:picked.options[i].en,sv:picked.options[i].sv})),
+   answer:String(order.indexOf(picked.correct))};
+ }
+
  const d=matchDifficulty(difficulty),tier=competitiveTiers[d];
  if(type==='year'){
    const pool=competitiveQuestions.years.filter(q=>q.difficulty===d);
@@ -65,13 +87,114 @@ function makeQ(type,difficulty,seen){
  const item=uniqueQuestion(pool,seen,x=>x.name,d+':clues');
  return{type,answer:item.name,clues:item.clues};
 }
-function makeMatchQuestions(difficulty){
- const seen={clues:new Set(),outline:new Set(),year:new Set()};
- return shuffle(['clues','clues','outline','outline','year','year']).map(type=>makeQ(type,difficulty,seen[type]));
+function makeMatchQuestions(difficulty,subjects){
+ const seen={clues:new Set(),outline:new Set(),year:new Set(),trivia:new Set()};
+ return shuffle(['trivia','trivia','trivia','trivia','trivia','clues','outline','year'])
+   .map(type=>makeQ(type,difficulty,seen[type],subjects));
 }
-function state(r,p){let finished=r.started&&r.round===r.qs.length,q=r.started&&!finished?r.qs[r.round]:null,reveal=q&&r.players.every(x=>x.done);return{code:r.id,difficulty:r.difficulty||'medium',started:r.started,finished,round:r.round,total:6,you:r.players.indexOf(p),players:r.players.map(x=>({name:x.name,score:x.score,done:x.done,ready:x.ready})),question:!q?null:q.type==='clues'?{type:q.type,clue:p.clue,clues:q.clues.slice(0,p.clue+1)}:q.type==='outline'?{type:q.type,shape:q.shape,viewBox:q.viewBox,options:q.options}:{type:q.type,prompt:q.prompt,options:q.options},yourDone:p.done,yourAnswer:p.answer,correctAnswer:reveal?q.answer:null}}
-function api(route,b){if(route==='/api/create'){let id;do{id=crypto.randomBytes(4).toString('hex').slice(0,6).toUpperCase()}while(rooms.has(id));let token=crypto.randomBytes(24).toString('hex'),p={name:String(b.name||'Player').trim().slice(0,24),token,score:0,done:false,ready:false,clue:0,answer:null};let r={id,players:[p],difficulty:matchDifficulty(b.difficulty),started:false,round:0,qs:[],last:Date.now()};rooms.set(id,r);return{token,...state(r,p)}}if(route==='/api/join'){let r=rooms.get(String(b.code||'').toUpperCase());if(!r)throw Error('Room not found');if(r.players.length>=2)throw Error('Room is full');let token=crypto.randomBytes(24).toString('hex'),p={name:String(b.name||'Player').trim().slice(0,24),token,score:0,done:false,ready:false,clue:0,answer:null};r.players.push(p);r.started=true;r.qs=makeMatchQuestions(r.difficulty);return{token,...state(r,p)}}
-let r=rooms.get(String(b.code||'').toUpperCase());if(!r)throw Error('Room not found');let p=r.players.find(x=>x.token===b.token);if(!p)throw Error('Invalid player session');r.last=Date.now();if(route==='/api/state')return state(r,p);if(!r.started||r.round>=6)throw Error('No active round');let q=r.qs[r.round];if(route==='/api/clue'){if(q.type!=='clues'||p.done)throw Error('Clues unavailable');p.clue=Math.min(4,p.clue+1)}else if(route==='/api/answer'){if(p.done)throw Error('Already answered');let answer=String(b.answer||'').slice(0,100);if(q.type!=='clues'&&!q.options.some(x=>String(x)===answer))throw Error('Choose an option');if(!answer.trim())throw Error('Enter an answer');p.answer=answer;p.done=true;if(norm(answer)===norm(q.answer))p.score+=q.type==='clues'?[100,80,60,40,20][p.clue]:100}else if(route==='/api/ready'){if(!r.players.every(x=>x.done))throw Error('Wait for both answers');p.ready=true;if(r.players.every(x=>x.ready)){r.round++;r.players.forEach(x=>Object.assign(x,{done:false,ready:false,clue:0,answer:null}))}}else throw Error('Unknown action');return state(r,p)}
+function makeTimelineQuestions(difficulty){
+ const d=matchDifficulty(difficulty),from=d==='easy'?1900:d==='medium'?1750:0;
+ const pool=timelineBank.events.filter(e=>e.year>=from);
+ const seen=new Set();
+ return Array.from({length:10},()=>uniqueQuestion(pool,seen,x=>x.id,'timeline:'+d));
+}
+function starterTimeline(){const a=timelineBank.anchor;return[{id:a.id,year:a.year,en:a.en,sv:a.sv,category:a.category}]}
+function newPlayer(name){
+ return{name:String(name||'Player').trim().slice(0,24)||'Player',
+ token:crypto.randomBytes(24).toString('hex'),score:0,done:false,ready:false,
+ clue:0,answer:null,correct:null,streak:0,timeline:starterTimeline()};
+}
+function state(r,p){
+ const finished=r.started&&r.round===r.qs.length,
+ q=r.started&&!finished?r.qs[r.round]:null,
+ reveal=q&&r.players.every(x=>x.done);
+ let question=null;
+ if(q){
+  if(r.mode==='timeline'){
+   question={type:'timeline',prompt:q.en,promptSv:q.sv,category:q.category};
+  }else if(q.type==='clues'){
+   question={type:'clues',clue:p.clue,clues:q.clues.slice(0,p.clue+1)};
+  }else if(q.type==='outline'){
+   question={type:'outline',shape:q.shape,viewBox:q.viewBox,options:q.options};
+  }else if(q.type==='trivia'){
+   question={type:'trivia',prompt:q.prompt,promptSv:q.promptSv,category:q.category,options:q.options};
+  }else{
+   question={type:'year',prompt:q.prompt,options:q.options};
+  }
+ }
+ const correctAnswer=!reveal?null:r.mode==='timeline'?q.year:
+   q.type==='trivia'?q.options.find(x=>x.id===q.answer):q.answer;
+ return{code:r.id,mode:r.mode,difficulty:r.difficulty,subjects:r.subjects,
+  started:r.started,finished,round:r.round,total:r.mode==='timeline'?10:8,
+  you:r.players.indexOf(p),players:r.players.map(x=>({name:x.name,score:x.score,
+   done:x.done,ready:x.ready,timelineCount:x.timeline.length,streak:x.streak})),
+  question,yourTimeline:r.mode==='timeline'?p.timeline.map(x=>({year:x.year,en:x.en,sv:x.sv})):null,
+  yourDone:p.done,yourAnswer:p.answer,yourCorrect:p.correct,correctAnswer};
+}
+function api(route,b){
+ if(route==='/api/create'){
+  let id;do{id=crypto.randomBytes(4).toString('hex').slice(0,6).toUpperCase()}while(rooms.has(id));
+  const mode=matchMode(b.mode),p=newPlayer(b.name);
+  const r={id,players:[p],mode,subjects:selectedSubjects(b.subjects),
+   difficulty:matchDifficulty(b.difficulty),started:false,round:0,qs:[],last:Date.now()};
+  rooms.set(id,r);return{token:p.token,...state(r,p)};
+ }
+ if(route==='/api/join'){
+  const r=rooms.get(String(b.code||'').toUpperCase());
+  if(!r)throw Error('Room not found');
+  if(r.players.length>=2)throw Error('Room is full');
+  if(matchMode(b.mode)!==r.mode)throw Error(r.mode==='timeline'?'This is a Timeline Duel room. Open the Timeline Duel page.':'This is a classic quiz room. Join on the Country Quest homepage.');
+  const p=newPlayer(b.name);
+  r.players.push(p);r.started=true;r.round=0;
+  r.qs=r.mode==='timeline'?makeTimelineQuestions(r.difficulty):makeMatchQuestions(r.difficulty,r.subjects);
+  r.last=Date.now();
+  return{token:p.token,...state(r,p)};
+ }
+ const r=rooms.get(String(b.code||'').toUpperCase());
+ if(!r)throw Error('Room not found');
+ const p=r.players.find(x=>x.token===b.token);
+ if(!p)throw Error('Invalid player session');
+ r.last=Date.now();
+ if(route==='/api/state')return state(r,p);
+ if(!r.started||r.round>=r.qs.length)throw Error('No active round');
+ const q=r.qs[r.round];
+ if(route==='/api/clue'){
+  if(r.mode!=='quiz'||q.type!=='clues'||p.done)throw Error('Clues unavailable');
+  p.clue=Math.min(4,p.clue+1);
+ }else if(route==='/api/answer'){
+  if(p.done)throw Error('Already answered');
+  const answer=String(b.answer??'').slice(0,100);
+  if(!answer.trim())throw Error('Enter an answer');
+  if(r.mode==='timeline'){
+   const slot=Number(answer);
+   if(!Number.isInteger(slot)||slot<0||slot>p.timeline.length)throw Error('Choose a valid timeline position');
+   const left=slot===0?-Infinity:p.timeline[slot-1].year;
+   const right=slot===p.timeline.length?Infinity:p.timeline[slot].year;
+   const correct=q.year>=left&&q.year<=right;
+   p.correct=correct;p.answer=String(slot);p.done=true;
+   if(correct){
+    p.streak+=1;p.score+=100+Math.min(50,(p.streak-1)*10);
+    p.timeline.splice(slot,0,{id:q.id,year:q.year,en:q.en,sv:q.sv,category:q.category});
+   }else{p.streak=0}
+  }else{
+   if(q.type==='trivia'){
+    if(!q.options.some(x=>x.id===answer))throw Error('Choose an option');
+   }else if(q.type!=='clues'&&!q.options.some(x=>String(x)===answer)){
+    throw Error('Choose an option');
+   }
+   p.answer=answer;p.done=true;p.correct=norm(answer)===norm(q.answer);
+   if(p.correct)p.score+=q.type==='clues'?[100,80,60,40,20][p.clue]:100;
+  }
+ }else if(route==='/api/ready'){
+  if(!r.players.every(x=>x.done))throw Error('Wait for both answers');
+  p.ready=true;
+  if(r.players.every(x=>x.ready)){
+   r.round++;
+   r.players.forEach(x=>Object.assign(x,{done:false,ready:false,clue:0,answer:null,correct:null}));
+  }
+ }else throw Error('Unknown action');
+ return state(r,p);
+}
 function respond(res,status,data){res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(data))}
 const root=path.join(__dirname,'public');
 http.createServer(async(req,res)=>{let u;try{u=new URL(req.url,'http://localhost')}catch{return respond(res,400,{error:'Bad URL'})}if(u.pathname==='/health')return respond(res,200,{ok:true});if(u.pathname.startsWith('/api/')){if(req.method!=='POST')return respond(res,405,{error:'POST required'});let body='';for await(const chunk of req){body+=chunk;if(body.length>10000)return respond(res,413,{error:'Request too large'})}try{return respond(res,200,api(u.pathname,JSON.parse(body||'{}')))}catch(e){return respond(res,400,{error:e.message})}}let file=u.pathname==='/'?'index.html':u.pathname.slice(1),full=path.resolve(root,file);if(!full.startsWith(root+path.sep))return respond(res,403,{error:'Forbidden'});try{let bytes=await fs.promises.readFile(full);res.writeHead(200,{'Content-Type':full.endsWith('.html')?'text/html; charset=utf-8':full.endsWith('.css')?'text/css; charset=utf-8':full.endsWith('.svg')?'image/svg+xml':full.endsWith('.js')?'text/javascript; charset=utf-8':'application/octet-stream'});res.end(bytes)}catch{return respond(res,404,{error:'Not found'})}}).listen(PORT,'0.0.0.0',()=>console.log('Country Quest listening on '+PORT));
