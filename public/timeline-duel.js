@@ -88,13 +88,13 @@ function landing(){
  +'<input class="field" id="roomCode" name="code" maxlength="6" required style="text-transform:uppercase" placeholder="'+escape(t('roomHint'))+'" value="'+escape(invite.toUpperCase())+'">'
  +'<button class="btn block" style="margin-top:24px" type="submit">'+escape(t('joinButton'))+'</button></form></div></section>'
  +'<p class="alert" id="error">'+escape(lastError)+'</p>';
- $('#createForm').onsubmit=async e=>{
+ $('createForm').onsubmit=async e=>{
   e.preventDefault();
-  const name=String($('#createName')?.value||'').trim()||'Player';
+  const name=String($('createName')?.value||'').trim()||'Player';
   const choice=document.querySelector('input[name="difficulty"]:checked');
   await joinOrCreate('create',{name,difficulty:choice?.value||'medium'});
  };
- $('#joinForm').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.currentTarget);await joinOrCreate('join',{name:f.get('name'),code:String(f.get('code')||'').toUpperCase()})};
+ $('joinForm').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.currentTarget);await joinOrCreate('join',{name:f.get('name'),code:String(f.get('code')||'').toUpperCase()})};
 }
 async function joinOrCreate(action,form){
  if(busy)return;
