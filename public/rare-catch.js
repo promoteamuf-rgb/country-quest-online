@@ -23,7 +23,7 @@ kicker:'COUNTRY QUEST · FISHING ADVENTURE',intro:'Answer rarer. Catch bigger fi
 begin:'CAST YOUR LINE',facts:['7 ROUNDS','25 SECONDS','RARE ANSWERS = BIG FISH'],how:'From tiny sardines to legendary sailfish — what will you catch?',
 casting:'Casting your line…',castingLine:'Your bait is sinking. Get ready for your question!',round:'ROUND',of:'OF',question:'NAME ONE CORRECT ANSWER',placeholder:'Type a country or capital…',send:'HOOK IT!',sonar:'📡 Sonar hint',sonarGuide:'2 hints per fishing trip',hintFound:'Sonar found one valid example:',hintCaution:'Try something rarer for a bigger fish.',tryAgain:'That answer is not in the accepted list. Try another!',empty:'Enter an answer first.',hintNone:'No sonar hints left.',reeling:'FISH ON THE LINE!',reelingLead:'A fish is biting! Reel it in…',
 catch:'YOU CAUGHT A FISH!',noCatch:'THE FISH GOT AWAY!',noCatchText:'No recognized answer before time ran out. Better luck on the next cast.',rarity:'ANSWER RARITY',result:'Correct geography answer',weight:'FISH WEIGHT',score:'RARITY POINTS',next:'CAST AGAIN →',end:'SEE YOUR FISHING LOG →',another:'Fish again',replay:'Go fishing again',best:'BEST CATCH',summary:'YOUR FISHING TRIP',summaryText:'Seven questions, seven chances to land a big one. Here is your fishing log.',
-noAnswer:'No fish',points:'pts',record:'Best trip weight',rareInfo:'Scores are curated rarity tiers, not measured from other players.',note:'The more unusual your correct answer, the larger your fish.',copy:'Copy result',copied:'Copied!',fishType:'FISH SPECIES',catchTotal:'TOTAL WEIGHT',fishUnit:'kg',rank10:'COMMON',rank25:'FAMILIAR',rank40:'UNCOMMON',rank60:'RARE',rank80:'EPIC',rank100:'LEGENDARY'
+noAnswer:'No fish',points:'pts',record:'Best trip weight',rareInfo:'Scores are curated rarity tiers, not measured from other players.',note:'The more unusual your correct answer, the larger your fish.',copy:'Copy result',copied:'Copied!',fishType:'FISH SPECIES',catchTotal:'TOTAL WEIGHT',fishUnit:'kg',rank10:'COMMON',rank25:'FAMILIAR',rank40:'UNCOMMON',rank60:'RARE',rank80:'EPIC',rank100:'LEGENDARY',diveHeading:'FOLLOW THE HOOK',diveLine:'Rarer answer means a deeper dive and a bigger fish.',diveDepth:'DEPTH',diveTarget:'FISH ZONE',diveFishFound:'FISH SPOTTED!',diveBite:'The fish has taken the bait!',diveGoing:'YOUR HOOK IS DIVING',diveGoingLine:'Watch the hook travel down to your catch.'
 },
 sv:{
 navAll:'Alla spel',navSolo:'Spela själv',hud:'FÅNGSTJOURNAL',fishCaught:'FÅNGADE FISKAR',totalWeight:'TOTAL VIKT',biggest:'STÖRSTA FISKEN',footer:'Eget Country Quest-spel · Sällsynthetspoängen är uppskattade, inte riktig spelarstatistik',
@@ -31,7 +31,7 @@ kicker:'COUNTRY QUEST · FISKEÄVENTYR',intro:'Svara ovanligare. Fånga större 
 begin:'KASTA UT LINAN',facts:['7 RUNDOR','25 SEKUNDER','OVANLIGT SVAR = STOR FISK'],how:'Från små sardiner till legendariska segelfiskar – vad kommer du att fånga?',
 casting:'Kastar ut linan …',castingLine:'Betet sjunker. Gör dig redo för nästa fråga!',round:'RUNDA',of:'AV',question:'ANGE ETT RÄTT SVAR',placeholder:'Skriv ett land eller en huvudstad …',send:'FÅNGA!',sonar:'📡 Sonarledtråd',sonarGuide:'2 ledtrådar per fisketur',hintFound:'Sonaren hittade ett godkänt exempel:',hintCaution:'Prova något ovanligare för en större fisk.',tryAgain:'Svaret finns inte i vår godkända lista. Försök igen!',empty:'Skriv ett svar först.',hintNone:'Inga sonarledtrådar kvar.',reeling:'NAPP PÅ KROKEN!',reelingLead:'En fisk har nappat! Dra upp den …',
 catch:'DU FÅNGADE EN FISK!',noCatch:'FISKEN KOM UNDAN!',noCatchText:'Inget godkänt svar innan tiden tog slut. Bättre lycka vid nästa kast.',rarity:'SVARETS SÄLLSYNTHET',result:'Rätt geografisvar',weight:'FISKENS VIKT',score:'SÄLLSYNTHETSPOÄNG',next:'KASTA IGEN →',end:'SE FÅNGSTJOURNALEN →',another:'Fiska igen',replay:'Fiska en gång till',best:'BÄSTA FÅNGSTEN',summary:'DIN FISKETUR',summaryText:'Sju frågor, sju chanser att få en riktig storfisk. Här är din fångstjournal.',
-noAnswer:'Ingen fisk',points:'p',record:'Bästa totalvikt',rareInfo:'Poängen är uppskattade sällsynthetsnivåer, inte uppmätta från andra spelare.',note:'Ju ovanligare rätt svar, desto större fisk.',copy:'Kopiera resultat',copied:'Kopierat!',fishType:'FISKART',catchTotal:'TOTAL VIKT',fishUnit:'kg',rank10:'VANLIG',rank25:'VÄLKÄND',rank40:'MINDRE VANLIG',rank60:'SÄLLSYNT',rank80:'EPISK',rank100:'LEGENDARISK'
+noAnswer:'Ingen fisk',points:'p',record:'Bästa totalvikt',rareInfo:'Poängen är uppskattade sällsynthetsnivåer, inte uppmätta från andra spelare.',note:'Ju ovanligare rätt svar, desto större fisk.',copy:'Kopiera resultat',copied:'Kopierat!',fishType:'FISKART',catchTotal:'TOTAL VIKT',fishUnit:'kg',rank10:'VANLIG',rank25:'VÄLKÄND',rank40:'MINDRE VANLIG',rank60:'SÄLLSYNT',rank80:'EPISK',rank100:'LEGENDARISK',diveHeading:'FÖLJ KROKEN',diveLine:'Ovanligare svar ger ett djupare dyk och en större fisk.',diveDepth:'DJUP',diveTarget:'FISKZON',diveFishFound:'FISK UPPTÄCKT!',diveBite:'Fisken har nappat!',diveGoing:'KROKEN DYKER NER',diveGoingLine:'Följ kroken ner till din fångst.'
 }
 };
 let lang='en';try{const v=localStorage.getItem(LANG_KEY);if(v==='sv'||v==='en')lang=v}catch{}
@@ -94,6 +94,7 @@ function setLang(v){
  if(phase==='playing')typed=$('answer')?.value??typed;
  lang=v;try{localStorage.setItem(LANG_KEY,v)}catch{}
  refreshStatic();render();
+ if(phase==='descending'&&latest?.fish)window.CQRareDive?.updateLanguage(diveCopy(latest.fish));
 }
 function refreshStatic(){
  document.documentElement.lang=lang;
@@ -113,12 +114,12 @@ function updateHUD(){
 }
 function begin(){
  if(BANK.length<TOTAL){$('stage').textContent='Question bank unavailable.';return}
- clearTimers();clearScene();
+ clearTimers();window.CQRareDive?.reset();clearScene();
  questions=newQuestions();round=0;answers=[];points=0;totalWeight=0;biggest=0;sonar=2;sonarAnswer=null;latest=null;message='';typed='';
  refreshStatic();cast();
 }
 function cast(){
- clearTimers();clearScene();phase='casting';document.body.dataset.phase=phase;sonarAnswer=null;message='';typed='';
+ clearTimers();window.CQRareDive?.reset();clearScene();phase='casting';document.body.dataset.phase=phase;sonarAnswer=null;message='';typed='';
  render();
  void document.body.offsetWidth;document.body.classList.add('casting');
  transition=setTimeout(()=>{
@@ -158,21 +159,21 @@ function sonarHint(){
  if(hint){hint.hidden=false;hint.innerHTML='<b>'+esc(val('hintFound'))+'</b> '+esc(local(sonarAnswer))+' — '+esc(val('hintCaution'))}
  const btn=$('sonar');if(btn)btn.disabled=true;
 }
-function finish(answer){
- if(phase!=='playing')return;
- clearTimers();
- phase=answer?'reeling':'reveal';document.body.dataset.phase=phase;
- const fish=answer?fishFor(answer):null;
- latest={question:questions[round],answer,fish,points:answer?answer.points:0};
- answers.push(latest);points+=latest.points;
- if(fish){totalWeight=Math.round((totalWeight+fish.weight)*10)/10;biggest=Math.max(biggest,fish.weight)}
- updateHUD();
- if(!fish){document.body.classList.add('no-fish');render();return}
- const fishNode=$('caughtFish'),fishBody=$('fishBody');
- fishBody.innerHTML=fishSvg(fish);
- const scale=fish.points===100?1.8:fish.points===80?1.55:fish.points===60?1.3:fish.points===40?1.05:fish.points===25?.85:.65;
- clearScene();
- fishNode.style.setProperty('--scale',scale);
+function diveCopy(fish){
+ const t=TEXT[lang];
+ return {
+  heading:t.diveHeading,
+  description:t.diveLine,
+  depth:t.diveDepth,
+  target:t.diveTarget,
+  rarity:t['rank'+fish.points]+' · '+fish.points+' '+t.points,
+  fishFound:t.diveFishFound,
+  bite:t.diveBite
+ };
+}
+function startReeling(){
+ if(phase!=='descending')return;
+ phase='reeling';document.body.dataset.phase=phase;
  document.body.classList.add('hooked');
  render();
  transition=setTimeout(()=>{
@@ -188,13 +189,37 @@ function finish(answer){
   },1000);
  },520);
 }
+function finish(answer){
+ if(phase!=='playing')return;
+ clearTimers();
+ const fish=answer?fishFor(answer):null;
+ latest={question:questions[round],answer,fish,points:answer?answer.points:0};
+ answers.push(latest);points+=latest.points;
+ if(fish){totalWeight=Math.round((totalWeight+fish.weight)*10)/10;biggest=Math.max(biggest,fish.weight)}
+ updateHUD();
+ if(!fish){
+  phase='reveal';document.body.dataset.phase=phase;
+  document.body.classList.add('no-fish');render();return;
+ }
+ const fishNode=$('caughtFish'),fishBody=$('fishBody');
+ fishBody.innerHTML=fishSvg(fish);
+ const scale=fish.points===100?1.8:fish.points===80?1.55:fish.points===60?1.3:fish.points===40?1.05:fish.points===25?.85:.65;
+ clearScene();fishNode.style.setProperty('--scale',scale);
+ phase='descending';document.body.dataset.phase=phase;
+ render();
+ if(window.CQRareDive){
+  window.CQRareDive.start(fish,fishSvg(fish),diveCopy(fish),startReeling);
+ }else{
+  startReeling();
+ }
+}
 function next(){
  if(phase!=='reveal')return;
  if(round>=TOTAL-1){complete();return}
  round++;cast();
 }
 function complete(){
- clearTimers();clearScene();phase='done';document.body.dataset.phase=phase;
+ clearTimers();window.CQRareDive?.reset();clearScene();phase='done';document.body.dataset.phase=phase;
  const best=Number(read('cq-rare-catch-best',0))||0;
  if(totalWeight>best)save('cq-rare-catch-best',totalWeight);
  render();
@@ -234,6 +259,10 @@ function render(){
     +'<span class="helper">'+esc(t.sonarGuide)+'</span></div>'
     +'<div class="sonar-result" id="sonarResult" '+(sonarAnswer?'':'hidden')+'>'
     +(sonarAnswer?'<b>'+esc(t.hintFound)+'</b> '+esc(local(sonarAnswer))+' — '+esc(t.hintCaution):'')+'</div>';
+ }
+ else if(phase==='descending'){
+  h=cardHeader(t.diveGoing)+'<h2 class="headline">🪝 '+esc(t.diveGoing)+'</h2>'
+   +'<p class="lead">'+esc(t.diveGoingLine)+'</p>';
  }
  else if(phase==='reeling'){
   h=cardHeader(t.reeling)+'<h2 class="headline">🎣 '+esc(t.reeling)+'</h2><p class="lead">'+esc(t.reelingLead)+'</p>'
