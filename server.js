@@ -19,6 +19,7 @@ const data=[
 {name:"Mexico",clues:["This country is in North America.","It has coastlines on two oceans.","Chichén Itzá is here.","Its cuisine includes tacos and tamales.","Its capital is Mexico City."],shape:"M35 40 L85 56 117 75 150 87 184 78 215 98 204 111 165 108 135 136 113 112 91 98 63 92 Z"}];
 const years=[["The Berlin Wall fell",1989],["The first Moon landing",1969],["The Titanic sank",1912],["World War II ended",1945],["The first modern Olympic Games were held",1896],["The United Nations was founded",1945],["India gained independence",1947],["The World Wide Web became publicly available",1991],["The French Revolution began",1789],["The first iPhone was released",2007],["The euro entered circulation as physical money",2002],["The first FIFA World Cup was held",1930]];
 const geographicOutlines=require('./public/outlines.js');
+const MAX_PLAYERS=12,MIN_PLAYERS=2;
 const rooms=new Map(),rand=n=>crypto.randomInt(n),shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){let j=rand(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
 const norm=s=>String(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
 const competitiveQuestions=require('./competitive-questions.json');
@@ -125,6 +126,7 @@ function state(r,p){
  const correctAnswer=!reveal?null:r.mode==='timeline'?q.year:
    q.type==='trivia'?q.options.find(x=>x.id===q.answer):q.answer;
  return{code:r.id,mode:r.mode,difficulty:r.difficulty,subjects:r.subjects,
+  isHost:r.hostToken===p.token,maxPlayers:MAX_PLAYERS,minPlayers:MIN_PLAYERS,
   started:r.started,finished,round:r.round,total:r.mode==='timeline'?10:8,
   you:r.players.indexOf(p),players:r.players.map(x=>({name:x.name,score:x.score,
    done:x.done,ready:x.ready,timelineCount:x.timeline.length,streak:x.streak})),
@@ -135,18 +137,18 @@ function api(route,b){
  if(route==='/api/create'){
   let id;do{id=crypto.randomBytes(4).toString('hex').slice(0,6).toUpperCase()}while(rooms.has(id));
   const mode=matchMode(b.mode),p=newPlayer(b.name);
-  const r={id,players:[p],mode,subjects:selectedSubjects(b.subjects),
+  const r={id,players:[p],hostToken:p.token,mode,subjects:selectedSubjects(b.subjects),
    difficulty:matchDifficulty(b.difficulty),started:false,round:0,qs:[],last:Date.now()};
   rooms.set(id,r);return{token:p.token,...state(r,p)};
  }
  if(route==='/api/join'){
   const r=rooms.get(String(b.code||'').toUpperCase());
   if(!r)throw Error('Room not found');
-  if(r.players.length>=2)throw Error('Room is full');
+  if(r.started)throw Error('The match has already started. Ask the host to create a new room.');
+  if(r.players.length>=MAX_PLAYERS)throw Error('Room is full (maximum '+MAX_PLAYERS+' players)');
   if(matchMode(b.mode)!==r.mode)throw Error(r.mode==='timeline'?'This is a Timeline Duel room. Open the Timeline Duel page.':'This is a classic quiz room. Join on the Country Quest homepage.');
   const p=newPlayer(b.name);
-  r.players.push(p);r.started=true;r.round=0;
-  r.qs=r.mode==='timeline'?makeTimelineQuestions(r.difficulty):makeMatchQuestions(r.difficulty,r.subjects);
+  r.players.push(p);
   r.last=Date.now();
   return{token:p.token,...state(r,p)};
  }
@@ -156,6 +158,15 @@ function api(route,b){
  if(!p)throw Error('Invalid player session');
  r.last=Date.now();
  if(route==='/api/state')return state(r,p);
+ if(route==='/api/start'){
+  if(r.hostToken!==p.token)throw Error('Only the room host can start the match');
+  if(r.started)throw Error('The match has already started');
+  if(r.players.length<MIN_PLAYERS)throw Error('At least '+MIN_PLAYERS+' players are required to start');
+  r.qs=r.mode==='timeline'?makeTimelineQuestions(r.difficulty):makeMatchQuestions(r.difficulty,r.subjects);
+  r.round=0;r.started=true;
+  r.players.forEach(x=>Object.assign(x,{score:0,streak:0,timeline:starterTimeline(),done:false,ready:false,clue:0,answer:null,correct:null}));
+  return state(r,p);
+ }
  if(!r.started||r.round>=r.qs.length)throw Error('No active round');
  const q=r.qs[r.round];
  if(route==='/api/clue'){
@@ -186,7 +197,7 @@ function api(route,b){
    if(p.correct)p.score+=q.type==='clues'?[100,80,60,40,20][p.clue]:100;
   }
  }else if(route==='/api/ready'){
-  if(!r.players.every(x=>x.done))throw Error('Wait for both answers');
+  if(!r.players.every(x=>x.done))throw Error('Wait for everyone to answer');
   p.ready=true;
   if(r.players.every(x=>x.ready)){
    r.round++;
