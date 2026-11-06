@@ -111,7 +111,7 @@ function state(r,p){
  let question=null;
  if(q){
   if(r.mode==='timeline'){
-   question={type:'timeline',prompt:q.en,promptSv:q.sv,category:q.category};
+   question={type:'timeline',en:q.en,sv:q.sv,prompt:q.en,promptSv:q.sv,category:q.category};
   }else if(q.type==='clues'){
    question={type:'clues',clue:p.clue,clues:q.clues.slice(0,p.clue+1)};
   }else if(q.type==='outline'){
