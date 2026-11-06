@@ -67,7 +67,13 @@ function updateLanguage(value){
  document.title=(lang==='sv'?'Tidslinjeduell':'Timeline Duel')+' · Country Quest';
  render();
 }
-function abandon(){session=null;state=null;remove();lastError='';render()}
+function abandon(){
+ const exiting=session;
+ session=null;state=null;remove();lastError='';
+ if(exiting)fetch('/api/leave',{method:'POST',headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({...exiting,mode:'timeline'}),keepalive:true}).catch(()=>{});
+ render();
+}
 function heroArt(){return '<div class="hero-art" aria-hidden="true"><div class="time-ribbon"><span><em>⌛</em><b>1900</b></span><span><em>🚀</em><b>1969</b></span><span><em>💻</em><b>2000</b></span></div></div>'}
 function landing(){
  const invite=new URLSearchParams(location.search).get('room')||'';
