@@ -5,6 +5,7 @@
 <meta name="theme-color" content="#073350"><meta name="description" content="Rare Catch — a yacht fishing geography quiz. Answer rarer, catch bigger fish!">
 <title>Rare Catch · Country Quest</title>
 <link rel="stylesheet" href="/rare-catch.css?v=4">
+<link rel="stylesheet" href="/rare-catch-dive.css?v=1">
 </head>
 <body class="catch-page" data-phase="intro">
 <div class="catch-world" aria-hidden="true">
@@ -36,6 +37,29 @@
  <div class="caught-fish" id="caughtFish"><div class="fish-body" id="fishBody">🐟</div><span class="fish-aura"></span></div>
  <div class="splash-ring" id="splashRing"></div>
 </div>
+<div class="dive-scene" id="diveScene" hidden aria-hidden="true">
+ <div class="dive-ocean">
+   <div class="dive-surface"></div>
+   <div class="dive-zone shallow"><span class="zone-name">SUNLIT WATER</span><span class="zone-fish a">🐠</span><span class="zone-fish b">🐟</span></div>
+   <div class="dive-zone reef"><span class="zone-name">REEF EDGE</span><span class="zone-fish a">🐢</span><span class="zone-fish c">🐡</span></div>
+   <div class="dive-zone blue"><span class="zone-name">OPEN OCEAN</span><span class="zone-fish a">🐟</span><span class="zone-fish b">🦈</span></div>
+   <div class="dive-zone twilight"><span class="zone-name">TWILIGHT ZONE</span><span class="zone-fish a">🦈</span><span class="zone-fish c">🪼</span></div>
+   <div class="dive-zone abyss"><span class="zone-name">DEEP BLUE</span><span class="zone-fish a">🦑</span><span class="zone-fish b">🐙</span></div>
+ </div>
+ <div class="dive-hook-rig"><span class="dive-hook">🪝</span></div>
+ <i class="trail" style="--offset:-28px;--size:9px;--delay:-.3s"></i>
+ <i class="trail" style="--offset:20px;--size:13px;--delay:-.8s"></i>
+ <i class="trail" style="--offset:-65px;--size:8px;--delay:-.1s"></i>
+ <i class="trail" style="--offset:51px;--size:11px;--delay:-.5s"></i>
+ <i class="trail" style="--offset:9px;--size:6px;--delay:-1s"></i>
+ <div class="dive-fish-target" id="diveFish"></div><div class="dive-ring"></div>
+ <div class="dive-hud">
+   <div><div class="dive-kicker" id="diveRarity">CORRECT ANSWER</div><h2 class="dive-title" id="diveTitle">FOLLOW THE HOOK</h2><p class="dive-label" id="diveLabel">Deeper answers catch bigger fish</p></div>
+   <div class="dive-depth"><small id="diveDepthCaption">DEPTH</small><strong id="diveDepthValue">0 m</strong><span class="dive-label" id="diveDepthZone">SUNLIT SHALLOWS</span></div>
+ </div>
+ <div class="dive-target-zone" id="diveTarget">TARGET: 0 m</div>
+ <div class="dive-zone-meter"><span></span></div>
+</div>
 <div class="site-ui">
  <header class="catch-header">
    <a class="brand" href="/" aria-label="Country Quest home"><span class="brand-icon">✳</span><span>COUNTRY<b>QUEST</b></span></a>
@@ -58,5 +82,6 @@
  <footer class="catch-footer"><span id="footnote">Original game · Curated rarity ratings, not live player statistics</span><a href="/" id="homeFooter">Country Quest ↗</a></footer>
 </div>
 <script src="/rare-bank.js?v=1"></script>
-<script src="/rare-catch.js?v=4"></script>
+<script src="/rare-catch-dive.js?v=1"></script>
+<script src="/rare-catch.js?v=5"></script>
 </body></html>
