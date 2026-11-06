@@ -4,7 +4,7 @@
 .dive-scene{position:fixed;inset:0;z-index:65;overflow:hidden;isolation:isolate;background:#075178;color:#effffe;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,visibility .18s}
 .dive-scene.active{opacity:1;visibility:visible}
 .dive-ocean{position:absolute;left:0;right:0;top:0;height:480vh;transform:translate3d(0,0,0);background:linear-gradient(to bottom,#52d3e6 0%,#1699ca 11%,#067aa8 22%,#125a91 36%,#123969 54%,#0c2449 71%,#071330 87%,#050b20 100%);will-change:transform}
-.dive-scene.sinking .dive-ocean{transform:translate3d(0,calc(-1 * var(--descent,60vh)),0);transition:transform var(--dive-duration,1500ms) cubic-bezier(.25,.44,.16,.98)}
+.dive-scene.sinking .dive-ocean{transform:translate3d(0,var(--descent,-60vh),0);transition:transform var(--dive-duration,1500ms) cubic-bezier(.25,.44,.16,.98)}
 .dive-ocean:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#062a5040,transparent 26%,#baffff13 65%,#00122f33);pointer-events:none}
 .dive-zone{position:absolute;left:0;right:0;height:70vh;pointer-events:none}
 .dive-zone:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,#a6f2e91d,transparent)}
@@ -48,4 +48,4 @@ body.dive-in-progress .catch-world .yacht-stage,body.dive-in-progress .catch-wor
 @keyframes dive-hook-bite{0%,100%{transform:translate(-50%,0) rotate(0)}50%{transform:translate(-50%,9px) rotate(18deg)}}
 @keyframes dive-bite-ring{0%{opacity:.9;transform:translate(-50%,-50%) scale(.2)}100%{opacity:0;transform:translate(-50%,-50%) scale(5)}}
 @media(max-width:680px){.dive-hud{top:22px;gap:10px}.dive-title{font-size:42px}.dive-label{max-width:200px;font-size:11px}.dive-depth{padding:8px 10px;min-width:107px;border-radius:10px}.dive-depth strong{font-size:37px}.dive-kicker{letter-spacing:1px}.dive-fish-target{width:155px;left:56%}.dive-target-zone{font-size:10px}.dive-zone .zone-name{font-size:23px}.dive-zone .zone-fish{font-size:68px}}
-@media(prefers-reduced-motion:reduce){.dive-scene,.dive-scene.sinking .dive-ocean,.dive-scene.sinking .dive-zone-meter span,.dive-scene.landed .dive-fish-target{transition:none!important}.dive-scene .trail,.dive-hook,.dive-ring{animation:none!important}.dive-scene.sinking .dive-ocean{transform:translate3d(0,calc(-1 * var(--descent,60vh)),0)}}
+@media(prefers-reduced-motion:reduce){.dive-scene,.dive-scene.sinking .dive-ocean,.dive-scene.sinking .dive-zone-meter span,.dive-scene.landed .dive-fish-target{transition:none!important}.dive-scene .trail,.dive-hook,.dive-ring{animation:none!important}.dive-scene.sinking .dive-ocean{transform:translate3d(0,var(--descent,-60vh),0)}}
