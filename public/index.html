@@ -302,10 +302,22 @@ const answerLabel=q=>{
 const correctLabel=q=>q.type==='trivia'?localizedOption(state.correctAnswer):state.correctAnswer;
 let h='';
 if(!state.started){
- h='<h1>'+multilang('Invite a friend.','Bjud in en vän.')+'</h1><div class="panel">'
+ const playerCount=state.players.length;
+ const canStart=playerCount>=(state.minPlayers||2);
+ const roster='<div class="room-player-list">'+state.players.map((p,i)=>
+  '<div class="room-player"><span class="room-player-num">'+(i+1)+'</span><span>'+escapeHTML(p.name)+'</span>'
+  +(i===0?'<small>★ '+multilang('Host','Värd')+'</small>':'')
+  +(i===state.you?'<small>'+multilang('(you)','(du)')+'</small>':'')+'</div>').join('')+'</div>';
+ h='<h1>'+multilang('Competitive waiting room','Tävlingslobby')+'</h1><div class="panel">'
   +'<p class="muted">'+multilang('Share this room code:','Dela rumskoden:')+'</p><div class="code">'+escapeHTML(state.code)+'</div>'+subjectDisplay
-  +'<div class="actions"><button id="copy">'+multilang('Copy invitation link','Kopiera inbjudningslänk')+'</button><button class="alt" id="leave">'+multilang('Leave','Lämna')+'</button></div>'
-  +'<p class="muted">'+multilang('Waiting for player 2...','Väntar på spelare två...')+'</p></div>';
+  +'<h2>'+multilang('Players','Spelare')+' ('+playerCount+' / '+(state.maxPlayers||12)+')</h2>'+roster
+  +'<div class="actions"><button id="copy">'+multilang('Copy invitation link','Kopiera inbjudningslänk')+'</button>'
+  +(state.isHost?'<button id="startMatch" '+(canStart?'':'disabled')+'>'+multilang('Start match','Starta matchen')+' ('+playerCount+')</button>':'')
+  +'<button class="alt" id="leave">'+multilang('Leave','Lämna')+'</button></div>'
+  +'<p class="muted">'+(state.isHost
+     ?canStart?multilang('Everyone joined? Start whenever you are ready. More players cannot join after the match begins.','Är alla med? Starta när du vill. Ingen kan gå med efter matchstart.')
+     :multilang('Invite at least one other player to enable Start.','Bjud in minst en spelare till för att kunna starta.')
+     :multilang('Waiting for the host to start the match.','Väntar på att värden startar matchen.'))+'</p></div>';
 }else if(state.finished){
  const [a,b]=state.players;
  h='<h1>🏆 '+(a.score===b.score?multilang("It's a tie!",'Oavgjort!'):escapeHTML(a.score>b.score?a.name:b.name)+' '+multilang('wins!','vinner!'))+'</h1>'
@@ -361,7 +373,7 @@ if(draft){
     }
   }
 }
-let el=id=>document.getElementById(id);if(el('copy'))el('copy').onclick=async()=>{let link=location.origin+'/?room='+encodeURIComponent(state.code);try{await navigator.clipboard.writeText(link);el('copy').textContent='Link copied!'}catch{prompt('Copy link:',link)}};if(el('leave'))el('leave').onclick=()=>{if(confirm('Leave this match?'))leave()};if(el('answer'))el('answer').onsubmit=e=>{e.preventDefault();act('answer',{answer:el('guess').value})};if(el('clue'))el('clue').onclick=()=>act('clue');if(el('ready'))el('ready').onclick=()=>act('ready');document.querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>act('answer',{answer:b.dataset.choice}))}
+let el=id=>document.getElementById(id);if(el('copy'))el('copy').onclick=async()=>{let link=location.origin+'/?room='+encodeURIComponent(state.code);try{await navigator.clipboard.writeText(link);el('copy').textContent='Link copied!'}catch{prompt('Copy link:',link)}};if(el('leave'))el('leave').onclick=()=>{if(confirm('Leave this match?'))leave()};if(el('answer'))el('answer').onsubmit=e=>{e.preventDefault();act('answer',{answer:el('guess').value})};if(el('clue'))el('clue').onclick=()=>act('clue');if(el('ready'))el('ready').onclick=()=>act('ready');if(el('startMatch'))el('startMatch').onclick=()=>act('start');document.querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>act('answer',{answer:b.dataset.choice}))}
 async function act(action,extra={}){if(busy)return;busy=true;try{state=await api(action,extra);render()}catch(err){let m=document.getElementById('message');if(m)m.textContent=err.message;else alert(err.message)}finally{busy=false}}
 async function poll(){if(!session||busy)return;try{const fresh=await api('state');if(JSON.stringify(fresh)!==JSON.stringify(state)){
       const previous=state;
