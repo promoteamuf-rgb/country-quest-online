@@ -41,3 +41,15 @@ footer{position:relative;z-index:2;margin-top:auto;border-top:1px solid #a3dfd42
 @media(max-width:720px){.hero{grid-template-columns:1fr}.hero-art{min-height:220px}.grid{grid-template-columns:1fr}.topbar nav{display:none}.topbar{gap:10px}.langs{margin-left:auto}.brand{font-size:22px}.main{padding-top:25px}.hero h1{font-size:76px}.panel{padding:19px}.room-head{align-items:flex-start}}
 @media(max-width:420px){.hero h1{font-size:64px}.time-ribbon span{min-height:100px}.time-ribbon span em{font-size:24px}.time-ribbon span b{font-size:18px}.scores{gap:7px}.score strong{font-size:28px}.question-card{padding:17px}.year-reveal{font-size:49px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.time-slot{transition:none!important}}
+
+/* Keep room creation and joining visible on every visit; resume is opt-in. */
+.resume-panel{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+margin:0 0 21px;padding:15px 20px;border-radius:13px;border:1px solid #9ddcc47c;
+background:linear-gradient(115deg,#193d4f,#183555)}
+.resume-panel>div:first-child{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.resume-panel strong{font:900 27px/1 "Barlow Condensed",Impact,sans-serif;letter-spacing:3px;color:#ffe3a2}
+.resume-buttons{display:flex;gap:8px;flex-wrap:wrap}
+.resume-buttons .btn{font-size:14px;min-height:38px;padding:8px 12px}
+.resume-buttons #resumeRoom{border-color:#fce3aa;color:#ffebbc}
+.resume-buttons #forgetRoom{border-color:#8c9caa;color:#cdd6e0}
+@media(max-width:680px){.resume-panel{align-items:stretch}.resume-buttons{width:100%}.resume-buttons .btn{flex:1}}
