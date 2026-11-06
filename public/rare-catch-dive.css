@@ -1,0 +1,51 @@
+/* Rare Catch: lightweight camera-follow hook dive. Only transform and opacity
+   move during descent; no videos, canvases or large animated images. */
+.dive-scene[hidden]{display:none!important}
+.dive-scene{position:fixed;inset:0;z-index:65;overflow:hidden;isolation:isolate;background:#075178;color:#effffe;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,visibility .18s}
+.dive-scene.active{opacity:1;visibility:visible}
+.dive-ocean{position:absolute;left:0;right:0;top:0;height:480vh;transform:translate3d(0,0,0);background:linear-gradient(to bottom,#52d3e6 0%,#1699ca 11%,#067aa8 22%,#125a91 36%,#123969 54%,#0c2449 71%,#071330 87%,#050b20 100%);will-change:transform}
+.dive-scene.sinking .dive-ocean{transform:translate3d(0,calc(-1 * var(--descent,60vh)),0);transition:transform var(--dive-duration,1500ms) cubic-bezier(.25,.44,.16,.98)}
+.dive-ocean:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#062a5040,transparent 26%,#baffff13 65%,#00122f33);pointer-events:none}
+.dive-zone{position:absolute;left:0;right:0;height:70vh;pointer-events:none}
+.dive-zone:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,#a6f2e91d,transparent)}
+.dive-zone .zone-name{position:absolute;left:14%;top:11%;color:#d4faffbd;font:900 clamp(16px,2.8vw,34px)/1 "Barlow Condensed",Impact,sans-serif;letter-spacing:3px;text-shadow:0 3px 10px #00192c85;opacity:.76}
+.dive-zone .zone-fish{position:absolute;font-size:clamp(48px,8vw,110px);filter:drop-shadow(0 12px 5px #031f3944);opacity:.74}
+.dive-zone .zone-fish.a{right:14%;top:16%}
+.dive-zone .zone-fish.b{right:38%;bottom:7%;font-size:clamp(38px,6vw,82px);opacity:.5}
+.dive-zone .zone-fish.c{left:21%;bottom:4%;font-size:clamp(38px,6vw,76px);opacity:.6}
+.dive-zone.shallow{top:14vh}
+.dive-zone.reef{top:93vh}
+.dive-zone.blue{top:167vh}
+.dive-zone.twilight{top:246vh}
+.dive-zone.abyss{top:330vh}
+.dive-surface{position:absolute;top:0;left:0;right:0;height:13vh;background:linear-gradient(#e1fffa,#72dae6 33%,transparent);opacity:.5}
+.dive-hook-rig{position:absolute;z-index:7;top:0;left:50%;height:50%;width:2px;transform:translateX(-50%);background:linear-gradient(180deg,#d7fffad9,#91bfe7d6);box-shadow:0 0 3px #deffff82}
+.dive-hook{position:absolute;left:50%;bottom:-11px;transform:translate(-50%,-2px);font-size:clamp(42px,6vw,65px);line-height:1;filter:drop-shadow(0 4px 4px #0008)}
+.dive-scene.sinking .dive-hook{animation:dive-hook-wiggle .55s ease-in-out infinite alternate}
+.dive-scene .trail{position:absolute;top:54%;left:calc(50% + var(--offset));width:var(--size);height:var(--size);border:1px solid #c9fff7af;background:#c8fff61b;border-radius:50%;opacity:0}
+.dive-scene.sinking .trail{animation:dive-trail .72s linear infinite;animation-delay:var(--delay)}
+.dive-hud{position:absolute;z-index:8;top:clamp(20px,4vh,48px);left:clamp(18px,5vw,70px);right:clamp(18px,5vw,70px);display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
+.dive-kicker{font:900 clamp(11px,1.2vw,14px)/1.2 Nunito,system-ui,sans-serif;letter-spacing:2px;color:#b9ffee;text-transform:uppercase}
+.dive-title{font:900 clamp(40px,6vw,82px)/1 "Barlow Condensed",Impact,sans-serif;letter-spacing:.7px;text-shadow:0 4px 13px #003451;margin:8px 0}
+.dive-label{font-size:13px;font-weight:900;color:#d0f6f3}
+.dive-depth{min-width:155px;text-align:right;border:1px solid #acfae18e;border-radius:15px;padding:13px 16px;background:#062743b9}
+.dive-depth small{display:block;font:900 10px/1.5 Nunito,sans-serif;letter-spacing:1.8px;color:#bdf9e8}
+.dive-depth strong{display:block;font:900 clamp(35px,4.6vw,61px)/1 "Barlow Condensed",Impact,sans-serif;color:#ffe19d;font-variant-numeric:tabular-nums}
+.dive-depth .depth-target{font-size:11px;font-weight:900;color:#bbf3ea}
+.dive-fish-target{position:absolute;z-index:11;top:52%;left:58%;width:clamp(135px,23vw,285px);opacity:0;transform:translate3d(90px,-40%,0) scale(calc(var(--fish-scale,1) * .5)) rotate(-18deg)}
+.dive-fish-target svg{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 10px #00172783)}
+.dive-scene.landed .dive-fish-target{opacity:1;transform:translate3d(0,-45%,0) scale(var(--fish-scale,1)) rotate(0deg);transition:transform .45s cubic-bezier(.15,1,.3,1),opacity .3s ease}
+.dive-ring{position:absolute;z-index:10;top:50%;left:50%;width:68px;height:68px;border:3px solid #eaffdac9;border-radius:50%;opacity:0;transform:translate(-50%,-50%) scale(.2)}
+.dive-scene.landed .dive-ring{animation:dive-bite-ring .7s ease-out forwards}
+.dive-scene.landed .dive-hook{animation:dive-hook-bite .38s ease-in-out 2}
+.dive-zone-meter{position:absolute;bottom:34px;left:clamp(20px,5vw,70px);right:clamp(20px,5vw,70px);z-index:9;height:6px;border-radius:99px;background:#d6fff24b;overflow:hidden}
+.dive-zone-meter span{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#a0faff,#e8ffe2,#ffe5ac);box-shadow:0 0 13px #d0fff9}
+.dive-scene.sinking .dive-zone-meter span{transform:scaleX(1);transition:transform var(--dive-duration,1500ms) cubic-bezier(.25,.44,.16,.98)}
+.dive-target-zone{position:absolute;bottom:47px;right:clamp(20px,5vw,70px);font-size:11px;font-weight:900;color:#d8faff;letter-spacing:1px}
+body.dive-in-progress .catch-world .yacht-stage,body.dive-in-progress .catch-world .deep-fish,body.dive-in-progress .catch-world .bubble{animation-play-state:paused}
+@keyframes dive-trail{0%{opacity:0;transform:translate3d(0,-20px,0) scale(.5)}20%{opacity:.85}100%{opacity:0;transform:translate3d(10px,-115px,0) scale(1.3)}}
+@keyframes dive-hook-wiggle{from{transform:translate(-50%,-2px) rotate(-4deg)}to{transform:translate(-50%,2px) rotate(5deg)}}
+@keyframes dive-hook-bite{0%,100%{transform:translate(-50%,0) rotate(0)}50%{transform:translate(-50%,9px) rotate(18deg)}}
+@keyframes dive-bite-ring{0%{opacity:.9;transform:translate(-50%,-50%) scale(.2)}100%{opacity:0;transform:translate(-50%,-50%) scale(5)}}
+@media(max-width:680px){.dive-hud{top:22px;gap:10px}.dive-title{font-size:42px}.dive-label{max-width:200px;font-size:11px}.dive-depth{padding:8px 10px;min-width:107px;border-radius:10px}.dive-depth strong{font-size:37px}.dive-kicker{letter-spacing:1px}.dive-fish-target{width:155px;left:56%}.dive-target-zone{font-size:10px}.dive-zone .zone-name{font-size:23px}.dive-zone .zone-fish{font-size:68px}}
+@media(prefers-reduced-motion:reduce){.dive-scene,.dive-scene.sinking .dive-ocean,.dive-scene.sinking .dive-zone-meter span,.dive-scene.landed .dive-fish-target{transition:none!important}.dive-scene .trail,.dive-hook,.dive-ring{animation:none!important}.dive-scene.sinking .dive-ocean{transform:translate3d(0,calc(-1 * var(--descent,60vh)),0)}}
