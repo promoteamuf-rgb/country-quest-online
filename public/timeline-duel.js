@@ -7,12 +7,12 @@ const translations={
 en:{
 home:'All games',other:'Classic competition',footer:'Original chronology challenge · Curated historical events',
 tag:'LIVE MULTIPLAYER · TIMELINE DUEL',title1:'PUT HISTORY',title2:'IN ORDER.',lead:'Two players. Ten event cards. Place each new event before, between or after the events already on your timeline. No exact-year guessing needed.',
-steps:['2 PLAYERS','10 EVENT ROUNDS','SPORT · SPACE · TECH · HISTORY'],create:'Create timeline room',join:'Join a friend',yourName:'Your name',nameHint:'Enter your name',roomCode:'Room code',roomHint:'ABC123',choose:'Choose difficulty',easy:'Easy',medium:'Medium',hard:'Hard',start:'Create a room',joinButton:'Join game',waiting:'Waiting for player two',waitingHelp:'This is a two-player game. Send the room link to a friend and the first event will appear as soon as they join.',invite:'Invite your friend with this link',copy:'Copy invitation link',copied:'Link copied!',you:'You',ready:'Ready',thinking:'Thinking…',completed:'Submitted',round:'ROUND',question:'WHEN DID THIS HAPPEN?',place:'Choose where this event belongs on your timeline',before:'Before everything',between:'Between these events',after:'After everything',submitted:'Your answer is locked in!',correct:'Correct! Your timeline grows.',wrong:'Not quite — your timeline stays as it is.',opponent:'Waiting for the other player to place the event…',year:'The actual year',continue:'Next event',waitingReady:'Waiting for friend…',finished:'THE FINAL TIMELINE',draw:'It’s a tie!',wins:'wins!',playAgain:'Play again',leave:'Leave match',back:'Back to games',timeline:'YOUR TIMELINE',locked:'Your timeline has',cards:'cards',score:'points',streak:'streak',error:'Something went wrong',retry:'Connection interrupted. Trying again…',category:'CATEGORY',instructions:'Tap a slot (+) to place the event. Correct positions stay on your timeline.',difficulty:'Difficulty',homeLabel:'A NEW WAY TO COMPETE',hint:'Your events are unique to your own timeline. Two players answer the same card at once.'
+steps:['2 PLAYERS','10 EVENT ROUNDS','SPORT · SPACE · TECH · HISTORY'],create:'Create timeline room',join:'Join a friend',yourName:'Your name',nameHint:'Enter your name',roomCode:'Room code',roomHint:'ABC123',choose:'Choose difficulty',easy:'Easy',medium:'Medium',hard:'Hard',start:'Create a room',joinButton:'Join game',waiting:'Waiting for player two',waitingHelp:'This is a two-player game. Send the room link to a friend and the first event will appear as soon as they join.',creating:'Creating your room… The server may need a moment to wake up.',joining:'Joining the room…',connectionError:'Could not reach the game server. Please try again.',createRetry:'The server is starting. Trying again…',invalidResponse:'The server returned an invalid room. Please try again.',invite:'Invite your friend with this link',copy:'Copy invitation link',copied:'Link copied!',you:'You',ready:'Ready',thinking:'Thinking…',completed:'Submitted',round:'ROUND',question:'WHEN DID THIS HAPPEN?',place:'Choose where this event belongs on your timeline',before:'Before everything',between:'Between these events',after:'After everything',submitted:'Your answer is locked in!',correct:'Correct! Your timeline grows.',wrong:'Not quite — your timeline stays as it is.',opponent:'Waiting for the other player to place the event…',year:'The actual year',continue:'Next event',waitingReady:'Waiting for friend…',finished:'THE FINAL TIMELINE',draw:'It’s a tie!',wins:'wins!',playAgain:'Play again',leave:'Leave match',back:'Back to games',timeline:'YOUR TIMELINE',locked:'Your timeline has',cards:'cards',score:'points',streak:'streak',error:'Something went wrong',retry:'Connection interrupted. Trying again…',category:'CATEGORY',instructions:'Tap a slot (+) to place the event. Correct positions stay on your timeline.',difficulty:'Difficulty',homeLabel:'A NEW WAY TO COMPETE',hint:'Your events are unique to your own timeline. Two players answer the same card at once.'
 },
 sv:{
 home:'Alla spel',other:'Vanlig tävling',footer:'Eget kronologispel · Historiska händelser med kontrollerade årtal',
 tag:'LIVE MULTIPLAYER · TIDSLINJEDUELL',title1:'SÄTT HISTORIEN',title2:'I ORDNING.',lead:'Två spelare. Tio händelser. Placera varje ny händelse före, mellan eller efter händelserna på din tidslinje. Du behöver inte kunna exakta årtal.',
-steps:['2 SPELARE','10 OMGÅNGAR','SPORT · RYMDEN · TEKNIK · HISTORIA'],create:'Skapa tidslinjerum',join:'Spela med en vän',yourName:'Ditt namn',nameHint:'Skriv ditt namn',roomCode:'Rumskod',roomHint:'ABC123',choose:'Välj svårighetsgrad',easy:'Lätt',medium:'Medel',hard:'Svår',start:'Skapa rum',joinButton:'Gå med',waiting:'Väntar på spelare två',waitingHelp:'Det här är ett spel för två. Skicka rumslänken till en vän. Den första händelsen visas när vännen går med.',invite:'Bjud in din vän med länken',copy:'Kopiera inbjudningslänk',copied:'Länk kopierad!',you:'Du',ready:'Redo',thinking:'Funderar…',completed:'Svarat',round:'RUNDA',question:'NÄR HÄNDE DET HÄR?',place:'Välj var händelsen ska ligga på din tidslinje',before:'Före alla',between:'Mellan dessa händelser',after:'Efter alla',submitted:'Ditt svar är låst!',correct:'Rätt! Din tidslinje växer.',wrong:'Inte riktigt – din tidslinje är oförändrad.',opponent:'Väntar på att den andra spelaren ska placera händelsen…',year:'Det rätta årtalet',continue:'Nästa händelse',waitingReady:'Väntar på vännen…',finished:'SLUTRESULTAT',draw:'Oavgjort!',wins:'vinner!',playAgain:'Spela igen',leave:'Lämna matchen',back:'Tillbaka till spelen',timeline:'DIN TIDSLINJE',locked:'Din tidslinje har',cards:'kort',score:'poäng',streak:'svit',error:'Något gick fel',retry:'Anslutningen bröts. Försöker igen…',category:'KATEGORI',instructions:'Tryck på en plats (+) för att placera händelsen. Rätt placerade kort stannar kvar.',difficulty:'Svårighetsgrad',homeLabel:'ETT NYTT SÄTT ATT TÄVLA',hint:'Ni får samma händelse men bygger varsin tidslinje.'
+steps:['2 SPELARE','10 OMGÅNGAR','SPORT · RYMDEN · TEKNIK · HISTORIA'],create:'Skapa tidslinjerum',join:'Spela med en vän',yourName:'Ditt namn',nameHint:'Skriv ditt namn',roomCode:'Rumskod',roomHint:'ABC123',choose:'Välj svårighetsgrad',easy:'Lätt',medium:'Medel',hard:'Svår',start:'Skapa rum',joinButton:'Gå med',waiting:'Väntar på spelare två',waitingHelp:'Det här är ett spel för två. Skicka rumslänken till en vän. Den första händelsen visas när vännen går med.',creating:'Skapar rum… Servern kan behöva en stund att vakna.',joining:'Ansluter till rummet…',connectionError:'Kunde inte nå spelservern. Försök igen.',createRetry:'Servern startar. Försöker igen…',invalidResponse:'Servern skickade ett ogiltigt rum. Försök igen.',invite:'Bjud in din vän med länken',copy:'Kopiera inbjudningslänk',copied:'Länk kopierad!',you:'Du',ready:'Redo',thinking:'Funderar…',completed:'Svarat',round:'RUNDA',question:'NÄR HÄNDE DET HÄR?',place:'Välj var händelsen ska ligga på din tidslinje',before:'Före alla',between:'Mellan dessa händelser',after:'Efter alla',submitted:'Ditt svar är låst!',correct:'Rätt! Din tidslinje växer.',wrong:'Inte riktigt – din tidslinje är oförändrad.',opponent:'Väntar på att den andra spelaren ska placera händelsen…',year:'Det rätta årtalet',continue:'Nästa händelse',waitingReady:'Väntar på vännen…',finished:'SLUTRESULTAT',draw:'Oavgjort!',wins:'vinner!',playAgain:'Spela igen',leave:'Lämna matchen',back:'Tillbaka till spelen',timeline:'DIN TIDSLINJE',locked:'Din tidslinje har',cards:'kort',score:'poäng',streak:'svit',error:'Något gick fel',retry:'Anslutningen bröts. Försöker igen…',category:'KATEGORI',instructions:'Tryck på en plats (+) för att placera händelsen. Rätt placerade kort stannar kvar.',difficulty:'Svårighetsgrad',homeLabel:'ETT NYTT SÄTT ATT TÄVLA',hint:'Ni får samma händelse men bygger varsin tidslinje.'
 }};
 const names={
 sports:{en:'Sports',sv:'Sport'},space:{en:'Space',sv:'Rymden'},technology:{en:'Technology',sv:'Teknik'},
@@ -28,11 +28,35 @@ let session=null,state=null,busy=false,lastError='';
 function store(){try{localStorage.setItem(SESSION_KEY,JSON.stringify(session))}catch{}}
 function remove(){try{localStorage.removeItem(SESSION_KEY)}catch{}}
 async function api(action,extra={}){
- const res=await fetch('/api/'+action,{method:'POST',headers:{'Content-Type':'application/json'},
-  body:JSON.stringify({...session,...extra,mode:'timeline'})});
- const data=await res.json();
- if(!res.ok)throw Error(data.error||'Network error');
- return data;
+ const body=JSON.stringify({...session,...extra,mode:'timeline'});
+ let lastError;
+ const attempts=action==='create'?2:1;
+ for(let attempt=0;attempt<attempts;attempt++){
+  let timeoutId=null;
+  let controller=null;
+  try{
+   if(typeof AbortController!=='undefined'){
+    controller=new AbortController();
+    timeoutId=setTimeout(()=>controller.abort(),45000);
+   }
+   const res=await fetch('/api/'+action,{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body,cache:'no-store',...(controller?{signal:controller.signal}:{})
+   });
+   let data;
+   try{data=await res.json()}catch{throw Error(t('connectionError'))}
+   if(!res.ok)throw Error(data.error||t('connectionError'));
+   return data;
+  }catch(err){
+   lastError=err;
+   if(action!=='create'||attempt===attempts-1||!(/fetch|network|abort|reach|failed|connection/i.test(String(err.message||err))))break;
+   const status=$('createStatus');
+   if(status)status.textContent=t('createRetry');
+  }finally{
+   if(timeoutId!==null)clearTimeout(timeoutId);
+  }
+ }
+ throw lastError||Error(t('connectionError'));
 }
 function updateLanguage(value){
  if(value!=='en'&&value!=='sv')return;
@@ -53,27 +77,47 @@ function landing(){
  +'<div class="info-chips">'+t('steps').map(x=>'<span>'+escape(x)+'</span>').join('')+'</div>'
  +'<p class="sub">'+escape(t('hint'))+'</p></div>'+heroArt()+'</section>'
  +'<section class="grid"><div class="panel"><h2>⏳ '+escape(t('create'))+'</h2>'
- +'<form id="createForm"><label for="createName">'+escape(t('yourName'))+'</label><input class="field" id="createName" name="name" maxlength="24" placeholder="'+escape(t('nameHint'))+'" required>'
+ +'<form id="createForm"><label for="createName">'+escape(t('yourName'))+'</label><input class="field" id="createName" name="name" maxlength="24" placeholder="'+escape(t('nameHint'))+'">'
  +'<label style="margin-top:17px">'+escape(t('choose'))+'</label><div class="level-grid">'
  +['easy','medium','hard'].map(x=>'<label><input type="radio" name="difficulty" value="'+x+'" '+(x==='medium'?'checked':'')+'><span>'+escape(t(x))+'</span></label>').join('')+'</div>'
- +'<button class="btn block" type="submit">'+escape(t('start'))+'</button></form></div>'
+ +'<button class="btn block" id="createRoomBtn" type="submit">'+escape(t('start'))+'</button>'
+ +'<p class="sub" id="createStatus" role="status" aria-live="polite"></p></form></div>'
  +'<div class="panel"><h2>👥 '+escape(t('join'))+'</h2><form id="joinForm"><label for="joinName">'+escape(t('yourName'))+'</label>'
  +'<input class="field" id="joinName" name="name" maxlength="24" required placeholder="'+escape(t('nameHint'))+'">'
  +'<label style="margin-top:17px" for="roomCode">'+escape(t('roomCode'))+'</label>'
  +'<input class="field" id="roomCode" name="code" maxlength="6" required style="text-transform:uppercase" placeholder="'+escape(t('roomHint'))+'" value="'+escape(invite.toUpperCase())+'">'
  +'<button class="btn block" style="margin-top:24px" type="submit">'+escape(t('joinButton'))+'</button></form></div></section>'
  +'<p class="alert" id="error">'+escape(lastError)+'</p>';
- $('#createForm').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.currentTarget);await joinOrCreate('create',{name:f.get('name'),difficulty:f.get('difficulty')})};
+ $('#createForm').onsubmit=async e=>{
+  e.preventDefault();
+  const name=String($('#createName')?.value||'').trim()||'Player';
+  const choice=document.querySelector('input[name="difficulty"]:checked');
+  await joinOrCreate('create',{name,difficulty:choice?.value||'medium'});
+ };
  $('#joinForm').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.currentTarget);await joinOrCreate('join',{name:f.get('name'),code:String(f.get('code')||'').toUpperCase()})};
 }
 async function joinOrCreate(action,form){
- if(busy)return;busy=true;lastError='';
+ if(busy)return;
+ busy=true;lastError='';
+ const button=$('createRoomBtn');
+ const message=$('createStatus');
+ if(button){button.disabled=true;button.textContent=t('creating')}
+ if(message)message.textContent=t('creating');
  try{
-  state=await api(action,form);
-  session={code:state.code,token:state.token};
-  store();render();
- }catch(e){lastError=e.message;const err=$('error');if(err)err.textContent=lastError}
- finally{busy=false}
+  const created=await api(action,form);
+  if(!created||!created.code||!created.token)throw Error(t('invalidResponse'));
+  session={code:created.code,token:created.token};
+  state=created;
+  store();
+  render();
+ }catch(e){
+  lastError=e?.message||t('connectionError');
+  if(message)message.textContent=lastError;
+  const err=$('error');if(err)err.textContent=lastError;
+ }finally{
+  busy=false;
+  if(button&&button.isConnected){button.disabled=false;button.textContent=t('start')}
+ }
 }
 function scores(){
  if(!state)return'';
