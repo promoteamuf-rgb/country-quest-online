@@ -53,3 +53,16 @@ background:linear-gradient(115deg,#193d4f,#183555)}
 .resume-buttons #resumeRoom{border-color:#fce3aa;color:#ffebbc}
 .resume-buttons #forgetRoom{border-color:#8c9caa;color:#cdd6e0}
 @media(max-width:680px){.resume-panel{align-items:stretch}.resume-buttons{width:100%}.resume-buttons .btn{flex:1}}
+
+/* Multiplayer lobby: 2–12 people, only the host controls match start. */
+.lobby-players{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;margin:14px 0 21px}
+.lobby-player{display:flex;align-items:center;gap:9px;min-height:47px;padding:10px 12px;border:1px solid #83c9c27a;background:#12374da8;border-radius:11px;min-width:0}
+.lobby-player strong{font-size:13px;overflow-wrap:anywhere;min-width:0}
+.lobby-number{display:grid;place-items:center;flex:0 0 27px;height:27px;border:1px solid #9eead7a2;border-radius:50%;font-size:12px;color:#baf5dc}
+.lobby-player small{margin-left:auto;white-space:nowrap;color:#ffe3a3;font-size:11px}
+.lobby-actions{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.lobby-actions .btn{flex:1;min-width:145px}
+.lobby-actions #startMatch{border-color:#f5f4c3}
+.lobby-actions #startMatch:disabled{opacity:.5;cursor:not-allowed;filter:grayscale(.45)}
+.scores{grid-template-columns:repeat(auto-fit,minmax(175px,1fr))}
+@media(max-width:520px){.lobby-players{grid-template-columns:1fr}.lobby-actions .btn{min-width:110px}}
