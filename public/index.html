@@ -252,11 +252,66 @@ function render(){if(!session){lastRenderedRound=null;landing();return}if(!state
     start:oldInput.selectionStart,
     end:oldInput.selectionEnd
   }:null;
-const difficultyName=({easy:'Easy',medium:'Medium',hard:'Hard'})[state.difficulty]||'Medium';const difficultyDisplay='<div class="difficulty-readout">Difficulty: <strong>'+escapeHTML(difficultyName)+'</strong></div>';let h='';if(!state.started){h='<h1>Invite a friend.</h1><div class="panel"><p class="muted">Share this room code:</p><div class="code">'+state.code+'</div>'+difficultyDisplay+'<div class="actions"><button id="copy">Copy invitation link</button><button class="alt" id="leave">Leave</button></div><p class="muted">Waiting for player 2...</p></div>'}
-else if(state.finished){let [a,b]=state.players;h='<h1>🏆 '+(a.score===b.score?"It's a tie!":escapeHTML(a.score>b.score?a.name:b.name)+' wins!')+'</h1><div class="panel"><h2>Final scores</h2>'+difficultyDisplay+scores()+'<div class="actions"><button id="leave">Play again</button></div></div>'}
-else{let q=state.question;h='<div style="margin-top:23px" class="tag">ROUND '+(state.round+1)+' / '+state.total+' · '+(q.type==='clues'?'COUNTRY CLUES':q.type==='outline'?'COUNTRY OUTLINE':'GUESS THE YEAR')+'</div>'+difficultyDisplay+scores()+'<div class="panel">';if(state.yourDone){h+='<h2>Answer submitted ✓</h2><p class="muted">Your answer: '+escapeHTML(state.yourAnswer)+'</p>'+(state.correctAnswer!==null?'<p>Correct answer: <b>'+escapeHTML(state.correctAnswer)+'</b></p><div class="actions"><button id="ready" '+(state.players[state.you].ready?'disabled':'')+'>'+(state.players[state.you].ready?'Waiting for friend…':'Next round →')+'</button></div>':'<p class="muted">Waiting for your friend to finish...</p>')}
-else if(q.type==='clues'){h+='<div class="tag">CLUE '+(q.clue+1)+' / 5 · '+[100,80,60,40,20][q.clue]+' POINTS</div>'+q.clues.map(x=>'<div class="clue">'+escapeHTML(x)+'</div>').join('')+'<form id="answer"><input class="field" id="guess" required autocomplete="off" placeholder="Enter country name"><div class="actions"><button>Guess</button><button class="alt" type="button" id="clue" '+(q.clue===4?'disabled':'')+'>Next clue →</button></div></form>'}
-else{h+=q.type==='outline'?'<h2>What country is this?</h2><div class="shape"><svg role="img" aria-label="Accurate country silhouette" viewBox="'+escapeHTML(q.viewBox||'0 0 320 220')+'" preserveAspectRatio="xMidYMid meet"><defs><linearGradient id="geoFill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a2f7da"/><stop offset="1" stop-color="#47bedb"/></linearGradient></defs><path d="'+escapeHTML(q.shape)+'" fill="url(#geoFill)" fill-rule="evenodd"/></svg></div>':'<h2>Guess the year</h2><div class="clue">'+escapeHTML(q.prompt)+'</div>';h+='<div class="choices">'+q.options.map(x=>'<button data-choice="'+escapeHTML(x)+'">'+escapeHTML(x)+'</button>').join('')+'</div>'}h+='<div class="notice" id="message"></div></div><button class="alt" id="leave">Leave match</button>'}
+const difficultyName=({easy:multilang('Easy','Lätt'),medium:multilang('Medium','Medel'),hard:multilang('Hard','Svår')})[state.difficulty]||'Medium';
+const subjectNames=(state.subjects||[]).map(c=>SUBJECT_LABELS[c]?.[multiplayerLanguage()]||c);
+const subjectDisplay='<div class="difficulty-readout">'+multilang('Difficulty: ','Svårighetsgrad: ')+'<strong>'+escapeHTML(difficultyName)+'</strong> · '
+ +multilang('Subjects: ','Ämnen: ')+'<strong>'+escapeHTML(subjectNames.length>5?subjectNames.length+' '+multilang('selected','valda'):subjectNames.join(', '))+'</strong></div>';
+const answerLabel=q=>{
+ if(q.type==='trivia'){
+  return localizedOption(q.options.find(opt=>opt.id===state.yourAnswer))||'';
+ }
+ return state.yourAnswer;
+};
+const correctLabel=q=>q.type==='trivia'?localizedOption(state.correctAnswer):state.correctAnswer;
+let h='';
+if(!state.started){
+ h='<h1>'+multilang('Invite a friend.','Bjud in en vän.')+'</h1><div class="panel">'
+  +'<p class="muted">'+multilang('Share this room code:','Dela rumskoden:')+'</p><div class="code">'+escapeHTML(state.code)+'</div>'+subjectDisplay
+  +'<div class="actions"><button id="copy">'+multilang('Copy invitation link','Kopiera inbjudningslänk')+'</button><button class="alt" id="leave">'+multilang('Leave','Lämna')+'</button></div>'
+  +'<p class="muted">'+multilang('Waiting for player 2...','Väntar på spelare två...')+'</p></div>';
+}else if(state.finished){
+ const [a,b]=state.players;
+ h='<h1>🏆 '+(a.score===b.score?multilang("It's a tie!",'Oavgjort!'):escapeHTML(a.score>b.score?a.name:b.name)+' '+multilang('wins!','vinner!'))+'</h1>'
+  +'<div class="panel"><h2>'+multilang('Final scores','Slutresultat')+'</h2>'+subjectDisplay+scores()
+  +'<div class="actions"><button id="leave">'+multilang('Play again','Spela igen')+'</button></div></div>';
+}else{
+ const q=state.question;
+ const title=q.type==='clues'?multilang('COUNTRY CLUES','LANDSLEDTRÅDAR'):
+  q.type==='outline'?multilang('COUNTRY OUTLINE','LANDSKONTUR'):
+  q.type==='year'?multilang('GUESS THE YEAR','GISSA ÅRET'):
+  multilang('GENERAL KNOWLEDGE','ALLMÄNBILDNING');
+ h='<div style="margin-top:23px" class="tag">'+multilang('ROUND','RUNDA')+' '+(state.round+1)+' / '+state.total+' · '+title+'</div>'+subjectDisplay+scores()+'<div class="panel">';
+ if(state.yourDone){
+  h+='<h2>'+multilang('Answer submitted ✓','Svar skickat ✓')+'</h2>'
+   +'<p class="muted">'+multilang('Your answer: ','Ditt svar: ')+escapeHTML(answerLabel(q))+'</p>';
+  if(state.correctAnswer!==null){
+   h+='<div class="answer-feedback '+(state.yourCorrect?'correct':'incorrect')+'">'
+     +(state.yourCorrect?multilang('✓ Correct','✓ Rätt'):multilang('✗ Incorrect','✗ Fel'))+'</div>'
+     +'<p>'+multilang('Correct answer: ','Rätt svar: ')+'<b>'+escapeHTML(correctLabel(q))+'</b></p>'
+     +'<div class="actions"><button id="ready" '+(state.players[state.you].ready?'disabled':'')+'>'
+     +(state.players[state.you].ready?multilang('Waiting for friend…','Väntar på vännen…'):multilang('Next round →','Nästa runda →'))+'</button></div>';
+  }else{
+   h+='<p class="muted">'+multilang('Waiting for your friend to finish...','Väntar på din vän...')+'</p>';
+  }
+ }else if(q.type==='clues'){
+  h+='<div class="tag">'+multilang('CLUE','LEDTRÅD')+' '+(q.clue+1)+' / 5 · '+[100,80,60,40,20][q.clue]+' '+multilang('POINTS','POÄNG')+'</div>'
+   +q.clues.map(x=>'<div class="clue">'+escapeHTML(x)+'</div>').join('')
+   +'<form id="answer"><input class="field" id="guess" required autocomplete="off" placeholder="'+multilang('Enter country name','Skriv landets namn')+'"><div class="actions"><button>'+multilang('Guess','Gissa')+'</button><button class="alt" type="button" id="clue" '+(q.clue===4?'disabled':'')+'>'+multilang('Next clue →','Nästa ledtråd →')+'</button></div></form>';
+ }else if(q.type==='trivia'){
+  const tag=SUBJECT_LABELS[q.category]?.[multiplayerLanguage()]||q.category;
+  h+='<span class="question-subject">'+escapeHTML(tag)+'</span>'
+   +'<h2 class="trivia-prompt">'+escapeHTML(multiplayerLanguage()==='sv'?q.promptSv:q.prompt)+'</h2>'
+   +'<div class="trivia-options">'+q.options.map(opt=>'<button type="button" data-choice="'+escapeHTML(opt.id)+'">'+escapeHTML(localizedOption(opt))+'</button>').join('')+'</div>';
+ }else{
+  if(q.type==='outline'){
+   h+='<h2>'+multilang('What country is this?','Vilket land är det?')+'</h2><div class="shape"><svg role="img" aria-label="Country silhouette" viewBox="'+escapeHTML(q.viewBox||'0 0 320 220')+'" preserveAspectRatio="xMidYMid meet"><defs><linearGradient id="geoFill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a2f7da"/><stop offset="1" stop-color="#47bedb"/></linearGradient></defs><path d="'+escapeHTML(q.shape)+'" fill="url(#geoFill)" fill-rule="evenodd"/></svg></div>';
+  }else{
+   h+='<h2>'+multilang('Guess the year','Gissa året')+'</h2><div class="clue">'+escapeHTML(q.promptSv&&multiplayerLanguage()==='sv'?q.promptSv:q.prompt)+'</div>';
+  }
+  h+='<div class="choices">'+q.options.map(x=>'<button data-choice="'+escapeHTML(x)+'">'+escapeHTML(x)+'</button>').join('')+'</div>';
+ }
+ h+='<div class="notice" id="message"></div></div><button class="alt" id="leave">'+multilang('Leave match','Lämna match')+'</button>';
+}
 app.innerHTML=h;
 lastRenderedRound=state.code+':'+state.round;
 if(draft){
