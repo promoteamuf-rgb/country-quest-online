@@ -74,7 +74,7 @@ function makeQ(type,difficulty,seen,subjects){
    const answer=picked.answer, options=new Set([answer]);
    const offsets=d==='easy'?[-100,-75,-50,-35,35,50,75,100]:d==='medium'?[-40,-30,-20,-12,12,20,30,40]:[-15,-12,-10,-7,-5,-3,3,5,7,10,12,15];
    for(const delta of shuffle(offsets)){if(options.size===4)break;const candidate=answer+delta;if(candidate>=1&&candidate<=2026)options.add(candidate)}
-   return{type,prompt:picked.prompt,answer,options:shuffle([...options])};
+   return{type,prompt:picked.prompt,promptSv:picked.promptSv||picked.prompt,answer,options:shuffle([...options])};
  }
  if(type==='outline'){
    const country=uniqueQuestion(tier.outlines,seen,x=>x,d+':outline');
