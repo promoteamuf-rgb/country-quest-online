@@ -95,7 +95,7 @@ const shapeNames=Object.keys(realOutlines).length?Object.keys(realOutlines):Obje
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const shuffle=a=>{let out=[...a];for(let i=out.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]]}return out};
-const normalize=s=>s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+const normalize=s=>String(s??'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
 const storeKey='country-quest-clean-v1';
 let saved={best:0,streak:0,played:0,wins:0};try{saved={...saved,...JSON.parse(localStorage.getItem(storeKey)||'{}')}}catch(e){}
 let mode=null,level='all',game=null,deck={},round=0,points=0,clueIndex=0,locked=false,feedback='',picked='',vs=null;
