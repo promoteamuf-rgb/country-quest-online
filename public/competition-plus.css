@@ -51,3 +51,13 @@
   .saved-match-actions{width:100%}
   .saved-match-actions button{flex:1}
 }
+
+/* Classic online matches now have a player roster and host-controlled start. */
+.room-player-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px;margin:12px 0 21px}
+.room-player{display:flex;gap:9px;align-items:center;min-height:42px;padding:10px 12px;border:1px solid #8bd0ba79;background:#133d50b8;border-radius:9px;color:#e7f8ef;font-size:13px;min-width:0;overflow-wrap:anywhere}
+.room-player-num{width:24px;height:24px;flex:none;display:grid;place-items:center;color:#173a46;background:#ccf9d6;border-radius:50%;font-size:12px;font-weight:900}
+.room-player small{margin-left:auto;white-space:nowrap;color:#ffe7a4;font-size:11px}
+#startMatch:disabled{opacity:.48;cursor:not-allowed;box-shadow:none}
+.page-index .players{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:9px}
+@media(max-width:600px){.room-player-list{grid-template-columns:1fr 1fr}.room-player{font-size:12px;padding:8px}.room-player small{font-size:10px}}
+@media(max-width:400px){.room-player-list{grid-template-columns:1fr}}
