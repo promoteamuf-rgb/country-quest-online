@@ -1,0 +1,23 @@
+name: Fetch original Jacumba source
+on:
+  push:
+    branches: [policeencounters-ffmpeg]
+    paths: ['.github/workflows/fetch-jacumba-source.yml']
+  workflow_dispatch:
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - name: Fetch original federal footage
+        run: |
+          mkdir -p source
+          curl -fLsS --retry 3 --max-time 180 'https://d34w7g4gy10iej.cloudfront.net/video/2608/DOD_111891141/DOD_111891141.mp4' -o source/Jacumba_original.mp4
+          file source/Jacumba_original.mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Jacumba-original-source
+          path: source/Jacumba_original.mp4
+          retention-days: 7
