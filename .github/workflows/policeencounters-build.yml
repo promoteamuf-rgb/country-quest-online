@@ -1,0 +1,28 @@
+name: PoliceEncounters Free FFmpeg Builder
+on:
+  push:
+    branches:
+      - policeencounters-ffmpeg
+    paths:
+      - 'policeencounters-pipeline/**'
+      - '.github/workflows/policeencounters-build.yml'
+  workflow_dispatch:
+jobs:
+  edit-real-source-video:
+    if: github.ref == 'refs/heads/policeencounters-ffmpeg'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install free editing tools
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg espeak-ng fonts-dejavu-core
+      - name: Download official footage and create 9x16 Short
+        run: bash policeencounters-pipeline/build.sh
+      - name: Save edited MP4 for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: PoliceEncounters-Jacumba-Rescue-01
+          path: output/
+          retention-days: 7
