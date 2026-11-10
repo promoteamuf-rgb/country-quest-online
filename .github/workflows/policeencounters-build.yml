@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install free editing tools
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg espeak-ng fonts-dejavu-core
+        run: ffmpeg -version | head -n 1
       - name: Download official footage and create 9x16 Short
         run: bash policeencounters-pipeline/build.sh
       - name: Save edited MP4 for review
