@@ -53,6 +53,7 @@ textarea{width:100%;resize:vertical;min-height:90px;border:1px solid #d9d6e2;bor
 <div class="exam-kind"><span class="pill">DELPROV B · 40 MIN</span><strong>Med digitala verktyg</strong><p>Korta uppgifter där digitalt stöd får användas.</p><button data-exam="B">Starta delprov B →</button></div>
 <div class="exam-kind"><span class="pill">DELPROV C · 120 MIN</span><strong>Med enkel räknare</strong><p>Flerstegsuppgifter. Redovisa mellanleden i anteckningarna.</p><button data-exam="C">Starta delprov C →</button></div>
 </div>
+<p class="notice"><a href="https://vidma.se/np2b/" target="_blank" rel="noopener noreferrer">Videolösningar till frisläppta Matte 2b-prov (Jonas Vikström / Vidma) ↗</a> · <a href="https://www.youtube.com/watch?v=iVNUO6foUGw" target="_blank" rel="noopener noreferrer">Blandad NP-repetition på YouTube ↗</a></p>
 <p class="notice" style="margin-top:16px">Delproven ovan är kortare, <strong>egenproducerade övningsprov</strong>. Tiderna och hjälpmedlen följer den aktuella provmodellen men de ersätter inte officiella prov. Se även <a href="https://www.umu.se/institutionen-for-tillampad-utbildningsvetenskap/np/np-2-4/tidigare-givna-prov/" target="_blank" rel="noopener noreferrer">Umeå universitets frisläppta prov för 2b ↗</a>.</p>
 </section>
 <section id="np-course" class="page" hidden><div class="section-head"><div><h2>Kursprov på hela Matte 2b</h2><p>24 blandade frågor med både grundläggande och utmanande uppgifter. Alla 12 ämnesområden ingår.</p></div></div>
@@ -98,6 +99,7 @@ textarea{width:100%;resize:vertical;min-height:90px;border:1px solid #d9d6e2;bor
  const screens={topics:"np-topics",np:"np-national",course:"np-course",review:"np-review",work:"np-work",results:"np-results"};
  const el=(tag,className,txt)=>{const e=document.createElement(tag);if(className)e.className=className;if(txt!=null)e.textContent=txt;return e};
  function switchView(name){
+  if(view==="work"&&name!=="work"&&name!=="results"){clearInterval(interval);interval=null}
   view=name;
   Object.entries(screens).forEach(([k,id])=>$(id).hidden=k!==name);
   $("np-hero").hidden=name==="work"||name==="results";
@@ -120,7 +122,7 @@ textarea{width:100%;resize:vertical;min-height:90px;border:1px solid #d9d6e2;bor
  function findQ(id){return all.find(x=>x.id===id)}
  function setLevel(v){level=v;if(work?.mode==="practice"){feedbackShown=false;renderQuestion()}}
  function startTopic(idx){
-   clearInterval(interval);interval=null;topicIndex=idx;work={mode:"practice",kind:"Öva",queue:TOPICS[idx].qs};
+   clearInterval(interval);interval=null;topicIndex=idx;level="E";work={mode:"practice",kind:"Öva",queue:TOPICS[idx].qs};
    savedAnswers={};savedReasons={};ended=false;
    switchView("work");renderQuestion();
  }
