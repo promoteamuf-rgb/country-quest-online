@@ -1,0 +1,25 @@
+name: Fetch Lake Michigan Coast Guard source
+on:
+  push:
+    branches: [policeencounters-ffmpeg]
+    paths: ['.github/workflows/fetch-lake-michigan-source.yml']
+  workflow_dispatch:
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - name: Download and validate original DVIDS footage
+        run: |
+          set -euo pipefail
+          mkdir -p source
+          curl -fLsS --retry 3 --max-time 180 'https://d34w7g4gy10iej.cloudfront.net/video/2611/DOD_112132896/DOD_112132896.mp4' -o source/Lake_Michigan_Coast_Guard_original.mp4
+          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 source/Lake_Michigan_Coast_Guard_original.mp4
+          ffmpeg -v error -i source/Lake_Michigan_Coast_Guard_original.mp4 -frames:v 1 -f null -
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lake-michigan-original-source
+          path: source/Lake_Michigan_Coast_Guard_original.mp4
+          retention-days: 7
