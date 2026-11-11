@@ -1,0 +1,320 @@
+<!doctype html><html lang="sv"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="MathLab Matte 2b - nationella prov, kursprov och övningar E till A med steg för steg-lösningar och svenska videor."><title>MathLab 2b · Nationella prov och kursprov</title><style>
+:root{--bg:#f8f7f4;--ink:#23223a;--muted:#767486;--line:#e3e1e8;--violet:#6956ad;--dark:#24243c;--paper:#fff;--lime:#c9e9b6}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Segoe UI",system-ui,Arial,sans-serif;font-size:15px}
+button,input,textarea{font:inherit}button{cursor:pointer}a{color:inherit} .wrap{width:min(1180px,calc(100% - 44px));margin:auto}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}.head{display:flex;align-items:center;gap:23px;min-height:77px}
+.logo{text-decoration:none;font-weight:850;letter-spacing:-.065em;font-size:28px}.logo span{color:#8166d0}.back{font-weight:650;color:#76748b;text-decoration:none;font-size:12px}.head-nav{display:flex;gap:5px;margin-left:auto;overflow:auto}.head-nav button{border:0;background:none;color:#6e6b80;border-radius:10px;padding:12px 14px;white-space:nowrap;font-size:13px;font-weight:750}.head-nav button.active{background:#efecf9;color:#493e86}
+.hero{margin:33px 0 20px;min-height:230px;border-radius:24px;background:linear-gradient(115deg,#292947 25%,#494277 100%);padding:44px 50px;color:white;position:relative;overflow:hidden}
+.hero:after{content:"x²";position:absolute;right:40px;top:-35px;font:210px Georgia,serif;letter-spacing:-.05em;color:#ffffff12;pointer-events:none}.hero>*{position:relative;z-index:1}.eyebrow{font-weight:850;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:#b4a5fd}
+.hero h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(35px,5vw,59px);line-height:1.07;letter-spacing:-.04em;margin:12px 0 14px}.hero p{max-width:580px;color:#e0dded;font-size:14px;line-height:1.7}
+.hero-nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+button.main{background:#cabaf4;color:#211b43;border:0;border-radius:10px;padding:13px 20px;font-weight:850;font-size:13px}button.light{background:#ffffff19;color:white;border:1px solid #ffffff50;border-radius:10px;padding:12px 19px;font-weight:760;font-size:13px}
+.page{padding:17px 0 50px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:18px 0 22px}.section-head h2{font:normal clamp(29px,3vw,40px) Georgia,serif;letter-spacing:-.035em;margin:0}.section-head p{color:var(--muted);line-height:1.65;font-size:14px;max-width:600px;margin:8px 0 0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{border:1px solid var(--line);background:white;border-radius:17px;padding:21px;text-align:left;min-height:175px;transition:border-color .15s,transform .15s}.card:hover{border-color:#aaa0d8;transform:translateY(-2px)}.card b{display:block;font-size:17px;margin:10px 0;letter-spacing:-.018em}.card p{font-size:12px;line-height:1.6;color:var(--muted);margin:0 0 15px}.card .meta{font-size:11px;font-weight:800;color:#8373b4;text-transform:uppercase;letter-spacing:.08em}.card .arrow{font-weight:850;color:var(--violet)}.simple{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}.simple p{line-height:1.7;color:#59586a}
+.chiplist{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.chiplist button{border:1px solid #dbd6e9;border-radius:10px;background:#fff;color:#6f6887;padding:11px 15px;font-weight:800;min-width:46px}.chiplist button.active{background:#272742;border-color:#272742;color:white}.subline{font-size:12px;color:#837e94}
+.exam-kind{border-radius:17px;background:#fff;border:1px solid var(--line);padding:22px}.exam-kind strong{display:block;font-size:20px;margin:10px 0}.exam-kind p{font-size:13px;color:var(--muted);line-height:1.6;min-height:58px}
+.exam-kind button,.purple-btn{border:0;border-radius:10px;background:#282742;color:#fff;font-weight:800;padding:13px 20px}
+.notice{font-size:12px;color:#766f86;line-height:1.7}.notice a{color:#6a50ac;font-weight:800}
+.work-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:15px;margin-bottom:17px}
+.work-head .back-btn{border:0;background:none;color:#635992;padding:10px 0;font-weight:850}.work-title{font-family:Georgia,serif;font-size:32px;letter-spacing:-.03em;margin:4px 0}
+.meter{height:7px;background:#e5e2ec;border-radius:10px;overflow:hidden}.meter>div{height:100%;background:#8572c1;transition:width .18s}
+.workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr);gap:17px;align-items:start}
+.exercise{border:1px solid var(--line);border-radius:19px;background:#fff;padding:31px}
+.pill{font-size:11px;letter-spacing:.06em;font-weight:850;color:#67569e}.exercise h2{font:normal clamp(24px,3vw,31px)/1.3 Georgia,serif;letter-spacing:-.02em;margin:18px 0 25px}
+.answerline{display:flex;gap:10px;flex-wrap:wrap}.answerline input{flex:1;min-width:120px;background:#fff;border:1px solid #ccc7d8;border-radius:11px;padding:15px;outline-color:#8d7cce}
+.answerline button{border:none;border-radius:11px;background:#baf0d5;color:#214d39;font-weight:850;padding:13px 21px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.controls button{border:1px solid #dedbe8;background:#f8f7fc;border-radius:9px;padding:11px 13px;color:#5d5777;font-weight:700;font-size:12px}
+.feedback{margin-top:16px;border:1px solid #d2cfe7;background:#f6f4ff;border-radius:12px;padding:15px;line-height:1.65;font-size:13px}
+.feedback.good{background:#e6f7ec;color:#1e6a44;border-color:#b7dcca}.feedback.bad{background:#fff1ea;color:#974d2b;border-color:#efc9bb}
+.answerform{margin-top:17px}.answerform label{display:block;color:#605c73;font-weight:750;font-size:12px;margin-bottom:8px}
+textarea{width:100%;resize:vertical;min-height:90px;border:1px solid #d9d6e2;border-radius:11px;padding:12px}
+.aside{display:flex;flex-direction:column;gap:14px}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:21px}
+.panel h3{font-size:17px;margin:0 0 12px}.panel p{font-size:13px;color:#6b687c;line-height:1.65}.formula{padding:12px 14px;border-left:3px solid #a594d8;background:#f5f2fc;font-size:14px;margin-top:13px;line-height:1.7}
+.videos{display:grid;gap:9px}.videos a{padding:11px 13px;border:1px solid #e7e4ef;border-radius:9px;text-decoration:none;font-size:12px;font-weight:750;color:#4f466e;background:#faf9fc}.videos a:hover{text-decoration:underline;border-color:#aaa1d5}.workspace-tip{font-size:11px;color:#867f95;line-height:1.6}
+.paper-tools{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}.paper-tools button{border:1px solid #dfdbea;border-radius:8px;background:#fff;padding:7px 11px;font-size:11px;font-weight:750}.paper-tools button.active{background:#4c4279;color:#fff}
+#scratch{width:100%;height:225px;background:repeating-linear-gradient(0deg,#fff 0px,#fff 26px,#e9eaf6 27px);border:1px solid #e0deea;border-radius:10px;touch-action:none;display:block;cursor:crosshair}
+.calcbox{display:flex;gap:7px}.calcbox input{min-width:0;flex:1;border:1px solid #d7d2e1;border-radius:9px;padding:11px}.calcbox button{border:none;background:#ded9f5;color:#3a316a;border-radius:9px;padding:11px;font-weight:850}
+.result{background:white;border:1px solid var(--line);border-radius:18px;padding:33px}.result strong{font:normal 52px Georgia,serif}.result-list{display:grid;gap:9px;margin-top:25px}.result-row{border:1px solid #e5e3eb;border-radius:10px;padding:14px;font-size:13px;line-height:1.6}.result-row strong{font-size:13px}.result-row.bad{border-color:#e9c7be;background:#fff9f7}.status{font-size:11px;font-weight:850;color:#a15c47}.success{color:#33835a}.footer{border-top:1px solid #e3e0e8;padding:24px 0;color:#817c93;font-size:12px}
+[hidden]{display:none !important}
+@media(max-width:890px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workspace{grid-template-columns:1fr}.head{gap:12px}.head-nav button{padding:11px 9px;font-size:11px}.hero{padding:37px}}
+@media(max-width:620px){.wrap{width:calc(100% - 26px)}.head{min-height:65px;flex-wrap:wrap;padding:12px 0}.logo{font-size:25px}.back{font-size:10px}.head-nav{width:100%;order:3}.head-nav button{flex:1}.hero{padding:27px 24px;border-radius:17px}.hero:after{right:-60px;top:0;font-size:150px}.hero-nav{gap:7px}.grid{grid-template-columns:1fr}.section-head h2{font-size:31px}.exercise{padding:20px}.panel{padding:18px}.answerline{flex-direction:column}.answerline button{width:100%}.work-title{font-size:25px}.result{padding:20px}}
+</style></head><body>
+<header><div class="wrap head">
+<a class="logo" href="index.html#kurser/2b">mathlab<span>.</span></a>
+<a class="back" href="index.html#kurser/2b">← Till Matte 2b</a>
+<nav class="head-nav" aria-label="Provlägesmeny"><button data-screen="topics" class="active">Ämnen</button><button data-screen="np">Nationella prov</button><button data-screen="course">Kursprov</button><button data-screen="review">Repetera fel</button></nav>
+</div></header>
+<main class="wrap">
+<section class="hero" id="np-hero"><span class="eyebrow">MATTE 2B / PROVTRÄNING</span><h1>Redo för provet?</h1><p>Välj ett område, träna från E till A eller testa ett helt kursprov. Enkla förklaringar, svenska videor och facit när du behöver det.</p><div class="hero-nav"><button class="main" data-screen="topics">Börja öva →</button><button class="light" data-screen="np">Träna som på nationella prov</button></div></section>
+<section id="np-topics" class="page"><div class="section-head"><div><h2>Vad vill du träna på?</h2><p>Alla centrala områden i Matte 2b. Välj ett kapitel och sedan E, D, C, B eller A.</p></div><span class="subline" id="np2b-count"></span></div><div id="np-topic-grid" class="grid"></div></section>
+<section id="np-national" class="page" hidden><div class="section-head"><div><h2>Nationella prov</h2><p>Egna övningsprov inspirerade av delprov A, B och C. Riktiga nationella prov har egna bedömningsanvisningar.</p></div></div>
+<div class="grid">
+<div class="exam-kind"><span class="pill">DELPROV A · 80 MIN</span><strong>Utan digitala verktyg</strong><p>Korta uppgifter. Visa vad du klarar utan miniräknare.</p><button data-exam="A">Starta delprov A →</button></div>
+<div class="exam-kind"><span class="pill">DELPROV B · 40 MIN</span><strong>Med digitala verktyg</strong><p>Korta uppgifter där digitalt stöd får användas.</p><button data-exam="B">Starta delprov B →</button></div>
+<div class="exam-kind"><span class="pill">DELPROV C · 120 MIN</span><strong>Med enkel räknare</strong><p>Flerstegsuppgifter. Redovisa mellanleden i anteckningarna.</p><button data-exam="C">Starta delprov C →</button></div>
+</div>
+<p class="notice" style="margin-top:16px">Delproven ovan är kortare, <strong>egenproducerade övningsprov</strong>. Tiderna och hjälpmedlen följer den aktuella provmodellen men de ersätter inte officiella prov. Se även <a href="https://www.umu.se/institutionen-for-tillampad-utbildningsvetenskap/np/np-2-4/tidigare-givna-prov/" target="_blank" rel="noopener noreferrer">Umeå universitets frisläppta prov för 2b ↗</a>.</p>
+</section>
+<section id="np-course" class="page" hidden><div class="section-head"><div><h2>Kursprov på hela Matte 2b</h2><p>24 blandade frågor med både grundläggande och utmanande uppgifter. Alla 12 ämnesområden ingår.</p></div></div>
+<div class="simple"><h3>Så funkar kursprovet</h3><p>Du har 90 minuter som riktmärke. Lös en uppgift i taget, skriv mellanled i anteckningsboken och lämna sedan in. Du får resultat, facit och förslag på vad du behöver repetera.</p><button class="purple-btn" data-exam="course">Starta kursprov →</button><p class="notice">Poängen gäller bara slutsvaren i den här träningsversionen. Lösningsmetod, resonemang och redovisning behöver bedömas separat av lärare.</p></div>
+</section>
+<section id="np-review" class="page" hidden><div class="section-head"><div><h2>Repetera det svåra</h2><p>Här hamnar frågor du svarat fel på. Repetera i din egen takt.</p></div></div><div class="simple" id="np-review-wrap"></div></section>
+<section id="np-work" class="page" hidden>
+<div class="work-head"><div><button class="back-btn" id="np-exit">← Tillbaka</button><div class="work-title" id="np-work-title"></div><span class="subline" id="np-work-meta"></span></div><div><div class="chiplist" id="np-levels"></div><span class="subline" id="np-timer"></span></div></div>
+<div class="meter"><div id="np-progress"></div></div>
+<div class="workspace" style="margin-top:17px">
+<div><div class="exercise">
+<span class="pill" id="np-question-label"></span>
+<h2 id="np-question-text"></h2>
+<form id="np-answer-form"><label class="subline" for="np-answer">Ditt svar (använd komma eller punkt för decimaler)</label><div class="answerline"><input id="np-answer" autocomplete="off" placeholder="Skriv ditt svar" required aria-label="Ditt svar"/><button type="submit" id="np-submit">Rätta svaret</button></div></form>
+<div class="answerform" id="np-exam-reason" hidden><label for="np-reason">Visa hur du tänkte (redovisas, men rättas inte automatiskt)</label><textarea id="np-reason" placeholder="Mellanled, motivering och beräkningar…"></textarea></div>
+<div id="np-feedback" class="feedback" hidden aria-live="polite"></div>
+<div class="controls"><button id="np-hint-btn" type="button">Ledtråd</button><button id="np-solution-btn" type="button">Visa lösning</button><button id="np-prev-btn" type="button">← Föregående</button><button id="np-next-btn" type="button">Nästa →</button><button id="np-finish-btn" type="button" hidden>Lämna in provet</button></div>
+</div>
+<div class="panel" style="margin-top:15px"><h3>Kladdpapper och anteckningar</h3><div class="paper-tools"><button type="button" data-pen="pen" class="active">Penna</button><button type="button" data-pen="erase">Sudd</button><button type="button" id="np-clear-paper">Rensa papper</button></div><canvas id="scratch" width="750" height="300" aria-label="Rita beräkningar med mus eller touch"></canvas><p class="workspace-tip">Kladdpappret sparas lokalt för den aktuella uppgiften.</p><label class="subline" for="np-notes">Anteckningsbok</label><textarea id="np-notes" placeholder="Skriv formler och egna lösningar…"></textarea></div>
+</div>
+<aside class="aside">
+<div class="panel" id="np-explainer"><h3>Förstå metoden</h3><p id="np-explain-short"></p><div class="formula" id="np-formula"></div><p id="np-worked"></p></div>
+<div class="panel"><h3>Svenska videogenomgångar</h3><p class="workspace-tip">Välj en av tre olika videovägar. Vissa länkar söker efter rätt ämne på YouTube.</p><div class="videos" id="np-videos"></div></div>
+<div class="panel" id="np-calc-panel"><h3>Enkel räknare</h3><div class="calcbox"><input id="np-calc-input" placeholder="Ex: (7+3)/2" aria-label="Räkneuttryck"><button id="np-calc-go" type="button">=</button></div><p class="workspace-tip" id="np-calc-result">Använd +, −, *, /, parenteser och ^.</p></div>
+</aside>
+</div></section>
+<section id="np-results" class="page" hidden><div class="section-head"><div><h2>Ditt provresultat</h2><p>Så här gick det för slutsvaren. Gå igenom redovisningen själv eller med en lärare.</p></div></div><div class="result"><strong id="np-score"></strong><p id="np-score-text"></p><button class="purple-btn" id="np-again">Till provträningen →</button><div id="np-result-rows" class="result-list"></div></div></section>
+</main>
+<footer class="footer"><div class="wrap">MathLab · Matematik 2b · Fristående träning som inte är ett officiellt nationellt prov. Dina anteckningar sparas på den här enheten.</div></footer>
+<script>const TOPICS=[{"id":"algebra","title":"Algebra och identiteter","desc":"Multiplicera uttryck och använd kvadrerings- och konjugatregeln.","formula":"(a+b)²=a²+2ab+b² • (a+b)(a−b)=a²−b²","example":"(x+3)² = x²+6x+9. Det viktiga är mittentermen 2·x·3=6x.","video":"kvadreringsregler konjugatregeln","qs":[{"id":"algebra-E","level":"E","prompt":"Utveckla (x+4)². Vilket tal står framför x?","answer":8,"hint":"Använd 2·x·4.","solution":"(x+4)²=x²+8x+16. Koefficienten framför x är 8.","tolerance":0.015,"topic":"algebra"},{"id":"algebra-D","level":"D","prompt":"Utveckla (2x−3)². Vilket tal står framför x?","answer":-12,"hint":"Mittentermen är 2·2x·(−3).","solution":"(2x−3)²=4x²−12x+9. Svar: −12.","tolerance":0.015,"topic":"algebra"},{"id":"algebra-C","level":"C","prompt":"Förenkla (x+5)(x−5). Vilken konstantterm får du?","answer":-25,"hint":"Det är en skillnad mellan två kvadrater.","solution":"(x+5)(x−5)=x²−25. Konstanttermen är −25.","tolerance":0.015,"topic":"algebra"},{"id":"algebra-B","level":"B","prompt":"Förenkla (2x+3)²−(2x−3)². Vilket tal står framför x?","answer":24,"hint":"Använd a²−b² eller utveckla båda uttrycken.","solution":"(4x²+12x+9)−(4x²−12x+9)=24x. Koefficienten är 24.","tolerance":0.015,"topic":"algebra"},{"id":"algebra-A","level":"A","prompt":"Bestäm a om (x+a)²−(x−a)²=28x för alla x.","answer":7,"hint":"Skillnaden blir 4ax.","solution":"(x+a)²−(x−a)²=4ax. Sätt 4a=28 och dela med 4: a=7.","tolerance":0.015,"topic":"algebra"}]},{"id":"system","title":"Ekvationssystem","desc":"Lös två linjära ekvationer genom substitution eller addition.","formula":"Substitution: lös ut en variabel • Addition: eliminera en variabel","example":"x+y=9 och x−y=3. Addera leden: 2x=12, alltså x=6 och y=3.","video":"ekvationssystem substitution additionsmetoden","qs":[{"id":"system-E","level":"E","prompt":"x+y=9 och x−y=3. Bestäm x.","answer":6,"hint":"Addera ekvationerna.","solution":"2x=12 ⇒ x=6.","tolerance":0.015,"topic":"system"},{"id":"system-D","level":"D","prompt":"2x+y=13 och x−y=2. Bestäm x.","answer":5,"hint":"Lägg ihop leden så att y försvinner.","solution":"3x=15 ⇒ x=5. Kontroll: y=3.","tolerance":0.015,"topic":"system"},{"id":"system-C","level":"C","prompt":"3x+2y=24 och x+y=9. Bestäm x.","answer":6,"hint":"Sätt y=9−x i första ekvationen.","solution":"3x+2(9−x)=24 ⇒ x+18=24 ⇒ x=6.","tolerance":0.015,"topic":"system"},{"id":"system-B","level":"B","prompt":"x+y=11 och 2x+3y=28. Bestäm x.","answer":5,"hint":"Sätt y=11−x.","solution":"2x+3(11−x)=28 ⇒ 33−x=28 ⇒ x=5.","tolerance":0.015,"topic":"system"},{"id":"system-A","level":"A","prompt":"2 vuxenbiljetter och 3 ungdomsbiljetter kostar 420 kr. 3 vuxenbiljetter och 1 ungdomsbiljett kostar också 420 kr. Vad kostar en vuxenbiljett?","answer":120,"hint":"Skriv 2a+3u=420 och 3a+u=420.","solution":"Ur andra ekvationen u=420−3a. Sätt in: 2a+3(420−3a)=420 ⇒ −7a=−840 ⇒ a=120 kr.","tolerance":0.015,"topic":"system"}]},{"id":"andradeq","title":"Andragradsekvationer","desc":"Lös x²+px+q=0 med faktorisering eller pq-formeln.","formula":"pq-formeln: x=−p/2 ± √((p/2)²−q)","example":"x²−5x+6=0 ⇒ (x−2)(x−3)=0 ⇒ x=2 eller 3.","video":"andragradsekvationer pq formeln nollproduktmetoden","qs":[{"id":"andradeq-E","level":"E","prompt":"x²−5x+6=0. Ange den största roten.","answer":3,"hint":"Faktorisera uttrycket.","solution":"(x−2)(x−3)=0 ⇒ rötterna är 2 och 3. Största roten är 3.","tolerance":0.015,"topic":"andradeq"},{"id":"andradeq-D","level":"D","prompt":"x²−8x+15=0. Ange den minsta roten.","answer":3,"hint":"Två tal har summa 8 och produkt 15.","solution":"(x−3)(x−5)=0 ⇒ minsta roten 3.","tolerance":0.015,"topic":"andradeq"},{"id":"andradeq-C","level":"C","prompt":"2x²−10x+12=0. Ange den största roten.","answer":3,"hint":"Börja med att dividera med 2.","solution":"x²−5x+6=0 ⇒ x=2 eller x=3. Största roten är 3.","tolerance":0.015,"topic":"andradeq"},{"id":"andradeq-B","level":"B","prompt":"x²−6x+5=0. Hur långt är det mellan rötterna?","answer":4,"hint":"Lös ekvationen och subtrahera rötterna.","solution":"(x−1)(x−5)=0 ⇒ rötterna 1 och 5. Avståndet är 5−1=4.","tolerance":0.015,"topic":"andradeq"},{"id":"andradeq-A","level":"A","prompt":"En rektangel har bredden x meter, längden x+3 meter och arean 70 m². Bestäm bredden.","answer":7,"hint":"Skriv x(x+3)=70.","solution":"x²+3x−70=0 ⇒ (x+10)(x−7)=0. Bredden måste vara positiv, alltså x=7 m.","tolerance":0.015,"topic":"andradeq"}]},{"id":"parabel","title":"Andragradsfunktioner","desc":"Hitta symmetrilinje, nollställen samt högsta och lägsta punkt.","formula":"f(x)=ax²+bx+c ⇒ symmetrilinjen x=−b/(2a)","example":"f(x)=x²−4x+3: symmetrilinjen är x=4/2=2 och minimivärdet är f(2)=−1.","video":"andragradsfunktioner symmetrilinje extrempunkt","qs":[{"id":"parabel-E","level":"E","prompt":"f(x)=x²−4x+3. Vilket x-värde har symmetrilinjen?","answer":2,"hint":"Använd −b/(2a).","solution":"a=1 och b=−4 ⇒ x=4/2=2.","tolerance":0.015,"topic":"parabel"},{"id":"parabel-D","level":"D","prompt":"f(x)=(x−3)²+2. Vilket är funktionens minsta värde?","answer":2,"hint":"En kvadrat är aldrig negativ.","solution":"(x−3)²≥0, så lägsta värde är 2 då x=3.","tolerance":0.015,"topic":"parabel"},{"id":"parabel-C","level":"C","prompt":"f(x)=−x²+8x−7. Vilket är det största funktionsvärdet?","answer":9,"hint":"Toppunktens x-värde är −b/(2a).","solution":"x=−8/(−2)=4. f(4)=−16+32−7=9.","tolerance":0.015,"topic":"parabel"},{"id":"parabel-B","level":"B","prompt":"f(x)=2x²−12x+13. Vilket är funktionens minsta värde?","answer":-5,"hint":"Beräkna f vid symmetrilinjen.","solution":"x=12/4=3. f(3)=18−36+13=−5.","tolerance":0.015,"topic":"parabel"},{"id":"parabel-A","level":"A","prompt":"f(x)=x²−2ax+9 har sitt minimum vid x=4. Bestäm a.","answer":4,"hint":"Symmetrilinjen har x=−b/(2·1).","solution":"Här är b=−2a, så symmetrilinjen x=a. Minimum vid x=4 ger a=4.","tolerance":0.015,"topic":"parabel"}]},{"id":"log","title":"Logaritmer och exponentialfunktioner","desc":"Använd logaritmer för att lösa ekvationer där x ligger i exponenten.","formula":"aˣ=b ⇒ x=ln(b)/ln(a) • 10^(log x)=x","example":"2ˣ=8 ⇒ x=3, eftersom 2·2·2=8.","video":"logaritmer exponentialekvationer matte 2b","qs":[{"id":"log-E","level":"E","prompt":"10ˣ=100. Bestäm x.","answer":2,"hint":"Skriv 100 som en tiopotens.","solution":"100=10² ⇒ x=2.","tolerance":0.015,"topic":"log"},{"id":"log-D","level":"D","prompt":"3ˣ=81. Bestäm x.","answer":4,"hint":"Skriv 81 som en potens av 3.","solution":"81=3⁴ ⇒ x=4.","tolerance":0.015,"topic":"log"},{"id":"log-C","level":"C","prompt":"log₁₀(x)=3. Bestäm x.","answer":1000,"hint":"Logaritm och tiopotens är inverser.","solution":"x=10³=1000.","tolerance":0.015,"topic":"log"},{"id":"log-B","level":"B","prompt":"2ˣ=20. Bestäm x med två decimaler.","answer":4.32,"hint":"Ta logaritmen på båda sidor.","solution":"x=ln(20)/ln(2)≈4,3219 ⇒ 4,32.","tolerance":0.025,"topic":"log"},{"id":"log-A","level":"A","prompt":"En population på 600 växer med 8 % varje år. Efter hur många hela år är den första gången större än 900?","answer":6,"hint":"Lös 600·1,08ᵗ>900.","solution":"1,08ᵗ>1,5 ⇒ t>ln(1,5)/ln(1,08)≈5,27. Minsta hela antal år är 6.","tolerance":0.015,"topic":"log"}]},{"id":"potens","title":"Potensekvationer","desc":"Skilj på potensekvation xⁿ=a och exponentialekvation aˣ=b.","formula":"xⁿ=a: x är basen • aˣ=b: x är exponenten","example":"x³=27 ⇒ x=3. Men 3ˣ=27 ⇒ också x=3, med olika lösningsmetoder.","video":"potensekvationer exponentialfunktion matte2b","qs":[{"id":"potens-E","level":"E","prompt":"x²=49. Ange den positiva roten.","answer":7,"hint":"Ta kvadratroten.","solution":"x=±7. Den positiva roten är 7.","tolerance":0.015,"topic":"potens"},{"id":"potens-D","level":"D","prompt":"x³=64. Bestäm x.","answer":4,"hint":"Vilket tal multiplicerat med sig självt tre gånger ger 64?","solution":"4³=64 ⇒ x=4.","tolerance":0.015,"topic":"potens"},{"id":"potens-C","level":"C","prompt":"x^(3/2)=27 och x≥0. Bestäm x.","answer":9,"hint":"Upphöj båda led till 2/3.","solution":"x=27^(2/3)=(∛27)²=3²=9.","tolerance":0.015,"topic":"potens"},{"id":"potens-B","level":"B","prompt":"x⁴=81. Ange den positiva reella roten.","answer":3,"hint":"81=3⁴.","solution":"x=±3. Positiva roten är 3.","tolerance":0.015,"topic":"potens"},{"id":"potens-A","level":"A","prompt":"x³=2x. Ange den största positiva lösningen med två decimaler.","answer":1.41,"hint":"Bryt ut x och använd nollproduktmetoden.","solution":"x(x²−2)=0 ⇒ x=0 eller x=±√2. Den största positiva är √2≈1,41.","tolerance":0.025,"topic":"potens"}]},{"id":"geometri","title":"Geometri och likformighet","desc":"Vinkelsummor, likformighet och Pythagoras sats.","formula":"a²+b²=c² • likformiga trianglar har samma förhållande mellan motsvarande sidor","example":"En rätvinklig triangel med kateter 3 och 4 har hypotenusan 5.","video":"geometri likformighet pythagoras matte 2b","qs":[{"id":"geometri-E","level":"E","prompt":"En triangel har vinklarna 50° och 60°. Hur stor är den tredje vinkeln?","answer":70,"hint":"Triangelns vinkelsumma är 180°.","solution":"180−50−60=70°.","tolerance":0.015,"topic":"geometri"},{"id":"geometri-D","level":"D","prompt":"Två trianglar är likformiga. En sida på 10 cm motsvaras av 15 cm. En annan sida på 10 cm i den lilla triangeln motsvaras av hur många cm i den stora?","answer":15,"hint":"Förstoringsfaktorn är 15/10=1,5.","solution":"10·1,5=15 cm.","tolerance":0.015,"topic":"geometri"},{"id":"geometri-C","level":"C","prompt":"Bestäm avståndet mellan punkterna (1,2) och (7,10).","answer":10,"hint":"Skillnaderna är 6 och 8; använd Pythagoras.","solution":"√(6²+8²)=√(36+64)=√100=10.","tolerance":0.015,"topic":"geometri"},{"id":"geometri-B","level":"B","prompt":"En likbent triangel har basvinklarna 42° var. Hur stor är toppvinkeln?","answer":96,"hint":"Ta 180° minus båda basvinklarna.","solution":"180−42−42=96°.","tolerance":0.015,"topic":"geometri"},{"id":"geometri-A","level":"A","prompt":"Två likformiga trianglar har motsvarande sidor 5 cm och 12,5 cm. Om en annan sida i den lilla triangeln är 7,2 cm, hur lång är motsvarande sida i den stora?","answer":18,"hint":"Beräkna skalfaktorn och multiplicera.","solution":"12,5/5=2,5. 7,2·2,5=18 cm.","tolerance":0.015,"topic":"geometri"}]},{"id":"logik","title":"Logik, satser och bevis","desc":"Avgör när en slutsats alltid gäller och när ett motexempel räcker.","formula":"Implikation: A ⇒ B betyder att A medför B. Ekvivalens: A ⇔ B går åt båda håll.","example":"Om n är delbart med 4 så är n jämnt. Om n är jämnt så behöver n inte vara delbart med 4.","video":"logik implikation ekvivalens geometri bevis","qs":[{"id":"logik-E","level":"E","prompt":"Om ett heltal är delbart med 4 är det jämnt. Svara 1 för sant, 0 för falskt.","answer":1,"hint":"Varje multipel av 4 är också en multipel av 2.","solution":"Sant: 4k=2(2k), alltså jämnt.","tolerance":0.015,"topic":"logik"},{"id":"logik-D","level":"D","prompt":"Om x²=9 måste x=3. Svara 1 för sant, 0 för falskt.","answer":0,"hint":"Tänk även på negativa tal.","solution":"Falskt: både x=3 och x=−3 ger x²=9.","tolerance":0.015,"topic":"logik"},{"id":"logik-C","level":"C","prompt":"En vinkel som står på en diameter i en cirkel är rät. Svara 1 för sant, 0 för falskt.","answer":1,"hint":"Tänk på Thales sats.","solution":"Sant. En randvinkel över en diameter är 90°.","tolerance":0.015,"topic":"logik"},{"id":"logik-B","level":"B","prompt":"Påståendet x²=16 ⇒ x=4 gäller för alla reella x. Svara 1 för sant, 0 för falskt.","answer":0,"hint":"Prova x=−4.","solution":"Falskt, eftersom (−4)²=16 men −4≠4.","tolerance":0.015,"topic":"logik"},{"id":"logik-A","level":"A","prompt":"Ge det negativa heltalet med |x|=5 som motexempel till att |x|=5 alltid betyder x=5.","answer":-5,"hint":"Absolutbelopp är avstånd från noll.","solution":"x=−5 fungerar eftersom |−5|=5 men x≠5.","tolerance":0.015,"topic":"logik"}]},{"id":"statistik","title":"Statistik: medelvärde och spridning","desc":"Beräkna medelvärde, median, variationsbredd och standardavvikelse.","formula":"Medelvärde=summa/antal • variationsbredd=max−min","example":"Talen 2, 4, 6 ger medelvärdet 4.","video":"statistik median standardavvikelse percentiler matematik 2b","qs":[{"id":"statistik-E","level":"E","prompt":"Bestäm medelvärdet av 4, 6 och 8.","answer":6,"hint":"Addera och dividera med tre.","solution":"(4+6+8)/3=18/3=6.","tolerance":0.015,"topic":"statistik"},{"id":"statistik-D","level":"D","prompt":"Bestäm medianen av 3, 4, 8, 13 och 18.","answer":8,"hint":"Värdena är sorterade.","solution":"Mittenvärdet, det tredje av fem, är 8.","tolerance":0.015,"topic":"statistik"},{"id":"statistik-C","level":"C","prompt":"Bestäm variationsbredden för 5, 6, 8 och 12.","answer":7,"hint":"Största minus minsta.","solution":"12−5=7.","tolerance":0.015,"topic":"statistik"},{"id":"statistik-B","level":"B","prompt":"Värdena 2, 4, 6, 8, 10 är hela populationen. Beräkna populationsstandardavvikelsen med två decimaler.","answer":2.83,"hint":"Medelvärdet är 6. Dela summan av kvadrerade avvikelser med fem.","solution":"(16+4+0+4+16)/5=8. σ=√8≈2,83.","tolerance":0.025,"topic":"statistik"},{"id":"statistik-A","level":"A","prompt":"Medelvärdet av fem tal är 12. Fyra av talen är 7, 10, 11 och 15. Vilket är det femte talet?","answer":17,"hint":"Totalsumman måste vara 5·12.","solution":"Summan är 60. De kända talen ger 43. Det sista är 60−43=17.","tolerance":0.015,"topic":"statistik"}]},{"id":"normal","title":"Normalfördelning","desc":"Använd medelvärde μ, standardavvikelse σ och z-värde.","formula":"z=(x−μ)/σ • cirka 68 % inom 1σ och 95 % inom 2σ","example":"Om μ=50 och σ=5 är x=60 två standardavvikelser över medelvärdet.","video":"normalfördelning standardavvikelse z värde","qs":[{"id":"normal-E","level":"E","prompt":"En normalfördelning har medelvärdet 100 och standardavvikelsen 10. Vad är z-värdet för x=110?","answer":1,"hint":"z=(110−100)/10.","solution":"z=10/10=1.","tolerance":0.015,"topic":"normal"},{"id":"normal-D","level":"D","prompt":"Medelvärdet är 75, standardavvikelsen 5. Bestäm z-värdet för x=65.","answer":-2,"hint":"Jämför x med medelvärdet.","solution":"(65−75)/5=−10/5=−2.","tolerance":0.015,"topic":"normal"},{"id":"normal-C","level":"C","prompt":"Cirka 68 % ligger inom en standardavvikelse. Om μ=50 och σ=4, vad är den övre gränsen för detta intervall?","answer":54,"hint":"Övre gränsen är μ+σ.","solution":"50+4=54.","tolerance":0.015,"topic":"normal"},{"id":"normal-B","level":"B","prompt":"Cirka 95 % ligger inom två standardavvikelser. Om μ=80 och σ=6, vad är den nedre gränsen?","answer":68,"hint":"Beräkna μ−2σ.","solution":"80−2·6=68.","tolerance":0.015,"topic":"normal"},{"id":"normal-A","level":"A","prompt":"En normalfördelning har μ=40 och σ=3. Ungefär vilket värde är 97,5:e percentilen enligt tvåstandardavvikelseregeln?","answer":46,"hint":"Övre 2,5 % börjar ungefär vid μ+2σ.","solution":"40+2·3=46. Det är en approximation, inte exakt percentil.","tolerance":0.015,"topic":"normal"}]},{"id":"regression","title":"Regression och korrelation","desc":"Tolka trendlinjer, lutning och korrelationskoefficient.","formula":"y=kx+m • r nära +1 eller −1 betyder starkt linjärt samband","example":"Modellen y=2x+3 ger y=13 då x=5.","video":"regressionsanalys korrelation matematik 2b","qs":[{"id":"regression-E","level":"E","prompt":"En korrelationskoefficient är r=0,9. Är sambandet starkt positivt? Svara 1 för ja, 0 för nej.","answer":1,"hint":"r nära +1 betyder starkt positivt.","solution":"Ja, r=0,9 indikerar ett starkt positivt linjärt samband.","tolerance":0.015,"topic":"regression"},{"id":"regression-D","level":"D","prompt":"En regressionslinje är y=2x+3. Bestäm modellens y-värde vid x=5.","answer":13,"hint":"Sätt x=5.","solution":"y=2·5+3=13.","tolerance":0.015,"topic":"regression"},{"id":"regression-C","level":"C","prompt":"Mätpunkter (1,4), (2,7) och (3,10) ligger på en rät linje. Vad är lutningen?","answer":3,"hint":"Lutningen är förändring i y dividerat med förändring i x.","solution":"(7−4)/(2−1)=3.","tolerance":0.015,"topic":"regression"},{"id":"regression-B","level":"B","prompt":"En regressionslinje har ekvationen y=−1,5x+20. Beräkna y då x=8.","answer":8,"hint":"Sätt in x=8 i modellen.","solution":"y=−1,5·8+20=−12+20=8.","tolerance":0.015,"topic":"regression"},{"id":"regression-A","level":"A","prompt":"I modellen y=0,8x+10 ökar x från 15 till 25. Hur mycket ökar det förväntade y-värdet?","answer":8,"hint":"Skillnaden i x är 10; multiplicera med lutningen.","solution":"Δy=0,8·(25−15)=8. Konstanttermen påverkar inte skillnaden.","tolerance":0.015,"topic":"regression"}]},{"id":"modell","title":"Modellering och problemlösning","desc":"Översätt textproblem till ekvationer och kontrollera att svaret är rimligt.","formula":"Linjär: y=kx+m • Exponentiell: y=C·aˣ","example":"En taxa med 70 kr start och 9 kr/km ger y=70+9x.","video":"problemlösning modellering kursprov matematik 2b","qs":[{"id":"modell-E","level":"E","prompt":"Ett abonnemang kostar 79 kr i månaden plus 5 kr/GB. Vad kostar 10 GB totalt?","answer":129,"hint":"79+5·10.","solution":"79+50=129 kr.","tolerance":0.015,"topic":"modell"},{"id":"modell-D","level":"D","prompt":"Du sätter in 5000 kr som ökar 10 % om året. Hur mycket finns efter två år?","answer":6050,"hint":"Multiplicera med 1,10 två gånger.","solution":"5000·1,10²=6050 kr.","tolerance":0.015,"topic":"modell"},{"id":"modell-C","level":"C","prompt":"En rektangel har omkretsen 32 cm. Längden är 4 cm större än bredden x. Hur stor är bredden?","answer":6,"hint":"Skriv 2x+2(x+4)=32.","solution":"4x+8=32 ⇒ 4x=24 ⇒ x=6 cm.","tolerance":0.015,"topic":"modell"},{"id":"modell-B","level":"B","prompt":"En modell är y=60+18x. Vid vilket x blir y=258?","answer":11,"hint":"Lös 60+18x=258.","solution":"18x=198 ⇒ x=11.","tolerance":0.015,"topic":"modell"},{"id":"modell-A","level":"A","prompt":"En population har 200 individer och växer med 5 % per år. Efter hur många hela år överstiger den för första gången 250?","answer":5,"hint":"Testa 200·1,05ᵗ och avrunda antalet år uppåt.","solution":"200·1,05⁴≈243,1 (<250), men 200·1,05⁵≈255,3 (>250). Svar 5 år.","tolerance":0.015,"topic":"modell"}]}];(function npApp(){
+ "use strict";
+ const $ = x => document.getElementById(x);
+ const LEVELS=["E","D","C","B","A"];
+ const all = TOPICS.flatMap(t=>t.qs);
+ const stored=()=>{try{return JSON.parse(localStorage.getItem("mathlab-np2b-v1")||"{}")}catch{return {}}};
+ const persist=x=>{try{localStorage.setItem("mathlab-np2b-v1",JSON.stringify(x))}catch{}};
+ let storage=stored();
+ if(!storage.notes)storage.notes={};
+ if(!storage.bad)storage.bad=[];
+ if(!storage.draw)storage.draw={};
+ let view="topics", work=null, savedAnswers={},savedReasons={},index=0,level="E",topicIndex=0,feedbackShown=false,started=0,limit=0,ended=false,pen="pen",drawing=false,lastPoint=null;
+ let interval=null;
+ const screens={topics:"np-topics",np:"np-national",course:"np-course",review:"np-review",work:"np-work",results:"np-results"};
+ const el=(tag,className,txt)=>{const e=document.createElement(tag);if(className)e.className=className;if(txt!=null)e.textContent=txt;return e};
+ function switchView(name){
+  view=name;
+  Object.entries(screens).forEach(([k,id])=>$(id).hidden=k!==name);
+  $("np-hero").hidden=name==="work"||name==="results";
+  document.querySelectorAll("[data-screen]").forEach(b=>b.classList.toggle("active",b.dataset.screen===name));
+  if(name==="review")renderReview();
+  window.scrollTo({top:0,behavior:"auto"});
+ }
+ function buildTopics(){
+   const root=$("np-topic-grid");root.replaceChildren();
+   TOPICS.forEach((t,idx)=>{
+    const b=el("button","card");
+    b.type="button";
+    b.append(el("span","meta",String(idx+1).padStart(2,"0")+" / MATTE 2B"),el("b","",t.title),el("p","",t.desc),el("span","arrow","Välj nivå E–A →"));
+    b.addEventListener("click",()=>startTopic(idx));
+    root.append(b);
+   });
+   $("np2b-count").textContent=TOPICS.length+" ämnen · "+all.length+" uppgifter";
+ }
+ function current(){return work.mode==="practice"?TOPICS[topicIndex].qs[LEVELS.indexOf(level)]:work.queue[index]}
+ function findQ(id){return all.find(x=>x.id===id)}
+ function setLevel(v){level=v;if(work?.mode==="practice"){feedbackShown=false;renderQuestion()}}
+ function startTopic(idx){
+   clearInterval(interval);interval=null;topicIndex=idx;work={mode:"practice",kind:"Öva",queue:TOPICS[idx].qs};
+   savedAnswers={};savedReasons={};ended=false;
+   switchView("work");renderQuestion();
+ }
+ function startExam(kind){
+   clearInterval(interval);
+   const choices=[];
+   TOPICS.forEach((t,i)=>{
+     if(kind==="course"){choices.push(t.qs[0],t.qs[i%2?2:4]);}
+     else if(kind==="A")choices.push(t.qs[i%3]);
+     else if(kind==="B")choices.push(t.qs[i%2?2:3]);
+     else choices.push(t.qs[i%2?3:4]);
+   });
+   work={mode:"exam",kind,queue:choices};index=0;savedAnswers={};savedReasons={};feedbackShown=false;ended=false;
+   limit=({A:80,B:40,C:120,course:90})[kind]*60;
+   started=Date.now();
+   interval=setInterval(updateTimer,1000);
+   switchView("work");renderQuestion();
+ }
+ function startReview(){
+   const bad=storage.bad.map(findQ).filter(Boolean);
+   if(!bad.length){switchView("review");return;}
+   work={mode:"exam",kind:"Repetition",queue:bad};index=0;savedAnswers={};savedReasons={};ended=false;limit=0;
+   clearInterval(interval);interval=null;switchView("work");renderQuestion();
+ }
+ function parse(v){
+  let s=String(v||"").trim().replace(/−/g,"-").replace(/,/g,".").replace(/^(?:svar\s*[:=]|[a-z]\s*=)\s*/i,"").replace(/\s*(?:kr|cm|mm|meter|år|m²|%|°)\s*$/i,"").trim();
+  if(/^[-+]?\d+(?:\.\d+)?\s*\/\s*[-+]?\d+(?:\.\d+)?$/.test(s)){const a=s.split("/").map(Number);return a[1]===0?NaN:a[0]/a[1]}
+  return /^[-+]?(?:\d+\.?\d*|\.\d+)$/.test(s)?Number(s):NaN;
+ }
+ function isCorrect(q,raw){const x=parse(raw);return Number.isFinite(x)&&Math.abs(x-q.answer)<=Math.max(q.tolerance,Math.abs(q.answer)*0.000001)}
+ function saveReview(id,bad){
+  const s=new Set(storage.bad);
+  if(bad)s.add(id);else s.delete(id);
+  storage.bad=[...s];persist(storage);
+ }
+ function score(){
+  return work.queue.reduce((n,q)=>n+(isCorrect(q,savedAnswers[q.id]||"")?1:0),0);
+ }
+ function finish(){
+  if(!work)return;
+  ended=true;clearInterval(interval);interval=null;
+  work.queue.forEach(q=>saveReview(q.id,!isCorrect(q,savedAnswers[q.id]||"")));
+  switchView("results");
+  const correct=score(),total=work.queue.length;
+  $("np-score").textContent=correct+" / "+total;
+  $("np-score-text").textContent=Math.round(correct/total*100)+" % av slutsvaren rätt. Detta är inte ett nationellt provbetyg. Lösningsmetod och redovisning måste bedömas separat.";
+  const root=$("np-result-rows");root.replaceChildren();
+  work.queue.forEach((q,i)=>{
+   const ok=isCorrect(q,savedAnswers[q.id]||"");
+   const row=el("div","result-row"+(ok?"":" bad"));
+   row.append(el("strong","",String(i+1)+". "+q.prompt),el("div",ok?"success":"status",ok?"✓ Rätt svar":"Behöver repeteras"));
+   const p=el("div","", "Ditt svar: "+(savedAnswers[q.id]||"–")+" · Facit: "+String(q.answer));row.append(p);
+   if(!ok)row.append(el("div","",q.solution));
+   root.append(row);
+  });
+ }
+ function updateTimer(){
+  if(!work||work.mode!=="exam"||!limit)return;
+  const left=Math.max(0,limit-Math.floor((Date.now()-started)/1000));
+  $("np-timer").textContent="Tid kvar: "+Math.floor(left/60)+":"+String(left%60).padStart(2,"0");
+  if(left===0){finish()}
+ }
+ function videosFor(t){
+  const root=$("np-videos");root.replaceChildren();
+  const search=creator=>"https://www.youtube.com/results?search_query="+encodeURIComponent(creator+" Matematik 2b "+t.video);
+  const options=[
+   {name:"Jonas Vikström · Vidma",url:t.id==="system"?"https://www.youtube.com/watch?v=yAG31Y2laxo":t.id==="normal"?"https://www.youtube.com/watch?v=VsiqQNm5HZ8":search("Jonas Vikström"),direct:t.id==="system"||t.id==="normal"},
+   {name:"Mattelärare · svenska genomgångar",url:search("Mattelärare"),direct:false},
+   {name:"Fler genomgångar på svenska",url:search("genomgång svenska"),direct:false}
+  ];
+  options.forEach(o=>{const a=el("a","",o.name+" "+(o.direct?"↗":"· sök ↗"));a.href=o.url;a.target="_blank";a.rel="noopener noreferrer";root.append(a)});
+ }
+ function renderLevels(){
+  const r=$("np-levels");r.replaceChildren();
+  if(work.mode!=="practice"){r.hidden=true;return}
+  r.hidden=false;
+  LEVELS.forEach(l=>{const b=el("button",level===l?"active":"",l);b.type="button";b.addEventListener("click",()=>setLevel(l));r.append(b)});
+ }
+ function renderQuestion(){
+  const q=current(),t=TOPICS.find(t=>t.id===q.topic),practice=work.mode==="practice";
+  $("np-work-title").textContent=practice?t.title:work.kind==="course"?"Kursprov: Matte 2b":work.kind==="Repetition"?"Repetera fel":"Nationella prov · Delprov "+work.kind;
+  $("np-work-meta").textContent=practice?"Välj den nivå du vill öva på":"Uppgift "+(index+1)+" av "+work.queue.length+" · Träningsprov";
+  $("np-progress").style.width=(practice?(LEVELS.indexOf(level)+1)*20:(index+1)/work.queue.length*100)+"%";
+  $("np-question-label").textContent=(practice?"NIVÅ "+level:"NIVÅ "+q.level)+" · "+t.title;
+  $("np-question-text").textContent=q.prompt;
+  $("np-answer").value=savedAnswers[q.id]||"";
+  $("np-feedback").hidden=true;
+  feedbackShown=false;
+  $("np-submit").textContent=practice?"Rätta svaret":"Spara svar";
+  $("np-hint-btn").hidden=!practice;
+  $("np-solution-btn").hidden=!practice;
+  $("np-prev-btn").hidden=practice||index===0;
+  $("np-next-btn").textContent=practice?"Nästa nivå →":"Spara och nästa →";
+  $("np-next-btn").hidden=!practice&&index===work.queue.length-1;
+  $("np-finish-btn").hidden=practice||index!==work.queue.length-1;
+  $("np-exam-reason").hidden=practice;
+  $("np-reason").value=savedReasons[q.id]||"";
+  $("np-calc-panel").hidden=work.mode==="exam"&&work.kind==="A";
+  $("np-explainer").hidden=!practice;
+  $("np-explain-short").textContent=t.desc;
+  $("np-formula").textContent=t.formula;
+  $("np-worked").textContent="Exempel: "+t.example;
+  videosFor(t); renderLevels();
+  $("np-timer").textContent=practice?"Öva i din takt":"";
+  updateTimer();
+  restoreWorkspace(q.id);
+ }
+ function check(){
+  const q=current(),value=$("np-answer").value.trim();
+  if(!value){$("np-answer").focus();return}
+  savedAnswers[q.id]=value;
+  if(work.mode!=="practice"){
+   $("np-feedback").hidden=false;$("np-feedback").className="feedback";
+   $("np-feedback").textContent="Svar sparat. Du får facit när du lämnar in.";
+   return;
+  }
+  const ok=isCorrect(q,value);
+  saveReview(q.id,!ok);
+  const f=$("np-feedback");f.hidden=false;f.className="feedback "+(ok?"good":"bad");
+  f.textContent=ok?"Rätt! "+q.solution:"Inte riktigt. Prova igen, läs ledtråden eller visa lösningen.";
+  feedbackShown=true;
+ }
+ function next(){
+  const q=current(); savedAnswers[q.id]=$("np-answer").value.trim();
+  if(work.mode==="practice"){
+   const n=LEVELS.indexOf(level);
+   if(n<4){level=LEVELS[n+1]}else{topicIndex=(topicIndex+1)%TOPICS.length;level="E"}
+   renderQuestion();return;
+  }
+  savedReasons[q.id]=$("np-reason").value;
+  if(index<work.queue.length-1){index++;renderQuestion()}else finish();
+ }
+ function renderReview(){
+  const root=$("np-review-wrap");root.replaceChildren();
+  const bad=storage.bad.map(findQ).filter(Boolean);
+  root.append(el("h3","",bad.length+" uppgifter att repetera"));
+  root.append(el("p","",bad.length?"Frågorna du missade ligger kvar tills du löser dem på nytt.":"Du har ännu inga felaktiga uppgifter sparade. Börja med att öva ett område."));
+  const btn=el("button","purple-btn","Starta repetitionspass →");btn.disabled=!bad.length;btn.addEventListener("click",startReview);root.append(btn);
+ }
+ function safeCalc(){
+  const s=$("np-calc-input").value.replace(/,/g,".").replace(/−/g,"-").replace(/\^/g,"**");
+  if(!/^[\d+\-*/().\s*]+$/.test(s)||s.length>70){$("np-calc-result").textContent="Använd bara tal, +, −, *, /, ^ och parenteser.";return}
+  try{const v=Function('"use strict";return ('+s+')')();$("np-calc-result").textContent=typeof v==="number"&&Number.isFinite(v)?"= "+String(Math.round(v*1e9)/1e9):"Ogiltigt uttryck"}catch{$("np-calc-result").textContent="Kontrollera parenteser och tecken."}
+ }
+ let ctx=null;
+ const canvas=$("scratch");
+ function paintFromSaved(id){
+  const image=storage.draw[id];
+  if(!image)return;
+  const im=new Image();
+  im.onload=()=>{if(current()?.id===id)ctx.drawImage(im,0,0,canvas.width,canvas.height)};
+  im.src=image;
+ }
+ function restoreWorkspace(id){
+  ctx=canvas.getContext("2d");
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.lineCap="round";ctx.lineJoin="round";
+  paintFromSaved(id);
+  $("np-notes").value=storage.notes[id]||"";
+ }
+ function pos(e){const r=canvas.getBoundingClientRect();return {x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}}
+ canvas.addEventListener("pointerdown",e=>{
+  if(!work)return;drawing=true;lastPoint=pos(e);
+  canvas.setPointerCapture(e.pointerId);
+  ctx.fillStyle=pen==="erase"?"white":"#272843";
+  ctx.beginPath();ctx.arc(lastPoint.x,lastPoint.y,pen==="erase"?13:1.5,0,2*Math.PI);ctx.fill();
+ });
+ canvas.addEventListener("pointermove",e=>{
+  if(!drawing||!lastPoint)return;
+  const p=pos(e);ctx.beginPath();ctx.strokeStyle=pen==="erase"?"#fff":"#272843";ctx.lineWidth=pen==="erase"?28:3;
+  ctx.moveTo(lastPoint.x,lastPoint.y);ctx.lineTo(p.x,p.y);ctx.stroke();lastPoint=p;
+ });
+ function finishStroke(){if(!drawing)return;drawing=false;lastPoint=null;if(work){storage.draw[current().id]=canvas.toDataURL("image/png");persist(storage)}}
+ canvas.addEventListener("pointerup",finishStroke);
+ canvas.addEventListener("pointercancel",finishStroke);
+ document.querySelectorAll("[data-pen]").forEach(b=>b.addEventListener("click",()=>{
+  pen=b.dataset.pen;document.querySelectorAll("[data-pen]").forEach(x=>x.classList.toggle("active",x===b));
+ }));
+ $("np-clear-paper").onclick=()=>{if(!work)return;ctx.clearRect(0,0,canvas.width,canvas.height);delete storage.draw[current().id];persist(storage)};
+ $("np-notes").addEventListener("input",()=>{if(!work)return;storage.notes[current().id]=$("np-notes").value;persist(storage)});
+ $("np-reason").addEventListener("input",()=>{if(work)savedReasons[current().id]=$("np-reason").value});
+ document.querySelectorAll("[data-screen]").forEach(b=>b.addEventListener("click",()=>switchView(b.dataset.screen)));
+ document.querySelectorAll("[data-exam]").forEach(b=>b.addEventListener("click",()=>startExam(b.dataset.exam)));
+ $("np-answer-form").addEventListener("submit",e=>{e.preventDefault();check()});
+ $("np-hint-btn").onclick=()=>{const q=current();const f=$("np-feedback");f.hidden=false;f.className="feedback";f.textContent="Ledtråd: "+q.hint};
+ $("np-solution-btn").onclick=()=>{const q=current();const f=$("np-feedback");f.hidden=false;f.className="feedback";f.textContent="Lösning: "+q.solution};
+ $("np-prev-btn").onclick=()=>{if(index>0){savedAnswers[current().id]=$("np-answer").value;index--;renderQuestion()}};
+ $("np-next-btn").onclick=next;
+ $("np-finish-btn").onclick=()=>{savedAnswers[current().id]=$("np-answer").value;savedReasons[current().id]=$("np-reason").value;finish()};
+ $("np-again").onclick=()=>switchView("topics");
+ $("np-exit").onclick=()=>{clearInterval(interval);interval=null;switchView(work?.mode==="practice"?"topics":"np")};
+ $("np-calc-go").onclick=safeCalc;
+ $("np-calc-input").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();safeCalc()}});
+ buildTopics();
+ switchView("topics");
+ window.MathLabNP2B={TOPICS,parse,isCorrect,startExam,startTopic,getWork:()=>work};
+})();</script></body></html>
